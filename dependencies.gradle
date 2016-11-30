@@ -8,11 +8,11 @@ ext {
     //Android
     appVersionCode = 1
     appVersionName = '1.0'
-    androidBuildToolsVersion = '23.0.2'
+    androidBuildToolsVersion = '25.0.0'
     androidMinSdkVersion = 15
-    androidTargetSdkVersion = 23
-    androidCompileSdkVersion = 23
-    androidSupportVersion = '23.2.0'
+    androidTargetSdkVersion = 25
+    androidCompileSdkVersion = 25
+    androidSupportVersion = '25.0.1'
 
     //Libraries
     daggerVersion = '2.0.2'
