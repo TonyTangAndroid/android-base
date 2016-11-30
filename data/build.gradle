@@ -52,6 +52,7 @@ dependencies {
     compile dataDependencies.retrofit
     compile dataDependencies.retrofitGson
     compile dataDependencies.retrofitRxJava
+    compile dataDependencies.okhttp3_log
 
     testCompile dataTestDependencies.junit
     testCompile dataTestDependencies.mockito

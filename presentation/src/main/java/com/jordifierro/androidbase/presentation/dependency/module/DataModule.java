@@ -20,6 +20,7 @@ import javax.inject.Singleton;
 import dagger.Module;
 import dagger.Provides;
 import okhttp3.OkHttpClient;
+import okhttp3.logging.HttpLoggingInterceptor;
 import retrofit2.Retrofit;
 import retrofit2.adapter.rxjava.RxJavaCallAdapterFactory;
 import retrofit2.converter.gson.GsonConverterFactory;
@@ -36,8 +37,11 @@ public class DataModule {
     @Provides
     @Singleton
     RestApi provideRestApi() {
-        OkHttpClient client = new OkHttpClient().newBuilder()
+		final HttpLoggingInterceptor interceptor = new HttpLoggingInterceptor();
+		interceptor.setLevel(HttpLoggingInterceptor.Level.BODY);
+		OkHttpClient client = new OkHttpClient().newBuilder()
                                                 .addInterceptor(new HttpInterceptor())
+                                                .addInterceptor(interceptor)
                                                 .build();
 
         GsonConverterFactory factory = GsonConverterFactory.create(new GsonBuilder()
