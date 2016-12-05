@@ -16,7 +16,7 @@ import static org.mockito.Mockito.verifyZeroInteractions;
 
 public class DeleteNoteUseCaseTest {
 
-    private static final int FAKE_ID = 1;
+    private static final String FAKE_ID = "BLlerFMbhA";
 
     @Mock private ThreadExecutor mockThreadExecutor;
     @Mock private PostExecutionThread mockPostExecutionThread;

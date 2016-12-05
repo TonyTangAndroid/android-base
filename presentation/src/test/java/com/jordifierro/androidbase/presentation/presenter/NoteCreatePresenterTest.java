@@ -64,7 +64,7 @@ public class NoteCreatePresenterTest {
     @SuppressWarnings("unchecked")
     public void testSubscriberOnNext() {
 
-        this.noteCreateSubscriber.onNext(new NoteEntity(1, "", ""));
+        this.noteCreateSubscriber.onNext(new NoteEntity("BLlerFMbhA", "", ""));
 
         verify(this.mockNoteCreateView).hideLoader();
         verify(this.mockNoteCreateView).close();

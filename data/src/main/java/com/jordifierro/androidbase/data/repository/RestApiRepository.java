@@ -13,6 +13,10 @@ public abstract class RestApiRepository {
 
     protected void handleResponseError(Response response) {
         if (!response.isSuccess()) {
+			response.code();
+			response.message();
+			final String rawResponse = response.raw().toString();
+			System.out.println(rawResponse);
             ResponseErrorWrapper errorWrapper;
             try {
                 errorWrapper = new Gson().fromJson(response.errorBody().string(), ResponseErrorWrapper.class);

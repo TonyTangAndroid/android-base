@@ -11,25 +11,25 @@ import rx.Observable;
 
 public class DeleteNoteUseCase extends com.jordifierro.androidbase.domain.interactor.UseCase {
 
-    private NoteRepository noteRepository;
-    private SessionRepository sessionRepository;
+	private NoteRepository noteRepository;
+	private SessionRepository sessionRepository;
 
-    private int noteId;
+	private String noteObjectId;
 
-    @Inject
-    public DeleteNoteUseCase(ThreadExecutor threadExecutor, PostExecutionThread postExecutionThread,
-                             NoteRepository noteRepository, SessionRepository sessionRepository) {
-        super(threadExecutor, postExecutionThread);
-        this.noteRepository = noteRepository;
-        this.sessionRepository = sessionRepository;
-    }
+	@Inject
+	public DeleteNoteUseCase(ThreadExecutor threadExecutor, PostExecutionThread postExecutionThread,
+							 NoteRepository noteRepository, SessionRepository sessionRepository) {
+		super(threadExecutor, postExecutionThread);
+		this.noteRepository = noteRepository;
+		this.sessionRepository = sessionRepository;
+	}
 
-    public void setParams(int noteId) {
-        this.noteId = noteId;
-    }
+	public void setParams(String noteObjectId) {
+		this.noteObjectId = noteObjectId;
+	}
 
-    @Override
-    protected Observable buildUseCaseObservable() {
-        return this.noteRepository.deleteNote(this.sessionRepository.getCurrentUser(), this.noteId);
-    }
+	@Override
+	protected Observable buildUseCaseObservable() {
+		return this.noteRepository.deleteNote(this.sessionRepository.getCurrentUser(), this.noteObjectId);
+	}
 }

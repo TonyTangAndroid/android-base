@@ -12,25 +12,25 @@ import rx.Observable;
 
 public class UpdateNoteUseCase extends com.jordifierro.androidbase.domain.interactor.UseCase {
 
-    private NoteRepository noteRepository;
-    private SessionRepository sessionRepository;
+	private NoteRepository noteRepository;
+	private SessionRepository sessionRepository;
 
-    private NoteEntity note;
+	private NoteEntity note;
 
-    @Inject
-    public UpdateNoteUseCase(ThreadExecutor threadExecutor, PostExecutionThread postExecutionThread,
-                             NoteRepository noteRepository, SessionRepository sessionRepository) {
-        super(threadExecutor, postExecutionThread);
-        this.noteRepository = noteRepository;
-        this.sessionRepository = sessionRepository;
-    }
+	@Inject
+	public UpdateNoteUseCase(ThreadExecutor threadExecutor, PostExecutionThread postExecutionThread,
+							 NoteRepository noteRepository, SessionRepository sessionRepository) {
+		super(threadExecutor, postExecutionThread);
+		this.noteRepository = noteRepository;
+		this.sessionRepository = sessionRepository;
+	}
 
-    public void setParams(NoteEntity note) {
-        this.note = note;
-    }
+	public void setParams(NoteEntity note) {
+		this.note = note;
+	}
 
-    @Override
-    protected Observable buildUseCaseObservable() {
-        return this.noteRepository.updateNote(this.sessionRepository.getCurrentUser(), this.note);
-    }
+	@Override
+	protected Observable<NoteEntity> buildUseCaseObservable() {
+		return this.noteRepository.updateNote(this.sessionRepository.getCurrentUser(), this.note);
+	}
 }

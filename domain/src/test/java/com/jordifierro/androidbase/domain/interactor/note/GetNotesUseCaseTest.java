@@ -28,34 +28,39 @@ import static org.mockito.Mockito.verifyZeroInteractions;
 
 public class GetNotesUseCaseTest {
 
-    @Mock private ThreadExecutor mockThreadExecutor;
-    @Mock private PostExecutionThread mockPostExecutionThread;
-    @Mock private NoteRepository mockNoteRepository;
-    @Mock private SessionRepository mockSessionRepository;
+	@Mock
+	private ThreadExecutor mockThreadExecutor;
+	@Mock
+	private PostExecutionThread mockPostExecutionThread;
+	@Mock
+	private NoteRepository mockNoteRepository;
+	@Mock
+	private SessionRepository mockSessionRepository;
 
-    @Before
-    public void setup() { MockitoAnnotations.initMocks(this); }
+	@Before
+	public void setup() {
+		MockitoAnnotations.initMocks(this);
+	}
 
-    @Test
-    public void testGetNotesUseCaseSuccess() {
-        GetNotesUseCase getNotesUseCase = new GetNotesUseCase(mockThreadExecutor,
-                mockPostExecutionThread, mockNoteRepository, mockSessionRepository);
-        TestSubscriber<List<NoteEntity>> testSubscriber = new TestSubscriber<>();
-        List<NoteEntity> notes = Arrays.asList(new NoteEntity[]
-                { new NoteEntity("t1", "c1"), new NoteEntity("t2", "c2")});
-        given(mockNoteRepository.getNotes(any(UserEntity.class)))
-                .willReturn(Observable.just(notes));
+	@Test
+	public void testGetNotesUseCaseSuccess() {
+		GetNotesUseCase getNotesUseCase = new GetNotesUseCase(mockThreadExecutor,
+				mockPostExecutionThread, mockNoteRepository, mockSessionRepository);
+		TestSubscriber<List<NoteEntity>> testSubscriber = new TestSubscriber<>();
+		List<NoteEntity> notes = Arrays.asList(new NoteEntity("t1", "c1"), new NoteEntity("t2", "c2"));
+		given(mockNoteRepository.getNotes(any(UserEntity.class)))
+				.willReturn(Observable.just(notes));
 
-        getNotesUseCase.buildUseCaseObservable().subscribe(testSubscriber);
+		getNotesUseCase.buildUseCaseObservable().subscribe(testSubscriber);
 
-        Assert.assertEquals(notes.size(), testSubscriber.getOnNextEvents().get(0).size());
-        Assert.assertEquals(notes.get(1).getContent(),
-                            testSubscriber.getOnNextEvents().get(0).get(1).getContent());
-        verify(mockSessionRepository).getCurrentUser();
-        verifyNoMoreInteractions(mockSessionRepository);
-        verify(mockNoteRepository).getNotes(null);
-        verifyNoMoreInteractions(mockNoteRepository);
-        verifyZeroInteractions(mockThreadExecutor);
-        verifyZeroInteractions(mockPostExecutionThread);
-    }
+		Assert.assertEquals(notes.size(), testSubscriber.getOnNextEvents().get(0).size());
+		Assert.assertEquals(notes.get(1).getContent(),
+				testSubscriber.getOnNextEvents().get(0).get(1).getContent());
+		verify(mockSessionRepository).getCurrentUser();
+		verifyNoMoreInteractions(mockSessionRepository);
+		verify(mockNoteRepository).getNotes(null);
+		verifyNoMoreInteractions(mockNoteRepository);
+		verifyZeroInteractions(mockThreadExecutor);
+		verifyZeroInteractions(mockPostExecutionThread);
+	}
 }

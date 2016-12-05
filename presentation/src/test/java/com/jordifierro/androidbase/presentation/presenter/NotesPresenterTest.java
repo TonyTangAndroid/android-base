@@ -2,8 +2,6 @@ package com.jordifierro.androidbase.presentation.presenter;
 
 import com.jordifierro.androidbase.data.net.error.RestApiErrorException;
 import com.jordifierro.androidbase.domain.entity.NoteEntity;
-import com.jordifierro.androidbase.domain.entity.VersionEntity;
-import com.jordifierro.androidbase.domain.interactor.CheckVersionExpirationUseCase;
 import com.jordifierro.androidbase.domain.interactor.note.GetNotesUseCase;
 import com.jordifierro.androidbase.presentation.view.NotesView;
 
@@ -20,95 +18,71 @@ import rx.Observable;
 import static junit.framework.Assert.assertNull;
 import static org.mockito.Matchers.any;
 import static org.mockito.Mockito.verify;
-import static org.mockito.Mockito.verifyNoMoreInteractions;
 
 public class NotesPresenterTest {
 
-    @Mock GetNotesUseCase getNotesUseCase;
-    @Mock CheckVersionExpirationUseCase checkVersionExpirationUseCase;
-    @Mock NotesView mockNotesView;
-    @Mock Observable mockObservable;
+	@Mock
+	GetNotesUseCase getNotesUseCase;
+	@Mock
+	NotesView mockNotesView;
+	@Mock
+	Observable mockObservable;
 
-    private NotesPresenter notesPresenter;
-    private NotesPresenter.NotesSubscriber notesSubscriber;
-    private NotesPresenter.VersionExpirationSubscriber versionExpirationSubscriber;
+	private NotesPresenter notesPresenter;
+	private NotesPresenter.NotesSubscriber notesSubscriber;
 
-    @Before
-    public void setUp() throws Exception {
-        MockitoAnnotations.initMocks(this);
-        this.notesPresenter = new NotesPresenter(this.getNotesUseCase,
-                                                 this.checkVersionExpirationUseCase);
-        this.notesPresenter.initWithView(this.mockNotesView);
-        this.notesSubscriber = this.notesPresenter.new NotesSubscriber();
-        this.versionExpirationSubscriber = this.notesPresenter.new VersionExpirationSubscriber();
-    }
+	@Before
+	public void setUp() throws Exception {
+		MockitoAnnotations.initMocks(this);
+		this.notesPresenter = new NotesPresenter(this.getNotesUseCase);
+		this.notesPresenter.initWithView(this.mockNotesView);
+		this.notesSubscriber = this.notesPresenter.new NotesSubscriber();
+	}
 
-    @Test
-    public void testDestroy() {
+	@Test
+	public void testDestroy() {
 
-        this.notesPresenter.destroy();
+		this.notesPresenter.destroy();
 
-        verify(this.getNotesUseCase).unsubscribe();
-        verify(this.checkVersionExpirationUseCase).unsubscribe();
-        assertNull(this.notesPresenter.notesView);
-        assertNull(this.notesPresenter.view);
-    }
+		verify(this.getNotesUseCase).unsubscribe();
+		assertNull(this.notesPresenter.notesView);
+		assertNull(this.notesPresenter.view);
+	}
 
-    @Test
-    public void testGetNotes() throws Exception {
+	@Test
+	public void testGetNotes() throws Exception {
 
-        this.notesPresenter.resume();
+		this.notesPresenter.resume();
 
-        verify(this.mockNotesView).showLoader();
-        verify(this.getNotesUseCase).execute(any(BasePresenter.BaseSubscriber.class));
-        verify(this.checkVersionExpirationUseCase).execute(any(BasePresenter.BaseSubscriber.class));
-    }
+		verify(this.mockNotesView).showLoader();
+		verify(this.getNotesUseCase).execute(any(BasePresenter.BaseSubscriber.class));
+	}
 
-    @Test
-    public void testSubscriberOnCompleted() {
+	@Test
+	public void testSubscriberOnCompleted() {
 
-        this.notesSubscriber.onCompleted();
+		this.notesSubscriber.onCompleted();
 
-        verify(this.mockNotesView).hideLoader();
-    }
+		verify(this.mockNotesView).hideLoader();
+	}
 
-    @Test
-    public void testSubscriberOnError() {
+	@Test
+	public void testSubscriberOnError() {
 
-        this.notesSubscriber.onError(new RestApiErrorException("Error message", 500));
+		this.notesSubscriber.onError(new RestApiErrorException("Error message", 500));
 
-        verify(this.mockNotesView).hideLoader();
-        verify(this.mockNotesView).handleError(any(Throwable.class));
-    }
+		verify(this.mockNotesView).hideLoader();
+		verify(this.mockNotesView).handleError(any(Throwable.class));
+	}
 
-    @Test
-    @SuppressWarnings("unchecked")
-    public void testSubscriberOnNext() {
+	@Test
+	@SuppressWarnings("unchecked")
+	public void testSubscriberOnNext() {
 
-        this.notesSubscriber.onNext(new ArrayList<NoteEntity>());
+		this.notesSubscriber.onNext(new ArrayList<NoteEntity>());
 
-        verify(this.mockNotesView).hideLoader();
-        verify(this.mockNotesView).showNotes(any(List.class));
-    }
-
-    @Test
-    public void testVersionSubscriberOnNextWithDate() {
-        VersionEntity versionEntity = new VersionEntity(VersionEntity.VERSION_WARNED);
-
-        this.versionExpirationSubscriber.onNext(versionEntity);
-
-        verify(this.mockNotesView).hideLoader();
-        verify(this.mockNotesView).showExpirationWarning();
-    }
-
-    @Test
-    public void testVersionSubscriberOnNextWithoutDate() {
-        VersionEntity versionEntity = new VersionEntity();
-
-        this.versionExpirationSubscriber.onNext(versionEntity);
-
-        verify(this.mockNotesView).hideLoader();
-        verifyNoMoreInteractions(this.mockNotesView);
-    }
+		verify(this.mockNotesView).hideLoader();
+		verify(this.mockNotesView).showNotes(any(List.class));
+	}
 
 }

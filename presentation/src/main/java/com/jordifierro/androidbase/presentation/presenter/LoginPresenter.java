@@ -11,44 +11,44 @@ import javax.inject.Inject;
 @ActivityScope
 public class LoginPresenter extends BasePresenter implements Presenter {
 
-    private DoLoginUseCase doLoginUseCase;
-    LoginView loginView;
+	LoginView loginView;
+	private DoLoginUseCase doLoginUseCase;
 
-    @Inject
-    public LoginPresenter(DoLoginUseCase doLoginUseCase) {
-        super(doLoginUseCase);
-        this.doLoginUseCase = doLoginUseCase;
-    }
+	@Inject
+	public LoginPresenter(DoLoginUseCase doLoginUseCase) {
+		super(doLoginUseCase);
+		this.doLoginUseCase = doLoginUseCase;
+	}
 
-    @Override
-    public void initWithView(BaseView view) {
-        super.initWithView(view);
-        this.loginView = (LoginView) view;
-    }
+	@Override
+	public void initWithView(BaseView view) {
+		super.initWithView(view);
+		this.loginView = (LoginView) view;
+	}
 
-    @Override
-    public void destroy() {
-        super.destroy();
-        this.loginView = null;
-    }
+	@Override
+	public void destroy() {
+		super.destroy();
+		this.loginView = null;
+	}
 
-    public void loginUser(String email, String password) {
-        UserEntity user = new UserEntity(email);
-        user.setPassword(password);
+	public void loginUser(String email, String password) {
+		UserEntity user = new UserEntity(email);
+		user.setPassword(password);
 
-        this.showLoader();
-        this.doLoginUseCase.setParams(user);
-        this.doLoginUseCase.execute(new LoginSubscriber());
-    }
+		this.showLoader();
+		this.doLoginUseCase.setParams(user);
+		this.doLoginUseCase.execute(new LoginSubscriber());
+	}
 
-    protected class LoginSubscriber extends BaseSubscriber<UserEntity> {
+	protected class LoginSubscriber extends BaseSubscriber<UserEntity> {
 
-        @Override
-        public void onNext(UserEntity user) {
-            LoginPresenter.this.hideLoader();
-            LoginPresenter.this.loginView.viewNotes();
-        }
+		@Override
+		public void onNext(UserEntity user) {
+			LoginPresenter.this.hideLoader();
+			LoginPresenter.this.loginView.viewNotes();
+		}
 
-    }
+	}
 
 }

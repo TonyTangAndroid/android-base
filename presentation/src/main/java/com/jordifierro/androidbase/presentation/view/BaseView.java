@@ -4,13 +4,17 @@ import android.content.Context;
 
 public interface BaseView {
 
-    Context context();
+	Context context();
 
-    void showLoader();
-    void hideLoader();
-    void handleError(Throwable error);
-    void showMessage(String message);
+	void showLoader();
 
-    void close();
-    void closeAndDisplayLogin();
+	void hideLoader();
+
+	void handleError(Throwable error);
+
+	void showMessage(String message);
+
+	void close();
+
+	void closeAndDisplayLogin();
 }

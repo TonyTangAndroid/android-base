@@ -1,9 +1,12 @@
 package com.jordifierro.androidbase.domain.interactor.note;
 
+import com.jordifierro.androidbase.domain.entity.NoteEntity;
 import com.jordifierro.androidbase.domain.executor.PostExecutionThread;
 import com.jordifierro.androidbase.domain.executor.ThreadExecutor;
 import com.jordifierro.androidbase.domain.repository.NoteRepository;
 import com.jordifierro.androidbase.domain.repository.SessionRepository;
+
+import java.util.List;
 
 import javax.inject.Inject;
 
@@ -23,7 +26,7 @@ public class GetNotesUseCase extends com.jordifierro.androidbase.domain.interact
     }
 
     @Override
-    protected Observable buildUseCaseObservable() {
+    protected Observable<List<NoteEntity>> buildUseCaseObservable() {
         return this.noteRepository.getNotes(this.sessionRepository.getCurrentUser());
     }
 }

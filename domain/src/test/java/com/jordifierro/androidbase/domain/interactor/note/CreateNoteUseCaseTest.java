@@ -26,7 +26,7 @@ import static org.mockito.Mockito.verifyZeroInteractions;
 
 public class CreateNoteUseCaseTest {
 
-    private static final int FAKE_ID = 1;
+    private static final String FAKE_ID = "BLlerFMbhA";
     private static final String FAKE_TITLE = "MyTitle";
     private static final String FAKE_CONTENT = "MyContent";
 

@@ -30,7 +30,7 @@ public class CreateNoteUseCase extends com.jordifierro.androidbase.domain.intera
     }
 
     @Override
-    protected Observable buildUseCaseObservable() {
+    protected Observable<NoteEntity> buildUseCaseObservable() {
         return this.noteRepository.createNote(this.sessionRepository.getCurrentUser(), this.note);
     }
 }

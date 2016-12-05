@@ -1,7 +1,5 @@
 package com.jordifierro.androidbase.data.net.interceptor;
 
-import com.jordifierro.androidbase.data.net.RestApi;
-
 import org.junit.Test;
 
 import java.util.Locale;
@@ -28,7 +26,6 @@ public class HttpInterceptorTest {
 
         RecordedRequest request = mockWebServer.takeRequest();
         assertEquals(Locale.getDefault().getLanguage(), request.getHeader("Accept-Language"));
-        assertEquals(RestApi.VERSION_HEADER, request.getHeader("Accept"));
 
         mockWebServer.shutdown();
     }

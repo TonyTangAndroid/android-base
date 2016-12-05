@@ -15,64 +15,64 @@ import java.util.List;
 
 public class NotesAdapter extends BaseAdapter {
 
-    public interface OnItemClickListener {
-        void onNoteItemClicked(NoteEntity note);
-    }
+	private Context context;
+	private OnItemClickListener listener;
+	private List<NoteEntity> notes;
 
-    private Context context;
-    private OnItemClickListener listener;
-    private List<NoteEntity> notes;
+	public NotesAdapter(Context context) {
+		this.context = context;
+		this.notes = Collections.emptyList();
+	}
 
-    public NotesAdapter(Context context) {
-        this.context = context;
-        this.notes = Collections.emptyList();
-    }
+	public void setOnItemClickListener(OnItemClickListener listener) {
+		this.listener = listener;
+	}
 
-    public void setOnItemClickListener(OnItemClickListener listener) {
-        this.listener = listener;
-    }
+	public void setNotes(List<NoteEntity> notes) {
+		this.notes = notes;
+		this.notifyDataSetChanged();
+	}
 
-    public void setNotes(List<NoteEntity> notes) {
-        this.notes = notes;
-        this.notifyDataSetChanged();
-    }
+	@Override
+	public int getCount() {
+		return notes.size();
+	}
 
-    @Override
-    public int getCount() {
-        return notes.size();
-    }
+	@Override
+	public Object getItem(int arg0) {
+		return notes.get(arg0);
+	}
 
-    @Override
-    public Object getItem(int arg0) {
-        return notes.get(arg0);
-    }
+	@Override
+	public long getItemId(int arg0) {
+		return notes.get(arg0).getObjectId().hashCode();
+	}
 
-    @Override
-    public long getItemId(int arg0) {
-        return notes.get(arg0).getId();
-    }
+	@Override
+	public View getView(int position, View view, ViewGroup parent) {
 
-    @Override
-    public View getView(int position, View view, ViewGroup parent) {
+		if (view == null) {
+			LayoutInflater inflater = (LayoutInflater) context
+					.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+			view = inflater.inflate(R.layout.view_cell_note, parent, false);
+		}
 
-        if(view == null){
-            LayoutInflater inflater = (LayoutInflater) context
-                    .getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-            view = inflater.inflate(R.layout.view_cell_note, parent, false);
-        }
+		((TextView) view.findViewById(R.id.title)).setText(notes.get(position).getTitle());
+		view.setTag(position);
 
-        ((TextView)view.findViewById(R.id.title)).setText(notes.get(position).getTitle());
-        view.setTag(position);
+		view.setOnClickListener(new View.OnClickListener() {
 
-        view.setOnClickListener(new View.OnClickListener() {
+			@Override
+			public void onClick(View arg0) {
+				listener.onNoteItemClicked(notes.get((int) arg0.getTag()));
+			}
+		});
 
-            @Override
-            public void onClick(View arg0) {
-                listener.onNoteItemClicked(notes.get((int)arg0.getTag()));
-            }
-        });
+		return view;
+	}
 
-        return view;
-    }
+	public interface OnItemClickListener {
+		void onNoteItemClicked(NoteEntity note);
+	}
 
 }

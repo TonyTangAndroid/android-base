@@ -1,5 +1,6 @@
 package com.jordifierro.androidbase.domain.interactor.note;
 
+import com.jordifierro.androidbase.domain.entity.NoteEntity;
 import com.jordifierro.androidbase.domain.executor.PostExecutionThread;
 import com.jordifierro.androidbase.domain.executor.ThreadExecutor;
 import com.jordifierro.androidbase.domain.repository.NoteRepository;
@@ -11,25 +12,25 @@ import rx.Observable;
 
 public class GetNoteUseCase extends com.jordifierro.androidbase.domain.interactor.UseCase {
 
-    private NoteRepository noteRepository;
-    private SessionRepository sessionRepository;
+	private NoteRepository noteRepository;
+	private SessionRepository sessionRepository;
 
-    private int noteId;
+	private String noteObjectId;
 
-    @Inject
-    public GetNoteUseCase(ThreadExecutor threadExecutor, PostExecutionThread postExecutionThread,
-                          NoteRepository noteRepository, SessionRepository sessionRepository) {
-        super(threadExecutor, postExecutionThread);
-        this.noteRepository = noteRepository;
-        this.sessionRepository = sessionRepository;
-    }
+	@Inject
+	public GetNoteUseCase(ThreadExecutor threadExecutor, PostExecutionThread postExecutionThread,
+						  NoteRepository noteRepository, SessionRepository sessionRepository) {
+		super(threadExecutor, postExecutionThread);
+		this.noteRepository = noteRepository;
+		this.sessionRepository = sessionRepository;
+	}
 
-    public void setParams(int noteId) {
-        this.noteId = noteId;
-    }
+	public void setParams(String noteObjectId) {
+		this.noteObjectId = noteObjectId;
+	}
 
-    @Override
-    protected Observable buildUseCaseObservable() {
-        return this.noteRepository.getNote(this.sessionRepository.getCurrentUser(), this.noteId);
-    }
+	@Override
+	protected Observable<NoteEntity> buildUseCaseObservable() {
+		return this.noteRepository.getNote(this.sessionRepository.getCurrentUser(), this.noteObjectId);
+	}
 }

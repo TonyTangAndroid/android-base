@@ -25,27 +25,27 @@ public class SessionDataRepositoryTest extends InstrumentationTestCase {
 
         this.sessionDataRepository = new SessionDataRepository(this.sharedPreferences);
         this.user = new UserEntity(FAKE_EMAIL);
-        this.user.setAuthToken(FAKE_TOKEN);
+        this.user.setSessionToken(FAKE_TOKEN);
     }
 
     public void testGetWithoutSetReturnsNull(){
-        assertNull(this.sessionDataRepository.getCurrentUser().getEmail());
-        assertNull(this.sessionDataRepository.getCurrentUser().getAuthToken());
+        assertNull(this.sessionDataRepository.getCurrentUser().getUsername());
+        assertNull(this.sessionDataRepository.getCurrentUser().getSessionToken());
     }
 
     public void testSetAndGetSettedUser() {
         this.sessionDataRepository.setCurrentUser(this.user);
         UserEntity currentUser = this.sessionDataRepository.getCurrentUser();
 
-        assertEquals(currentUser.getEmail(), FAKE_EMAIL);
-        assertEquals(currentUser.getAuthToken(), FAKE_TOKEN);
+        assertEquals(currentUser.getUsername(), FAKE_EMAIL);
+        assertEquals(currentUser.getSessionToken(), FAKE_TOKEN);
     }
 
     public void testSetInvalidateAndGetNullUser() {
         this.sessionDataRepository.setCurrentUser(this.user);
         this.sessionDataRepository.invalidateSession();
 
-        assertNull(this.sessionDataRepository.getCurrentUser().getEmail());
-        assertNull(this.sessionDataRepository.getCurrentUser().getAuthToken());
+        assertNull(this.sessionDataRepository.getCurrentUser().getUsername());
+        assertNull(this.sessionDataRepository.getCurrentUser().getSessionToken());
     }
 }

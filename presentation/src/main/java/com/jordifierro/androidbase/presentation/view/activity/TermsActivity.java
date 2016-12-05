@@ -5,11 +5,11 @@ import com.jordifierro.androidbase.presentation.view.activity.base.WebViewActivi
 
 public class TermsActivity extends WebViewActivity {
 
-    private static final String TERMS_URL = RestApi.URL_BASE + "/terms";
+	private static final String TERMS_URL = RestApi.URL_BASE + "/terms";
 
-    @Override
-    public String getUrl() {
-        return TERMS_URL;
-    }
+	@Override
+	public String getUrl() {
+		return TERMS_URL;
+	}
 
 }

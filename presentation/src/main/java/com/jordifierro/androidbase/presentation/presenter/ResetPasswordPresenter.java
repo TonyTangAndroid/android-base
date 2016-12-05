@@ -1,6 +1,5 @@
 package com.jordifierro.androidbase.presentation.presenter;
 
-import com.jordifierro.androidbase.domain.entity.MessageEntity;
 import com.jordifierro.androidbase.domain.entity.UserEntity;
 import com.jordifierro.androidbase.domain.interactor.user.ResetPasswordUseCase;
 import com.jordifierro.androidbase.presentation.dependency.ActivityScope;
@@ -12,46 +11,43 @@ import javax.inject.Inject;
 @ActivityScope
 public class ResetPasswordPresenter extends BasePresenter implements Presenter {
 
-    private ResetPasswordUseCase resetPasswordUseCase;
-    ResetPasswordView resetPasswordView;
+	ResetPasswordView resetPasswordView;
+	private ResetPasswordUseCase resetPasswordUseCase;
 
-    @Inject
-    public ResetPasswordPresenter(ResetPasswordUseCase resetPasswordUseCase) {
-        super(resetPasswordUseCase);
-        this.resetPasswordUseCase = resetPasswordUseCase;
-    }
+	@Inject
+	public ResetPasswordPresenter(ResetPasswordUseCase resetPasswordUseCase) {
+		super(resetPasswordUseCase);
+		this.resetPasswordUseCase = resetPasswordUseCase;
+	}
 
-    @Override
-    public void initWithView(BaseView view) {
-        super.initWithView(view);
-        this.resetPasswordView = (ResetPasswordView) view;
-    }
+	@Override
+	public void initWithView(BaseView view) {
+		super.initWithView(view);
+		this.resetPasswordView = (ResetPasswordView) view;
+	}
 
-    @Override
-    public void destroy() {
-        super.destroy();
-        this.resetPasswordView = null;
-    }
+	@Override
+	public void destroy() {
+		super.destroy();
+		this.resetPasswordView = null;
+	}
 
-    public void resetPassword(String email, String newPassword, String newPasswordConfirmation) {
-        UserEntity user = new UserEntity(email);
-        user.setNewPassword(newPassword);
-        user.setNewPasswordConfirmation(newPasswordConfirmation);
+	public void resetPassword(String email, String newPassword, String newPasswordConfirmation) {
+		UserEntity user = new UserEntity(email);
+		this.showLoader();
+		this.resetPasswordUseCase.setParams(user);
+		this.resetPasswordUseCase.execute(new ResetPasswordSubscriber());
+	}
 
-        this.showLoader();
-        this.resetPasswordUseCase.setParams(user);
-        this.resetPasswordUseCase.execute(new ResetPasswordSubscriber());
-    }
+	protected class ResetPasswordSubscriber extends BaseSubscriber<Void> {
 
-    protected class ResetPasswordSubscriber extends BaseSubscriber<MessageEntity> {
+		@Override
+		public void onNext(Void message) {
+			ResetPasswordPresenter.this.hideLoader();
+			ResetPasswordPresenter.this.resetPasswordView.showMessage("Success");
+			ResetPasswordPresenter.this.resetPasswordView.close();
+		}
 
-        @Override
-        public void onNext(MessageEntity message) {
-            ResetPasswordPresenter.this.hideLoader();
-            ResetPasswordPresenter.this.resetPasswordView.showMessage(message.getMessage());
-            ResetPasswordPresenter.this.resetPasswordView.close();
-        }
-
-    }
+	}
 
 }

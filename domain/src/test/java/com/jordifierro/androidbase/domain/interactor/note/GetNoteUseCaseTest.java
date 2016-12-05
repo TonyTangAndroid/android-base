@@ -26,34 +26,40 @@ import static org.mockito.Mockito.verifyZeroInteractions;
 
 public class GetNoteUseCaseTest {
 
-    private static final int FAKE_ID = 1;
+	private static final String FAKE_ID = "BLlerFMbhA";
 
-    @Mock private ThreadExecutor mockThreadExecutor;
-    @Mock private PostExecutionThread mockPostExecutionThread;
-    @Mock private NoteRepository mockNoteRepository;
-    @Mock private SessionRepository mockSessionRepository;
+	@Mock
+	private ThreadExecutor mockThreadExecutor;
+	@Mock
+	private PostExecutionThread mockPostExecutionThread;
+	@Mock
+	private NoteRepository mockNoteRepository;
+	@Mock
+	private SessionRepository mockSessionRepository;
 
-    @Before
-    public void setup() { MockitoAnnotations.initMocks(this); }
+	@Before
+	public void setup() {
+		MockitoAnnotations.initMocks(this);
+	}
 
-    @Test
-    public void testGetNoteUseCaseSuccess() {
-        GetNoteUseCase getNoteUseCase = new GetNoteUseCase(mockThreadExecutor,
-                mockPostExecutionThread, mockNoteRepository, mockSessionRepository);
-        TestSubscriber<NoteEntity> testSubscriber = new TestSubscriber<>();
-        NoteEntity note = new NoteEntity("Title", "Content");
-        given(mockNoteRepository.getNote(any(UserEntity.class), eq(FAKE_ID)))
-                .willReturn(Observable.just(note));
+	@Test
+	public void testGetNoteUseCaseSuccess() {
+		GetNoteUseCase getNoteUseCase = new GetNoteUseCase(mockThreadExecutor,
+				mockPostExecutionThread, mockNoteRepository, mockSessionRepository);
+		TestSubscriber<NoteEntity> testSubscriber = new TestSubscriber<>();
+		NoteEntity note = new NoteEntity("Title", "Content");
+		given(mockNoteRepository.getNote(any(UserEntity.class), eq(FAKE_ID)))
+				.willReturn(Observable.just(note));
 
-        getNoteUseCase.setParams(FAKE_ID);
-        getNoteUseCase.buildUseCaseObservable().subscribe(testSubscriber);
+		getNoteUseCase.setParams(FAKE_ID);
+		getNoteUseCase.buildUseCaseObservable().subscribe(testSubscriber);
 
-        Assert.assertEquals(note.getTitle(), testSubscriber.getOnNextEvents().get(0).getTitle());
-        verify(mockSessionRepository).getCurrentUser();
-        verifyNoMoreInteractions(mockSessionRepository);
-        verify(mockNoteRepository).getNote(null, FAKE_ID);
-        verifyNoMoreInteractions(mockNoteRepository);
-        verifyZeroInteractions(mockThreadExecutor);
-        verifyZeroInteractions(mockPostExecutionThread);
-    }
+		Assert.assertEquals(note.getTitle(), testSubscriber.getOnNextEvents().get(0).getTitle());
+		verify(mockSessionRepository).getCurrentUser();
+		verifyNoMoreInteractions(mockSessionRepository);
+		verify(mockNoteRepository).getNote(null, FAKE_ID);
+		verifyNoMoreInteractions(mockNoteRepository);
+		verifyZeroInteractions(mockThreadExecutor);
+		verifyZeroInteractions(mockPostExecutionThread);
+	}
 }

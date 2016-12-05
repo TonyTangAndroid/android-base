@@ -25,7 +25,7 @@ public class SessionDataRepository implements SessionRepository {
     public UserEntity getCurrentUser() {
         if (sharedPreferences.contains(EMAIL) && sharedPreferences.contains(AUTH_TOKEN)) {
             UserEntity user = new UserEntity(sharedPreferences.getString(EMAIL, null));
-            user.setAuthToken(sharedPreferences.getString(AUTH_TOKEN, null));
+            user.setSessionToken(sharedPreferences.getString(AUTH_TOKEN, null));
             return user;
         }
         return new UserEntity();
@@ -34,8 +34,8 @@ public class SessionDataRepository implements SessionRepository {
     @Override
     public void setCurrentUser(UserEntity user) {
         SharedPreferences.Editor editor = sharedPreferences.edit();
-        editor.putString(EMAIL, user.getEmail());
-        editor.putString(AUTH_TOKEN, user.getAuthToken());
+        editor.putString(EMAIL, user.getUsername());
+        editor.putString(AUTH_TOKEN, user.getSessionToken());
         editor.apply();
     }
 
