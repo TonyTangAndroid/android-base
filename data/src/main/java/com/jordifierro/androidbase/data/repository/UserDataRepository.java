@@ -1,8 +1,8 @@
 package com.jordifierro.androidbase.data.repository;
 
 import com.jordifierro.androidbase.data.net.RestApi;
-import com.jordifierro.androidbase.data.net.wrapper.CreatedWrapper;
-import com.jordifierro.androidbase.data.net.wrapper.UpdatedWrapper;
+import com.jordifierro.androidbase.domain.entity.CreatedWrapper;
+import com.jordifierro.androidbase.domain.entity.EmptyWrapper;
 import com.jordifierro.androidbase.domain.entity.UserEntity;
 import com.jordifierro.androidbase.domain.repository.UserRepository;
 
@@ -37,13 +37,25 @@ public class UserDataRepository extends RestApiRepository implements UserReposit
 	}
 
 	@Override
-	public Observable<Void> deleteUser(final UserEntity user) {
+	public Observable<CreatedWrapper> createUserWithRawResponse(UserEntity user) {
+		return this.restApi.createUser(user).map(new Func1<Response<CreatedWrapper>, CreatedWrapper>() {
+			@Override
+			public CreatedWrapper call(Response<CreatedWrapper> createdWrapperResponse) {
+				handleResponseError(createdWrapperResponse);
+				return createdWrapperResponse.body();
+			}
+		});
+
+	}
+
+	@Override
+	public Observable<EmptyWrapper> deleteUser(final UserEntity user) {
 		return this.restApi.deleteUser(user.getSessionToken(), user.getObjectId())
-				.map(new Func1<Response<UpdatedWrapper>, Void>() {
+				.map(new Func1<Response<EmptyWrapper>, EmptyWrapper>() {
 					@Override
-					public Void call(Response<UpdatedWrapper> voidResponse) {
+					public EmptyWrapper call(Response<EmptyWrapper> voidResponse) {
 						handleResponseError(voidResponse);
-						return null;
+						return voidResponse.body();
 					}
 				});
 	}
@@ -53,6 +65,7 @@ public class UserDataRepository extends RestApiRepository implements UserReposit
 		return this.restApi.resetPassword(user.getEmail()).map(new Func1<Response<Void>, Void>() {
 			@Override
 			public Void call(Response<Void> voidResponse) {
+				handleResponseError(voidResponse);
 				return voidResponse.body();
 			}
 		});

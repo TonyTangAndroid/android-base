@@ -33,8 +33,11 @@ public class DoResetPasswordUseCaseTest {
                 mockPostExecutionThread, mockUserRepository);
 		given(mockUserRepository.resetPassword(mockUser))
 				.willReturn(Observable.just(null));
-        resetPasswordUseCase.buildUseCaseObservable();
+
 		resetPasswordUseCase.setParams(mockUser);
+		resetPasswordUseCase.buildUseCaseObservable();
+
+
         verify(mockUserRepository).resetPassword(mockUser);
         verifyNoMoreInteractions(mockUserRepository);
         verifyZeroInteractions(mockThreadExecutor);

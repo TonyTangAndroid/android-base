@@ -1,10 +1,16 @@
-package com.jordifierro.androidbase.data.net.wrapper;
+package com.jordifierro.androidbase.domain.entity;
 
 public class CreatedWrapper {
 
 	private String createdAt;
 	private String objectId;
 	private String sessionToken;
+
+	public CreatedWrapper(String createdAt, String objectId, String sessionToken) {
+		this.createdAt = createdAt;
+		this.objectId = objectId;
+		this.sessionToken = sessionToken;
+	}
 
 	public String getSessionToken() {
 		return sessionToken;

@@ -1,9 +1,10 @@
 package com.jordifierro.androidbase.data.repository;
 
 import com.jordifierro.androidbase.data.net.RestApi;
-import com.jordifierro.androidbase.data.net.wrapper.CreatedWrapper;
-import com.jordifierro.androidbase.data.net.wrapper.NotesListWrapper;
+import com.jordifierro.androidbase.domain.entity.CreatedWrapper;
+import com.jordifierro.androidbase.domain.entity.NoteEntitiesWrapper;
 import com.jordifierro.androidbase.domain.entity.NoteEntity;
+import com.jordifierro.androidbase.domain.entity.UpdatedWrapper;
 import com.jordifierro.androidbase.domain.entity.UserEntity;
 import com.jordifierro.androidbase.domain.repository.NoteRepository;
 
@@ -27,15 +28,14 @@ public class NoteDataRepository extends RestApiRepository implements NoteReposit
 	}
 
 	@Override
-	public Observable<NoteEntity> createNote(UserEntity user, final NoteEntity note) {
-		return this.restApi.createNote(user.getSessionToken(), note)
-				.flatMap(new Func1<Response<CreatedWrapper>,  Observable<NoteEntity>>() {
-					@Override
-					public  Observable<NoteEntity> call(Response<CreatedWrapper> noteEntityResponse) {
-						handleResponseError(noteEntityResponse);
-						return getNote(user, noteEntityResponse.body().getObjectId());
-					}
-				});
+	public Observable<CreatedWrapper> createNote(UserEntity user, final NoteEntity note) {
+		return this.restApi.createNote(user.getSessionToken(), note).map(new Func1<Response<CreatedWrapper>, CreatedWrapper>() {
+			@Override
+			public CreatedWrapper call(Response<CreatedWrapper> createdWrapperResponse) {
+				handleResponseError(createdWrapperResponse);
+				return createdWrapperResponse.body();
+			}
+		});
 	}
 
 	@Override
@@ -53,9 +53,9 @@ public class NoteDataRepository extends RestApiRepository implements NoteReposit
 	@Override
 	public Observable<List<NoteEntity>> getNotes(UserEntity user) {
 		return this.restApi.getNotes(user.getSessionToken())
-				.map(new Func1<Response<NotesListWrapper>, List<NoteEntity>>() {
+				.map(new Func1<Response<NoteEntitiesWrapper>, List<NoteEntity>>() {
 					@Override
-					public List<NoteEntity> call(Response<NotesListWrapper> listResponse) {
+					public List<NoteEntity> call(Response<NoteEntitiesWrapper> listResponse) {
 						handleResponseError(listResponse);
 						return listResponse.body().getResults();
 					}
@@ -63,11 +63,11 @@ public class NoteDataRepository extends RestApiRepository implements NoteReposit
 	}
 
 	@Override
-	public Observable<NoteEntity> updateNote(UserEntity user, NoteEntity note) {
+	public Observable<UpdatedWrapper> updateNote(UserEntity user, NoteEntity note) {
 		return this.restApi.updateNote(user.getSessionToken(), note.getObjectId(), note)
-				.map(new Func1<Response<NoteEntity>, NoteEntity>() {
+				.map(new Func1<Response<UpdatedWrapper>, UpdatedWrapper>() {
 					@Override
-					public NoteEntity call(Response<NoteEntity> noteEntityResponse) {
+					public UpdatedWrapper call(Response<UpdatedWrapper> noteEntityResponse) {
 						handleResponseError(noteEntityResponse);
 						return noteEntityResponse.body();
 					}

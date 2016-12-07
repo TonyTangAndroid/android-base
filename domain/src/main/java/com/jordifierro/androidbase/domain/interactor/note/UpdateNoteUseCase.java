@@ -1,6 +1,7 @@
 package com.jordifierro.androidbase.domain.interactor.note;
 
 import com.jordifierro.androidbase.domain.entity.NoteEntity;
+import com.jordifierro.androidbase.domain.entity.UpdatedWrapper;
 import com.jordifierro.androidbase.domain.executor.PostExecutionThread;
 import com.jordifierro.androidbase.domain.executor.ThreadExecutor;
 import com.jordifierro.androidbase.domain.repository.NoteRepository;
@@ -30,7 +31,7 @@ public class UpdateNoteUseCase extends com.jordifierro.androidbase.domain.intera
 	}
 
 	@Override
-	protected Observable<NoteEntity> buildUseCaseObservable() {
+	protected Observable<UpdatedWrapper> buildUseCaseObservable() {
 		return this.noteRepository.updateNote(this.sessionRepository.getCurrentUser(), this.note);
 	}
 }

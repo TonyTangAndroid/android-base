@@ -1,9 +1,10 @@
 package com.jordifierro.androidbase.data.net;
 
-import com.jordifierro.androidbase.data.net.wrapper.CreatedWrapper;
-import com.jordifierro.androidbase.data.net.wrapper.NotesListWrapper;
-import com.jordifierro.androidbase.data.net.wrapper.UpdatedWrapper;
+import com.jordifierro.androidbase.domain.entity.CreatedWrapper;
+import com.jordifierro.androidbase.domain.entity.EmptyWrapper;
+import com.jordifierro.androidbase.domain.entity.NoteEntitiesWrapper;
 import com.jordifierro.androidbase.domain.entity.NoteEntity;
+import com.jordifierro.androidbase.domain.entity.UpdatedWrapper;
 import com.jordifierro.androidbase.domain.entity.UserEntity;
 
 import retrofit2.Response;
@@ -16,6 +17,7 @@ import retrofit2.http.Header;
 import retrofit2.http.POST;
 import retrofit2.http.PUT;
 import retrofit2.http.Path;
+import retrofit2.http.Query;
 import rx.Observable;
 
 public interface RestApi {
@@ -26,42 +28,53 @@ public interface RestApi {
 
 
 	String URL_BASE = "https://api.parse.com/1/";
+	String URL_PATH_USERS = "users";
+	String URL_PATH_USERS_OBJECT_ID = "users/{objectId}";
+	String URL_PATH_REQUEST_PASSWORD_RESET = "requestPasswordReset";
+	String URL_PATH_LOGIN = "login";
+	String URL_PATH_LOGOUT = "logout";
+	String URL_PATH_CLASSES_NOTE_OBJECT_ID = "classes/note/{objectId}";
+	String URL_PATH_USERS_ME = "users/me";
+	String URL_PATH_CLASSES_NOTE = "classes/note";
+	String FIELD_EMAIL = "email";
+	String FIELD_USERNAME = "username";
+	String FIELD_PASSWORD = "password";
 
-	@POST("users")
+	@POST(URL_PATH_USERS)
 	Observable<Response<CreatedWrapper>> createUser(@Body UserEntity userEntity);
 
-	@DELETE("users/{objectId}")
-	Observable<Response<UpdatedWrapper>> deleteUser(@Header(PARSE_SESSION_KEY) String token, @Path("objectId") String objectId);
-
-	@POST("requestPasswordReset")
-	Observable<Response<Void>> resetPassword(@Field("email") String email);
+	@DELETE(URL_PATH_USERS_OBJECT_ID)
+	Observable<Response<EmptyWrapper>> deleteUser(@Header(PARSE_SESSION_KEY) String token, @Path("objectId") String objectId);
 
 	@FormUrlEncoded
-	@POST("login")
-	Observable<Response<UserEntity>> doLogin(@Field("username") String username, @Field("password") String password);
+	@POST(URL_PATH_REQUEST_PASSWORD_RESET)
+	Observable<Response<Void>> resetPassword(@Field(FIELD_EMAIL) String email);
 
-	@POST("logout")
+	@GET(URL_PATH_LOGIN)
+	Observable<Response<UserEntity>> doLogin(@Query(FIELD_USERNAME) String username, @Query(FIELD_PASSWORD) String password);
+
+	@POST(URL_PATH_LOGOUT)
 	Observable<Response<Void>> doLogout(@Header(PARSE_SESSION_KEY) String token);
 
-	@POST("classes/note")
+	@POST(URL_PATH_CLASSES_NOTE)
 	Observable<Response<CreatedWrapper>> createNote(@Header(PARSE_SESSION_KEY) String token,
 													@Body NoteEntity note);
 
-	@GET("classes/note/{objectId}")
+	@GET(URL_PATH_CLASSES_NOTE_OBJECT_ID)
 	Observable<Response<NoteEntity>> getNote(@Header(PARSE_SESSION_KEY) String token,
 											 @Path("objectId") String objectId);
 
-	@GET("users/me")
+	@GET(URL_PATH_USERS_ME)
 	Observable<Response<UserEntity>> me(@Header(PARSE_SESSION_KEY) String token);
 
-	@GET("classes/note")
-	Observable<Response<NotesListWrapper>> getNotes(@Header(PARSE_SESSION_KEY) String token);
+	@GET(URL_PATH_CLASSES_NOTE)
+	Observable<Response<NoteEntitiesWrapper>> getNotes(@Header(PARSE_SESSION_KEY) String token);
 
-	@PUT("classes/note/{objectId}")
-	Observable<Response<NoteEntity>> updateNote(@Header(PARSE_SESSION_KEY) String token,
-												@Path("objectId") String objectId, @Body NoteEntity note);
+	@PUT(URL_PATH_CLASSES_NOTE_OBJECT_ID)
+	Observable<Response<UpdatedWrapper>> updateNote(@Header(PARSE_SESSION_KEY) String token,
+													@Path("objectId") String objectId, @Body NoteEntity note);
 
-	@DELETE("classes/note/{objectId}")
+	@DELETE(URL_PATH_CLASSES_NOTE_OBJECT_ID)
 	Observable<Response<Void>> deleteNote(@Header(PARSE_SESSION_KEY) String token,
 										  @Path("objectId") String objectId);
 

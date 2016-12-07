@@ -8,7 +8,7 @@ import static org.junit.Assert.assertThat;
 
 public class NoteEntityTest {
 
-    private static final String FAKE_ID = "BLlerFMbhA";
+    private static final String FAKE_OBJECT_ID = "3WQrZ0dyrt";
     private static final String FAKE_TITLE = "email@test.com";
     private static final String FAKE_CONTENT = "1234ABCD";
 
@@ -16,12 +16,12 @@ public class NoteEntityTest {
 
     @Before
     public void setup() {
-        this.note =  new NoteEntity(FAKE_ID, FAKE_TITLE, FAKE_CONTENT);
+        this.note =  new NoteEntity(FAKE_OBJECT_ID, FAKE_TITLE, FAKE_CONTENT);
     }
 
     @Test
     public void tesNoteConstructor() {
-        assertThat(this.note.getObjectId(), is(FAKE_ID));
+        assertThat(this.note.getObjectId(), is(FAKE_OBJECT_ID));
         assertThat(this.note.getTitle(), is(FAKE_TITLE));
         assertThat(this.note.getContent(), is(FAKE_CONTENT));
     }

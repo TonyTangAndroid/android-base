@@ -1,1 +1,4 @@
-{"error":{"status":404,"message":"not found."}}
+{
+  "code": 101,
+  "error": "object not found for get"
+}

@@ -1,10 +1,8 @@
-package com.jordifierro.androidbase.data.net.wrapper;
-
-import com.jordifierro.androidbase.domain.entity.NoteEntity;
+package com.jordifierro.androidbase.domain.entity;
 
 import java.util.List;
 
-public class NotesListWrapper {
+public class NoteEntitiesWrapper {
 
 
 	private List<NoteEntity> results;

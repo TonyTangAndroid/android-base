@@ -20,6 +20,7 @@ public class UserEntityTest {
 	@Test
 	public void testUserConstructor() {
 		assertThat(this.user.getUsername(), is(FAKE_EMAIL));
+		assertThat(this.user.getEmail(), is(user.getUsername()));
 	}
 
 	@Test
@@ -33,5 +34,17 @@ public class UserEntityTest {
 		assertThat(this.user.getUsername(), is("another@email.com"));
 		assertThat(this.user.getSessionToken(), is("1234TOKEN"));
 		assertThat(this.user.getPassword(), is("password"));
+	}
+
+	@Test
+	public void testUserSetUserName() {
+		this.user.setUsername("another@email.com");
+		assertThat(this.user.getEmail(), is(this.user.getUsername()));
+	}
+
+	@Test
+	public void testUserSetEmail() {
+		this.user.setEmail("another@email.com");
+		assertThat(this.user.getEmail(), is(this.user.getUsername()));
 	}
 }

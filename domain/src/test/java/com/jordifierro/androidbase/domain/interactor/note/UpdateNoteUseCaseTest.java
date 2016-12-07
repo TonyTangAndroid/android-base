@@ -1,6 +1,7 @@
 package com.jordifierro.androidbase.domain.interactor.note;
 
 import com.jordifierro.androidbase.domain.entity.NoteEntity;
+import com.jordifierro.androidbase.domain.entity.UpdatedWrapper;
 import com.jordifierro.androidbase.domain.entity.UserEntity;
 import com.jordifierro.androidbase.domain.executor.PostExecutionThread;
 import com.jordifierro.androidbase.domain.executor.ThreadExecutor;
@@ -26,10 +27,10 @@ import static org.mockito.Mockito.verifyZeroInteractions;
 
 public class UpdateNoteUseCaseTest {
 
-	private static final String FAKE_ID = "BLlerFMbhA";
+	public static final String FAKE_UPDATED_TIME = "2016-12-06T21:58:10.898Z";
+	private static final String FAKE_ID = "3WQrZ0dyrt";
 	private static final String FAKE_TITLE = "MyTitle";
 	private static final String FAKE_CONTENT = "MyContent";
-
 	@Mock
 	private ThreadExecutor mockThreadExecutor;
 	@Mock
@@ -46,18 +47,19 @@ public class UpdateNoteUseCaseTest {
 
 	@Test
 	public void testUpdateNoteUseCaseSuccess() {
+		//XXX should return note object after updated.
 		NoteEntity note = new NoteEntity(FAKE_ID, FAKE_TITLE, FAKE_CONTENT);
+		UpdatedWrapper updatedWrapper = new UpdatedWrapper(FAKE_UPDATED_TIME);
 		UpdateNoteUseCase updateNoteUseCase = new UpdateNoteUseCase(mockThreadExecutor,
 				mockPostExecutionThread, mockNoteRepository, mockSessionRepository);
-		TestSubscriber<NoteEntity> testSubscriber = new TestSubscriber<>();
+		TestSubscriber<UpdatedWrapper> testSubscriber = new TestSubscriber<>();
 		given(mockNoteRepository.updateNote(any(UserEntity.class), eq(note)))
-				.willReturn(Observable.just(note));
+				.willReturn(Observable.just(updatedWrapper));
 
 		updateNoteUseCase.setParams(note);
 		updateNoteUseCase.buildUseCaseObservable().subscribe(testSubscriber);
 
-		Assert.assertEquals(FAKE_TITLE, testSubscriber.getOnNextEvents().get(0).getTitle());
-		Assert.assertEquals(FAKE_CONTENT, testSubscriber.getOnNextEvents().get(0).getContent());
+		Assert.assertEquals(FAKE_UPDATED_TIME, testSubscriber.getOnNextEvents().get(0).getUpdatedAt());
 		verify(mockSessionRepository).getCurrentUser();
 		verifyNoMoreInteractions(mockSessionRepository);
 		verify(mockNoteRepository).updateNote(null, note);

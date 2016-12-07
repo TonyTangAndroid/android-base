@@ -13,4 +13,6 @@ public class ParsePermissionWrapper {
 	public void setPermissionArrayList(ArrayList<ParsePermission> permissionArrayList) {
 		this.permissionArrayList = permissionArrayList;
 	}
+
+
 }

@@ -3,6 +3,7 @@ package com.jordifierro.androidbase.domain.interactor;
 import com.jordifierro.androidbase.domain.executor.PostExecutionThread;
 import com.jordifierro.androidbase.domain.executor.ThreadExecutor;
 
+import org.jetbrains.annotations.NotNull;
 import org.junit.Before;
 import org.junit.Test;
 import org.mockito.Mock;
@@ -58,12 +59,12 @@ public class UseCaseTest {
 
     private static class FakeUseCase extends UseCase {
 
-        protected FakeUseCase(ThreadExecutor threadExecutor,
-                              PostExecutionThread postExecutionThread) {
+        FakeUseCase(ThreadExecutor threadExecutor,
+					PostExecutionThread postExecutionThread) {
             super(threadExecutor, postExecutionThread);
         }
 
-        @Override protected Observable buildUseCaseObservable() {
+        @Override protected Observable<Integer> buildUseCaseObservable() {
             return Observable.just(1, 2, 3);
         }
 
@@ -72,7 +73,7 @@ public class UseCaseTest {
     private class DefaultThreadExecutor implements ThreadExecutor {
 
         @Override
-        public void execute(Runnable command) {
+        public void execute(@NotNull Runnable command) {
             command.run();
         }
 

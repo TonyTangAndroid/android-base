@@ -15,7 +15,7 @@ public class TestParse {
 				"    \"updatedAt\": \"2013-04-22T19:49:39.252Z\",\n" +
 				"    \"objectId\": \"HSO4N1JT3W\",\n" +
 				"    \"ACL\": {\n" +
-				"        \"BLlerFMbhA\": {\n" +
+				"        \"3WQrZ0dyrt\": {\n" +
 				"            \"read\": true,\n" +
 				"            \"write\": true\n" +
 				"        },\n" +
