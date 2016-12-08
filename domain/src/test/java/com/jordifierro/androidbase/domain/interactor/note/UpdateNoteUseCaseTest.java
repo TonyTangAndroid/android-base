@@ -28,6 +28,9 @@ import static org.mockito.Mockito.verifyZeroInteractions;
 public class UpdateNoteUseCaseTest {
 
 	public static final String FAKE_UPDATED_TIME = "2016-12-06T21:58:10.898Z";
+	private static final String FAKE_NEW_TITLE = "MyNewTitle";
+	private static final String FAKE_NEW_CONTENT = "MyNewContent";
+
 	private static final String FAKE_ID = "3WQrZ0dyrt";
 	private static final String FAKE_TITLE = "MyTitle";
 	private static final String FAKE_CONTENT = "MyContent";
@@ -49,20 +52,31 @@ public class UpdateNoteUseCaseTest {
 	public void testUpdateNoteUseCaseSuccess() {
 		//XXX should return note object after updated.
 		NoteEntity note = new NoteEntity(FAKE_ID, FAKE_TITLE, FAKE_CONTENT);
+		NoteEntity updatedNote = new NoteEntity(FAKE_ID, FAKE_NEW_TITLE, FAKE_NEW_CONTENT);
+		updatedNote.setUpdatedAt(FAKE_UPDATED_TIME);
+
 		UpdatedWrapper updatedWrapper = new UpdatedWrapper(FAKE_UPDATED_TIME);
 		UpdateNoteUseCase updateNoteUseCase = new UpdateNoteUseCase(mockThreadExecutor,
 				mockPostExecutionThread, mockNoteRepository, mockSessionRepository);
-		TestSubscriber<UpdatedWrapper> testSubscriber = new TestSubscriber<>();
+		TestSubscriber<NoteEntity> testSubscriber = new TestSubscriber<>();
+
 		given(mockNoteRepository.updateNote(any(UserEntity.class), eq(note)))
 				.willReturn(Observable.just(updatedWrapper));
+
+		given(mockNoteRepository.getNote(any(UserEntity.class), eq(note.getObjectId())))
+				.willReturn(Observable.just(updatedNote));
+
 
 		updateNoteUseCase.setParams(note);
 		updateNoteUseCase.buildUseCaseObservable().subscribe(testSubscriber);
 
 		Assert.assertEquals(FAKE_UPDATED_TIME, testSubscriber.getOnNextEvents().get(0).getUpdatedAt());
+		Assert.assertEquals(FAKE_NEW_TITLE, testSubscriber.getOnNextEvents().get(0).getTitle());
+		Assert.assertEquals(FAKE_NEW_CONTENT, testSubscriber.getOnNextEvents().get(0).getContent());
 		verify(mockSessionRepository).getCurrentUser();
 		verifyNoMoreInteractions(mockSessionRepository);
 		verify(mockNoteRepository).updateNote(null, note);
+		verify(mockNoteRepository).getNote(null, updatedNote.getObjectId());
 		verifyNoMoreInteractions(mockNoteRepository);
 		verifyZeroInteractions(mockThreadExecutor);
 		verifyZeroInteractions(mockPostExecutionThread);

@@ -1,5 +1,4 @@
 apply plugin: "java"
-apply plugin: 'me.tatarka.retrolambda'
 
 dependencies {
     def domainDependencies = rootProject.ext.domainDependencies
@@ -12,4 +11,9 @@ dependencies {
     testCompile domainTestDependencies.mockito
     testCompile domainTestDependencies.jetAnnotations
     compile 'com.google.code.gson:gson:2.4'
+}
+
+tasks.withType(JavaCompile) {
+    sourceCompatibility = "1.7"
+    targetCompatibility = "1.7"
 }

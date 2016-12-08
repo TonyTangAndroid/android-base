@@ -2,11 +2,14 @@ package com.jordifierro.androidbase.presentation.dependency.module;
 
 import android.content.SharedPreferences;
 
+import com.google.gson.GsonBuilder;
 import com.jordifierro.androidbase.data.net.RestApi;
 import com.jordifierro.androidbase.data.net.interceptor.HttpInterceptor;
 import com.jordifierro.androidbase.data.repository.NoteDataRepository;
 import com.jordifierro.androidbase.data.repository.SessionDataRepository;
 import com.jordifierro.androidbase.data.repository.UserDataRepository;
+import com.jordifierro.androidbase.domain.entity.ParseACLJsonAdapter;
+import com.jordifierro.androidbase.domain.entity.ParsePermissionWrapper;
 import com.jordifierro.androidbase.domain.repository.NoteRepository;
 import com.jordifierro.androidbase.domain.repository.SessionRepository;
 import com.jordifierro.androidbase.domain.repository.UserRepository;
@@ -40,12 +43,11 @@ public class DataModule {
 				.addInterceptor(interceptor)
 				.build();
 
-//		GsonConverterFactory factory = GsonConverterFactory.create(new GsonBuilder()
-//				.setFieldNamingPolicy(FieldNamingPolicy.LOWER_CASE_WITH_UNDERSCORES).create());
-
 		return new Retrofit.Builder()
 				.baseUrl(RestApi.URL_BASE)
-				.addConverterFactory(GsonConverterFactory.create())
+				.addConverterFactory(GsonConverterFactory.create(new GsonBuilder()
+						.registerTypeAdapter(ParsePermissionWrapper.class, new ParseACLJsonAdapter())
+						.create()))
 				.addCallAdapterFactory(RxJavaCallAdapterFactory.create())
 				.client(client)
 				.build()

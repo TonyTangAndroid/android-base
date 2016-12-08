@@ -1,5 +1,6 @@
 package com.jordifierro.androidbase.domain.interactor.user;
 
+import com.jordifierro.androidbase.domain.entity.EmptyWrapper;
 import com.jordifierro.androidbase.domain.entity.UserEntity;
 import com.jordifierro.androidbase.domain.executor.PostExecutionThread;
 import com.jordifierro.androidbase.domain.executor.ThreadExecutor;
@@ -9,7 +10,6 @@ import com.jordifierro.androidbase.domain.repository.UserRepository;
 import javax.inject.Inject;
 
 import rx.Observable;
-import rx.Subscriber;
 
 public class ResetPasswordUseCase extends UseCase {
 
@@ -29,12 +29,7 @@ public class ResetPasswordUseCase extends UseCase {
     }
 
     @Override
-    public void execute(Subscriber useCaseSubscriber) {
-        super.execute(useCaseSubscriber);
-    }
-
-    @Override
-    protected Observable buildUseCaseObservable() {
+    protected Observable<EmptyWrapper> buildUseCaseObservable() {
         return this.userRepository.resetPassword(this.user);
     }
 }

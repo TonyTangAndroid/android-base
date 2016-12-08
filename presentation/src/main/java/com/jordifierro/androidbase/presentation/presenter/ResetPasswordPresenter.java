@@ -1,5 +1,6 @@
 package com.jordifierro.androidbase.presentation.presenter;
 
+import com.jordifierro.androidbase.domain.entity.EmptyWrapper;
 import com.jordifierro.androidbase.domain.entity.UserEntity;
 import com.jordifierro.androidbase.domain.interactor.user.ResetPasswordUseCase;
 import com.jordifierro.androidbase.presentation.dependency.ActivityScope;
@@ -39,10 +40,10 @@ public class ResetPasswordPresenter extends BasePresenter implements Presenter {
 		this.resetPasswordUseCase.execute(new ResetPasswordSubscriber());
 	}
 
-	protected class ResetPasswordSubscriber extends BaseSubscriber<Void> {
+	protected class ResetPasswordSubscriber extends BaseSubscriber<EmptyWrapper> {
 
 		@Override
-		public void onNext(Void message) {
+		public void onNext(EmptyWrapper message) {
 			ResetPasswordPresenter.this.hideLoader();
 			ResetPasswordPresenter.this.resetPasswordView.showMessage("Success");
 			ResetPasswordPresenter.this.resetPasswordView.close();

@@ -90,7 +90,7 @@ public class NoteEditPresenterTest {
 	@SuppressWarnings("unchecked")
 	public void testGetSubscriberOnNext() {
 
-		this.getNoteSubscriber.onNext(new NoteEntity("BLlerFMbhA", "", ""));
+		this.getNoteSubscriber.onNext(new NoteEntity("3WQrZ0dyrt", "", ""));
 
 		verify(this.mockNoteEditView).showLoader();
 		verify(this.mockNoteEditView).hideLoader();
@@ -129,7 +129,7 @@ public class NoteEditPresenterTest {
 	@SuppressWarnings("unchecked")
 	public void testUpdateSubscriberOnNext() {
 
-		this.updateNoteSubscriber.onNext(new NoteEntity("BLlerFMbhA", "", ""));
+		this.updateNoteSubscriber.onNext(new NoteEntity("3WQrZ0dyrt", "", ""));
 
 		verify(this.mockNoteEditView).showLoader();
 		verify(this.mockNoteEditView).hideLoader();

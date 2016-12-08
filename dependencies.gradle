@@ -15,7 +15,7 @@ ext {
     androidSupportVersion = '25.0.1'
 
     //Libraries
-    daggerVersion = '2.0.2'
+    daggerVersion = '2.8'
     butterKnifeVersion = '7.0.1'
     rxJavaVersion = '1.1.1'
     rxAndroidVersion = '1.1.0'

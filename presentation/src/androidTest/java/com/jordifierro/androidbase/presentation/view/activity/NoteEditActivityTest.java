@@ -35,75 +35,75 @@ import static org.mockito.Mockito.verify;
 @SmallTest
 public class NoteEditActivityTest {
 
-    @Rule
-    public final ActivityTestRule<NoteEditActivity> activityTestRule = new ActivityTestRule<>(
-            NoteEditActivity.class, true, false);
-    private NoteEditFragment noteEditFragment;
+	@Rule
+	public final ActivityTestRule<NoteEditActivity> activityTestRule = new ActivityTestRule<>(
+			NoteEditActivity.class, true, false);
+	private NoteEditFragment noteEditFragment;
 
-    @Before
-    public void setUp() throws Exception {
-        activityTestRule.launchActivity(new Intent().putExtra(NoteEditActivity.PARAM_NOTE_ID, 2));
-        this.noteEditFragment = ((NoteEditFragment) this.activityTestRule.getActivity()
-                                .getFragmentManager().findFragmentById(R.id.fragment_container));
-    }
+	@Before
+	public void setUp() throws Exception {
+		activityTestRule.launchActivity(new Intent().putExtra(NoteEditActivity.PARAM_NOTE_ID, "2"));
+		this.noteEditFragment = ((NoteEditFragment) this.activityTestRule.getActivity()
+				.getFragmentManager().findFragmentById(R.id.fragment_container));
+	}
 
-    @Test
-    public void testViewElements() throws PackageManager.NameNotFoundException {
-        onView(allOf(isAssignableFrom(TextView.class),withParent(isAssignableFrom(Toolbar.class))))
-                .check(matches(withText(R.string.title_activity_note_edit)));
-        onView(withId(R.id.btn_submit)).check(matches(withText(R.string.button_save)));
-    }
+	@Test
+	public void testViewElements() throws PackageManager.NameNotFoundException {
+		onView(allOf(isAssignableFrom(TextView.class), withParent(isAssignableFrom(Toolbar.class))))
+				.check(matches(withText(R.string.title_activity_note_edit)));
+		onView(withId(R.id.btn_submit)).check(matches(withText(R.string.button_save)));
+	}
 
-    @Test
-    public void testGetNoteId() {
-        assertEquals(2, this.noteEditFragment.getNoteId());
-    }
+	@Test
+	public void testGetNoteId() {
+		assertEquals("2", this.noteEditFragment.getNoteObjectId());
+	}
 
-    @Test
-    public void testSubmitButtonTextChanged() {
-        onView(withText(R.string.button_save)).check(matches(isDisplayed()));
-    }
+	@Test
+	public void testSubmitButtonTextChanged() {
+		onView(withText(R.string.button_save)).check(matches(isDisplayed()));
+	}
 
-    @Test
-    public void testShowNote() {
+	@Test
+	public void testShowNote() {
 
-        this.activityTestRule.getActivity().runOnUiThread(new Runnable() {
-            @Override
-            public void run() {
-                NoteEditActivityTest.this.noteEditFragment.showNote(
-                        new NoteEntity("Note title", "Note content..."));
-            }
-        });
+		this.activityTestRule.getActivity().runOnUiThread(new Runnable() {
+			@Override
+			public void run() {
+				NoteEditActivityTest.this.noteEditFragment.showNote(
+						new NoteEntity("Note title", "Note content..."));
+			}
+		});
 
-        onView(withText("Note title")).check(matches(isDisplayed()));
-        onView(withText("Note content...")).check(matches(isDisplayed()));
-    }
+		onView(withText("Note title")).check(matches(isDisplayed()));
+		onView(withText("Note content...")).check(matches(isDisplayed()));
+	}
 
-    @Test
-    public void testEditNote() {
+	@Test
+	public void testEditNote() {
 
-        this.activityTestRule.getActivity().runOnUiThread(new Runnable() {
-            @Override
-            public void run() {
-                NoteEditActivityTest.this.noteEditFragment.showNote(
-                        new NoteEntity("Title", "Content"));
-            }
-        });
+		this.activityTestRule.getActivity().runOnUiThread(new Runnable() {
+			@Override
+			public void run() {
+				NoteEditActivityTest.this.noteEditFragment.showNote(
+						new NoteEntity("Title", "Content"));
+			}
+		});
 
-        onView(withId(R.id.et_title)).perform(typeText(" updated!"), closeSoftKeyboard());
-        onView(withId(R.id.et_content)).perform(typeText(" changed!"));
-        onView(withId(R.id.btn_submit)).perform(click());
+		onView(withId(R.id.et_title)).perform(typeText(" updated!"), closeSoftKeyboard());
+		onView(withId(R.id.et_content)).perform(typeText(" changed!"));
+		onView(withId(R.id.btn_submit)).perform(click());
 
-        verify(this.noteEditFragment.getNoteEditPresenter()).updateNote(
-                "Title updated!", "Content changed!");
-    }
+		verify(this.noteEditFragment.getNoteEditPresenter()).updateNote(
+				"Title updated!", "Content changed!");
+	}
 
-    @Test
-    public void testDeleteItemPressed() {
+	@Test
+	public void testDeleteItemPressed() {
 
-        onView(withId(R.id.item_delete)).perform(click());
+		onView(withId(R.id.item_delete)).perform(click());
 
-        verify(this.noteEditFragment.getNoteEditPresenter()).deleteNoteButtonPressed();
-    }
+		verify(this.noteEditFragment.getNoteEditPresenter()).deleteNoteButtonPressed();
+	}
 
 }

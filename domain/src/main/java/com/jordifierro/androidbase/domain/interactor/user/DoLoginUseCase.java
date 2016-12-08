@@ -10,7 +10,6 @@ import com.jordifierro.androidbase.domain.repository.UserRepository;
 import javax.inject.Inject;
 
 import rx.Observable;
-import rx.Subscriber;
 import rx.functions.Action1;
 
 public class DoLoginUseCase extends UseCase {
@@ -33,12 +32,7 @@ public class DoLoginUseCase extends UseCase {
     }
 
     @Override
-    public void execute(Subscriber useCaseSubscriber) {
-        super.execute(useCaseSubscriber);
-    }
-
-    @Override
-    protected Observable buildUseCaseObservable() {
+    protected Observable<UserEntity> buildUseCaseObservable() {
         return this.userRepository.loginUser(this.user)
                 .doOnNext(new Action1<UserEntity>() {
                     @Override

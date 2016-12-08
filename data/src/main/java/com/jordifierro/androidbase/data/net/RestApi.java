@@ -7,11 +7,11 @@ import com.jordifierro.androidbase.domain.entity.NoteEntity;
 import com.jordifierro.androidbase.domain.entity.UpdatedWrapper;
 import com.jordifierro.androidbase.domain.entity.UserEntity;
 
+import java.util.Map;
+
 import retrofit2.Response;
 import retrofit2.http.Body;
 import retrofit2.http.DELETE;
-import retrofit2.http.Field;
-import retrofit2.http.FormUrlEncoded;
 import retrofit2.http.GET;
 import retrofit2.http.Header;
 import retrofit2.http.POST;
@@ -46,15 +46,14 @@ public interface RestApi {
 	@DELETE(URL_PATH_USERS_OBJECT_ID)
 	Observable<Response<EmptyWrapper>> deleteUser(@Header(PARSE_SESSION_KEY) String token, @Path("objectId") String objectId);
 
-	@FormUrlEncoded
 	@POST(URL_PATH_REQUEST_PASSWORD_RESET)
-	Observable<Response<Void>> resetPassword(@Field(FIELD_EMAIL) String email);
+	Observable<Response<EmptyWrapper>> resetPassword(@Body Map<String, Object> params);
 
 	@GET(URL_PATH_LOGIN)
 	Observable<Response<UserEntity>> doLogin(@Query(FIELD_USERNAME) String username, @Query(FIELD_PASSWORD) String password);
 
 	@POST(URL_PATH_LOGOUT)
-	Observable<Response<Void>> doLogout(@Header(PARSE_SESSION_KEY) String token);
+	Observable<Response<EmptyWrapper>> doLogout(@Header(PARSE_SESSION_KEY) String token);
 
 	@POST(URL_PATH_CLASSES_NOTE)
 	Observable<Response<CreatedWrapper>> createNote(@Header(PARSE_SESSION_KEY) String token,
@@ -75,7 +74,7 @@ public interface RestApi {
 													@Path("objectId") String objectId, @Body NoteEntity note);
 
 	@DELETE(URL_PATH_CLASSES_NOTE_OBJECT_ID)
-	Observable<Response<Void>> deleteNote(@Header(PARSE_SESSION_KEY) String token,
+	Observable<Response<EmptyWrapper>> deleteNote(@Header(PARSE_SESSION_KEY) String token,
 										  @Path("objectId") String objectId);
 
 }

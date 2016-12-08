@@ -78,7 +78,7 @@ public class ResetPasswordPresenterTest {
 
         this.resetPasswordSubscriber.onNext(null);
         verify(this.mockResetPasswordView).hideLoader();
-        verify(this.mockResetPasswordView).showMessage("message");
+        verify(this.mockResetPasswordView).showMessage("Success");
         verify(this.mockResetPasswordView).close();
     }
 

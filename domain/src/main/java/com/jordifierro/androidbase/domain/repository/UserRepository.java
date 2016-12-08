@@ -13,11 +13,11 @@ public interface UserRepository {
 
 	Observable<EmptyWrapper> deleteUser(UserEntity user);
 
-	Observable<Void> resetPassword(UserEntity user);
+	Observable<EmptyWrapper> resetPassword(UserEntity user);
 
 	Observable<UserEntity> loginUser(UserEntity user);
 
-	Observable<Void> logoutUser(UserEntity user);
+	Observable<EmptyWrapper> logoutUser(UserEntity user);
 
 	Observable<UserEntity> me(String token);
 

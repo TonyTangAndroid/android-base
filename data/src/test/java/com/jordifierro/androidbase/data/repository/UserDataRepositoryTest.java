@@ -18,6 +18,8 @@ import org.junit.Test;
 
 import java.io.IOException;
 import java.net.URLEncoder;
+import java.util.HashMap;
+import java.util.Map;
 
 import okhttp3.mockwebserver.MockResponse;
 import okhttp3.mockwebserver.MockWebServer;
@@ -200,8 +202,10 @@ public class UserDataRepositoryTest extends BaseDataRepositoryTest {
 		assertEquals(constructUrl(RestApi.URL_PATH_REQUEST_PASSWORD_RESET), request.getPath());
 		assertEquals("POST", request.getMethod());
 
+		Map<String , Object> params =new HashMap<>();
+		params.put(RestApi.FIELD_EMAIL, this.fakeUser.getEmail());
 		String query = RestApi.FIELD_EMAIL + "=" + URLEncoder.encode(this.fakeUser.getEmail(), "UTF-8");
-		assertEquals(query, request.getBody().readUtf8());
+		assertEquals(new Gson().toJson(params), request.getBody().readUtf8());
 	}
 
 	@Test
@@ -259,10 +263,19 @@ public class UserDataRepositoryTest extends BaseDataRepositoryTest {
 
 		this.userDataRepository.loginUser(this.fakeUser).subscribe(this.testSubscriber);
 		this.testSubscriber.awaitTerminalEvent();
+		this.testSubscriber.assertValueCount(1);
 
 		UserEntity responseUser = (UserEntity) this.testSubscriber.getOnNextEvents().get(0);
 		assertTrue(responseUser.getUsername().length() > 0);
 		assertTrue(responseUser.getSessionToken().length() > 0);
+	}
+
+	@Test
+	public void testLogoutUserSuccess() throws Exception {
+		this.mockWebServer.enqueue(new MockResponse().setResponseCode(200).setBody("{}"));
+		this.userDataRepository.logoutUser(this.fakeUser).subscribe(this.testSubscriber);
+		this.testSubscriber.awaitTerminalEvent();
+		this.testSubscriber.assertValueCount(1);
 	}
 
 	@Test
@@ -293,16 +306,6 @@ public class UserDataRepositoryTest extends BaseDataRepositoryTest {
 		assertEquals("POST", request.getMethod());
 		assertEquals(AUTH_TOKEN, request.getHeader(PARSE_SESSION_KEY));
 		assertEquals("", request.getBody().readUtf8());
-	}
-
-	@Test
-	public void testLogoutUserSuccess() throws Exception {
-		this.mockWebServer.enqueue(new MockResponse().setResponseCode(200));
-
-		this.userDataRepository.logoutUser(this.fakeUser).subscribe(this.testSubscriber);
-		this.testSubscriber.awaitTerminalEvent();
-
-		this.testSubscriber.assertValueCount(1);
 	}
 
 	@Test

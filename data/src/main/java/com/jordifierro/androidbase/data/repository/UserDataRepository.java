@@ -6,6 +6,9 @@ import com.jordifierro.androidbase.domain.entity.EmptyWrapper;
 import com.jordifierro.androidbase.domain.entity.UserEntity;
 import com.jordifierro.androidbase.domain.repository.UserRepository;
 
+import java.util.HashMap;
+import java.util.Map;
+
 import javax.inject.Inject;
 import javax.inject.Singleton;
 
@@ -61,10 +64,12 @@ public class UserDataRepository extends RestApiRepository implements UserReposit
 	}
 
 	@Override
-	public Observable<Void> resetPassword(UserEntity user) {
-		return this.restApi.resetPassword(user.getEmail()).map(new Func1<Response<Void>, Void>() {
+	public Observable<EmptyWrapper> resetPassword(UserEntity user) {
+		Map<String, Object> params = new HashMap<>();
+		params.put(RestApi.FIELD_EMAIL, user.getEmail());
+		return this.restApi.resetPassword(params).map(new Func1<Response<EmptyWrapper>, EmptyWrapper>() {
 			@Override
-			public Void call(Response<Void> voidResponse) {
+			public EmptyWrapper call(Response<EmptyWrapper> voidResponse) {
 				handleResponseError(voidResponse);
 				return voidResponse.body();
 			}
@@ -94,13 +99,13 @@ public class UserDataRepository extends RestApiRepository implements UserReposit
 	}
 
 	@Override
-	public Observable<Void> logoutUser(UserEntity user) {
+	public Observable<EmptyWrapper> logoutUser(UserEntity user) {
 		return this.restApi.doLogout(user.getSessionToken())
-				.map(new Func1<Response<Void>, Void>() {
+				.map(new Func1<Response<EmptyWrapper>, EmptyWrapper>() {
 					@Override
-					public Void call(Response<Void> voidResponse) {
-						handleResponseError(voidResponse);
-						return null;
+					public EmptyWrapper call(Response<EmptyWrapper> emptyWrapperResponse) {
+						handleResponseError(emptyWrapperResponse);
+						return emptyWrapperResponse.body();
 					}
 				});
 	}

@@ -80,7 +80,7 @@ public class NoteDetailPresenterTest {
 	@SuppressWarnings("unchecked")
 	public void testSubscriberOnNext() {
 
-		this.noteDetailSubscriber.onNext(new NoteEntity("BLlerFMbhA", "", ""));
+		this.noteDetailSubscriber.onNext(new NoteEntity("3WQrZ0dyrt", "", ""));
 
 		verify(this.mockNoteDetailView).hideLoader();
 		verify(this.mockNoteDetailView).showNote(any(NoteEntity.class));
