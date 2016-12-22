@@ -51,12 +51,9 @@ dependencies {
     compile dataDependencies.rxJava
     compile dataDependencies.retrofit
     compile dataDependencies.retrofitGson
-<<<<<<< HEAD
     compile dataDependencies.retrofitRxJava2
-=======
-    compile dataDependencies.retrofitRxJava
     compile dataDependencies.okhttp3_log
->>>>>>> master
+    compile dataDependencies.okhttp3
 
     testCompile dataTestDependencies.junit
     testCompile dataTestDependencies.mockito
