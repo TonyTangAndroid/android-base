@@ -8,11 +8,19 @@ ext {
     //Android
     appVersionCode = 1
     appVersionName = '1.0'
+<<<<<<< HEAD
     androidBuildToolsVersion = '25.0.2'
     androidMinSdkVersion = 15
     androidTargetSdkVersion = 23
     androidCompileSdkVersion = 23
     androidSupportVersion = '23.2.1'
+=======
+    androidBuildToolsVersion = '25.0.0'
+    androidMinSdkVersion = 15
+    androidTargetSdkVersion = 25
+    androidCompileSdkVersion = 25
+    androidSupportVersion = '25.0.1'
+>>>>>>> master
 
     //Libraries
     daggerVersion = '2.8'
@@ -50,7 +58,12 @@ ext {
     dataDependencies = [
             retrofit:           "com.squareup.retrofit2:retrofit:${retrofitVersion}",
             retrofitGson:       "com.squareup.retrofit2:converter-gson:${retrofitVersion}",
+<<<<<<< HEAD
             retrofitRxJava2:    "com.jakewharton.retrofit:retrofit2-rxjava2-adapter:${retrofitRxJava2AdapterVersion}",
+=======
+            okhttp3_log:        "com.squareup.okhttp3:logging-interceptor:3.0.1",
+            retrofitRxJava:     "com.squareup.retrofit2:adapter-rxjava:${retrofitVersion}",
+>>>>>>> master
             javaxAnnotation:    "javax.annotation:jsr250-api:${javaxAnnotationVersion}",
             rxJava:             "io.reactivex.rxjava2:rxjava:${rxJavaVersion}"
     ]

@@ -7,6 +7,7 @@ android {
     buildToolsVersion rootProject.ext.androidBuildToolsVersion
 
     defaultConfig {
+
         applicationId 'com.jordifierro.androidbase.presentation'
         minSdkVersion rootProject.ext.androidMinSdkVersion
         targetSdkVersion rootProject.ext.androidTargetSdkVersion
@@ -14,9 +15,15 @@ android {
         versionName rootProject.ext.appVersionName
         testInstrumentationRunner 'com.jordifierro.androidbase.presentation.TestMockerRunner'
     }
+<<<<<<< HEAD
     compileOptions {
         incremental false
     }
+=======
+
+
+
+>>>>>>> master
     buildTypes {
         release {
             minifyEnabled false
@@ -30,11 +37,20 @@ android {
     lintOptions {
         abortOnError false
     }
+<<<<<<< HEAD
+=======
+
+>>>>>>> master
     compileOptions {
         sourceCompatibility JavaVersion.VERSION_1_8
         targetCompatibility JavaVersion.VERSION_1_8
     }
+<<<<<<< HEAD
+=======
+ 
+>>>>>>> master
 }
+
 
 dependencies {
     def presentationDependencies = rootProject.ext.presentationDependencies

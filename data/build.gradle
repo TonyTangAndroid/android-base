@@ -19,6 +19,8 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
     }
+
+
     lintOptions {
         abortOnError false
     }
@@ -49,7 +51,12 @@ dependencies {
     compile dataDependencies.rxJava
     compile dataDependencies.retrofit
     compile dataDependencies.retrofitGson
+<<<<<<< HEAD
     compile dataDependencies.retrofitRxJava2
+=======
+    compile dataDependencies.retrofitRxJava
+    compile dataDependencies.okhttp3_log
+>>>>>>> master
 
     testCompile dataTestDependencies.junit
     testCompile dataTestDependencies.mockito
