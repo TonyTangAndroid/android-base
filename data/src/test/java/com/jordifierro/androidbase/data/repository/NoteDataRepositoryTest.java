@@ -280,10 +280,13 @@ public class NoteDataRepositoryTest extends BaseDataRepositoryTest {
 
     @Test
     public void testDeleteNoteSuccessResponse() throws Exception {
-        this.mockWebServer.enqueue(new MockResponse().setResponseCode(204));
+//        this.mockWebServer.enqueue(new MockResponse().setResponseCode(204));
+        this.mockWebServer.enqueue(new MockResponse().setResponseCode(200).setBody("{}"));
         this.noteDataRepository.deleteNote(this.fakeUser, MOCK_NOTE_OBJECT_ID).subscribe(this.testObserver);
         this.testObserver.awaitTerminalEvent();
         this.testObserver.assertValueCount(1);
+        this.testObserver.assertNoErrors();
+        this.testObserver.assertComplete();
     }
 
     @Test

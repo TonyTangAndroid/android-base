@@ -66,7 +66,7 @@ public class NoteDataRepository extends RestApiRepository implements NoteReposit
         return this.restApi.deleteNote(user.getSessionToken(), noteObjectId)
                 .map(response -> {
                     handleResponseError(response);
-                    return new VoidEntity();
+                    return response.body();
                 });
     }
 }
