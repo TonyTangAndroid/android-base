@@ -73,8 +73,15 @@ public class NoteEditFragment extends BaseFragment implements NoteEditView {
         return ((Listener) getActivity()).getNoteObjectId();
     }
 
+    @Override
+    public void onNoteDeleted() {
+        ((Listener) getActivity()).onNoteDeleted();
+    }
+
     public interface Listener {
         String getNoteObjectId();
+
+        void onNoteDeleted();
     }
 
 }

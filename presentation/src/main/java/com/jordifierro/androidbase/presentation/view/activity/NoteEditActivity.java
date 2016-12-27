@@ -14,6 +14,7 @@ import com.jordifierro.androidbase.presentation.view.fragment.NoteEditFragment;
 public class NoteEditActivity extends CleanActivity implements NoteEditFragment.Listener {
 
     public static final String PARAM_NOTE_ID = "param_note_id";
+    public static final int RESULT_NOTE_DELETED = RESULT_OK + 1;
 
     private String noteId;
     private NoteEditFragment noteEditFragment;
@@ -43,6 +44,11 @@ public class NoteEditActivity extends CleanActivity implements NoteEditFragment.
 
     public String getNoteObjectId() {
         return this.noteId;
+    }
+
+    @Override
+    public void onNoteDeleted() {
+        setResult(RESULT_NOTE_DELETED);
     }
 
     @Override

@@ -8,4 +8,5 @@ public interface NoteEditView extends BaseView {
 
     String getNoteObjectId();
 
+    void onNoteDeleted();
 }

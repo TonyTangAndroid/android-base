@@ -14,6 +14,7 @@ import com.jordifierro.androidbase.presentation.view.fragment.NoteDetailFragment
 public class NoteDetailActivity extends CleanActivity implements NoteDetailFragment.Listener {
 
     public static final String PARAM_NOTE_ID = "param_note_id";
+    private static final int REQUEST_NOTE_EDIT = 1;
 
     private String noteObjectId;
 
@@ -60,7 +61,16 @@ public class NoteDetailActivity extends CleanActivity implements NoteDetailFragm
     }
 
     public void navigateToEdit() {
-        startActivity(NoteEditActivity.getCallingIntent(this, this.getNoteObjectId()));
+        startActivityForResult(NoteEditActivity.getCallingIntent(this, this.getNoteObjectId()), REQUEST_NOTE_EDIT);
     }
 
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+
+        if (requestCode == REQUEST_NOTE_EDIT && resultCode == NoteEditActivity.RESULT_NOTE_DELETED) {
+            finish();
+        } else {
+            super.onActivityResult(requestCode, resultCode, data);
+        }
+    }
 }

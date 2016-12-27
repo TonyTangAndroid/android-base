@@ -83,6 +83,7 @@ public class NoteEditPresenter extends BasePresenter implements Presenter {
         @Override
         public void onNext(VoidEntity ignore) {
             NoteEditPresenter.this.hideLoader();
+            NoteEditPresenter.this.noteEditView.onNoteDeleted();
             NoteEditPresenter.this.noteEditView.close();
         }
 
