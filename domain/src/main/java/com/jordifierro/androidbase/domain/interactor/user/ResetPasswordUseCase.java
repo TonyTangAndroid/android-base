@@ -1,7 +1,7 @@
 package com.jordifierro.androidbase.domain.interactor.user;
 
-import com.jordifierro.androidbase.domain.entity.VoidEntity;
 import com.jordifierro.androidbase.domain.entity.UserEntity;
+import com.jordifierro.androidbase.domain.entity.VoidEntity;
 import com.jordifierro.androidbase.domain.executor.PostExecutionThread;
 import com.jordifierro.androidbase.domain.executor.ThreadExecutor;
 import com.jordifierro.androidbase.domain.interactor.UseCase;

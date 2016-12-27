@@ -24,7 +24,7 @@ public class SessionDataRepository implements SessionRepository {
 
     @Override
     public UserEntity getCurrentUser() {
-        if (sharedPreferences.contains(EMAIL) && sharedPreferences.contains(AUTH_TOKEN)&& sharedPreferences.contains(OBJECT_ID)) {
+        if (sharedPreferences.contains(EMAIL) && sharedPreferences.contains(AUTH_TOKEN) && sharedPreferences.contains(OBJECT_ID)) {
             UserEntity user = new UserEntity(sharedPreferences.getString(EMAIL, null));
             user.setSessionToken(sharedPreferences.getString(AUTH_TOKEN, null));
             user.setObjectId(sharedPreferences.getString(OBJECT_ID, null));

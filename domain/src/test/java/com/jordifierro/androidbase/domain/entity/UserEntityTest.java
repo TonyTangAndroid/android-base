@@ -8,43 +8,43 @@ import static org.junit.Assert.assertThat;
 
 public class UserEntityTest {
 
-	private static final String FAKE_EMAIL = "email@test.com";
+    private static final String FAKE_EMAIL = "email@test.com";
 
-	private UserEntity user;
+    private UserEntity user;
 
-	@Before
-	public void setup() {
-		this.user = new UserEntity(FAKE_EMAIL);
-	}
+    @Before
+    public void setup() {
+        this.user = new UserEntity(FAKE_EMAIL);
+    }
 
-	@Test
-	public void testUserConstructor() {
-		assertThat(this.user.getUsername(), is(FAKE_EMAIL));
-		assertThat(this.user.getEmail(), is(user.getUsername()));
-	}
+    @Test
+    public void testUserConstructor() {
+        assertThat(this.user.getUsername(), is(FAKE_EMAIL));
+        assertThat(this.user.getEmail(), is(user.getUsername()));
+    }
 
-	@Test
-	public void testUserSetters() {
-		this.user.setUsername("another@email.com");
-		this.user.setEmail("another@email.com");
-		this.user.setSessionToken("1234TOKEN");
-		this.user.setPassword("password");
+    @Test
+    public void testUserSetters() {
+        this.user.setUsername("another@email.com");
+        this.user.setEmail("another@email.com");
+        this.user.setSessionToken("1234TOKEN");
+        this.user.setPassword("password");
 
-		assertThat(this.user.getEmail(), is("another@email.com"));
-		assertThat(this.user.getUsername(), is("another@email.com"));
-		assertThat(this.user.getSessionToken(), is("1234TOKEN"));
-		assertThat(this.user.getPassword(), is("password"));
-	}
+        assertThat(this.user.getEmail(), is("another@email.com"));
+        assertThat(this.user.getUsername(), is("another@email.com"));
+        assertThat(this.user.getSessionToken(), is("1234TOKEN"));
+        assertThat(this.user.getPassword(), is("password"));
+    }
 
-	@Test
-	public void testUserSetUserName() {
-		this.user.setUsername("another@email.com");
-		assertThat(this.user.getEmail(), is(this.user.getUsername()));
-	}
+    @Test
+    public void testUserSetUserName() {
+        this.user.setUsername("another@email.com");
+        assertThat(this.user.getEmail(), is(this.user.getUsername()));
+    }
 
-	@Test
-	public void testUserSetEmail() {
-		this.user.setEmail("another@email.com");
-		assertThat(this.user.getEmail(), is(this.user.getUsername()));
-	}
+    @Test
+    public void testUserSetEmail() {
+        this.user.setEmail("another@email.com");
+        assertThat(this.user.getEmail(), is(this.user.getUsername()));
+    }
 }

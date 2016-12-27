@@ -8,16 +8,16 @@ import com.jordifierro.androidbase.presentation.view.fragment.ResetPasswordFragm
 
 public class ResetPasswordActivity extends CleanActivity {
 
-	@Override
-	protected void initializeActivity(Bundle savedInstanceState) {
-		if (savedInstanceState == null) {
-			addFragment(R.id.fragment_container, new ResetPasswordFragment());
-		}
-	}
+    @Override
+    protected void initializeActivity(Bundle savedInstanceState) {
+        if (savedInstanceState == null) {
+            addFragment(R.id.fragment_container, new ResetPasswordFragment());
+        }
+    }
 
-	@Override
-	protected boolean useToolbar() {
-		return false;
-	}
+    @Override
+    protected boolean useToolbar() {
+        return false;
+    }
 
 }

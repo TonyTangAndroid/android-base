@@ -41,103 +41,103 @@ import static org.hamcrest.core.IsNot.not;
 @SmallTest
 public class NotesActivityTest {
 
-	@Rule
-	public final ActivityTestRule<MainActivity> activityTestRule = new ActivityTestRule<>(
-			MainActivity.class);
-	private NotesFragment notesFragment;
-	private List<NoteEntity> notes = new ArrayList<>();
+    @Rule
+    public final ActivityTestRule<MainActivity> activityTestRule = new ActivityTestRule<>(
+            MainActivity.class);
+    private NotesFragment notesFragment;
+    private List<NoteEntity> notes = new ArrayList<>();
 
-	@Before
-	public void setUp() throws Exception {
-		this.notesFragment = ((NotesFragment) this.activityTestRule.getActivity()
-				.getFragmentManager().findFragmentById(R.id.fragment_container));
-		this.notes.add(new NoteEntity("1", "First title", "First content"));
-		this.notes.add(new NoteEntity("2", "Second title", "Second content"));
-		this.notes.add(new NoteEntity("3", "Third title", "Third content"));
-	}
+    @Before
+    public void setUp() throws Exception {
+        this.notesFragment = ((NotesFragment) this.activityTestRule.getActivity()
+                .getFragmentManager().findFragmentById(R.id.fragment_container));
+        this.notes.add(new NoteEntity("1", "First title", "First content"));
+        this.notes.add(new NoteEntity("2", "Second title", "Second content"));
+        this.notes.add(new NoteEntity("3", "Third title", "Third content"));
+    }
 
-	@Test
-	public void testViewElements() throws PackageManager.NameNotFoundException {
-		onView(Matchers.allOf(isAssignableFrom(TextView.class), withParent(isAssignableFrom(Toolbar.class))))
-				.check(matches(withText(R.string.title_activity_main)));
-		onView(withId(R.id.btn_create_new_note))
-				.check(matches(withText(R.string.button_create_new_note)));
-	}
+    @Test
+    public void testViewElements() throws PackageManager.NameNotFoundException {
+        onView(Matchers.allOf(isAssignableFrom(TextView.class), withParent(isAssignableFrom(Toolbar.class))))
+                .check(matches(withText(R.string.title_activity_main)));
+        onView(withId(R.id.btn_create_new_note))
+                .check(matches(withText(R.string.button_create_new_note)));
+    }
 
-	@Test
-	public void testShowNotes() {
+    @Test
+    public void testShowNotes() {
 
-		this.activityTestRule.getActivity().runOnUiThread(new Runnable() {
-			@Override
-			public void run() {
-				NotesActivityTest.this.notesFragment.showNotes(NotesActivityTest.this.notes);
-			}
-		});
+        this.activityTestRule.getActivity().runOnUiThread(new Runnable() {
+            @Override
+            public void run() {
+                NotesActivityTest.this.notesFragment.showNotes(NotesActivityTest.this.notes);
+            }
+        });
 
-		onView(withText("First title")).check(matches(isDisplayed()));
-		onView(withText("Second title")).check(matches(isDisplayed()));
-		onView(withText("Third title")).check(matches(isDisplayed()));
-	}
+        onView(withText("First title")).check(matches(isDisplayed()));
+        onView(withText("Second title")).check(matches(isDisplayed()));
+        onView(withText("Third title")).check(matches(isDisplayed()));
+    }
 
-	@Test
-	public void testNoteSelected() {
-		Intents.init();
-		this.activityTestRule.getActivity().runOnUiThread(new Runnable() {
-			@Override
-			public void run() {
-				NotesActivityTest.this.notesFragment.showNotes(NotesActivityTest.this.notes);
-			}
-		});
+    @Test
+    public void testNoteSelected() {
+        Intents.init();
+        this.activityTestRule.getActivity().runOnUiThread(new Runnable() {
+            @Override
+            public void run() {
+                NotesActivityTest.this.notesFragment.showNotes(NotesActivityTest.this.notes);
+            }
+        });
 
-		onView(withText("Second title")).perform(click());
+        onView(withText("Second title")).perform(click());
 
-		intended(allOf(
-				hasComponent(NoteDetailActivity.class.getName()),
-				hasExtra(NoteDetailActivity.PARAM_NOTE_ID, "2")));
-		Intents.release();
-	}
+        intended(allOf(
+                hasComponent(NoteDetailActivity.class.getName()),
+                hasExtra(NoteDetailActivity.PARAM_NOTE_ID, "2")));
+        Intents.release();
+    }
 
-	@Test
-	public void testNavigateToCreateNote() {
-		Intents.init();
+    @Test
+    public void testNavigateToCreateNote() {
+        Intents.init();
 
-		onView(withId(R.id.btn_create_new_note)).perform(click());
+        onView(withId(R.id.btn_create_new_note)).perform(click());
 
-		intended(hasComponent(NoteCreateActivity.class.getName()));
-		Intents.release();
-	}
+        intended(hasComponent(NoteCreateActivity.class.getName()));
+        Intents.release();
+    }
 
-	@Test
-	public void testNavigateToSettings() {
-		Intents.init();
+    @Test
+    public void testNavigateToSettings() {
+        Intents.init();
 
-		onView(withId(R.id.item_settings)).perform(click());
+        onView(withId(R.id.item_settings)).perform(click());
 
-		intended(hasComponent(SettingsActivity.class.getName()));
-		Intents.release();
-	}
+        intended(hasComponent(SettingsActivity.class.getName()));
+        Intents.release();
+    }
 
-	@Test
-	public void testShowExpirationDate() {
+    @Test
+    public void testShowExpirationDate() {
 
-		this.activityTestRule.getActivity().runOnUiThread(new Runnable() {
-			@Override
-			public void run() {
-				NotesActivityTest.this.notesFragment.showExpirationWarning();
-			}
-		});
+        this.activityTestRule.getActivity().runOnUiThread(new Runnable() {
+            @Override
+            public void run() {
+                NotesActivityTest.this.notesFragment.showExpirationWarning();
+            }
+        });
 
-		String expiration = this.activityTestRule.getActivity()
-				.getResources().getString(R.string.message_expiration);
-		String update = this.activityTestRule.getActivity()
-				.getResources().getString(R.string.message_update);
+        String expiration = this.activityTestRule.getActivity()
+                .getResources().getString(R.string.message_expiration);
+        String update = this.activityTestRule.getActivity()
+                .getResources().getString(R.string.message_update);
 
-		onView(withText(containsString(expiration))).inRoot(
-				withDecorView(not(this.activityTestRule.getActivity().getWindow().getDecorView())))
-				.check(matches(isDisplayed()));
-		onView(withText(containsString(update))).inRoot(
-				withDecorView(not(this.activityTestRule.getActivity().getWindow().getDecorView())))
-				.check(matches(isDisplayed()));
-	}
+        onView(withText(containsString(expiration))).inRoot(
+                withDecorView(not(this.activityTestRule.getActivity().getWindow().getDecorView())))
+                .check(matches(isDisplayed()));
+        onView(withText(containsString(update))).inRoot(
+                withDecorView(not(this.activityTestRule.getActivity().getWindow().getDecorView())))
+                .check(matches(isDisplayed()));
+    }
 
 }

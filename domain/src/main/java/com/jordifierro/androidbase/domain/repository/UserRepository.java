@@ -1,8 +1,8 @@
 package com.jordifierro.androidbase.domain.repository;
 
 import com.jordifierro.androidbase.domain.entity.CreatedWrapper;
-import com.jordifierro.androidbase.domain.entity.VoidEntity;
 import com.jordifierro.androidbase.domain.entity.UserEntity;
+import com.jordifierro.androidbase.domain.entity.VoidEntity;
 
 import io.reactivex.Observable;
 

@@ -20,20 +20,20 @@ import dagger.Component;
 @Component(modules = {ApplicationModule.class, DataModule.class})
 public interface ApplicationComponent {
 
-	Context context();
+    Context context();
 
-	SharedPreferences sharedPreferences();
+    SharedPreferences sharedPreferences();
 
-	ThreadExecutor threadExecutor();
+    ThreadExecutor threadExecutor();
 
-	PostExecutionThread postExecutionThread();
+    PostExecutionThread postExecutionThread();
 
-	SessionRepository sessionRepository();
+    SessionRepository sessionRepository();
 
-	RestApi restApi();
+    RestApi restApi();
 
-	UserRepository userRepository();
+    UserRepository userRepository();
 
-	NoteRepository noteRepository();
+    NoteRepository noteRepository();
 
 }

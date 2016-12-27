@@ -58,7 +58,6 @@ public class DeleteUserUseCaseTest {
         testScheduler.triggerActions();
 
 
-
         verify(mockUserRepository).deleteUser(mockUser);
         final List<Object> resultList = testObserver.getEvents().get(0);
         assertEquals(voidEntity, resultList.get(0));

@@ -14,46 +14,46 @@ import butterknife.Bind;
 
 public class NoteDetailFragment extends BaseFragment implements NoteDetailView {
 
-	@Inject
-	NoteDetailPresenter noteDetailPresenter;
+    @Inject
+    NoteDetailPresenter noteDetailPresenter;
 
-	@Bind(R.id.tv_title)
-	TextView titleTV;
-	@Bind(R.id.tv_content)
-	TextView contentTV;
+    @Bind(R.id.tv_title)
+    TextView titleTV;
+    @Bind(R.id.tv_content)
+    TextView contentTV;
 
-	@Override
-	protected void callInjection() {
-		this.getFragmentInjector().inject(this);
-	}
+    @Override
+    protected void callInjection() {
+        this.getFragmentInjector().inject(this);
+    }
 
-	@Override
-	protected int layoutId() {
-		return R.layout.fragment_note_detail;
-	}
+    @Override
+    protected int layoutId() {
+        return R.layout.fragment_note_detail;
+    }
 
-	@Override
-	protected BasePresenter presenter() {
-		return this.noteDetailPresenter;
-	}
+    @Override
+    protected BasePresenter presenter() {
+        return this.noteDetailPresenter;
+    }
 
-	public NoteDetailPresenter getNoteDetailPresenter() {
-		return noteDetailPresenter;
-	}
+    public NoteDetailPresenter getNoteDetailPresenter() {
+        return noteDetailPresenter;
+    }
 
-	@Override
-	public void showNote(NoteEntity note) {
-		titleTV.setText(note.getTitle());
-		contentTV.setText(note.getContent());
-	}
+    @Override
+    public void showNote(NoteEntity note) {
+        titleTV.setText(note.getTitle());
+        contentTV.setText(note.getContent());
+    }
 
-	@Override
-	public String getNoteObjectId() {
-		return ((Listener) getActivity()).getNoteObjectId();
-	}
+    @Override
+    public String getNoteObjectId() {
+        return ((Listener) getActivity()).getNoteObjectId();
+    }
 
-	public interface Listener {
-		String getNoteObjectId();
-	}
+    public interface Listener {
+        String getNoteObjectId();
+    }
 
 }

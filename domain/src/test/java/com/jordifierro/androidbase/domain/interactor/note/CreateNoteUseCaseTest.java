@@ -61,7 +61,6 @@ public class CreateNoteUseCaseTest {
         TestObserver<NoteEntity> testObserver = new TestObserver<>();
 
 
-
         CreateNoteUseCase createNoteUseCase = new CreateNoteUseCase(mockThreadExecutor,
                 mockPostExecutionThread, mockNoteRepository, mockSessionRepository);
 

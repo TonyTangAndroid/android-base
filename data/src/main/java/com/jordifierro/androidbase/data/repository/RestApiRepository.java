@@ -10,18 +10,18 @@ import retrofit2.Response;
 
 public abstract class RestApiRepository {
 
-	protected void handleResponseError(Response response) {
-		if (!response.isSuccessful()) {
+    protected void handleResponseError(Response response) {
+        if (!response.isSuccessful()) {
 
-			try {
-				ResponseErrorWrapper errorWrapper;
-				final String errorBody = response.errorBody().string();
-				System.out.println("response.code:" + response.code() + "\nresponse.message:" + response.message() + "\nresponse.errorBody:" + errorBody);
-				errorWrapper = new Gson().fromJson(errorBody, ResponseErrorWrapper.class);
-				throw new RestApiErrorException(errorWrapper.getError(), errorWrapper.getCode());
-			} catch (IOException | NullPointerException e) {
-				throw new RestApiErrorException(response.message(), response.code());
-			}
-		}
-	}
+            try {
+                ResponseErrorWrapper errorWrapper;
+                final String errorBody = response.errorBody().string();
+                System.out.println("response.code:" + response.code() + "\nresponse.message:" + response.message() + "\nresponse.errorBody:" + errorBody);
+                errorWrapper = new Gson().fromJson(errorBody, ResponseErrorWrapper.class);
+                throw new RestApiErrorException(errorWrapper.getError(), errorWrapper.getCode());
+            } catch (IOException | NullPointerException e) {
+                throw new RestApiErrorException(response.message(), response.code());
+            }
+        }
+    }
 }

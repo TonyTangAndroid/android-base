@@ -4,8 +4,8 @@ import com.jordifierro.androidbase.domain.entity.NoteEntity;
 
 public interface NoteDetailView extends BaseView {
 
-	void showNote(NoteEntity note);
+    void showNote(NoteEntity note);
 
-	String getNoteObjectId();
+    String getNoteObjectId();
 
 }

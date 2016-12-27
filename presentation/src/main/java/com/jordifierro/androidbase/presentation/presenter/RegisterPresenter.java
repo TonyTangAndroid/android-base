@@ -11,43 +11,43 @@ import javax.inject.Inject;
 @ActivityScope
 public class RegisterPresenter extends BasePresenter implements Presenter {
 
-	RegisterView registerView;
-	private CreateUserUseCase createUserUseCase;
+    RegisterView registerView;
+    private CreateUserUseCase createUserUseCase;
 
-	@Inject
-	public RegisterPresenter(CreateUserUseCase createUserUseCase) {
-		super(createUserUseCase);
-		this.createUserUseCase = createUserUseCase;
-	}
+    @Inject
+    public RegisterPresenter(CreateUserUseCase createUserUseCase) {
+        super(createUserUseCase);
+        this.createUserUseCase = createUserUseCase;
+    }
 
-	@Override
-	public void initWithView(BaseView view) {
-		super.initWithView(view);
-		this.registerView = (RegisterView) view;
-	}
+    @Override
+    public void initWithView(BaseView view) {
+        super.initWithView(view);
+        this.registerView = (RegisterView) view;
+    }
 
-	@Override
-	public void destroy() {
-		super.destroy();
-		this.registerView = null;
-	}
+    @Override
+    public void destroy() {
+        super.destroy();
+        this.registerView = null;
+    }
 
-	public void registerUser(String email, String password, String passwordConfirmation) {
-		UserEntity user = new UserEntity(email);
-		user.setPassword(password);
-		this.showLoader();
-		this.createUserUseCase.setParams(user);
-		this.createUserUseCase.execute(new RegisterSubscriber());
-	}
+    public void registerUser(String email, String password, String passwordConfirmation) {
+        UserEntity user = new UserEntity(email);
+        user.setPassword(password);
+        this.showLoader();
+        this.createUserUseCase.setParams(user);
+        this.createUserUseCase.execute(new RegisterSubscriber());
+    }
 
-	protected class RegisterSubscriber extends BaseSubscriber<UserEntity> {
+    protected class RegisterSubscriber extends BaseSubscriber<UserEntity> {
 
-		@Override
-		public void onNext(UserEntity user) {
-			RegisterPresenter.this.hideLoader();
-			RegisterPresenter.this.registerView.viewNotes();
-		}
+        @Override
+        public void onNext(UserEntity user) {
+            RegisterPresenter.this.hideLoader();
+            RegisterPresenter.this.registerView.viewNotes();
+        }
 
-	}
+    }
 
 }

@@ -36,8 +36,8 @@ import static org.hamcrest.CoreMatchers.allOf;
 @SmallTest
 public class NoteDetailActivityTest {
 
-	public static final String TEST_NOTE_OBJECT_ID = "3WQrZ0dyrt";
-	@Rule
+    public static final String TEST_NOTE_OBJECT_ID = "3WQrZ0dyrt";
+    @Rule
     public final ActivityTestRule<NoteDetailActivity> activityTestRule = new ActivityTestRule<>(
             NoteDetailActivity.class, true, false);
     private NoteDetailFragment noteDetailFragment;

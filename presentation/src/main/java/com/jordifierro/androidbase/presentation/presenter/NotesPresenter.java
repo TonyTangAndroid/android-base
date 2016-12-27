@@ -13,41 +13,41 @@ import javax.inject.Inject;
 @ActivityScope
 public class NotesPresenter extends BasePresenter implements Presenter {
 
-	NotesView notesView;
-	private GetNotesUseCase getNotesUseCase;
+    NotesView notesView;
+    private GetNotesUseCase getNotesUseCase;
 
-	@Inject
-	public NotesPresenter(GetNotesUseCase getNotesUseCase) {
-		super(getNotesUseCase);
-		this.getNotesUseCase = getNotesUseCase;
-	}
+    @Inject
+    public NotesPresenter(GetNotesUseCase getNotesUseCase) {
+        super(getNotesUseCase);
+        this.getNotesUseCase = getNotesUseCase;
+    }
 
-	@Override
-	public void initWithView(BaseView view) {
-		super.initWithView(view);
-		this.notesView = (NotesView) view;
-	}
+    @Override
+    public void initWithView(BaseView view) {
+        super.initWithView(view);
+        this.notesView = (NotesView) view;
+    }
 
-	@Override
-	public void resume() {
-		this.showLoader();
-		this.getNotesUseCase.execute(new NotesSubscriber());
-	}
+    @Override
+    public void resume() {
+        this.showLoader();
+        this.getNotesUseCase.execute(new NotesSubscriber());
+    }
 
-	@Override
-	public void destroy() {
-		super.destroy();
-		this.notesView = null;
-	}
+    @Override
+    public void destroy() {
+        super.destroy();
+        this.notesView = null;
+    }
 
-	protected class NotesSubscriber extends BaseSubscriber<List<NoteEntity>> {
+    protected class NotesSubscriber extends BaseSubscriber<List<NoteEntity>> {
 
-		@Override
-		public void onNext(List<NoteEntity> notes) {
-			NotesPresenter.this.hideLoader();
-			NotesPresenter.this.notesView.showNotes(notes);
-		}
-	}
+        @Override
+        public void onNext(List<NoteEntity> notes) {
+            NotesPresenter.this.hideLoader();
+            NotesPresenter.this.notesView.showNotes(notes);
+        }
+    }
 
 
 }

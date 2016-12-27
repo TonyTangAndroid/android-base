@@ -7,89 +7,88 @@ import com.google.gson.annotations.Expose;
 public class NoteEntity {
 
 
-	@Expose(deserialize = false)
-	private String objectId;
+    @Expose(deserialize = false)
+    private String objectId;
 
-	private String title;
-	private String content;
+    private String title;
+    private String content;
 
-	@Expose(deserialize = false)
-	private String createdAt;
-
-
-	@Expose(deserialize = false)
-	private String updatedAt;
+    @Expose(deserialize = false)
+    private String createdAt;
 
 
+    @Expose(deserialize = false)
+    private String updatedAt;
 
-	private ParsePermissionWrapper ACL;
 
-	public NoteEntity(String title, String content) {
-		this.title = title;
-		this.content = content;
-	}
+    private ParsePermissionWrapper ACL;
 
-	public NoteEntity(String objectId, String title, String content) {
-		this.objectId = objectId;
-		this.title = title;
-		this.content = content;
-	}
+    public NoteEntity(String title, String content) {
+        this.title = title;
+        this.content = content;
+    }
 
-	public String getTitle() {
-		return title;
-	}
+    public NoteEntity(String objectId, String title, String content) {
+        this.objectId = objectId;
+        this.title = title;
+        this.content = content;
+    }
 
-	public void setTitle(String title) {
-		this.title = title;
-	}
+    public String getTitle() {
+        return title;
+    }
 
-	public String getContent() {
-		return content;
-	}
+    public void setTitle(String title) {
+        this.title = title;
+    }
 
-	public void setContent(String content) {
-		this.content = content;
-	}
+    public String getContent() {
+        return content;
+    }
 
-	public String getCreatedAt() {
-		return createdAt;
-	}
+    public void setContent(String content) {
+        this.content = content;
+    }
 
-	public void setCreatedAt(String createdAt) {
-		this.createdAt = createdAt;
-	}
+    public String getCreatedAt() {
+        return createdAt;
+    }
 
-	public String getUpdatedAt() {
-		return updatedAt;
-	}
+    public void setCreatedAt(String createdAt) {
+        this.createdAt = createdAt;
+    }
 
-	public void setUpdatedAt(String updatedAt) {
-		this.updatedAt = updatedAt;
-	}
+    public String getUpdatedAt() {
+        return updatedAt;
+    }
 
-	public String getObjectId() {
-		return objectId;
-	}
+    public void setUpdatedAt(String updatedAt) {
+        this.updatedAt = updatedAt;
+    }
 
-	public void setObjectId(String objectId) {
-		this.objectId = objectId;
-	}
+    public String getObjectId() {
+        return objectId;
+    }
 
-	public ParsePermissionWrapper getACL() {
-		return ACL;
-	}
+    public void setObjectId(String objectId) {
+        this.objectId = objectId;
+    }
 
-	public void setACL(ParsePermissionWrapper ACL) {
-		this.ACL = ACL;
-	}
+    public ParsePermissionWrapper getACL() {
+        return ACL;
+    }
 
-	@Override
-	public String toString() {
-		final GsonBuilder gsonBuilder = new GsonBuilder().registerTypeAdapter(ParsePermissionWrapper.class, new ParseACLJsonAdapter());
-		gsonBuilder.setPrettyPrinting();
-		Gson gson = gsonBuilder.create();
-		return gson.toJson(this);
-	}
+    public void setACL(ParsePermissionWrapper ACL) {
+        this.ACL = ACL;
+    }
+
+    @Override
+    public String toString() {
+        final GsonBuilder gsonBuilder = new GsonBuilder().registerTypeAdapter(ParsePermissionWrapper.class, new ParseACLJsonAdapter());
+        gsonBuilder.setPrettyPrinting();
+        Gson gson = gsonBuilder.create();
+        return gson.toJson(this);
+    }
 
 
 }

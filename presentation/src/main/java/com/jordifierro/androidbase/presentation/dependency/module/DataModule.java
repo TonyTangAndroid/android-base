@@ -27,43 +27,43 @@ import retrofit2.converter.gson.GsonConverterFactory;
 @Module
 public class DataModule {
 
-	@Provides
-	@Singleton
-	SessionRepository provideSessionRepository(SharedPreferences sharedPreferences) {
-		return new SessionDataRepository(sharedPreferences);
-	}
+    @Provides
+    @Singleton
+    SessionRepository provideSessionRepository(SharedPreferences sharedPreferences) {
+        return new SessionDataRepository(sharedPreferences);
+    }
 
-	@Provides
-	@Singleton
-	RestApi provideRestApi() {
-		final HttpLoggingInterceptor interceptor = new HttpLoggingInterceptor();
-		interceptor.setLevel(HttpLoggingInterceptor.Level.BODY);
-		OkHttpClient client = new OkHttpClient().newBuilder()
-				.addInterceptor(new HttpInterceptor())
-				.addInterceptor(interceptor)
-				.build();
+    @Provides
+    @Singleton
+    RestApi provideRestApi() {
+        final HttpLoggingInterceptor interceptor = new HttpLoggingInterceptor();
+        interceptor.setLevel(HttpLoggingInterceptor.Level.BODY);
+        OkHttpClient client = new OkHttpClient().newBuilder()
+                .addInterceptor(new HttpInterceptor())
+                .addInterceptor(interceptor)
+                .build();
 
-		return new Retrofit.Builder()
-				.baseUrl(RestApi.URL_BASE)
-				.addConverterFactory(GsonConverterFactory.create(new GsonBuilder()
-						.registerTypeAdapter(ParsePermissionWrapper.class, new ParseACLJsonAdapter())
-						.create()))
-				.addCallAdapterFactory(RxJava2CallAdapterFactory.create())
-				.client(client)
-				.build()
-				.create(RestApi.class);
-	}
+        return new Retrofit.Builder()
+                .baseUrl(RestApi.URL_BASE)
+                .addConverterFactory(GsonConverterFactory.create(new GsonBuilder()
+                        .registerTypeAdapter(ParsePermissionWrapper.class, new ParseACLJsonAdapter())
+                        .create()))
+                .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
+                .client(client)
+                .build()
+                .create(RestApi.class);
+    }
 
-	@Provides
-	@Singleton
-	UserRepository provideUserRepository(RestApi restApi) {
-		return new UserDataRepository(restApi);
-	}
+    @Provides
+    @Singleton
+    UserRepository provideUserRepository(RestApi restApi) {
+        return new UserDataRepository(restApi);
+    }
 
-	@Provides
-	@Singleton
-	NoteRepository provideNoteRepository(RestApi restApi) {
-		return new NoteDataRepository(restApi);
-	}
+    @Provides
+    @Singleton
+    NoteRepository provideNoteRepository(RestApi restApi) {
+        return new NoteDataRepository(restApi);
+    }
 
 }

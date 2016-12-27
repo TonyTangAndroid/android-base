@@ -2,37 +2,37 @@ package com.jordifierro.androidbase.domain.entity;
 
 public class CreatedWrapper {
 
-	private String createdAt;
-	private String objectId;
-	private String sessionToken;
+    private String createdAt;
+    private String objectId;
+    private String sessionToken;
 
-	public CreatedWrapper(String createdAt, String objectId, String sessionToken) {
-		this.createdAt = createdAt;
-		this.objectId = objectId;
-		this.sessionToken = sessionToken;
-	}
+    public CreatedWrapper(String createdAt, String objectId, String sessionToken) {
+        this.createdAt = createdAt;
+        this.objectId = objectId;
+        this.sessionToken = sessionToken;
+    }
 
-	public String getSessionToken() {
-		return sessionToken;
-	}
+    public String getSessionToken() {
+        return sessionToken;
+    }
 
-	public void setSessionToken(String sessionToken) {
-		this.sessionToken = sessionToken;
-	}
+    public void setSessionToken(String sessionToken) {
+        this.sessionToken = sessionToken;
+    }
 
-	public String getObjectId() {
-		return objectId;
-	}
+    public String getObjectId() {
+        return objectId;
+    }
 
-	public void setObjectId(String objectId) {
-		this.objectId = objectId;
-	}
+    public void setObjectId(String objectId) {
+        this.objectId = objectId;
+    }
 
-	public String getCreatedAt() {
-		return createdAt;
-	}
+    public String getCreatedAt() {
+        return createdAt;
+    }
 
-	public void setCreatedAt(String createdAt) {
-		this.createdAt = createdAt;
-	}
+    public void setCreatedAt(String createdAt) {
+        this.createdAt = createdAt;
+    }
 }

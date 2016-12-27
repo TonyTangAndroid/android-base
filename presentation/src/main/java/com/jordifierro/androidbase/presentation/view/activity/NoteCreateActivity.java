@@ -8,11 +8,11 @@ import com.jordifierro.androidbase.presentation.view.fragment.NoteCreateFragment
 
 public class NoteCreateActivity extends CleanActivity {
 
-	@Override
-	protected void initializeActivity(Bundle savedInstanceState) {
-		if (savedInstanceState == null) {
-			addFragment(R.id.fragment_container, new NoteCreateFragment());
-		}
-	}
+    @Override
+    protected void initializeActivity(Bundle savedInstanceState) {
+        if (savedInstanceState == null) {
+            addFragment(R.id.fragment_container, new NoteCreateFragment());
+        }
+    }
 
 }

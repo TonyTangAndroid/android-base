@@ -29,7 +29,7 @@ public class SessionDataRepositoryTest extends InstrumentationTestCase {
         this.user.setObjectId(FAKE_OBJECT_ID);
     }
 
-    public void testGetWithoutSetReturnsNull(){
+    public void testGetWithoutSetReturnsNull() {
         assertNull(this.sessionDataRepository.getCurrentUser().getUsername());
         assertNull(this.sessionDataRepository.getCurrentUser().getSessionToken());
         assertNull(this.sessionDataRepository.getCurrentUser().getObjectId());
