@@ -8,9 +8,7 @@ import io.reactivex.Observable;
 
 
 public interface UserRepository {
-    Observable<UserEntity> createUser(UserEntity user);
-
-    Observable<CreatedWrapper> createUserWithRawResponse(UserEntity user);
+    Observable<CreatedWrapper> createUser(UserEntity user);
 
     Observable<VoidEntity> deleteUser(UserEntity user);
 

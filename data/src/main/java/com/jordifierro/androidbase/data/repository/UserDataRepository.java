@@ -13,7 +13,6 @@ import javax.inject.Inject;
 import javax.inject.Singleton;
 
 import io.reactivex.Observable;
-import io.reactivex.ObservableSource;
 import io.reactivex.functions.Function;
 import retrofit2.Response;
 
@@ -28,22 +27,9 @@ public class UserDataRepository extends RestApiRepository implements UserReposit
     }
 
     @Override
-    public Observable<UserEntity> createUser(UserEntity user) {
-        return this.restApi.createUser(user)
-                .flatMap(new Function<Response<CreatedWrapper>, ObservableSource<UserEntity>>() {
-                    @Override
-                    public ObservableSource<UserEntity> apply(Response<CreatedWrapper> createdWrapperResponse) throws Exception {
-                        handleResponseError(createdWrapperResponse);
-                        final CreatedWrapper body = createdWrapperResponse.body();
-                        return getUserBySessionToken(body.getSessionToken());
-
-                    }
-                });
-    }
-
-    @Override
-    public Observable<CreatedWrapper> createUserWithRawResponse(UserEntity user) {
+    public Observable<CreatedWrapper> createUser(UserEntity user) {
         return this.restApi.createUser(user).map(new Function<Response<CreatedWrapper>, CreatedWrapper>() {
+
             @Override
             public CreatedWrapper apply(Response<CreatedWrapper> createdWrapperResponse) throws Exception {
 
@@ -51,9 +37,12 @@ public class UserDataRepository extends RestApiRepository implements UserReposit
                 return createdWrapperResponse.body();
 
             }
+
         });
 
     }
+
+
 
     @Override
     public Observable<VoidEntity> deleteUser(final UserEntity user) {

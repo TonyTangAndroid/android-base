@@ -166,30 +166,8 @@ public class UserDataRepositoryTest extends BaseDataRepositoryTest {
                 FileUtils.readFileToString(
                         TestUtils.getFileFromPath(this, "res/user_create_raw_ok.json"))));
 
-        this.mockWebServer.enqueue(new MockResponse().setResponseCode(200).setBody(
-                FileUtils.readFileToString(
-                        TestUtils.getFileFromPath(this, "res/user_me_ok.json"))));
-
 
         this.userDataRepository.createUser(this.fakeUser).subscribe(this.testObserver);
-        this.testObserver.awaitTerminalEvent();
-
-        UserEntity responseUser = (UserEntity) ((List<Object>) this.testObserver.getEvents().get(0)).get(0);
-        assertTrue(responseUser.getSessionToken().length() > 0);
-        assertTrue(responseUser.getObjectId().length() > 0);
-        assertTrue(responseUser.getUsername().length() > 0);
-        assertTrue(responseUser.getEmail().length() > 0);
-        assertTrue(responseUser.getCreatedAt().length() > 0);
-    }
-
-
-    @Test
-    public void testCreateUserRawSuccess() throws Exception {
-        this.mockWebServer.enqueue(new MockResponse().setResponseCode(201).setBody(
-                FileUtils.readFileToString(
-                        TestUtils.getFileFromPath(this, "res/user_create_raw_ok.json"))));
-
-        this.userDataRepository.createUserWithRawResponse(this.fakeUser).subscribe(this.testObserver);
         this.testObserver.awaitTerminalEvent();
 
         CreatedWrapper responseUser = (CreatedWrapper) ((List<Object>) this.testObserver.getEvents().get(0)).get(0);
