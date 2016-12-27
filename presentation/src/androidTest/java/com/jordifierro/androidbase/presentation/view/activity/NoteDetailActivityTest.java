@@ -36,14 +36,15 @@ import static org.hamcrest.CoreMatchers.allOf;
 @SmallTest
 public class NoteDetailActivityTest {
 
-    @Rule
+	public static final String TEST_NOTE_OBJECT_ID = "3WQrZ0dyrt";
+	@Rule
     public final ActivityTestRule<NoteDetailActivity> activityTestRule = new ActivityTestRule<>(
             NoteDetailActivity.class, true, false);
     private NoteDetailFragment noteDetailFragment;
 
     @Before
     public void setUp() throws Exception {
-        activityTestRule.launchActivity(new Intent().putExtra(NoteDetailActivity.PARAM_NOTE_ID, 2));
+        activityTestRule.launchActivity(new Intent().putExtra(NoteDetailActivity.PARAM_NOTE_ID, TEST_NOTE_OBJECT_ID));
         this.noteDetailFragment = ((NoteDetailFragment) this.activityTestRule.getActivity()
                 .getFragmentManager().findFragmentById(R.id.fragment_container));
     }
@@ -56,7 +57,7 @@ public class NoteDetailActivityTest {
 
     @Test
     public void testGetNoteId() {
-        assertEquals(2, this.noteDetailFragment.getNoteId());
+        assertEquals(TEST_NOTE_OBJECT_ID, this.noteDetailFragment.getNoteObjectId());
     }
 
     @Test
@@ -82,7 +83,7 @@ public class NoteDetailActivityTest {
 
         intended(allOf(
                 hasComponent(NoteEditActivity.class.getName()),
-                hasExtra(NoteEditActivity.PARAM_NOTE_ID, 2)));
+                hasExtra(NoteEditActivity.PARAM_NOTE_ID, TEST_NOTE_OBJECT_ID)));
         Intents.release();
     }
 

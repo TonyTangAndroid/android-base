@@ -28,6 +28,7 @@ public class RestApiErrorExceptionTest {
     @Test
     public void testStatusCodes() {
         assertEquals(400, RestApiErrorException.BAD_REQUEST);
+        assertEquals(209, RestApiErrorException.INVALID_SESSION_TOKEN);
         assertEquals(401, RestApiErrorException.UNAUTHORIZED);
         assertEquals(404, RestApiErrorException.NOT_FOUND);
         assertEquals(422, RestApiErrorException.UNPROCESSABLE_ENTITY);

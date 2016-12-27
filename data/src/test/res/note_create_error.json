@@ -1,6 +1,4 @@
 {
-  "error": {
-    "status": 422,
-    "message": "Title can't be blank"
-  }
+  "code": 102,
+  "error": "Note Created error"
 }

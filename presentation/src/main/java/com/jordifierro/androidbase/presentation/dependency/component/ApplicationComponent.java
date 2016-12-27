@@ -9,7 +9,6 @@ import com.jordifierro.androidbase.domain.executor.ThreadExecutor;
 import com.jordifierro.androidbase.domain.repository.NoteRepository;
 import com.jordifierro.androidbase.domain.repository.SessionRepository;
 import com.jordifierro.androidbase.domain.repository.UserRepository;
-import com.jordifierro.androidbase.domain.repository.VersionRepository;
 import com.jordifierro.androidbase.presentation.dependency.module.ApplicationModule;
 import com.jordifierro.androidbase.presentation.dependency.module.DataModule;
 
@@ -21,22 +20,20 @@ import dagger.Component;
 @Component(modules = {ApplicationModule.class, DataModule.class})
 public interface ApplicationComponent {
 
-    Context context();
+	Context context();
 
-    SharedPreferences sharedPreferences();
+	SharedPreferences sharedPreferences();
 
-    ThreadExecutor threadExecutor();
+	ThreadExecutor threadExecutor();
 
-    PostExecutionThread postExecutionThread();
+	PostExecutionThread postExecutionThread();
 
-    SessionRepository sessionRepository();
+	SessionRepository sessionRepository();
 
-    RestApi restApi();
+	RestApi restApi();
 
-    UserRepository userRepository();
+	UserRepository userRepository();
 
-    NoteRepository noteRepository();
-
-    VersionRepository versionRepository();
+	NoteRepository noteRepository();
 
 }

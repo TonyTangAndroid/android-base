@@ -6,10 +6,10 @@ import java.util.List;
 
 public interface NotesView extends BaseView {
 
-    void showNotes(List<NoteEntity> notes);
+	void showNotes(List<NoteEntity> notes);
 
-    void showNote(int noteId);
+	void showNote(String noteObjectId);
 
-    void showExpirationWarning();
+	void showExpirationWarning();
 
 }

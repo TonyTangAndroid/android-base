@@ -11,47 +11,47 @@ import javax.inject.Inject;
 @ActivityScope
 public class NoteDetailPresenter extends BasePresenter implements Presenter {
 
-    private GetNoteUseCase getNoteUseCase;
-    NoteDetailView noteDetailView;
+	NoteDetailView noteDetailView;
+	private GetNoteUseCase getNoteUseCase;
 
-    @Inject
-    public NoteDetailPresenter(GetNoteUseCase getNoteUseCase) {
-        super(getNoteUseCase);
-        this.getNoteUseCase = getNoteUseCase;
-    }
+	@Inject
+	public NoteDetailPresenter(GetNoteUseCase getNoteUseCase) {
+		super(getNoteUseCase);
+		this.getNoteUseCase = getNoteUseCase;
+	}
 
-    @Override
-    public void initWithView(BaseView view) {
-        super.initWithView(view);
-        this.noteDetailView = (NoteDetailView) view;
-    }
+	@Override
+	public void initWithView(BaseView view) {
+		super.initWithView(view);
+		this.noteDetailView = (NoteDetailView) view;
+	}
 
-    @Override
-    public void resume() {
-        this.showLoader();
-        this.getNoteUseCase.setParams(this.noteDetailView.getNoteId());
-        this.getNoteUseCase.execute(new NoteDetailSubscriber());
-    }
+	@Override
+	public void resume() {
+		this.showLoader();
+		this.getNoteUseCase.setParams(this.noteDetailView.getNoteObjectId());
+		this.getNoteUseCase.execute(new NoteDetailSubscriber());
+	}
 
-    @Override
-    public void destroy() {
-        super.destroy();
-        this.noteDetailView = null;
-    }
+	@Override
+	public void destroy() {
+		super.destroy();
+		this.noteDetailView = null;
+	}
 
-    protected class NoteDetailSubscriber extends BaseSubscriber<NoteEntity> {
+	protected class NoteDetailSubscriber extends BaseSubscriber<NoteEntity> {
 
-        @Override
-        public void onError(Throwable e) {
-            super.onError(e);
-            NoteDetailPresenter.this.noteDetailView.close();
-        }
+		@Override
+		public void onError(Throwable e) {
+			super.onError(e);
+			NoteDetailPresenter.this.noteDetailView.close();
+		}
 
-        @Override
-        public void onNext(NoteEntity note) {
-            NoteDetailPresenter.this.hideLoader();
-            NoteDetailPresenter.this.noteDetailView.showNote(note);
-        }
-    }
+		@Override
+		public void onNext(NoteEntity note) {
+			NoteDetailPresenter.this.hideLoader();
+			NoteDetailPresenter.this.noteDetailView.showNote(note);
+		}
+	}
 
 }

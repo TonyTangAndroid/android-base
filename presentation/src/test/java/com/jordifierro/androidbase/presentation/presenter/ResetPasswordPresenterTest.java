@@ -1,7 +1,6 @@
 package com.jordifierro.androidbase.presentation.presenter;
 
 import com.jordifierro.androidbase.data.net.error.RestApiErrorException;
-import com.jordifierro.androidbase.domain.entity.MessageEntity;
 import com.jordifierro.androidbase.domain.entity.UserEntity;
 import com.jordifierro.androidbase.domain.interactor.user.ResetPasswordUseCase;
 import com.jordifierro.androidbase.presentation.view.ResetPasswordView;
@@ -78,10 +77,9 @@ public class ResetPasswordPresenterTest {
     @SuppressWarnings("unchecked")
     public void testSubscriberOnNext() {
 
-        this.resetPasswordSubscriber.onNext(new MessageEntity("message"));
-
+        this.resetPasswordSubscriber.onNext(null);
         verify(this.mockResetPasswordView).hideLoader();
-        verify(this.mockResetPasswordView).showMessage("message");
+        verify(this.mockResetPasswordView).showMessage("Success");
         verify(this.mockResetPasswordView).close();
     }
 

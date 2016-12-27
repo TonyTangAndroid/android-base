@@ -1,66 +1,86 @@
 package com.jordifierro.androidbase.domain.entity;
 
+import com.google.gson.annotations.Expose;
+
 public class UserEntity {
 
-    private String email;
-    private String authToken;
-    private String password;
-    private String passwordConfirmation;
-    private String newPassword;
-    private String newPasswordConfirmation;
 
-    public UserEntity() {
-    }
+	private String email;
+	private String username;
+	private String password;
+	@Expose(deserialize = false)
+	private String objectId;
+	@Expose(deserialize = false)
+	private String createdAt;
+	@Expose(deserialize = false)
+	private String updatedAt;
+	@Expose(deserialize = false)
+	private String sessionToken;
 
-    public UserEntity(String email) {
-        this.email = email;
-    }
+	public UserEntity() {
+	}
 
-    public String getEmail() {
-        return email;
-    }
+	public UserEntity(String username) {
+		this.username = username;
+		this.email = username;
+	}
 
-    public void setEmail(String email) {
-        this.email = email;
-    }
+	public String getEmail() {
+		return email;
+	}
 
-    public String getAuthToken() {
-        return authToken;
-    }
+	public void setEmail(String email) {
+		this.email = email;
+		this.username = email;
+	}
 
-    public void setAuthToken(String authToken) {
-        this.authToken = authToken;
-    }
+	public String getCreatedAt() {
+		return createdAt;
+	}
 
-    public String getPassword() {
-        return password;
-    }
+	public void setCreatedAt(String createdAt) {
+		this.createdAt = createdAt;
+	}
 
-    public void setPassword(String password) {
-        this.password = password;
-    }
+	public String getUpdatedAt() {
+		return updatedAt;
+	}
 
-    public String getPasswordConfirmation() {
-        return passwordConfirmation;
-    }
+	public void setUpdatedAt(String updatedAt) {
+		this.updatedAt = updatedAt;
+	}
 
-    public void setPasswordConfirmation(String passwordConfirmation) {
-        this.passwordConfirmation = passwordConfirmation;
-    }
+	public String getObjectId() {
+		return objectId;
+	}
 
-    public String getNewPassword() {
-        return newPassword;
-    }
+	public void setObjectId(String objectId) {
+		this.objectId = objectId;
+	}
 
-    public void setNewPassword(String newPassword) {
-        this.newPassword = newPassword;
-    }
+	public String getUsername() {
+		return username;
+	}
 
-    public String getNewPasswordConfirmation() {
-        return newPasswordConfirmation;
-    }
+	public void setUsername(String username) {
+		this.username = username;
+		this.email = username;
+	}
 
-    public void setNewPasswordConfirmation(String newPasswordConfirmation) {
-        this.newPasswordConfirmation = newPasswordConfirmation;
-    }
+	public String getSessionToken() {
+		return sessionToken == null ? "Empty One" : sessionToken;
+	}
+
+	public void setSessionToken(String sessionToken) {
+		this.sessionToken = sessionToken;
+	}
+
+	public String getPassword() {
+		return password;
+	}
+
+	public void setPassword(String password) {
+		this.password = password;
+	}
+
 }

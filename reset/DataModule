@@ -38,12 +38,11 @@ public class DataModule {
                                                 .addInterceptor(new HttpInterceptor())
                                                 .build();
 
-        GsonConverterFactory factory = GsonConverterFactory.create(new GsonBuilder()
-                    .setFieldNamingPolicy(FieldNamingPolicy.LOWER_CASE_WITH_UNDERSCORES).create());
-
         return new Retrofit.Builder()
                            .baseUrl(RestApi.URL_BASE)
-                           .addConverterFactory(factory)
+                           .addConverterFactory(GsonConverterFactory.create(new GsonBuilder()
+                                          .registerTypeAdapter(ParsePermissionWrapper.class, new ParseACLJsonAdapter())
+                                          .create()))
                            .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
                            .client(client)
                            .build()

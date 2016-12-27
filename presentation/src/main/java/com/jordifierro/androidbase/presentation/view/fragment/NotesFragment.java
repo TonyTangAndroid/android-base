@@ -21,8 +21,7 @@ public class NotesFragment extends BaseFragment implements NotesView {
     @Inject
     NotesPresenter notesPresenter;
 
-    @Bind(R.id.listview)
-    ListView listView;
+    @Bind(R.id.listview) ListView listView;
 
     @Override
     protected void callInjection() {
@@ -49,7 +48,7 @@ public class NotesFragment extends BaseFragment implements NotesView {
         adapter.setOnItemClickListener(new NotesAdapter.OnItemClickListener() {
             @Override
             public void onNoteItemClicked(NoteEntity note) {
-                NotesFragment.this.showNote(note.getId());
+                NotesFragment.this.showNote(note.getObjectId());
             }
         });
         adapter.setNotes(notes);
@@ -58,24 +57,23 @@ public class NotesFragment extends BaseFragment implements NotesView {
 
     @OnClick(R.id.btn_create_new_note)
     public void createNewNoteButtonPressed() {
-        ((Listener) getActivity()).diplayNoteCreator();
+        ((Listener)getActivity()).diplayNoteCreator();
     }
 
     @Override
-    public void showNote(int noteId) {
-        ((Listener) getActivity()).showNote(noteId);
+    public void showNote(String noteObjectId) {
+        ((Listener)getActivity()).showNote(noteObjectId);
     }
 
     @Override
     public void showExpirationWarning() {
         showMessage(getResources().getString(R.string.message_expiration) + ".\n" +
-                getResources().getString(R.string.message_update) + ".");
+                    getResources().getString(R.string.message_update) + ".");
     }
 
     public interface Listener {
         void diplayNoteCreator();
-
-        void showNote(int noteId);
+        void showNote(String noteObjectId);
     }
 
 }

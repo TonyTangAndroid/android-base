@@ -5,11 +5,11 @@ import com.jordifierro.androidbase.presentation.view.activity.base.WebViewActivi
 
 public class PrivacyActivity extends WebViewActivity {
 
-    private static final String TERMS_URL = RestApi.URL_BASE + "/privacy";
+	private static final String TERMS_URL = RestApi.URL_BASE + "/privacy";
 
-    @Override
-    public String getUrl() {
-        return TERMS_URL;
-    }
+	@Override
+	public String getUrl() {
+		return TERMS_URL;
+	}
 
 }

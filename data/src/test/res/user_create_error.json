@@ -1,6 +1,4 @@
 {
-  "error": {
-    "status": 422,
-    "message": "Email has already been taken"
-  }
+  "code": 203,
+  "error": "the email address ztangmstr@gmail.com has already been taken"
 }
