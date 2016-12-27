@@ -18,42 +18,50 @@ import dagger.Provides;
 @Module
 public class TestMockerModule {
 
-    @Provides @ActivityScope
+    @Provides
+    @ActivityScope
     LoginPresenter provideLoginPresenter() {
         return Mockito.mock(LoginPresenter.class);
     }
 
-    @Provides @ActivityScope
+    @Provides
+    @ActivityScope
     NoteCreatePresenter provideNoteCreatePresenter() {
         return Mockito.mock(NoteCreatePresenter.class);
     }
 
-    @Provides @ActivityScope
+    @Provides
+    @ActivityScope
     NoteDetailPresenter provideNoteDetailPresenter() {
         return Mockito.mock(NoteDetailPresenter.class);
     }
 
-    @Provides @ActivityScope
+    @Provides
+    @ActivityScope
     NotesPresenter provideNotesPresenter() {
         return Mockito.mock(NotesPresenter.class);
     }
 
-    @Provides @ActivityScope
+    @Provides
+    @ActivityScope
     RegisterPresenter provideRegisterPresenter() {
         return Mockito.mock(RegisterPresenter.class);
     }
 
-    @Provides @ActivityScope
+    @Provides
+    @ActivityScope
     SettingsPresenter provideSettingsPresenter() {
         return Mockito.mock(SettingsPresenter.class);
     }
 
-    @Provides @ActivityScope
+    @Provides
+    @ActivityScope
     NoteEditPresenter provideNoteEditPresenter() {
         return Mockito.mock(NoteEditPresenter.class);
     }
 
-    @Provides @ActivityScope
+    @Provides
+    @ActivityScope
     ResetPasswordPresenter provideResetPasswordPresenter() {
         return Mockito.mock(ResetPasswordPresenter.class);
     }

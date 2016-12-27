@@ -33,58 +33,58 @@ ext {
     espressoVersion = '2.2.2'
 
     domainDependencies = [
-            retrofit:           "com.squareup.retrofit2:retrofit:${retrofitVersion}",
-            retrofitGson:       "com.squareup.retrofit2:converter-gson:${retrofitVersion}",
-            retrofitRxJava:     "com.squareup.retrofit2:adapter-rxjava:${retrofitVersion}",
-            javaxInject:        "javax.inject:javax.inject:${javaxInjectVersion}",
-            rxJava:             "io.reactivex:rxjava:${rxJavaVersion}"
+            retrofit      : "com.squareup.retrofit2:retrofit:${retrofitVersion}",
+            retrofitGson  : "com.squareup.retrofit2:converter-gson:${retrofitVersion}",
+            retrofitRxJava: "com.squareup.retrofit2:adapter-rxjava:${retrofitVersion}",
+            javaxInject   : "javax.inject:javax.inject:${javaxInjectVersion}",
+            rxJava        : "io.reactivex:rxjava:${rxJavaVersion}"
     ]
 
     domainTestDependencies = [
-            junit:              "junit:junit:${jUnitVersion}",
-            mockito:            "org.mockito:mockito-core:${mockitoVersion}",
-            jetAnnotations:     "org.jetbrains:annotations-java5:${jetAnnotationVersion}"
+            junit         : "junit:junit:${jUnitVersion}",
+            mockito       : "org.mockito:mockito-core:${mockitoVersion}",
+            jetAnnotations: "org.jetbrains:annotations-java5:${jetAnnotationVersion}"
     ]
 
     dataDependencies = [
-            retrofit:           "com.squareup.retrofit2:retrofit:${retrofitVersion}",
-            retrofitGson:       "com.squareup.retrofit2:converter-gson:${retrofitVersion}",
-            okhttp3_log:        "com.squareup.okhttp3:logging-interceptor:3.0.1",
-            retrofitRxJava:     "com.squareup.retrofit2:adapter-rxjava:${retrofitVersion}",
-            javaxAnnotation:    "javax.annotation:jsr250-api:${javaxAnnotationVersion}",
-            rxJava:             "io.reactivex:rxjava:${rxJavaVersion}"
+            retrofit       : "com.squareup.retrofit2:retrofit:${retrofitVersion}",
+            retrofitGson   : "com.squareup.retrofit2:converter-gson:${retrofitVersion}",
+            okhttp3_log    : "com.squareup.okhttp3:logging-interceptor:3.0.1",
+            retrofitRxJava : "com.squareup.retrofit2:adapter-rxjava:${retrofitVersion}",
+            javaxAnnotation: "javax.annotation:jsr250-api:${javaxAnnotationVersion}",
+            rxJava         : "io.reactivex:rxjava:${rxJavaVersion}"
     ]
 
     dataTestDependencies = [
-            junit:              "junit:junit:${jUnitVersion}",
-            mockito:            "org.mockito:mockito-core:${mockitoVersion}",
-            mockWebServer:      "com.squareup.okhttp3:mockwebserver:${mockWebServerVersion}",
-            commonsIO:          "commons-io:commons-io:${commonsIOVersion}"
+            junit        : "junit:junit:${jUnitVersion}",
+            mockito      : "org.mockito:mockito-core:${mockitoVersion}",
+            mockWebServer: "com.squareup.okhttp3:mockwebserver:${mockWebServerVersion}",
+            commonsIO    : "commons-io:commons-io:${commonsIOVersion}"
     ]
 
     presentationDependencies = [
-            daggerCompiler:     "com.google.dagger:dagger-compiler:${daggerVersion}",
-            dagger:             "com.google.dagger:dagger:${daggerVersion}",
-            butterKnife:        "com.jakewharton:butterknife:${butterKnifeVersion}",
-            rxJava:             "io.reactivex:rxjava:${rxJavaVersion}",
-            rxAndroid:          "io.reactivex:rxandroid:${rxAndroidVersion}",
-            javaxAnnotation:    "javax.annotation:jsr250-api:${javaxAnnotationVersion}",
-            androidCompatv7:    "com.android.support:appcompat-v7:${androidSupportVersion}",
-            androidSupportv4:   "com.android.support:support-v4:${androidSupportVersion}",
-            androidDesign:      "com.android.support:design:${androidSupportVersion}"
+            daggerCompiler  : "com.google.dagger:dagger-compiler:${daggerVersion}",
+            dagger          : "com.google.dagger:dagger:${daggerVersion}",
+            butterKnife     : "com.jakewharton:butterknife:${butterKnifeVersion}",
+            rxJava          : "io.reactivex:rxjava:${rxJavaVersion}",
+            rxAndroid       : "io.reactivex:rxandroid:${rxAndroidVersion}",
+            javaxAnnotation : "javax.annotation:jsr250-api:${javaxAnnotationVersion}",
+            androidCompatv7 : "com.android.support:appcompat-v7:${androidSupportVersion}",
+            androidSupportv4: "com.android.support:support-v4:${androidSupportVersion}",
+            androidDesign   : "com.android.support:design:${androidSupportVersion}"
     ]
     presentationTestDependencies = [
-            junit:              "junit:junit:${jUnitVersion}",
-            mockito:            "org.mockito:mockito-core:${mockitoVersion}",
-            dexmaker:           "com.crittercism.dexmaker:dexmaker:${dexmakerVersion}",
-            dexmakerDx:         "com.crittercism.dexmaker:dexmaker-dx:${dexmakerVersion}",
-            dexmakerParent:     "com.crittercism.dexmaker:dexmaker-parent:${dexmakerVersion}",
-            dexmakerMockito:    "com.crittercism.dexmaker:dexmaker-mockito:${dexmakerVersion}",
+            junit             : "junit:junit:${jUnitVersion}",
+            mockito           : "org.mockito:mockito-core:${mockitoVersion}",
+            dexmaker          : "com.crittercism.dexmaker:dexmaker:${dexmakerVersion}",
+            dexmakerDx        : "com.crittercism.dexmaker:dexmaker-dx:${dexmakerVersion}",
+            dexmakerParent    : "com.crittercism.dexmaker:dexmaker-parent:${dexmakerVersion}",
+            dexmakerMockito   : "com.crittercism.dexmaker:dexmaker-mockito:${dexmakerVersion}",
             androidAnnotations: "com.android.support:support-annotations:${androidSupportVersion}",
-            espresso:           "com.android.support.test.espresso:espresso-core:${espressoVersion}",
-            espressoIntents:    "com.android.support.test.espresso:espresso-intents:${espressoVersion}",
-            espressoWeb:        "com.android.support.test.espresso:espresso-web:${espressoVersion}",
-            daggerCompiler:     "com.google.dagger:dagger-compiler:${daggerVersion}"
+            espresso          : "com.android.support.test.espresso:espresso-core:${espressoVersion}",
+            espressoIntents   : "com.android.support.test.espresso:espresso-intents:${espressoVersion}",
+            espressoWeb       : "com.android.support.test.espresso:espresso-web:${espressoVersion}",
+            daggerCompiler    : "com.google.dagger:dagger-compiler:${daggerVersion}"
     ]
 
 

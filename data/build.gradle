@@ -30,11 +30,11 @@ android {
     }
 }
 
-task copyResToDebugClasses(type: Copy){
+task copyResToDebugClasses(type: Copy) {
     from "${projectDir}/src/test/res"
     into "${buildDir}/intermediates/classes/test/debug/res"
 }
-task copyResToReleaseClasses(type: Copy){
+task copyResToReleaseClasses(type: Copy) {
     from "${projectDir}/src/test/res"
     into "${buildDir}/intermediates/classes/test/release/res"
 }
