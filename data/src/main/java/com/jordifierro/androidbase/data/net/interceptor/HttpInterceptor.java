@@ -16,7 +16,8 @@ import okhttp3.Response;
 public class HttpInterceptor implements Interceptor {
 
     @Inject
-    public HttpInterceptor() {}
+    public HttpInterceptor() {
+    }
 
     @Override
     public Response intercept(Chain chain) throws IOException {

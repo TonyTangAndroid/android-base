@@ -12,7 +12,6 @@ import com.jordifierro.androidbase.presentation.R;
 import com.jordifierro.androidbase.presentation.presenter.BasePresenter;
 import com.jordifierro.androidbase.presentation.presenter.NoteEditPresenter;
 import com.jordifierro.androidbase.presentation.view.NoteEditView;
-import com.jordifierro.androidbase.presentation.view.activity.base.BaseActivity;
 
 import javax.inject.Inject;
 
@@ -24,9 +23,12 @@ public class NoteEditFragment extends BaseFragment implements NoteEditView {
     @Inject
     NoteEditPresenter noteEditPresenter;
 
-    @Bind(R.id.et_title) EditText titleET;
-    @Bind(R.id.et_content) EditText contentET;
-    @Bind(R.id.btn_submit) Button submitButton;
+    @Bind(R.id.et_title)
+    EditText titleET;
+    @Bind(R.id.et_content)
+    EditText contentET;
+    @Bind(R.id.btn_submit)
+    Button submitButton;
 
     @Override
     protected void callInjection() {
@@ -62,13 +64,13 @@ public class NoteEditFragment extends BaseFragment implements NoteEditView {
 
     @OnClick(R.id.btn_submit)
     public void updateNoteButtonPressed() {
-        this.noteEditPresenter.updateNote(  titleET.getText().toString(),
-                                            contentET.getText().toString());
+        this.noteEditPresenter.updateNote(titleET.getText().toString(),
+                contentET.getText().toString());
     }
 
     @Override
     public int getNoteId() {
-        return ((Listener)getActivity()).getNoteId();
+        return ((Listener) getActivity()).getNoteId();
     }
 
     public interface Listener {

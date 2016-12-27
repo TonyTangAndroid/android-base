@@ -80,11 +80,11 @@ public class VersionDataRepositoryTest {
                         TestUtils.getFileFromPath(this, "res/version_expiration_ok.json"))));
 
         this.versionDataRepository.checkVersionExpiration(this.fakeUser)
-                                    .subscribe(this.testObserver);
+                .subscribe(this.testObserver);
         this.testObserver.awaitTerminalEvent();
 
         VersionEntity responseVersion =
-                (VersionEntity) ((List<Object>)testObserver.getEvents().get(0)).get(0);
+                (VersionEntity) ((List<Object>) testObserver.getEvents().get(0)).get(0);
         assertEquals(VersionEntity.VERSION_OK, responseVersion.getState());
     }
 
@@ -99,7 +99,7 @@ public class VersionDataRepositoryTest {
         this.testObserver.awaitTerminalEvent();
 
         VersionEntity responseVersion =
-                (VersionEntity) ((List<Object>)testObserver.getEvents().get(0)).get(0);
+                (VersionEntity) ((List<Object>) testObserver.getEvents().get(0)).get(0);
         assertEquals(VersionEntity.VERSION_WARNED, responseVersion.getState());
     }
 
@@ -114,7 +114,7 @@ public class VersionDataRepositoryTest {
         this.testObserver.awaitTerminalEvent();
 
         VersionEntity responseVersion =
-                (VersionEntity) ((List<Object>)testObserver.getEvents().get(0)).get(0);
+                (VersionEntity) ((List<Object>) testObserver.getEvents().get(0)).get(0);
         assertEquals(VersionEntity.VERSION_EXPIRED, responseVersion.getState());
     }
 

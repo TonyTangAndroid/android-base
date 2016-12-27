@@ -55,20 +55,20 @@ public class NotesAdapter extends BaseAdapter {
     @Override
     public View getView(int position, View view, ViewGroup parent) {
 
-        if(view == null){
+        if (view == null) {
             LayoutInflater inflater = (LayoutInflater) context
                     .getSystemService(Context.LAYOUT_INFLATER_SERVICE);
             view = inflater.inflate(R.layout.view_cell_note, parent, false);
         }
 
-        ((TextView)view.findViewById(R.id.title)).setText(notes.get(position).getTitle());
+        ((TextView) view.findViewById(R.id.title)).setText(notes.get(position).getTitle());
         view.setTag(position);
 
         view.setOnClickListener(new View.OnClickListener() {
 
             @Override
             public void onClick(View arg0) {
-                listener.onNoteItemClicked(notes.get((int)arg0.getTag()));
+                listener.onNoteItemClicked(notes.get((int) arg0.getTag()));
             }
         });
 

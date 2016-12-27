@@ -24,10 +24,14 @@ import static org.mockito.Mockito.verifyNoMoreInteractions;
 
 public class NotesPresenterTest {
 
-    @Mock GetNotesUseCase getNotesUseCase;
-    @Mock CheckVersionExpirationUseCase checkVersionExpirationUseCase;
-    @Mock NotesView mockNotesView;
-    @Mock Observable mockObservable;
+    @Mock
+    GetNotesUseCase getNotesUseCase;
+    @Mock
+    CheckVersionExpirationUseCase checkVersionExpirationUseCase;
+    @Mock
+    NotesView mockNotesView;
+    @Mock
+    Observable mockObservable;
 
     private NotesPresenter notesPresenter;
     private NotesPresenter.NotesSubscriber notesSubscriber;
@@ -37,7 +41,7 @@ public class NotesPresenterTest {
     public void setUp() throws Exception {
         MockitoAnnotations.initMocks(this);
         this.notesPresenter = new NotesPresenter(this.getNotesUseCase,
-                                                 this.checkVersionExpirationUseCase);
+                this.checkVersionExpirationUseCase);
         this.notesPresenter.initWithView(this.mockNotesView);
         this.notesSubscriber = this.notesPresenter.new NotesSubscriber();
         this.versionExpirationSubscriber = this.notesPresenter.new VersionExpirationSubscriber();

@@ -12,8 +12,6 @@ import javax.inject.Inject;
 import javax.inject.Singleton;
 
 import io.reactivex.Observable;
-import io.reactivex.functions.Function;
-import retrofit2.Response;
 
 @Singleton
 public class NoteDataRepository extends RestApiRepository implements NoteRepository {

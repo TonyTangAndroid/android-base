@@ -16,7 +16,7 @@ public class UserWrapperTest {
 
     @Before
     public void setup() {
-        this.userWrapper =  new UserWrapper(new UserEntity(FAKE_EMAIL));
+        this.userWrapper = new UserWrapper(new UserEntity(FAKE_EMAIL));
     }
 
     @Test

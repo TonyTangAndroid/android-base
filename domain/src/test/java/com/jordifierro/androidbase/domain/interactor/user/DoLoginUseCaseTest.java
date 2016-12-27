@@ -25,14 +25,21 @@ public class DoLoginUseCaseTest {
 
     private static final String FAKE_PASS = "1234";
 
-    @Mock private ThreadExecutor mockThreadExecutor;
-    @Mock private PostExecutionThread mockPostExecutionThread;
-    @Mock private UserRepository mockUserRepository;
-    @Mock private SessionRepository mockSessionRepository;
-    @Mock private UserEntity mockUser;
+    @Mock
+    private ThreadExecutor mockThreadExecutor;
+    @Mock
+    private PostExecutionThread mockPostExecutionThread;
+    @Mock
+    private UserRepository mockUserRepository;
+    @Mock
+    private SessionRepository mockSessionRepository;
+    @Mock
+    private UserEntity mockUser;
 
     @Before
-    public void setup() { MockitoAnnotations.initMocks(this); }
+    public void setup() {
+        MockitoAnnotations.initMocks(this);
+    }
 
     @Test
     public void testDoLoginUseCaseSuccess() {

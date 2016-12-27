@@ -7,7 +7,6 @@ import com.jordifierro.androidbase.presentation.R;
 import com.jordifierro.androidbase.presentation.presenter.BasePresenter;
 import com.jordifierro.androidbase.presentation.presenter.NoteDetailPresenter;
 import com.jordifierro.androidbase.presentation.view.NoteDetailView;
-import com.jordifierro.androidbase.presentation.view.activity.base.BaseActivity;
 
 import javax.inject.Inject;
 
@@ -18,8 +17,10 @@ public class NoteDetailFragment extends BaseFragment implements NoteDetailView {
     @Inject
     NoteDetailPresenter noteDetailPresenter;
 
-    @Bind(R.id.tv_title) TextView titleTV;
-    @Bind(R.id.tv_content) TextView contentTV;
+    @Bind(R.id.tv_title)
+    TextView titleTV;
+    @Bind(R.id.tv_content)
+    TextView contentTV;
 
     @Override
     protected void callInjection() {
@@ -48,7 +49,7 @@ public class NoteDetailFragment extends BaseFragment implements NoteDetailView {
 
     @Override
     public int getNoteId() {
-        return ((Listener)getActivity()).getNoteId();
+        return ((Listener) getActivity()).getNoteId();
     }
 
     public interface Listener {

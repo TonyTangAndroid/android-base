@@ -96,7 +96,7 @@ public class NoteDataRepositoryTest {
         this.testObserver.awaitTerminalEvent();
 
         NoteEntity responseNote =
-                (NoteEntity) ((List<Object>)testObserver.getEvents().get(0)).get(0);
+                (NoteEntity) ((List<Object>) testObserver.getEvents().get(0)).get(0);
         assertTrue(responseNote.getId() > 0);
         assertTrue(responseNote.getTitle().length() > 0);
         assertTrue(responseNote.getContent().length() > 0);
@@ -143,7 +143,7 @@ public class NoteDataRepositoryTest {
         this.testObserver.awaitTerminalEvent();
 
         NoteEntity responseNote =
-                (NoteEntity) ((List<Object>)testObserver.getEvents().get(0)).get(0);
+                (NoteEntity) ((List<Object>) testObserver.getEvents().get(0)).get(0);
         assertTrue(responseNote.getId() > 0);
         assertTrue(responseNote.getTitle().length() > 0);
         assertTrue(responseNote.getContent().length() > 0);
@@ -189,7 +189,7 @@ public class NoteDataRepositoryTest {
         this.testObserver.awaitTerminalEvent();
 
         List<NoteEntity> responseNotes =
-                (List<NoteEntity>) ((List<Object>)testObserver.getEvents().get(0)).get(0);
+                (List<NoteEntity>) ((List<Object>) testObserver.getEvents().get(0)).get(0);
         assertTrue(responseNotes.size() > 0);
         assertTrue(responseNotes.get(0).getTitle().length() > 0);
         assertTrue(responseNotes.get(0).getContent().length() > 0);
@@ -233,7 +233,7 @@ public class NoteDataRepositoryTest {
         this.testObserver.awaitTerminalEvent();
 
         NoteEntity responseNote =
-                (NoteEntity) ((List<Object>)testObserver.getEvents().get(0)).get(0);
+                (NoteEntity) ((List<Object>) testObserver.getEvents().get(0)).get(0);
         assertTrue(responseNote.getId() > 0);
         assertTrue(responseNote.getTitle().length() > 0);
         assertTrue(responseNote.getContent().length() > 0);

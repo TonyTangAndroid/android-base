@@ -7,7 +7,6 @@ import android.view.Menu;
 import android.view.MenuItem;
 
 import com.jordifierro.androidbase.presentation.R;
-import com.jordifierro.androidbase.presentation.view.activity.base.BaseActivity;
 import com.jordifierro.androidbase.presentation.view.activity.base.CleanActivity;
 import com.jordifierro.androidbase.presentation.view.fragment.NotesFragment;
 

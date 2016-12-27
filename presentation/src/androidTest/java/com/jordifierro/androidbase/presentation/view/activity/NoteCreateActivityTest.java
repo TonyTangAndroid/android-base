@@ -40,12 +40,12 @@ public class NoteCreateActivityTest {
     @Before
     public void setUp() throws Exception {
         this.noteCreateFragment = ((NoteCreateFragment) this.activityTestRule.getActivity()
-                                .getFragmentManager().findFragmentById(R.id.fragment_container));
+                .getFragmentManager().findFragmentById(R.id.fragment_container));
     }
 
     @Test
     public void testViewElements() throws PackageManager.NameNotFoundException {
-        onView(allOf(isAssignableFrom(TextView.class),withParent(isAssignableFrom(Toolbar.class))))
+        onView(allOf(isAssignableFrom(TextView.class), withParent(isAssignableFrom(Toolbar.class))))
                 .check(matches(withText(R.string.title_activity_note_create)));
         onView(withId(R.id.btn_submit)).check(matches(withText(R.string.button_create)));
         onView(withId(R.id.et_title)).check(matches(withHint(R.string.edittext_title)));
@@ -60,7 +60,7 @@ public class NoteCreateActivityTest {
         onView(withId(R.id.btn_submit)).perform(click());
 
         verify(this.noteCreateFragment.getNoteCreatePresenter()).createButtonPressed("Title",
-                                                                                     "Content");
+                "Content");
     }
 
 }

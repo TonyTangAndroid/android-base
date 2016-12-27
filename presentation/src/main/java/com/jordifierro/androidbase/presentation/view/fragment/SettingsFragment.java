@@ -4,7 +4,6 @@ import com.jordifierro.androidbase.presentation.R;
 import com.jordifierro.androidbase.presentation.presenter.BasePresenter;
 import com.jordifierro.androidbase.presentation.presenter.SettingsPresenter;
 import com.jordifierro.androidbase.presentation.view.SettingsView;
-import com.jordifierro.androidbase.presentation.view.activity.base.BaseActivity;
 
 import javax.inject.Inject;
 
@@ -12,7 +11,8 @@ import butterknife.OnClick;
 
 public class SettingsFragment extends BaseFragment implements SettingsView {
 
-    @Inject SettingsPresenter settingsPresenter;
+    @Inject
+    SettingsPresenter settingsPresenter;
 
     @Override
     protected void callInjection() {
@@ -45,16 +45,17 @@ public class SettingsFragment extends BaseFragment implements SettingsView {
 
     @OnClick(R.id.tv_terms)
     public void termsButtonPressed() {
-        ((Listener)getActivity()).showTerms();
+        ((Listener) getActivity()).showTerms();
     }
 
     @OnClick(R.id.tv_privacy)
     public void privacyButtonPressed() {
-        ((Listener)getActivity()).showPrivacy();
+        ((Listener) getActivity()).showPrivacy();
     }
 
     public interface Listener {
         void showTerms();
+
         void showPrivacy();
     }
 }

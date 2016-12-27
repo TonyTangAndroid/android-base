@@ -50,7 +50,7 @@ public class NotesActivityTest {
     @Before
     public void setUp() throws Exception {
         this.notesFragment = ((NotesFragment) this.activityTestRule.getActivity()
-                                .getFragmentManager().findFragmentById(R.id.fragment_container));
+                .getFragmentManager().findFragmentById(R.id.fragment_container));
         this.notes.add(new NoteEntity(1, "First title", "First content"));
         this.notes.add(new NoteEntity(2, "Second title", "Second content"));
         this.notes.add(new NoteEntity(3, "Third title", "Third content"));
@@ -58,7 +58,7 @@ public class NotesActivityTest {
 
     @Test
     public void testViewElements() throws PackageManager.NameNotFoundException {
-        onView(Matchers.allOf(isAssignableFrom(TextView.class),withParent(isAssignableFrom(Toolbar.class))))
+        onView(Matchers.allOf(isAssignableFrom(TextView.class), withParent(isAssignableFrom(Toolbar.class))))
                 .check(matches(withText(R.string.title_activity_main)));
         onView(withId(R.id.btn_create_new_note))
                 .check(matches(withText(R.string.button_create_new_note)));

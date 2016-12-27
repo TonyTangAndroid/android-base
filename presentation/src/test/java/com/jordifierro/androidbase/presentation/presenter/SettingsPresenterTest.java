@@ -17,10 +17,14 @@ import static org.mockito.Mockito.verify;
 
 public class SettingsPresenterTest {
 
-    @Mock DoLogoutUseCase mockDoLogoutUseCase;
-    @Mock DeleteUserUseCase mockDeleteUserUseCase;
-    @Mock SettingsView mockSettingsView;
-    @Mock Observable mockObservable;
+    @Mock
+    DoLogoutUseCase mockDoLogoutUseCase;
+    @Mock
+    DeleteUserUseCase mockDeleteUserUseCase;
+    @Mock
+    SettingsView mockSettingsView;
+    @Mock
+    Observable mockObservable;
 
     private SettingsPresenter settingsPresenter;
 

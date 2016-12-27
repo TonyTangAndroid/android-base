@@ -1,7 +1,6 @@
 package com.jordifierro.androidbase.presentation.view.activity;
 
 import android.content.Intent;
-import android.content.pm.PackageManager;
 import android.support.test.espresso.intent.Intents;
 import android.support.test.rule.ActivityTestRule;
 import android.support.test.runner.AndroidJUnit4;
@@ -46,12 +45,12 @@ public class NoteDetailActivityTest {
     public void setUp() throws Exception {
         activityTestRule.launchActivity(new Intent().putExtra(NoteDetailActivity.PARAM_NOTE_ID, 2));
         this.noteDetailFragment = ((NoteDetailFragment) this.activityTestRule.getActivity()
-                                .getFragmentManager().findFragmentById(R.id.fragment_container));
+                .getFragmentManager().findFragmentById(R.id.fragment_container));
     }
 
     @Test
     public void testViewElements() {
-        onView(Matchers.allOf(isAssignableFrom(TextView.class),withParent(isAssignableFrom(Toolbar.class))))
+        onView(Matchers.allOf(isAssignableFrom(TextView.class), withParent(isAssignableFrom(Toolbar.class))))
                 .check(matches(withText(R.string.title_activity_note_detail)));
     }
 

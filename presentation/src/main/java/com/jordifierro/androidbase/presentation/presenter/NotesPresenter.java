@@ -48,7 +48,8 @@ public class NotesPresenter extends BasePresenter implements Presenter {
 
     protected class NotesSubscriber extends BaseSubscriber<List<NoteEntity>> {
 
-        @Override public void onNext(List<NoteEntity> notes) {
+        @Override
+        public void onNext(List<NoteEntity> notes) {
             NotesPresenter.this.hideLoader();
             NotesPresenter.this.notesView.showNotes(notes);
         }
@@ -56,7 +57,8 @@ public class NotesPresenter extends BasePresenter implements Presenter {
 
     protected class VersionExpirationSubscriber extends BaseSubscriber<VersionEntity> {
 
-        @Override public void onNext(VersionEntity version) {
+        @Override
+        public void onNext(VersionEntity version) {
             NotesPresenter.this.hideLoader();
             if (version.isWarned()) NotesPresenter.this.notesView.showExpirationWarning();
         }

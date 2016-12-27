@@ -31,7 +31,7 @@ public abstract class CleanActivity extends BaseActivity implements BaseView {
 
     private void initializeActivityComponent() {
         if (this.fragmentInjector == null) {
-            this.fragmentInjector = ((BaseApplication)getApplication()).getFragmentInjector();
+            this.fragmentInjector = ((BaseApplication) getApplication()).getFragmentInjector();
         }
     }
 
@@ -48,8 +48,7 @@ public abstract class CleanActivity extends BaseActivity implements BaseView {
                 default:
                     showMessage(error.getMessage());
             }
-        }
-        else Toast.makeText(context(), getResources().getString(R.string.message_error),
+        } else Toast.makeText(context(), getResources().getString(R.string.message_error),
                 Toast.LENGTH_LONG).show();
     }
 

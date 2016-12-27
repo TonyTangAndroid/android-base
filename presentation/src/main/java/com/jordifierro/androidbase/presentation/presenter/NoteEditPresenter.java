@@ -46,7 +46,8 @@ public class NoteEditPresenter extends BasePresenter implements Presenter {
 
     protected class GetNoteSubscriber extends BaseSubscriber<NoteEntity> {
 
-        @Override public void onNext(NoteEntity note) {
+        @Override
+        public void onNext(NoteEntity note) {
             NoteEditPresenter.this.hideLoader();
             NoteEditPresenter.this.noteEditView.showNote(note);
         }
@@ -63,14 +64,15 @@ public class NoteEditPresenter extends BasePresenter implements Presenter {
 
     protected class UpdateNoteSubscriber extends BaseSubscriber<NoteEntity> {
 
-        @Override public void onNext(NoteEntity note) {
+        @Override
+        public void onNext(NoteEntity note) {
             NoteEditPresenter.this.hideLoader();
             NoteEditPresenter.this.noteEditView.close();
         }
 
     }
 
-    public void deleteNoteButtonPressed(){
+    public void deleteNoteButtonPressed() {
         this.noteEditView.showLoader();
         this.deleteNoteUseCase.setParams(this.noteEditView.getNoteId());
         this.deleteNoteUseCase.execute(new DeleteNoteSubscriber());
@@ -78,7 +80,8 @@ public class NoteEditPresenter extends BasePresenter implements Presenter {
 
     protected class DeleteNoteSubscriber extends BaseSubscriber<VoidEntity> {
 
-        @Override public void onNext(VoidEntity ignore) {
+        @Override
+        public void onNext(VoidEntity ignore) {
             NoteEditPresenter.this.hideLoader();
             NoteEditPresenter.this.noteEditView.close();
         }

@@ -18,18 +18,25 @@ import javax.inject.Singleton;
 import dagger.Component;
 
 @Singleton
-@Component(modules = { ApplicationModule.class, DataModule.class })
+@Component(modules = {ApplicationModule.class, DataModule.class})
 public interface ApplicationComponent {
 
     Context context();
+
     SharedPreferences sharedPreferences();
+
     ThreadExecutor threadExecutor();
+
     PostExecutionThread postExecutionThread();
 
     SessionRepository sessionRepository();
+
     RestApi restApi();
+
     UserRepository userRepository();
+
     NoteRepository noteRepository();
+
     VersionRepository versionRepository();
 
 }

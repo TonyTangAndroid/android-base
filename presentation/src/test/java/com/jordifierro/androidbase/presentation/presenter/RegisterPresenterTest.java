@@ -18,9 +18,12 @@ import static org.mockito.Mockito.verify;
 
 public class RegisterPresenterTest {
 
-    @Mock CreateUserUseCase mockCreateUserUseCase;
-    @Mock RegisterView mockRegisterView;
-    @Mock Observable mockObservable;
+    @Mock
+    CreateUserUseCase mockCreateUserUseCase;
+    @Mock
+    RegisterView mockRegisterView;
+    @Mock
+    Observable mockObservable;
 
     private RegisterPresenter registerPresenter;
     private RegisterPresenter.RegisterSubscriber registerSubscriber;

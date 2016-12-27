@@ -8,7 +8,6 @@ import android.view.Menu;
 import android.view.MenuItem;
 
 import com.jordifierro.androidbase.presentation.R;
-import com.jordifierro.androidbase.presentation.view.activity.base.BaseActivity;
 import com.jordifierro.androidbase.presentation.view.activity.base.CleanActivity;
 import com.jordifierro.androidbase.presentation.view.fragment.NoteEditFragment;
 
@@ -31,8 +30,7 @@ public class NoteEditActivity extends CleanActivity implements NoteEditFragment.
             this.noteId = getIntent().getIntExtra(PARAM_NOTE_ID, -1);
             if (this.noteEditFragment == null) this.noteEditFragment = new NoteEditFragment();
             addFragment(R.id.fragment_container, this.noteEditFragment);
-        }
-        else this.noteId = savedInstanceState.getInt(PARAM_NOTE_ID);
+        } else this.noteId = savedInstanceState.getInt(PARAM_NOTE_ID);
     }
 
     @Override

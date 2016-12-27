@@ -37,23 +37,23 @@ public class DataModule {
     @Provides
     @Singleton
     RestApi provideRestApi() {
-		final HttpLoggingInterceptor interceptor = new HttpLoggingInterceptor();
-		interceptor.setLevel(HttpLoggingInterceptor.Level.BODY);
-		OkHttpClient client = new OkHttpClient().newBuilder()
-                                                .addInterceptor(new HttpInterceptor())
-                                                .addInterceptor(interceptor)
-                                                .build();
+        final HttpLoggingInterceptor interceptor = new HttpLoggingInterceptor();
+        interceptor.setLevel(HttpLoggingInterceptor.Level.BODY);
+        OkHttpClient client = new OkHttpClient().newBuilder()
+                .addInterceptor(new HttpInterceptor())
+                .addInterceptor(interceptor)
+                .build();
 
         GsonConverterFactory factory = GsonConverterFactory.create(new GsonBuilder()
-                    .setFieldNamingPolicy(FieldNamingPolicy.LOWER_CASE_WITH_UNDERSCORES).create());
+                .setFieldNamingPolicy(FieldNamingPolicy.LOWER_CASE_WITH_UNDERSCORES).create());
 
         return new Retrofit.Builder()
-                           .baseUrl(RestApi.URL_BASE)
-                           .addConverterFactory(factory)
-                           .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
-                           .client(client)
-                           .build()
-                           .create(RestApi.class);
+                .baseUrl(RestApi.URL_BASE)
+                .addConverterFactory(factory)
+                .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
+                .client(client)
+                .build()
+                .create(RestApi.class);
     }
 
     @Provides

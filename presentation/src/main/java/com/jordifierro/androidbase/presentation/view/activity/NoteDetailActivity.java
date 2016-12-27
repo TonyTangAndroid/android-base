@@ -8,7 +8,6 @@ import android.view.Menu;
 import android.view.MenuItem;
 
 import com.jordifierro.androidbase.presentation.R;
-import com.jordifierro.androidbase.presentation.view.activity.base.BaseActivity;
 import com.jordifierro.androidbase.presentation.view.activity.base.CleanActivity;
 import com.jordifierro.androidbase.presentation.view.fragment.NoteDetailFragment;
 
@@ -29,8 +28,7 @@ public class NoteDetailActivity extends CleanActivity implements NoteDetailFragm
         if (savedInstanceState == null) {
             this.noteId = getIntent().getIntExtra(PARAM_NOTE_ID, -1);
             addFragment(R.id.fragment_container, new NoteDetailFragment());
-        }
-        else this.noteId = savedInstanceState.getInt(PARAM_NOTE_ID);
+        } else this.noteId = savedInstanceState.getInt(PARAM_NOTE_ID);
     }
 
     @Override

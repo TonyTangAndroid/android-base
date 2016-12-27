@@ -23,7 +23,8 @@ public class ResetPasswordPresenterTest {
     ResetPasswordUseCase mockResetPasswordUseCase;
     @Mock
     ResetPasswordView mockResetPasswordView;
-    @Mock Observable mockObservable;
+    @Mock
+    Observable mockObservable;
 
     private ResetPasswordPresenter resetPasswordPresenter;
     private ResetPasswordPresenter.ResetPasswordSubscriber resetPasswordSubscriber;

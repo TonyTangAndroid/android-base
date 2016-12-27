@@ -22,14 +22,21 @@ import static org.mockito.Mockito.verifyZeroInteractions;
 
 public class DeleteUserUseCaseTest {
 
-    @Mock private ThreadExecutor mockThreadExecutor;
-    @Mock private PostExecutionThread mockPostExecutionThread;
-    @Mock private UserRepository mockUserRepository;
-    @Mock private SessionRepository mockSessionRepository;
-    @Mock private UserEntity mockUser;
+    @Mock
+    private ThreadExecutor mockThreadExecutor;
+    @Mock
+    private PostExecutionThread mockPostExecutionThread;
+    @Mock
+    private UserRepository mockUserRepository;
+    @Mock
+    private SessionRepository mockSessionRepository;
+    @Mock
+    private UserEntity mockUser;
 
     @Before
-    public void setup() { MockitoAnnotations.initMocks(this); }
+    public void setup() {
+        MockitoAnnotations.initMocks(this);
+    }
 
     @Test
     public void testDeleteUserUseCaseSuccess() {
@@ -41,8 +48,8 @@ public class DeleteUserUseCaseTest {
         TestScheduler testScheduler = new TestScheduler();
 
         deleteUserUseCase.buildUseCaseObservable()
-            .observeOn(testScheduler)
-            .subscribe();
+                .observeOn(testScheduler)
+                .subscribe();
         testScheduler.triggerActions();
 
         verify(mockSessionRepository).getCurrentUser();

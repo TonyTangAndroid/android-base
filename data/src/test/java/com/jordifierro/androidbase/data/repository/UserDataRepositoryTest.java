@@ -83,7 +83,7 @@ public class UserDataRepositoryTest {
         assertEquals("/users", request.getPath());
         assertEquals("POST", request.getMethod());
         assertEquals(this.gson.toJson(new UserWrapper(this.fakeUser)).toString(),
-                     request.getBody().readUtf8());
+                request.getBody().readUtf8());
     }
 
     @Test
@@ -96,7 +96,7 @@ public class UserDataRepositoryTest {
         this.testObserver.awaitTerminalEvent();
 
         UserEntity responseUser =
-                (UserEntity) ((List<Object>)testObserver.getEvents().get(0)).get(0);
+                (UserEntity) ((List<Object>) testObserver.getEvents().get(0)).get(0);
         assertTrue(responseUser.getEmail().length() > 0);
         assertTrue(responseUser.getAuthToken().length() > 0);
     }
@@ -164,7 +164,7 @@ public class UserDataRepositoryTest {
         assertEquals("/users/reset_password", request.getPath());
         assertEquals("POST", request.getMethod());
         assertEquals(this.gson.toJson(new UserWrapper(this.fakeUser)).toString(),
-                     request.getBody().readUtf8());
+                request.getBody().readUtf8());
     }
 
     @Test
@@ -177,7 +177,7 @@ public class UserDataRepositoryTest {
         this.testObserver.awaitTerminalEvent();
 
         MessageEntity responseMessage =
-                (MessageEntity) ((List<Object>)testObserver.getEvents().get(0)).get(0);
+                (MessageEntity) ((List<Object>) testObserver.getEvents().get(0)).get(0);
         assertEquals("Check your email to confirm the new password", responseMessage.getMessage());
     }
 
@@ -206,7 +206,7 @@ public class UserDataRepositoryTest {
         assertEquals("/users/login", request.getPath());
         assertEquals("POST", request.getMethod());
         assertEquals(gson.toJson(new UserWrapper(this.fakeUser)).toString(),
-                     request.getBody().readUtf8());
+                request.getBody().readUtf8());
     }
 
     @Test
@@ -220,7 +220,7 @@ public class UserDataRepositoryTest {
         this.testObserver.awaitTerminalEvent();
 
         UserEntity responseUser =
-                (UserEntity) ((List<Object>)testObserver.getEvents().get(0)).get(0);
+                (UserEntity) ((List<Object>) testObserver.getEvents().get(0)).get(0);
         assertTrue(responseUser.getEmail().length() > 0);
         assertTrue(responseUser.getAuthToken().length() > 0);
     }

@@ -9,7 +9,8 @@ public class UserEntity {
     private String newPassword;
     private String newPasswordConfirmation;
 
-    public UserEntity() {}
+    public UserEntity() {
+    }
 
     public UserEntity(String email) {
         this.email = email;

@@ -1,1 +1,6 @@
-{"error":{"status":404,"message":"not found."}}
+{
+  "error": {
+    "status": 404,
+    "message": "not found."
+  }
+}

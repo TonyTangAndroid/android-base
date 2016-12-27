@@ -14,8 +14,8 @@ import org.junit.Test;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 
-import io.reactivex.observers.TestObserver;
 import io.reactivex.Observable;
+import io.reactivex.observers.TestObserver;
 
 import static org.mockito.BDDMockito.given;
 import static org.mockito.Mockito.verify;
@@ -26,11 +26,16 @@ public class ResetPasswordUseCaseTest {
 
     private static final String FAKE_MSG = "message";
 
-    @Mock private ThreadExecutor mockThreadExecutor;
-    @Mock private PostExecutionThread mockPostExecutionThread;
-    @Mock private UserRepository mockUserRepository;
-    @Mock private SessionRepository mockSessionRepository;
-    @Mock private UserEntity mockUser;
+    @Mock
+    private ThreadExecutor mockThreadExecutor;
+    @Mock
+    private PostExecutionThread mockPostExecutionThread;
+    @Mock
+    private UserRepository mockUserRepository;
+    @Mock
+    private SessionRepository mockSessionRepository;
+    @Mock
+    private UserEntity mockUser;
 
     private TestObserver<MessageEntity> testObserver;
     private ResetPasswordUseCase resetPasswordUseCase;
@@ -55,7 +60,7 @@ public class ResetPasswordUseCaseTest {
 
         verify(this.mockUserRepository).resetPassword(this.mockUser);
         Assert.assertEquals(FAKE_MSG,
-                ((MessageEntity)(testObserver.getEvents().get(0)).get(0)).getMessage());
+                ((MessageEntity) (testObserver.getEvents().get(0)).get(0)).getMessage());
         verifyNoMoreInteractions(this.mockUserRepository);
         verifyZeroInteractions(this.mockSessionRepository);
         verifyZeroInteractions(this.mockThreadExecutor);

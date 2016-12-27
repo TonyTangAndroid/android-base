@@ -28,7 +28,7 @@ public class SessionDataRepositoryTest extends InstrumentationTestCase {
         this.user.setAuthToken(FAKE_TOKEN);
     }
 
-    public void testGetWithoutSetReturnsNull(){
+    public void testGetWithoutSetReturnsNull() {
         assertNull(this.sessionDataRepository.getCurrentUser().getEmail());
         assertNull(this.sessionDataRepository.getCurrentUser().getAuthToken());
     }

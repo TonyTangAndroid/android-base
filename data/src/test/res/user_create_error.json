@@ -1,1 +1,6 @@
-{"error":{"status":422,"message":"Email has already been taken"}}
+{
+  "error": {
+    "status": 422,
+    "message": "Email has already been taken"
+  }
+}
