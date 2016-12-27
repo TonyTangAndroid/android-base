@@ -50,7 +50,7 @@ public class NoteDataRepositoryTest extends BaseDataRepositoryTest {
 
         this.noteDataRepository = new NoteDataRepository(
                 new Retrofit.Builder()
-                        .baseUrl(mockWebServer.url(FAKE_SERVER))
+                        .baseUrl(mockWebServer.url(MOCK_SERVER))
                         .addConverterFactory(
                                 GsonConverterFactory.create(new GsonBuilder()
                                         .registerTypeAdapter(ParsePermissionWrapper.class, new ParseACLJsonAdapter())
@@ -64,8 +64,8 @@ public class NoteDataRepositoryTest extends BaseDataRepositoryTest {
         this.testObserver = new TestObserver();
 
         this.fakeUser = new UserEntity("some@mail");
-        this.fakeUser.setSessionToken(AUTH_TOKEN);
-        this.fakeNote = new NoteEntity(NOTE_OBJECT_ID, NOTE_TITLE, NOTE_CONTENT);
+        this.fakeUser.setSessionToken(MOCK_AUTH_TOKEN);
+        this.fakeNote = new NoteEntity(MOCK_NOTE_OBJECT_ID, MOCK_NOTE_TITLE, MOCK_NOTE_CONTENT);
     }
 
     @After
@@ -82,9 +82,9 @@ public class NoteDataRepositoryTest extends BaseDataRepositoryTest {
                     .subscribe(this.testObserver);
             RecordedRequest request = this.mockWebServer.takeRequest();
 
-            assertEquals(FAKE_SERVER + RestApi.URL_PATH_CLASSES_NOTE, request.getPath());
+            assertEquals(MOCK_SERVER + RestApi.URL_PATH_CLASSES_NOTE, request.getPath());
             assertEquals("POST", request.getMethod());
-            assertEquals(AUTH_TOKEN, request.getHeader(PARSE_SESSION_KEY));
+            assertEquals(MOCK_AUTH_TOKEN, request.getHeader(PARSE_SESSION_KEY));
             final Buffer requestBody = request.getBody();
             final String actual = requestBody.readUtf8();
             // the request body is the one that you pass into the server
@@ -101,7 +101,7 @@ public class NoteDataRepositoryTest extends BaseDataRepositoryTest {
         RecordedRequest request = this.mockWebServer.takeRequest();
         assertEquals(getFormattedUrl(this.fakeNote.getObjectId(), RestApi.URL_PATH_CLASSES_NOTE_OBJECT_ID), request.getPath());
         assertEquals("GET", request.getMethod());
-        assertEquals(AUTH_TOKEN, request.getHeader(PARSE_SESSION_KEY));
+        assertEquals(MOCK_AUTH_TOKEN, request.getHeader(PARSE_SESSION_KEY));
         final String actual = request.getBody().readUtf8();
         // the request body is the one that you pass into the server
         assertEquals("", actual);
@@ -114,9 +114,9 @@ public class NoteDataRepositoryTest extends BaseDataRepositoryTest {
 
         this.noteDataRepository.getNotes(this.fakeUser).subscribe(this.testObserver);
         RecordedRequest request = this.mockWebServer.takeRequest();
-        assertEquals(FAKE_SERVER + RestApi.URL_PATH_CLASSES_NOTE, request.getPath());
+        assertEquals(MOCK_SERVER + RestApi.URL_PATH_CLASSES_NOTE, request.getPath());
         assertEquals("GET", request.getMethod());
-        assertEquals(AUTH_TOKEN, request.getHeader(PARSE_SESSION_KEY));
+        assertEquals(MOCK_AUTH_TOKEN, request.getHeader(PARSE_SESSION_KEY));
         // the request body is the one that you pass into the server
         assertEquals("", request.getBody().readUtf8());
     }
@@ -146,13 +146,13 @@ public class NoteDataRepositoryTest extends BaseDataRepositoryTest {
                         TestUtils.getFileFromPath(this, "res/note_get_ok.json"))));
 
 
-        this.noteDataRepository.getNote(this.fakeUser, NOTE_OBJECT_ID).subscribe(this.testObserver);
+        this.noteDataRepository.getNote(this.fakeUser, MOCK_NOTE_OBJECT_ID).subscribe(this.testObserver);
         this.testObserver.awaitTerminalEvent();
 
         NoteEntity responseNote = (NoteEntity) ((List<Object>) testObserver.getEvents().get(0)).get(0);
-        assertTrue(NOTE_OBJECT_ID.equals(responseNote.getObjectId()));
+        assertTrue(MOCK_NOTE_OBJECT_ID.equals(responseNote.getObjectId()));
         assertTrue(responseNote.getACL().getPermissionArrayList().size() == 1);
-        assertTrue(USER_OBJECT_ID.equals(responseNote.getACL().getPermissionArrayList().get(0).getObjectId()));
+        assertTrue(MOCK_USER_OBJECT_ID.equals(responseNote.getACL().getPermissionArrayList().get(0).getObjectId()));
         assertTrue(responseNote.getTitle().length() > 0);
         assertTrue(responseNote.getContent().length() > 0);
     }
@@ -181,7 +181,7 @@ public class NoteDataRepositoryTest extends BaseDataRepositoryTest {
                 FileUtils.readFileToString(
                         TestUtils.getFileFromPath(this, "res/note_get_error.json"))));
 
-        this.noteDataRepository.getNote(this.fakeUser, NOTE_OBJECT_ID).subscribe(this.testObserver);
+        this.noteDataRepository.getNote(this.fakeUser, MOCK_NOTE_OBJECT_ID).subscribe(this.testObserver);
         this.testObserver.awaitTerminalEvent();
 
         this.testObserver.assertValueCount(0);
@@ -228,7 +228,7 @@ public class NoteDataRepositoryTest extends BaseDataRepositoryTest {
         RecordedRequest request = this.mockWebServer.takeRequest();
         assertEquals(getFormattedUrl(this.fakeNote.getObjectId(), RestApi.URL_PATH_CLASSES_NOTE_OBJECT_ID), request.getPath());
         assertEquals("PUT", request.getMethod());
-        assertEquals(AUTH_TOKEN, request.getHeader(RestApi.PARSE_SESSION_KEY));
+        assertEquals(MOCK_AUTH_TOKEN, request.getHeader(RestApi.PARSE_SESSION_KEY));
         assertEquals(new Gson().toJson(this.fakeNote), request.getBody().readUtf8());
     }
 
@@ -274,14 +274,14 @@ public class NoteDataRepositoryTest extends BaseDataRepositoryTest {
         RecordedRequest request = this.mockWebServer.takeRequest();
         assertEquals(getFormattedUrl(this.fakeNote.getObjectId(), RestApi.URL_PATH_CLASSES_NOTE_OBJECT_ID), request.getPath());
         assertEquals("DELETE", request.getMethod());
-        assertEquals(AUTH_TOKEN, request.getHeader(RestApi.PARSE_SESSION_KEY));
+        assertEquals(MOCK_AUTH_TOKEN, request.getHeader(RestApi.PARSE_SESSION_KEY));
         assertEquals("", request.getBody().readUtf8());
     }
 
     @Test
     public void testDeleteNoteSuccessResponse() throws Exception {
         this.mockWebServer.enqueue(new MockResponse().setResponseCode(204));
-        this.noteDataRepository.deleteNote(this.fakeUser, NOTE_OBJECT_ID).subscribe(this.testObserver);
+        this.noteDataRepository.deleteNote(this.fakeUser, MOCK_NOTE_OBJECT_ID).subscribe(this.testObserver);
         this.testObserver.awaitTerminalEvent();
         this.testObserver.assertValueCount(1);
     }
@@ -290,7 +290,7 @@ public class NoteDataRepositoryTest extends BaseDataRepositoryTest {
     public void testDeleteUserErrorResponse() throws Exception {
         this.mockWebServer.enqueue(new MockResponse().setResponseCode(401));
 
-        this.noteDataRepository.deleteNote(this.fakeUser, NOTE_OBJECT_ID).subscribe(this.testObserver);
+        this.noteDataRepository.deleteNote(this.fakeUser, MOCK_NOTE_OBJECT_ID).subscribe(this.testObserver);
         this.testObserver.awaitTerminalEvent();
 
         this.testObserver.assertValueCount(0);

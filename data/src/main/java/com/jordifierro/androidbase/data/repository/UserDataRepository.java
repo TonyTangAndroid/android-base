@@ -35,7 +35,7 @@ public class UserDataRepository extends RestApiRepository implements UserReposit
                     public ObservableSource<UserEntity> apply(Response<CreatedWrapper> createdWrapperResponse) throws Exception {
                         handleResponseError(createdWrapperResponse);
                         final CreatedWrapper body = createdWrapperResponse.body();
-                        return me(body.getSessionToken());
+                        return getUserBySessionToken(body.getSessionToken());
 
                     }
                 });
@@ -81,10 +81,11 @@ public class UserDataRepository extends RestApiRepository implements UserReposit
     }
 
     @Override
-    public Observable<UserEntity> me(String token) {
-        return this.restApi.me(token).map(new Function<Response<UserEntity>, UserEntity>() {
+    public Observable<UserEntity> getUserBySessionToken(String token) {
+        return this.restApi.getUserBySessionToken(token).map(new Function<Response<UserEntity>, UserEntity>() {
             @Override
             public UserEntity apply(Response<UserEntity> userEntityResponse) {
+                handleResponseError(userEntityResponse);
                 return userEntityResponse.body();
             }
         });

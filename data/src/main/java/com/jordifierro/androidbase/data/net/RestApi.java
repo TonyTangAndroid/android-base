@@ -64,7 +64,7 @@ public interface RestApi {
                                              @Path("objectId") String objectId);
 
     @GET(URL_PATH_USERS_ME)
-    Observable<Response<UserEntity>> me(@Header(PARSE_SESSION_KEY) String token);
+    Observable<Response<UserEntity>> getUserBySessionToken(@Header(PARSE_SESSION_KEY) String token);
 
     @GET(URL_PATH_CLASSES_NOTE)
     Observable<Response<NoteEntitiesWrapper>> getNotes(@Header(PARSE_SESSION_KEY) String token);

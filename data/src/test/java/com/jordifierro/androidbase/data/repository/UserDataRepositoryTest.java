@@ -55,7 +55,7 @@ public class UserDataRepositoryTest extends BaseDataRepositoryTest {
 
         this.userDataRepository = new UserDataRepository(
                 new Retrofit.Builder()
-                        .baseUrl(mockWebServer.url(FAKE_SERVER))
+                        .baseUrl(mockWebServer.url(MOCK_SERVER))
                         .addConverterFactory(GsonConverterFactory.create(this.gson))
                         .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
                         .build()
@@ -64,15 +64,80 @@ public class UserDataRepositoryTest extends BaseDataRepositoryTest {
 
         this.testObserver = new TestObserver();
 
-        this.fakeUser = new UserEntity(FAKE_EMAIL);
-        this.fakeUser.setObjectId(USER_OBJECT_ID);
-        this.fakeUser.setPassword(FAKE_PASS);
-        this.fakeUser.setSessionToken(AUTH_TOKEN);
+        this.fakeUser = new UserEntity(MOCK_EMAIL);
+        this.fakeUser.setObjectId(MOCK_USER_OBJECT_ID);
+        this.fakeUser.setPassword(MOCK_PASS);
+        this.fakeUser.setSessionToken(MOCK_AUTH_TOKEN);
     }
 
     @After
     public void tearDown() throws Exception {
         this.mockWebServer.shutdown();
+    }
+
+
+    @Test
+    public void testGetUserBySessionTokenRequest() throws Exception {
+        this.mockWebServer.enqueue(new MockResponse());
+
+        this.userDataRepository.getUserBySessionToken(MOCK_AUTH_TOKEN).subscribe(this.testObserver);
+
+        RecordedRequest request = this.mockWebServer.takeRequest();
+
+        assertEquals(constructUrl(RestApi.URL_PATH_USERS_ME), request.getPath());
+        assertEquals("GET", request.getMethod());
+        assertEquals(request.getHeader(PARSE_SESSION_KEY), MOCK_AUTH_TOKEN);
+    }
+
+
+    @Test
+    public void testGetUserBySessionTokenError() throws Exception {
+        this.mockWebServer.enqueue(new MockResponse().setResponseCode(400).setBody(
+                FileUtils.readFileToString(
+                        TestUtils.getFileFromPath(this, "res/user_me_error.json"))));
+
+        this.userDataRepository.getUserBySessionToken(MOCK_AUTH_TOKEN).subscribe(this.testObserver);
+        this.testObserver.awaitTerminalEvent();
+
+        this.testObserver.assertValueCount(0);
+        RestApiErrorException error = (RestApiErrorException)
+                this.testObserver.errors().get(0);
+        assertEquals(209, error.getStatusCode());
+        assertEquals("invalid session token", error.getMessage());
+    }
+
+
+    @Test
+    public void testGetUserBySessionTokenSuccess() throws Exception {
+
+        this.mockWebServer.enqueue(new MockResponse().setResponseCode(200).setBody(
+                FileUtils.readFileToString(
+                        TestUtils.getFileFromPath(this, "res/user_me_ok.json"))));
+
+
+        this.userDataRepository.getUserBySessionToken(MOCK_AUTH_TOKEN).subscribe(this.testObserver);
+        this.testObserver.awaitTerminalEvent();
+
+        UserEntity responseUser = (UserEntity) ((List<Object>) this.testObserver.getEvents().get(0)).get(0);
+        assertTrue(responseUser.getSessionToken().length() > 0);
+        assertTrue(responseUser.getObjectId().length() > 0);
+        assertTrue(responseUser.getUsername().length() > 0);
+        assertTrue(responseUser.getEmail().length() > 0);
+        assertTrue(responseUser.getCreatedAt().length() > 0);
+    }
+
+
+    @Test
+    public void testCreateUserRequest() throws Exception {
+        this.mockWebServer.enqueue(new MockResponse());
+
+        this.userDataRepository.createUser(this.fakeUser).subscribe(this.testObserver);
+
+        RecordedRequest request = this.mockWebServer.takeRequest();
+        assertEquals(constructUrl(RestApi.URL_PATH_USERS), request.getPath());
+        assertEquals("POST", request.getMethod());
+        assertEquals(this.gson.toJson(this.fakeUser),
+                request.getBody().readUtf8());
     }
 
 
@@ -159,21 +224,8 @@ public class UserDataRepositoryTest extends BaseDataRepositoryTest {
 
         assertEquals(getFormattedUrl(fakeUser.getObjectId(), RestApi.URL_PATH_USERS_OBJECT_ID), request.getPath());
         assertEquals("DELETE", request.getMethod());
-        assertEquals(AUTH_TOKEN, request.getHeader(PARSE_SESSION_KEY));
+        assertEquals(MOCK_AUTH_TOKEN, request.getHeader(PARSE_SESSION_KEY));
         assertEquals("", request.getBody().readUtf8());
-    }
-
-    @Test
-    public void testCreateUserRequest() throws Exception {
-        this.mockWebServer.enqueue(new MockResponse());
-
-        this.userDataRepository.createUser(this.fakeUser).subscribe(this.testObserver);
-
-        RecordedRequest request = this.mockWebServer.takeRequest();
-        assertEquals(constructUrl(RestApi.URL_PATH_USERS), request.getPath());
-        assertEquals("POST", request.getMethod());
-        assertEquals(this.gson.toJson(this.fakeUser),
-                request.getBody().readUtf8());
     }
 
 
@@ -194,7 +246,7 @@ public class UserDataRepositoryTest extends BaseDataRepositoryTest {
 
     @Test
     public void testResetPasswordRequest() throws Exception {
-        this.fakeUser.setEmail(FAKE_EMAIL);
+        this.fakeUser.setEmail(MOCK_EMAIL);
         this.mockWebServer.enqueue(new MockResponse());
 
         this.userDataRepository.resetPassword(this.fakeUser).subscribe(this.testObserver);
@@ -203,7 +255,7 @@ public class UserDataRepositoryTest extends BaseDataRepositoryTest {
         assertEquals(constructUrl(RestApi.URL_PATH_REQUEST_PASSWORD_RESET), request.getPath());
         assertEquals("POST", request.getMethod());
 
-        Map<String , Object> params =new HashMap<>();
+        Map<String, Object> params = new HashMap<>();
         params.put(RestApi.FIELD_EMAIL, this.fakeUser.getEmail());
         String query = RestApi.FIELD_EMAIL + "=" + URLEncoder.encode(this.fakeUser.getEmail(), "UTF-8");
         assertEquals(new Gson().toJson(params), request.getBody().readUtf8());
@@ -305,7 +357,7 @@ public class UserDataRepositoryTest extends BaseDataRepositoryTest {
         RecordedRequest request = this.mockWebServer.takeRequest();
         assertEquals(constructUrl(RestApi.URL_PATH_LOGOUT), request.getPath());
         assertEquals("POST", request.getMethod());
-        assertEquals(AUTH_TOKEN, request.getHeader(PARSE_SESSION_KEY));
+        assertEquals(MOCK_AUTH_TOKEN, request.getHeader(PARSE_SESSION_KEY));
         assertEquals("", request.getBody().readUtf8());
     }
 

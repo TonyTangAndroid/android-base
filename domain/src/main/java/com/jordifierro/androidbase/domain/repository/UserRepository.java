@@ -20,6 +20,6 @@ public interface UserRepository {
 
     Observable<VoidEntity> logoutUser(UserEntity user);
 
-    Observable<UserEntity> me(String token);
+    Observable<UserEntity> getUserBySessionToken(String token);
 
 }
