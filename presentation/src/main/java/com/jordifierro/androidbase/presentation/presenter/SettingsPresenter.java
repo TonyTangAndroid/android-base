@@ -1,5 +1,6 @@
 package com.jordifierro.androidbase.presentation.presenter;
 
+import com.jordifierro.androidbase.domain.entity.VoidEntity;
 import com.jordifierro.androidbase.domain.interactor.user.DeleteUserUseCase;
 import com.jordifierro.androidbase.domain.interactor.user.DoLogoutUseCase;
 import com.jordifierro.androidbase.presentation.dependency.ActivityScope;
@@ -11,9 +12,9 @@ import javax.inject.Inject;
 @ActivityScope
 public class SettingsPresenter extends BasePresenter implements Presenter {
 
+    SettingsView settingsView;
     private DoLogoutUseCase doLogoutUseCase;
     private DeleteUserUseCase deleteUserUseCase;
-    SettingsView settingsView;
 
     @Inject
     public SettingsPresenter(DoLogoutUseCase doLogoutUseCase, DeleteUserUseCase deleteUserUseCase) {
@@ -35,13 +36,19 @@ public class SettingsPresenter extends BasePresenter implements Presenter {
     }
 
     public void logoutUserButtonPressed() {
-        this.doLogoutUseCase.execute(new BaseSubscriber<>());
+        this.doLogoutUseCase.execute(new SettingsSubscriber());
         this.settingsView.closeAndDisplayLogin();
     }
 
     public void deleteAccountButtonPressed() {
-        this.deleteUserUseCase.execute(new BaseSubscriber<>());
+        this.deleteUserUseCase.execute(new SettingsSubscriber());
         this.settingsView.closeAndDisplayLogin();
+    }
+
+
+    protected class SettingsSubscriber extends BaseSubscriber<VoidEntity> {
+
+
     }
 
 }

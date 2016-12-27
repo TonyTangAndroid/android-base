@@ -11,7 +11,7 @@ import retrofit2.Response;
 public abstract class RestApiRepository {
 
 	protected void handleResponseError(Response response) {
-		if (!response.isSuccess()) {
+		if (!response.isSuccessful()) {
 
 			try {
 				ResponseErrorWrapper errorWrapper;

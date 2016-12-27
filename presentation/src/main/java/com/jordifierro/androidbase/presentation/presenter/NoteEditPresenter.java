@@ -34,7 +34,7 @@ public class NoteEditPresenter extends BasePresenter implements Presenter {
         this.noteEditView = (NoteEditView) view;
 
         this.showLoader();
-        this.getNoteUseCase.setParams(this.noteEditView.getNoteId());
+        this.getNoteUseCase.setParams(this.noteEditView.getNoteObjectId());
         this.getNoteUseCase.execute(new GetNoteSubscriber());
     }
 
@@ -55,7 +55,7 @@ public class NoteEditPresenter extends BasePresenter implements Presenter {
 
     public void updateNote(String title, String content) {
         NoteEntity updatedNote = new NoteEntity(title, content);
-        updatedNote.setId(this.noteEditView.getNoteId());
+        updatedNote.setObjectId(this.noteEditView.getNoteObjectId());
 
         this.noteEditView.showLoader();
         this.updateNoteUseCase.setParams(updatedNote);
@@ -74,7 +74,7 @@ public class NoteEditPresenter extends BasePresenter implements Presenter {
 
     public void deleteNoteButtonPressed() {
         this.noteEditView.showLoader();
-        this.deleteNoteUseCase.setParams(this.noteEditView.getNoteId());
+        this.deleteNoteUseCase.setParams(this.noteEditView.getNoteObjectId());
         this.deleteNoteUseCase.execute(new DeleteNoteSubscriber());
     }
 

@@ -16,7 +16,7 @@ public class NoteEntityTest {
 
     @Before
     public void setup() {
-        this.note =  new NoteEntity(FAKE_OBJECT_ID, FAKE_TITLE, FAKE_CONTENT);
+        this.note = new NoteEntity(FAKE_OBJECT_ID, FAKE_TITLE, FAKE_CONTENT);
     }
 
     @Test

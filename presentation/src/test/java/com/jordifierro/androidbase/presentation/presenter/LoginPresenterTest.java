@@ -53,7 +53,7 @@ public class LoginPresenterTest {
 
         verify(this.mockLoginView).showLoader();
         verify(this.mockDoLoginUseCase).setParams(any(UserEntity.class));
-        verify(this.mockDoLoginUseCase).execute(any(BasePresenter.BaseSubscriber.class));
+        verify(this.mockDoLoginUseCase).execute(any(LoginPresenter.LoginSubscriber.class));
     }
 
     @Test

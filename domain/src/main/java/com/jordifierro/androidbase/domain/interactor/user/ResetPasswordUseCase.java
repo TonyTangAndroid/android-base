@@ -1,6 +1,6 @@
 package com.jordifierro.androidbase.domain.interactor.user;
 
-import com.jordifierro.androidbase.domain.entity.EmptyWrapper;
+import com.jordifierro.androidbase.domain.entity.VoidEntity;
 import com.jordifierro.androidbase.domain.entity.UserEntity;
 import com.jordifierro.androidbase.domain.executor.PostExecutionThread;
 import com.jordifierro.androidbase.domain.executor.ThreadExecutor;
@@ -9,9 +9,10 @@ import com.jordifierro.androidbase.domain.repository.UserRepository;
 
 import javax.inject.Inject;
 
-import rx.Observable;
+import io.reactivex.Observable;
 
-public class ResetPasswordUseCase extends UseCase {
+
+public class ResetPasswordUseCase extends UseCase<VoidEntity> {
 
     private UserRepository userRepository;
 
@@ -19,7 +20,7 @@ public class ResetPasswordUseCase extends UseCase {
 
     @Inject
     public ResetPasswordUseCase(ThreadExecutor threadExecutor, PostExecutionThread postExecutionThread,
-								UserRepository userRepository) {
+                                UserRepository userRepository) {
         super(threadExecutor, postExecutionThread);
         this.userRepository = userRepository;
     }
@@ -29,7 +30,7 @@ public class ResetPasswordUseCase extends UseCase {
     }
 
     @Override
-    protected Observable<EmptyWrapper> buildUseCaseObservable() {
+    protected Observable<VoidEntity> buildUseCaseObservable() {
         return this.userRepository.resetPassword(this.user);
     }
 }

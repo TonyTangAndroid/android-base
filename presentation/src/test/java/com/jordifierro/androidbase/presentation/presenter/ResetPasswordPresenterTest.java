@@ -53,7 +53,7 @@ public class ResetPasswordPresenterTest {
 
         verify(this.mockResetPasswordView).showLoader();
         verify(this.mockResetPasswordUseCase).setParams(any(UserEntity.class));
-        verify(this.mockResetPasswordUseCase).execute(any(BasePresenter.BaseSubscriber.class));
+        verify(this.mockResetPasswordUseCase).execute(any(ResetPasswordPresenter.ResetPasswordSubscriber.class));
     }
 
     @Test

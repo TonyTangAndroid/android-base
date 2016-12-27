@@ -12,9 +12,13 @@ import org.junit.Test;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 
+import java.util.List;
+
 import io.reactivex.Observable;
+import io.reactivex.observers.TestObserver;
 import io.reactivex.schedulers.TestScheduler;
 
+import static org.junit.Assert.assertEquals;
 import static org.mockito.BDDMockito.given;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.verifyNoMoreInteractions;
@@ -33,6 +37,9 @@ public class DeleteUserUseCaseTest {
     @Mock
     private UserEntity mockUser;
 
+    @Mock
+    private VoidEntity voidEntity;
+
     @Before
     public void setup() {
         MockitoAnnotations.initMocks(this);
@@ -44,13 +51,18 @@ public class DeleteUserUseCaseTest {
                 mockPostExecutionThread, mockUserRepository, mockSessionRepository);
         given(mockSessionRepository.getCurrentUser()).willReturn(mockUser);
         given(mockUserRepository.deleteUser(mockUser))
-                .willReturn(Observable.just(new VoidEntity()));
+                .willReturn(Observable.just(voidEntity));
         TestScheduler testScheduler = new TestScheduler();
-
-        deleteUserUseCase.buildUseCaseObservable()
-                .observeOn(testScheduler)
-                .subscribe();
+        TestObserver<VoidEntity> testObserver = new TestObserver<>();
+        deleteUserUseCase.buildUseCaseObservable().observeOn(testScheduler).subscribe(testObserver);
         testScheduler.triggerActions();
+
+
+
+        verify(mockUserRepository).deleteUser(mockUser);
+        final List<Object> resultList = testObserver.getEvents().get(0);
+        assertEquals(voidEntity, resultList.get(0));
+
 
         verify(mockSessionRepository).getCurrentUser();
         verify(mockUserRepository).deleteUser(mockUser);

@@ -13,25 +13,25 @@ import io.reactivex.Observable;
 
 public class DeleteNoteUseCase extends UseCase<VoidEntity> {
 
-	private NoteRepository noteRepository;
-	private SessionRepository sessionRepository;
+    private NoteRepository noteRepository;
+    private SessionRepository sessionRepository;
 
-	private String noteObjectId;
+    private String noteObjectId;
 
-	@Inject
-	public DeleteNoteUseCase(ThreadExecutor threadExecutor, PostExecutionThread postExecutionThread,
-							 NoteRepository noteRepository, SessionRepository sessionRepository) {
-		super(threadExecutor, postExecutionThread);
-		this.noteRepository = noteRepository;
-		this.sessionRepository = sessionRepository;
-	}
+    @Inject
+    public DeleteNoteUseCase(ThreadExecutor threadExecutor, PostExecutionThread postExecutionThread,
+                             NoteRepository noteRepository, SessionRepository sessionRepository) {
+        super(threadExecutor, postExecutionThread);
+        this.noteRepository = noteRepository;
+        this.sessionRepository = sessionRepository;
+    }
 
-	public void setParams(String noteObjectId) {
-		this.noteObjectId = noteObjectId;
-	}
+    public void setParams(String noteObjectId) {
+        this.noteObjectId = noteObjectId;
+    }
 
     @Override
     protected Observable<VoidEntity> buildUseCaseObservable() {
-        return this.noteRepository.deleteNote(this.sessionRepository.getCurrentUser(), this.noteId);
+        return this.noteRepository.deleteNote(this.sessionRepository.getCurrentUser(), this.noteObjectId);
     }
 }

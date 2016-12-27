@@ -52,7 +52,7 @@ public class SettingsPresenterTest {
 
         this.settingsPresenter.logoutUserButtonPressed();
 
-        verify(this.mockDoLogoutUseCase).execute(any(BasePresenter.BaseSubscriber.class));
+        verify(this.mockDoLogoutUseCase).execute(any(SettingsPresenter.SettingsSubscriber.class));
         verify(this.mockSettingsView).closeAndDisplayLogin();
     }
 
@@ -61,7 +61,7 @@ public class SettingsPresenterTest {
 
         this.settingsPresenter.deleteAccountButtonPressed();
 
-        verify(this.mockDeleteUserUseCase).execute(any(BasePresenter.BaseSubscriber.class));
+        verify(this.mockDeleteUserUseCase).execute(any(SettingsPresenter.SettingsSubscriber.class));
         verify(this.mockSettingsView).closeAndDisplayLogin();
     }
 

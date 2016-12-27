@@ -16,7 +16,7 @@ import io.reactivex.Observable;
 
 import static junit.framework.Assert.assertNull;
 import static org.mockito.Matchers.any;
-import static org.mockito.Matchers.anyInt;
+import static org.mockito.Matchers.anyString;
 import static org.mockito.Mockito.atLeast;
 import static org.mockito.Mockito.verify;
 
@@ -63,9 +63,9 @@ public class NoteEditPresenterTest {
     @Test
     public void testGetNote() throws Exception {
 
-        verify(this.mockNoteEditView).getNoteId();
+        verify(this.mockNoteEditView).getNoteObjectId();
         verify(this.mockNoteEditView).showLoader();
-        verify(this.getNoteUseCase).setParams(any(int.class));
+        verify(this.getNoteUseCase).setParams(any(String.class));
         verify(this.getNoteUseCase).execute(any(NoteEditPresenter.GetNoteSubscriber.class));
     }
 
@@ -90,7 +90,7 @@ public class NoteEditPresenterTest {
     @SuppressWarnings("unchecked")
     public void testGetSubscriberOnNext() {
 
-        this.getNoteSubscriber.onNext(new NoteEntity(1, "", ""));
+        this.getNoteSubscriber.onNext(new NoteEntity("3WQrZ0dyrt", "", ""));
 
         verify(this.mockNoteEditView).showLoader();
         verify(this.mockNoteEditView).hideLoader();
@@ -102,7 +102,7 @@ public class NoteEditPresenterTest {
 
         this.noteEditPresenter.updateNote("", "");
 
-        verify(this.mockNoteEditView, atLeast(1)).getNoteId();
+        verify(this.mockNoteEditView, atLeast(1)).getNoteObjectId();
         verify(this.mockNoteEditView, atLeast(1)).showLoader();
         verify(this.updateNoteUseCase).setParams(any(NoteEntity.class));
         verify(this.updateNoteUseCase).execute(any(NoteEditPresenter.UpdateNoteSubscriber.class));
@@ -129,7 +129,7 @@ public class NoteEditPresenterTest {
     @SuppressWarnings("unchecked")
     public void testUpdateSubscriberOnNext() {
 
-        this.updateNoteSubscriber.onNext(new NoteEntity(1, "", ""));
+        this.updateNoteSubscriber.onNext(new NoteEntity("3WQrZ0dyrt", "", ""));
 
         verify(this.mockNoteEditView).showLoader();
         verify(this.mockNoteEditView).hideLoader();
@@ -141,8 +141,8 @@ public class NoteEditPresenterTest {
 
         this.noteEditPresenter.deleteNoteButtonPressed();
 
-        verify(this.mockNoteEditView, atLeast(1)).getNoteId();
-        verify(this.deleteNoteUseCase).setParams(anyInt());
+        verify(this.mockNoteEditView, atLeast(1)).getNoteObjectId();
+        verify(this.deleteNoteUseCase).setParams(anyString());
         verify(this.deleteNoteUseCase).execute(any(NoteEditPresenter.DeleteNoteSubscriber.class));
     }
 

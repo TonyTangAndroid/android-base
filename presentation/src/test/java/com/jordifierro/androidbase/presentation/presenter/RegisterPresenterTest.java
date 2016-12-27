@@ -53,7 +53,7 @@ public class RegisterPresenterTest {
 
         verify(this.mockRegisterView).showLoader();
         verify(this.mockCreateUserUseCase).setParams(any(UserEntity.class));
-        verify(this.mockCreateUserUseCase).execute(any(BasePresenter.BaseSubscriber.class));
+        verify(this.mockCreateUserUseCase).execute(any(RegisterPresenter.RegisterSubscriber.class));
     }
 
     @Test

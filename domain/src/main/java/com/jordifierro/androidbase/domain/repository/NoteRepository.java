@@ -4,21 +4,23 @@ import com.jordifierro.androidbase.domain.entity.CreatedWrapper;
 import com.jordifierro.androidbase.domain.entity.NoteEntity;
 import com.jordifierro.androidbase.domain.entity.UpdatedWrapper;
 import com.jordifierro.androidbase.domain.entity.UserEntity;
+import com.jordifierro.androidbase.domain.entity.VoidEntity;
 
 import java.util.List;
 
-import rx.Observable;
+import io.reactivex.Observable;
+
 
 public interface NoteRepository {
 
 
-	Observable<CreatedWrapper> createNote(UserEntity user, NoteEntity note);
+    Observable<CreatedWrapper> createNote(UserEntity user, NoteEntity note);
 
-	Observable<NoteEntity> getNote(UserEntity user, String noteObjectId);
+    Observable<NoteEntity> getNote(UserEntity user, String noteObjectId);
 
-	Observable<List<NoteEntity>> getNotes(UserEntity user);
+    Observable<List<NoteEntity>> getNotes(UserEntity user);
 
-	Observable<UpdatedWrapper> updateNote(UserEntity user, NoteEntity note);
+    Observable<UpdatedWrapper> updateNote(UserEntity user, NoteEntity note);
 
-	Observable deleteNote(UserEntity user, String noteObjectId);
+    Observable<VoidEntity> deleteNote(UserEntity user, String noteObjectId);
 }
