@@ -6,7 +6,7 @@ allprojects {
 
 ext {
     //Android
-    appVersionCode = 1
+    appVersionCode = 20161231
     appVersionName = '1.0'
     androidBuildToolsVersion = '25.0.2'
     androidMinSdkVersion = 15
