@@ -28,7 +28,9 @@ public interface FragmentInjector {
     void inject(SettingsFragment settingsFragment);
 
     void inject(ResetPasswordFragment resetPasswordFragment);
+
     void inject(NotesViewPagerFragment NotesViewPagerFragment);
-    void inject(NoteDetailFragmentForPager  noteDetailFragmentForPager);
+
+    void inject(NoteDetailFragmentForPager noteDetailFragmentForPager);
 
 }

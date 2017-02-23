@@ -18,28 +18,30 @@ public class NoteDetailFragmentForPager extends BaseFragment implements NoteDeta
     @Inject
     NoteDetailPresenter noteDetailPresenter;
 
-    @Bind(R.id.tv_title) TextView titleTV;
-    @Bind(R.id.tv_content) TextView contentTV;
-    private int noteId;
+    @Bind(R.id.tv_title)
+    TextView titleTV;
+    @Bind(R.id.tv_content)
+    TextView contentTV;
+    private String noteObjectId;
 
-    @Override
-    protected void callInjection() {
-        this.getFragmentInjector().inject(this);
-    }
-
-    public static NoteDetailFragmentForPager newInstance(int noteId) {
+    public static NoteDetailFragmentForPager newInstance(String noteObjectId) {
 
         Bundle args = new Bundle();
-        args.putInt("argNoteId", noteId);
+        args.putString("argNoteId", noteObjectId);
         NoteDetailFragmentForPager fragment = new NoteDetailFragmentForPager();
         fragment.setArguments(args);
         return fragment;
     }
 
     @Override
+    protected void callInjection() {
+        this.getFragmentInjector().inject(this);
+    }
+
+    @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        noteId = getArguments().getInt("argNoteId");
+        noteObjectId = getArguments().getString("argNoteId");
     }
 
     @Override
@@ -59,10 +61,9 @@ public class NoteDetailFragmentForPager extends BaseFragment implements NoteDeta
     }
 
     @Override
-    public int getNoteId() {
-        return noteId;
+    public String getNoteObjectId() {
+        return noteObjectId;
     }
-
 
 
 }

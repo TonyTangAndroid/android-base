@@ -29,7 +29,7 @@ public class NoteDetailPresenterForViewPager extends BasePresenter implements Pr
     @Override
     public void resume() {
         this.showLoader();
-        this.getNoteUseCase.setParams(this.noteDetailView.getNoteId());
+        this.getNoteUseCase.setParams(this.noteDetailView.getNoteObjectId());
         this.getNoteUseCase.execute(new NoteDetailSubscriber());
     }
 

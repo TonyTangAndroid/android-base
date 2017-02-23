@@ -1,7 +1,6 @@
 apply plugin: 'com.android.application'
 apply plugin: 'com.neenbedankt.android-apt'
 apply plugin: 'me.tatarka.retrolambda'
-apply from: 'sign.gradle'
 
 android {
     compileSdkVersion rootProject.ext.androidCompileSdkVersion

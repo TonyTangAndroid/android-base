@@ -2,13 +2,11 @@ package com.jordifierro.androidbase.presentation.presenter;
 
 import com.jordifierro.androidbase.domain.entity.NoteEntity;
 import com.jordifierro.androidbase.domain.interactor.note.GetNoteUseCase;
-import com.jordifierro.androidbase.presentation.dependency.ActivityScope;
 import com.jordifierro.androidbase.presentation.view.BaseView;
 import com.jordifierro.androidbase.presentation.view.NoteDetailView;
 
 import javax.inject.Inject;
 
-@ActivityScope
 public class NoteDetailPresenter extends BasePresenter implements Presenter {
 
     NoteDetailView noteDetailView;

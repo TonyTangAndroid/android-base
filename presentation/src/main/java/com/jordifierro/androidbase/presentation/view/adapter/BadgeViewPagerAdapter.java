@@ -23,7 +23,7 @@ public class BadgeViewPagerAdapter extends FragmentStatePagerAdapter {
 
 	@Override
 	public Fragment getItem(int position) {
-		return NoteDetailFragmentForPager.newInstance(badgeIdList.get(position).getId());
+		return NoteDetailFragmentForPager.newInstance(badgeIdList.get(position).getObjectId());
 	}
 
 	@Override
