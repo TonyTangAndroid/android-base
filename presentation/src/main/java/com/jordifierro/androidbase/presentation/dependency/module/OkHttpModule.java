@@ -6,10 +6,11 @@ import com.jordifierro.androidbase.presentation.dependency.ApplicationScope;
 import dagger.Module;
 import dagger.Provides;
 import hugo.weaving.DebugLog;
+import okhttp3.OkHttpClient;
 import okhttp3.logging.HttpLoggingInterceptor;
 
 @Module
-public class OkHttpInterceptorModule {
+public class OkHttpModule {
 
 
 	@Provides
@@ -26,5 +27,16 @@ public class OkHttpInterceptorModule {
 	@ApplicationScope
 	HttpInterceptor provideHttpInterceptor() {
 		return new HttpInterceptor();
+	}
+
+	@Provides
+	@DebugLog
+	@ApplicationScope
+	OkHttpClient provideOkHttpClient(HttpLoggingInterceptor httpLoggingInterceptor, HttpInterceptor httpInterceptor) {
+
+		return new OkHttpClient().newBuilder()
+				.addInterceptor(httpLoggingInterceptor)
+				.addInterceptor(httpInterceptor)
+				.build();
 	}
 }

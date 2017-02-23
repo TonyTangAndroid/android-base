@@ -9,7 +9,7 @@ import com.jordifierro.androidbase.presentation.dependency.ApplicationScope;
 import dagger.Module;
 import dagger.Provides;
 
-@Module(includes = {SharedPreferenceModule.class})
+@Module
 public class DataLocalModule {
 
     @Provides
