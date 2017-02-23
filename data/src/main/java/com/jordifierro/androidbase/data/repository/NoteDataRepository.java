@@ -11,15 +11,15 @@ import com.jordifierro.androidbase.domain.repository.NoteRepository;
 import java.util.List;
 
 import javax.inject.Inject;
-import javax.inject.Singleton;
 
+import hugo.weaving.DebugLog;
 import io.reactivex.Observable;
 
-@Singleton
 public class NoteDataRepository extends RestApiRepository implements NoteRepository {
 
     private final RestApi restApi;
 
+    @DebugLog
     @Inject
     public NoteDataRepository(RestApi restApi) {
         this.restApi = restApi;

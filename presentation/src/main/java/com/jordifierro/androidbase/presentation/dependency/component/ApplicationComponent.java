@@ -7,15 +7,16 @@ import com.jordifierro.androidbase.domain.executor.ThreadExecutor;
 import com.jordifierro.androidbase.domain.repository.NoteRepository;
 import com.jordifierro.androidbase.domain.repository.SessionRepository;
 import com.jordifierro.androidbase.domain.repository.UserRepository;
+import com.jordifierro.androidbase.presentation.dependency.ApplicationScope;
 import com.jordifierro.androidbase.presentation.dependency.module.ApplicationModule;
 import com.jordifierro.androidbase.presentation.dependency.module.ContextModule;
 import com.jordifierro.androidbase.presentation.dependency.module.DataModule;
 
-import javax.inject.Singleton;
-
 import dagger.Component;
+import hugo.weaving.DebugLog;
 
-@Singleton
+@DebugLog
+@ApplicationScope
 @Component(modules = {ContextModule.class, ApplicationModule.class, DataModule.class})
 public interface ApplicationComponent {
 

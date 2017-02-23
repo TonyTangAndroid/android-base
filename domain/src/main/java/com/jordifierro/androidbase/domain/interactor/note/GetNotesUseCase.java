@@ -22,6 +22,7 @@ public class GetNotesUseCase extends UseCase<List<NoteEntity>> {
     public GetNotesUseCase(ThreadExecutor threadExecutor, PostExecutionThread postExecutionThread,
                            NoteRepository noteRepository, SessionRepository sessionRepository) {
         super(threadExecutor, postExecutionThread);
+        System.out.println("GetNotesUseCase Created");
         this.noteRepository = noteRepository;
         this.sessionRepository = sessionRepository;
     }

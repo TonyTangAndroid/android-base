@@ -5,13 +5,13 @@ import com.jordifierro.androidbase.domain.entity.VoidEntity;
 import com.jordifierro.androidbase.domain.interactor.note.DeleteNoteUseCase;
 import com.jordifierro.androidbase.domain.interactor.note.GetNoteUseCase;
 import com.jordifierro.androidbase.domain.interactor.note.UpdateNoteUseCase;
-import com.jordifierro.androidbase.presentation.dependency.ActivityScope;
 import com.jordifierro.androidbase.presentation.view.BaseView;
 import com.jordifierro.androidbase.presentation.view.NoteEditView;
 
 import javax.inject.Inject;
 
-@ActivityScope
+import hugo.weaving.DebugLog;
+
 public class NoteEditPresenter extends BasePresenter implements Presenter {
 
     private UpdateNoteUseCase updateNoteUseCase;
@@ -19,6 +19,7 @@ public class NoteEditPresenter extends BasePresenter implements Presenter {
     private DeleteNoteUseCase deleteNoteUseCase;
     NoteEditView noteEditView;
 
+    @DebugLog
     @Inject
     public NoteEditPresenter(UpdateNoteUseCase updateNoteUseCase,
                              GetNoteUseCase getNoteUseCase, DeleteNoteUseCase deleteNoteUseCase) {

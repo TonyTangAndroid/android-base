@@ -3,8 +3,7 @@ package com.jordifierro.androidbase.presentation.dependency.module;
 import android.content.Context;
 
 import com.jordifierro.androidbase.presentation.BaseApplication;
-
-import javax.inject.Singleton;
+import com.jordifierro.androidbase.presentation.dependency.ApplicationScope;
 
 import dagger.Module;
 import dagger.Provides;
@@ -20,7 +19,7 @@ public class ContextModule {
     }
 
     @Provides
-    @Singleton
+    @ApplicationScope
     Context provideApplicationContext() {
         return this.applicationContext;
     }

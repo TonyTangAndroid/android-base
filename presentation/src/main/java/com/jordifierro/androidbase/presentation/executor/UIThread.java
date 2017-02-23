@@ -3,15 +3,15 @@ package com.jordifierro.androidbase.presentation.executor;
 import com.jordifierro.androidbase.domain.executor.PostExecutionThread;
 
 import javax.inject.Inject;
-import javax.inject.Singleton;
 
+import hugo.weaving.DebugLog;
 import io.reactivex.Scheduler;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 
 
-@Singleton
 public class UIThread implements PostExecutionThread {
 
+    @DebugLog
     @Inject
     public UIThread() {
     }

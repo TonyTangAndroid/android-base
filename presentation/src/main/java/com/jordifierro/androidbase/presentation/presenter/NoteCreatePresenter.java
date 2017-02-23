@@ -2,18 +2,19 @@ package com.jordifierro.androidbase.presentation.presenter;
 
 import com.jordifierro.androidbase.domain.entity.NoteEntity;
 import com.jordifierro.androidbase.domain.interactor.note.CreateNoteUseCase;
-import com.jordifierro.androidbase.presentation.dependency.ActivityScope;
 import com.jordifierro.androidbase.presentation.view.BaseView;
 import com.jordifierro.androidbase.presentation.view.NoteCreateView;
 
 import javax.inject.Inject;
 
-@ActivityScope
+import hugo.weaving.DebugLog;
+
 public class NoteCreatePresenter extends BasePresenter implements Presenter {
 
     private CreateNoteUseCase createNoteUseCase;
     NoteCreateView noteCreateView;
 
+    @DebugLog
     @Inject
     public NoteCreatePresenter(CreateNoteUseCase createNoteUseCase) {
         super(createNoteUseCase);

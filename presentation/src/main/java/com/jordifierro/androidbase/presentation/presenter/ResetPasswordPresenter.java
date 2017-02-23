@@ -3,19 +3,20 @@ package com.jordifierro.androidbase.presentation.presenter;
 import com.jordifierro.androidbase.domain.entity.UserEntity;
 import com.jordifierro.androidbase.domain.entity.VoidEntity;
 import com.jordifierro.androidbase.domain.interactor.user.ResetPasswordUseCase;
-import com.jordifierro.androidbase.presentation.dependency.ActivityScope;
 import com.jordifierro.androidbase.presentation.view.BaseView;
 import com.jordifierro.androidbase.presentation.view.ResetPasswordView;
 
 import javax.inject.Inject;
 
-@ActivityScope
+import hugo.weaving.DebugLog;
+
 public class ResetPasswordPresenter extends BasePresenter implements Presenter {
 
     ResetPasswordView resetPasswordView;
     private ResetPasswordUseCase resetPasswordUseCase;
 
     @Inject
+    @DebugLog
     public ResetPasswordPresenter(ResetPasswordUseCase resetPasswordUseCase) {
         super(resetPasswordUseCase);
         this.resetPasswordUseCase = resetPasswordUseCase;

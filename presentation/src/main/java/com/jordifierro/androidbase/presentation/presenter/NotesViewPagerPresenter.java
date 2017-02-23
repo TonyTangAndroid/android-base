@@ -9,12 +9,15 @@ import java.util.List;
 
 import javax.inject.Inject;
 
+import hugo.weaving.DebugLog;
+
 public class NotesViewPagerPresenter extends BasePresenter implements Presenter {
 
     NotesViewPagerView notesView;
     private GetNotesUseCase getNotesUseCase;
 
     @Inject
+    @DebugLog
     public NotesViewPagerPresenter(GetNotesUseCase getNotesUseCase) {
         super(getNotesUseCase);
         this.getNotesUseCase = getNotesUseCase;

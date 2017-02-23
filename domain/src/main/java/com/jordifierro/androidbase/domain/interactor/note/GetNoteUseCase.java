@@ -21,7 +21,9 @@ public class GetNoteUseCase extends UseCase<NoteEntity> {
     @Inject
     public GetNoteUseCase(ThreadExecutor threadExecutor, PostExecutionThread postExecutionThread,
                           NoteRepository noteRepository, SessionRepository sessionRepository) {
+
         super(threadExecutor, postExecutionThread);
+        System.out.println("GetNoteUseCase Created");
         this.noteRepository = noteRepository;
         this.sessionRepository = sessionRepository;
     }

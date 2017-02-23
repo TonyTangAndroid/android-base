@@ -6,9 +6,9 @@ import com.jordifierro.androidbase.domain.entity.UserEntity;
 import com.jordifierro.androidbase.domain.repository.SessionRepository;
 
 import javax.inject.Inject;
-import javax.inject.Singleton;
 
-@Singleton
+import hugo.weaving.DebugLog;
+
 public class SessionDataRepository implements SessionRepository {
 
     private static final String OBJECT_ID = "objectId";
@@ -17,6 +17,7 @@ public class SessionDataRepository implements SessionRepository {
 
     private final SharedPreferences sharedPreferences;
 
+    @DebugLog
     @Inject
     public SessionDataRepository(SharedPreferences sharedPreferences) {
         this.sharedPreferences = sharedPreferences;

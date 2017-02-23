@@ -11,9 +11,9 @@ import java.util.concurrent.ThreadPoolExecutor;
 import java.util.concurrent.TimeUnit;
 
 import javax.inject.Inject;
-import javax.inject.Singleton;
 
-@Singleton
+import hugo.weaving.DebugLog;
+
 public class JobExecutor implements ThreadExecutor {
 
     static final int INITIAL_POOL_SIZE = 3;
@@ -23,6 +23,7 @@ public class JobExecutor implements ThreadExecutor {
 
     ThreadPoolExecutor threadPoolExecutor;
 
+    @DebugLog
     @Inject
     public JobExecutor() {
         BlockingQueue<Runnable> workQueue = new LinkedBlockingQueue<>();

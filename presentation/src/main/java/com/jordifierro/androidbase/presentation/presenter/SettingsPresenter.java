@@ -3,13 +3,13 @@ package com.jordifierro.androidbase.presentation.presenter;
 import com.jordifierro.androidbase.domain.entity.VoidEntity;
 import com.jordifierro.androidbase.domain.interactor.user.DeleteUserUseCase;
 import com.jordifierro.androidbase.domain.interactor.user.DoLogoutUseCase;
-import com.jordifierro.androidbase.presentation.dependency.ActivityScope;
 import com.jordifierro.androidbase.presentation.view.BaseView;
 import com.jordifierro.androidbase.presentation.view.SettingsView;
 
 import javax.inject.Inject;
 
-@ActivityScope
+import hugo.weaving.DebugLog;
+
 public class SettingsPresenter extends BasePresenter implements Presenter {
 
     SettingsView settingsView;
@@ -17,6 +17,7 @@ public class SettingsPresenter extends BasePresenter implements Presenter {
     private DeleteUserUseCase deleteUserUseCase;
 
     @Inject
+    @DebugLog
     public SettingsPresenter(DoLogoutUseCase doLogoutUseCase, DeleteUserUseCase deleteUserUseCase) {
         super(doLogoutUseCase, deleteUserUseCase);
         this.doLogoutUseCase = doLogoutUseCase;
