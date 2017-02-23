@@ -18,61 +18,45 @@ import butterknife.Bind;
 
 public class NotesViewPagerFragment extends BaseFragment implements NotesViewPagerView {
 
-    @Inject
-    NotesViewPagerPresenter notesViewPagerPresenter;
+	@Inject
+	NotesViewPagerPresenter notesViewPagerPresenter;
 
-    @Bind(R.id.tab_dots)
-    TabLayout tabDots;
-    @Bind(R.id.view_pager_badge)
-    ViewPager viewPagerBadge;
+	@Bind(R.id.tab_dots)
+	TabLayout tabDots;
+	@Bind(R.id.view_pager_badge)
+	ViewPager viewPagerBadge;
 
 
-    @Override
-    protected void callInjection() {
-        this.getFragmentInjector().inject(this);
-    }
+	@Override
+	protected void callInjection() {
+		this.getFragmentInjector().inject(this);
+	}
 
-    @Override
-    protected int layoutId() {
-        return R.layout.fragment_notes_view_pager;
-    }
+	@Override
+	protected int layoutId() {
+		return R.layout.fragment_notes_view_pager;
+	}
 
-    @Override
-    protected BasePresenter presenter() {
-        return this.notesViewPagerPresenter;
-    }
+	@Override
+	protected BasePresenter presenter() {
+		return this.notesViewPagerPresenter;
+	}
 
-    public NotesViewPagerPresenter getNotesViewPagerPresenter() {
-        return notesViewPagerPresenter;
-    }
 
-    @Override
-    public void showNotes(List<NoteEntity> notes) {
+	@Override
+	public void showNotes(List<NoteEntity> notes) {
 
-        BadgeViewPagerAdapter pagerAdapter = new BadgeViewPagerAdapter(getChildFragmentManager(), notes);
-        viewPagerBadge.setAdapter(pagerAdapter);
-        pagerAdapter.notifyDataSetChanged();
-    }
+		BadgeViewPagerAdapter pagerAdapter = new BadgeViewPagerAdapter(getChildFragmentManager(), notes);
+		viewPagerBadge.setAdapter(pagerAdapter);
+		pagerAdapter.notifyDataSetChanged();
+	}
 
-    @Override
-    public void showNote(String noteObjectId) {
-        throw new RuntimeException("Not Supported");
 
-    }
+	@Override
+	public void initView() {
+ 		tabDots.setupWithViewPager(viewPagerBadge, true);
 
-    @Override
-    public void showExpirationWarning() {
-        showMessage(getResources().getString(R.string.message_expiration) + ".\n" +
-                getResources().getString(R.string.message_update) + ".");
-    }
-
-    @Override
-    public void initView() {
-        BadgeViewPagerAdapter pagerAdapter = new BadgeViewPagerAdapter(getChildFragmentManager(), null);
-        viewPagerBadge.setAdapter(pagerAdapter);
-        tabDots.setupWithViewPager(viewPagerBadge);
-
-    }
+	}
 
 
 }

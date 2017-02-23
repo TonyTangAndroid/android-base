@@ -47,7 +47,7 @@ public class BasePresenter implements Presenter {
     }
 
     public void showLoader() {
-        this.view.showLoader();
+//        this.view.showLoader();
     }
 
     public void hideLoader() {
