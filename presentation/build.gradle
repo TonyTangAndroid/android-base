@@ -9,7 +9,7 @@ android {
 
     defaultConfig {
 
-        applicationId 'com.tony.tang.clean.demo'
+        applicationId 'com.jordifierro.androidbase.presentation'
         minSdkVersion rootProject.ext.androidMinSdkVersion
         targetSdkVersion rootProject.ext.androidTargetSdkVersion
         versionCode rootProject.ext.appVersionCode
