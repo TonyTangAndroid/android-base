@@ -32,7 +32,6 @@ public class HttpInterceptor implements Interceptor {
         Request request = chain.request().newBuilder()
                 .addHeader(ACCEPT_LANGUAGE, Locale.getDefault().getLanguage())
                 .addHeader(X_PARSE_APPLICATION_ID, RestApi.PARSE_APPLICATION_ID_VALUE)
-                .addHeader(X_PARSE_REST_API_KEY, RestApi.PARSE_REST_API_VALUE)
                 .addHeader(X_PARSE_REVOCABLE_SESSION, "1")
                 .addHeader(CONTENT_TYPE, APPLICATION_JSON)
                 .build();

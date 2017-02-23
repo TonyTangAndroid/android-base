@@ -22,12 +22,11 @@ import retrofit2.http.Query;
 
 public interface RestApi {
 
-    String PARSE_REST_API_VALUE = "h0LF75nQ0YZhAJ1fQ57P3HksubAmPGsCnycW16M3";
     String PARSE_APPLICATION_ID_VALUE = "vstpbbwVyVsYYQaMTkYp8OWaRTf4XTMefcmSVAWP";
     String PARSE_SESSION_KEY = "X-Parse-Session-Token";
 
 
-    String URL_BASE = "https://api.parse.com/1/";
+    String URL_BASE = "https://parse.anycopy.io/parse_server_demo/";
     String URL_PATH_USERS = "users";
     String URL_PATH_USERS_OBJECT_ID = "users/{objectId}";
     String URL_PATH_REQUEST_PASSWORD_RESET = "requestPasswordReset";

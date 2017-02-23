@@ -9,7 +9,7 @@ android {
 
     defaultConfig {
 
-        applicationId 'com.rjsq.demo'
+        applicationId 'com.tony.tang.clean.demo'
         minSdkVersion rootProject.ext.androidMinSdkVersion
         targetSdkVersion rootProject.ext.androidTargetSdkVersion
         versionCode rootProject.ext.appVersionCode
