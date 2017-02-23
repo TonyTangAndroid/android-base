@@ -34,7 +34,7 @@ public class NoteEditPresenter extends BasePresenter implements Presenter {
         this.noteEditView = (NoteEditView) view;
 
         this.showLoader();
-        this.getNoteUseCase.setParams(this.noteEditView.getNoteId());
+        this.getNoteUseCase.setParams(this.noteEditView.getNoteObjectId());
         this.getNoteUseCase.execute(new GetNoteSubscriber());
     }
 
@@ -46,7 +46,8 @@ public class NoteEditPresenter extends BasePresenter implements Presenter {
 
     protected class GetNoteSubscriber extends BaseSubscriber<NoteEntity> {
 
-        @Override public void onNext(NoteEntity note) {
+        @Override
+        public void onNext(NoteEntity note) {
             NoteEditPresenter.this.hideLoader();
             NoteEditPresenter.this.noteEditView.showNote(note);
         }
@@ -54,7 +55,7 @@ public class NoteEditPresenter extends BasePresenter implements Presenter {
 
     public void updateNote(String title, String content) {
         NoteEntity updatedNote = new NoteEntity(title, content);
-        updatedNote.setId(this.noteEditView.getNoteId());
+        updatedNote.setObjectId(this.noteEditView.getNoteObjectId());
 
         this.noteEditView.showLoader();
         this.updateNoteUseCase.setParams(updatedNote);
@@ -63,23 +64,26 @@ public class NoteEditPresenter extends BasePresenter implements Presenter {
 
     protected class UpdateNoteSubscriber extends BaseSubscriber<NoteEntity> {
 
-        @Override public void onNext(NoteEntity note) {
+        @Override
+        public void onNext(NoteEntity note) {
             NoteEditPresenter.this.hideLoader();
             NoteEditPresenter.this.noteEditView.close();
         }
 
     }
 
-    public void deleteNoteButtonPressed(){
+    public void deleteNoteButtonPressed() {
         this.noteEditView.showLoader();
-        this.deleteNoteUseCase.setParams(this.noteEditView.getNoteId());
+        this.deleteNoteUseCase.setParams(this.noteEditView.getNoteObjectId());
         this.deleteNoteUseCase.execute(new DeleteNoteSubscriber());
     }
 
     protected class DeleteNoteSubscriber extends BaseSubscriber<VoidEntity> {
 
-        @Override public void onNext(VoidEntity ignore) {
+        @Override
+        public void onNext(VoidEntity ignore) {
             NoteEditPresenter.this.hideLoader();
+            NoteEditPresenter.this.noteEditView.onNoteDeleted();
             NoteEditPresenter.this.noteEditView.close();
         }
 

@@ -26,15 +26,21 @@ import static org.mockito.Mockito.verifyZeroInteractions;
 
 public class GetNoteUseCaseTest {
 
-    private static final int FAKE_ID = 1;
+    private static final String FAKE_ID = "3WQrZ0dyrt";
 
-    @Mock private ThreadExecutor mockThreadExecutor;
-    @Mock private PostExecutionThread mockPostExecutionThread;
-    @Mock private NoteRepository mockNoteRepository;
-    @Mock private SessionRepository mockSessionRepository;
+    @Mock
+    private ThreadExecutor mockThreadExecutor;
+    @Mock
+    private PostExecutionThread mockPostExecutionThread;
+    @Mock
+    private NoteRepository mockNoteRepository;
+    @Mock
+    private SessionRepository mockSessionRepository;
 
     @Before
-    public void setup() { MockitoAnnotations.initMocks(this); }
+    public void setup() {
+        MockitoAnnotations.initMocks(this);
+    }
 
     @Test
     public void testGetNoteUseCaseSuccess() {
@@ -49,7 +55,7 @@ public class GetNoteUseCaseTest {
         getNoteUseCase.buildUseCaseObservable().subscribe(testObserver);
 
         Assert.assertEquals(note.getTitle(),
-                ((NoteEntity)(testObserver.getEvents().get(0)).get(0)).getTitle());
+                ((NoteEntity) (testObserver.getEvents().get(0)).get(0)).getTitle());
         verify(mockSessionRepository).getCurrentUser();
         verifyNoMoreInteractions(mockSessionRepository);
         verify(mockNoteRepository).getNote(null, FAKE_ID);

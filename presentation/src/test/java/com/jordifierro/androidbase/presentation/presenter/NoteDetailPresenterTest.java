@@ -18,9 +18,12 @@ import static org.mockito.Mockito.verify;
 
 public class NoteDetailPresenterTest {
 
-    @Mock GetNoteUseCase getNoteUseCase;
-    @Mock NoteDetailView mockNoteDetailView;
-    @Mock Observable mockObservable;
+    @Mock
+    GetNoteUseCase getNoteUseCase;
+    @Mock
+    NoteDetailView mockNoteDetailView;
+    @Mock
+    Observable mockObservable;
 
     private NoteDetailPresenter noteDetailPresenter;
     private NoteDetailPresenter.NoteDetailSubscriber noteDetailSubscriber;
@@ -49,10 +52,10 @@ public class NoteDetailPresenterTest {
 
         this.noteDetailPresenter.resume();
 
-        verify(this.mockNoteDetailView).getNoteId();
+        verify(this.mockNoteDetailView).getNoteObjectId();
         verify(this.mockNoteDetailView).showLoader();
-        verify(this.getNoteUseCase).setParams(any(int.class));
-        verify(this.getNoteUseCase).execute(any(BasePresenter.BaseSubscriber.class));
+        verify(this.getNoteUseCase).setParams(any(String.class));
+        verify(this.getNoteUseCase).execute(any(NoteDetailPresenter.NoteDetailSubscriber.class));
     }
 
     @Test
@@ -77,7 +80,7 @@ public class NoteDetailPresenterTest {
     @SuppressWarnings("unchecked")
     public void testSubscriberOnNext() {
 
-        this.noteDetailSubscriber.onNext(new NoteEntity(1, "", ""));
+        this.noteDetailSubscriber.onNext(new NoteEntity("3WQrZ0dyrt", "", ""));
 
         verify(this.mockNoteDetailView).hideLoader();
         verify(this.mockNoteDetailView).showNote(any(NoteEntity.class));

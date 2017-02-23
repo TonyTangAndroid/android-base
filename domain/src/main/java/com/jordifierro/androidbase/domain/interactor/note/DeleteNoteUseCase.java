@@ -9,7 +9,6 @@ import com.jordifierro.androidbase.domain.repository.SessionRepository;
 
 import javax.inject.Inject;
 
-import io.reactivex.Completable;
 import io.reactivex.Observable;
 
 public class DeleteNoteUseCase extends UseCase<VoidEntity> {
@@ -17,7 +16,7 @@ public class DeleteNoteUseCase extends UseCase<VoidEntity> {
     private NoteRepository noteRepository;
     private SessionRepository sessionRepository;
 
-    private int noteId;
+    private String noteObjectId;
 
     @Inject
     public DeleteNoteUseCase(ThreadExecutor threadExecutor, PostExecutionThread postExecutionThread,
@@ -27,12 +26,12 @@ public class DeleteNoteUseCase extends UseCase<VoidEntity> {
         this.sessionRepository = sessionRepository;
     }
 
-    public void setParams(int noteId) {
-        this.noteId = noteId;
+    public void setParams(String noteObjectId) {
+        this.noteObjectId = noteObjectId;
     }
 
     @Override
     protected Observable<VoidEntity> buildUseCaseObservable() {
-        return this.noteRepository.deleteNote(this.sessionRepository.getCurrentUser(), this.noteId);
+        return this.noteRepository.deleteNote(this.sessionRepository.getCurrentUser(), this.noteObjectId);
     }
 }

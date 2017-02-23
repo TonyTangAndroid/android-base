@@ -1,5 +1,7 @@
 package com.jordifierro.androidbase.domain.interactor.user;
 
+import com.jordifierro.androidbase.domain.entity.UserEntity;
+import com.jordifierro.androidbase.domain.entity.VoidEntity;
 import com.jordifierro.androidbase.domain.executor.PostExecutionThread;
 import com.jordifierro.androidbase.domain.executor.ThreadExecutor;
 import com.jordifierro.androidbase.domain.repository.SessionRepository;
@@ -10,31 +12,64 @@ import org.junit.Test;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 
+import java.util.List;
+
+import io.reactivex.Observable;
+import io.reactivex.observers.TestObserver;
+import io.reactivex.schedulers.TestScheduler;
+
+import static org.junit.Assert.assertEquals;
+import static org.mockito.BDDMockito.given;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.verifyNoMoreInteractions;
 import static org.mockito.Mockito.verifyZeroInteractions;
 
 public class DoLogoutUseCaseTest {
 
-    @Mock private ThreadExecutor mockThreadExecutor;
-    @Mock private PostExecutionThread mockPostExecutionThread;
-    @Mock private UserRepository mockUserRepository;
-    @Mock private SessionRepository mockSessionRepository;
+    @Mock
+    private ThreadExecutor mockThreadExecutor;
+    @Mock
+    private PostExecutionThread mockPostExecutionThread;
+    @Mock
+    private UserRepository mockUserRepository;
+    @Mock
+    private SessionRepository mockSessionRepository;
+
+    @Mock
+    private UserEntity mockUser;
+    @Mock
+    private VoidEntity voidEntity;
+
 
     @Before
-    public void setup() { MockitoAnnotations.initMocks(this); }
+    public void setup() {
+        MockitoAnnotations.initMocks(this);
+    }
 
     @Test
     public void testDoLogoutUseCaseSuccess() {
         DoLogoutUseCase doLogoutUseCase = new DoLogoutUseCase(mockThreadExecutor,
                 mockPostExecutionThread, mockUserRepository, mockSessionRepository);
 
-        doLogoutUseCase.buildUseCaseObservable();
+        given(mockSessionRepository.getCurrentUser()).willReturn(mockUser);
+
+        given(mockUserRepository.logoutUser(mockUser)).willReturn(Observable.just(voidEntity));
+
+        TestObserver<VoidEntity> testObserver = new TestObserver<>();
+        TestScheduler testScheduler = new TestScheduler();
+        final Observable<VoidEntity> voidEntityObservable = doLogoutUseCase.buildUseCaseObservable();
+        voidEntityObservable.observeOn(testScheduler).subscribe(testObserver);
+        testScheduler.triggerActions();
+
+
+        verify(mockUserRepository).logoutUser(mockUser);
+        final List<Object> resultList = testObserver.getEvents().get(0);
+        assertEquals(voidEntity, resultList.get(0));
 
         verify(mockSessionRepository).getCurrentUser();
         verify(mockSessionRepository).invalidateSession();
         verifyNoMoreInteractions(mockSessionRepository);
-        verify(mockUserRepository).logoutUser(null);
+        verify(mockUserRepository).logoutUser(mockUser);
         verifyNoMoreInteractions(mockUserRepository);
         verifyZeroInteractions(mockThreadExecutor);
         verifyZeroInteractions(mockPostExecutionThread);

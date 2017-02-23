@@ -11,7 +11,6 @@ import javax.inject.Inject;
 
 import io.reactivex.Observable;
 import io.reactivex.functions.Action;
-import io.reactivex.functions.Function;
 
 public class DeleteUserUseCase extends UseCase<VoidEntity> {
 

@@ -51,7 +51,7 @@ public class MainActivity extends CleanActivity implements NotesFragment.Listene
     }
 
     @Override
-    public void showNote(int noteId) {
-        startActivity(NoteDetailActivity.getCallingIntent(this, noteId));
+    public void showNote(String noteObjectId) {
+        startActivity(NoteDetailActivity.getCallingIntent(this, noteObjectId));
     }
 }

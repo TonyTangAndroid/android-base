@@ -16,7 +16,7 @@ public class GetNoteUseCase extends UseCase<NoteEntity> {
     private NoteRepository noteRepository;
     private SessionRepository sessionRepository;
 
-    private int noteId;
+    private String noteObjectId;
 
     @Inject
     public GetNoteUseCase(ThreadExecutor threadExecutor, PostExecutionThread postExecutionThread,
@@ -26,12 +26,12 @@ public class GetNoteUseCase extends UseCase<NoteEntity> {
         this.sessionRepository = sessionRepository;
     }
 
-    public void setParams(int noteId) {
-        this.noteId = noteId;
+    public void setParams(String noteObjectId) {
+        this.noteObjectId = noteObjectId;
     }
 
     @Override
     protected Observable<NoteEntity> buildUseCaseObservable() {
-        return this.noteRepository.getNote(this.sessionRepository.getCurrentUser(), this.noteId);
+        return this.noteRepository.getNote(this.sessionRepository.getCurrentUser(), this.noteObjectId);
     }
 }

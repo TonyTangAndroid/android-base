@@ -16,15 +16,21 @@ import static org.mockito.Mockito.verifyZeroInteractions;
 
 public class DeleteNoteUseCaseTest {
 
-    private static final int FAKE_ID = 1;
+    private static final String FAKE_ID = "3WQrZ0dyrt";
 
-    @Mock private ThreadExecutor mockThreadExecutor;
-    @Mock private PostExecutionThread mockPostExecutionThread;
-    @Mock private NoteRepository mockNoteRepository;
-    @Mock private SessionRepository mockSessionRepository;
+    @Mock
+    private ThreadExecutor mockThreadExecutor;
+    @Mock
+    private PostExecutionThread mockPostExecutionThread;
+    @Mock
+    private NoteRepository mockNoteRepository;
+    @Mock
+    private SessionRepository mockSessionRepository;
 
     @Before
-    public void setup() { MockitoAnnotations.initMocks(this); }
+    public void setup() {
+        MockitoAnnotations.initMocks(this);
+    }
 
     @Test
     public void testDeleteNoteUseCaseSuccess() {

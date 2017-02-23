@@ -15,14 +15,25 @@ import okhttp3.Response;
 @Singleton
 public class HttpInterceptor implements Interceptor {
 
+
+    public static final String X_PARSE_APPLICATION_ID = "X-Parse-Application-Id";
+    public static final String X_PARSE_REST_API_KEY = "X-Parse-REST-API-Key";
+    public static final String X_PARSE_REVOCABLE_SESSION = "X-Parse-Revocable-Session";
+    public static final String ACCEPT_LANGUAGE = "Accept-Language";
+    public static final String CONTENT_TYPE = "Content-Type";
+    public static final String APPLICATION_JSON = "application/json";
+
     @Inject
-    public HttpInterceptor() {}
+    public HttpInterceptor() {
+    }
 
     @Override
     public Response intercept(Chain chain) throws IOException {
         Request request = chain.request().newBuilder()
-                .addHeader("Accept-Language", Locale.getDefault().getLanguage())
-                .addHeader("Accept", RestApi.VERSION_HEADER)
+                .addHeader(ACCEPT_LANGUAGE, Locale.getDefault().getLanguage())
+                .addHeader(X_PARSE_APPLICATION_ID, RestApi.PARSE_APPLICATION_ID_VALUE)
+                .addHeader(X_PARSE_REVOCABLE_SESSION, "1")
+                .addHeader(CONTENT_TYPE, APPLICATION_JSON)
                 .build();
         return chain.proceed(request);
     }

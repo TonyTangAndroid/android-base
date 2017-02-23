@@ -1,7 +1,7 @@
 package com.jordifierro.androidbase.presentation.presenter;
 
-import com.jordifierro.androidbase.domain.entity.MessageEntity;
 import com.jordifierro.androidbase.domain.entity.UserEntity;
+import com.jordifierro.androidbase.domain.entity.VoidEntity;
 import com.jordifierro.androidbase.domain.interactor.user.ResetPasswordUseCase;
 import com.jordifierro.androidbase.presentation.dependency.ActivityScope;
 import com.jordifierro.androidbase.presentation.view.BaseView;
@@ -12,8 +12,8 @@ import javax.inject.Inject;
 @ActivityScope
 public class ResetPasswordPresenter extends BasePresenter implements Presenter {
 
-    private ResetPasswordUseCase resetPasswordUseCase;
     ResetPasswordView resetPasswordView;
+    private ResetPasswordUseCase resetPasswordUseCase;
 
     @Inject
     public ResetPasswordPresenter(ResetPasswordUseCase resetPasswordUseCase) {
@@ -35,20 +35,17 @@ public class ResetPasswordPresenter extends BasePresenter implements Presenter {
 
     public void resetPassword(String email, String newPassword, String newPasswordConfirmation) {
         UserEntity user = new UserEntity(email);
-        user.setNewPassword(newPassword);
-        user.setNewPasswordConfirmation(newPasswordConfirmation);
-
         this.showLoader();
         this.resetPasswordUseCase.setParams(user);
         this.resetPasswordUseCase.execute(new ResetPasswordSubscriber());
     }
 
-    protected class ResetPasswordSubscriber extends BaseSubscriber<MessageEntity> {
+    protected class ResetPasswordSubscriber extends BaseSubscriber<VoidEntity> {
 
         @Override
-        public void onNext(MessageEntity message) {
+        public void onNext(VoidEntity message) {
             ResetPasswordPresenter.this.hideLoader();
-            ResetPasswordPresenter.this.resetPasswordView.showMessage(message.getMessage());
+            ResetPasswordPresenter.this.resetPasswordView.showMessage("Success");
             ResetPasswordPresenter.this.resetPasswordView.close();
         }
 

@@ -9,7 +9,6 @@ import android.test.suitebuilder.annotation.SmallTest;
 import android.widget.TextView;
 
 import com.jordifierro.androidbase.presentation.R;
-import com.jordifierro.androidbase.presentation.view.activity.SettingsActivity;
 import com.jordifierro.androidbase.presentation.view.fragment.SettingsFragment;
 
 import org.junit.Before;
@@ -17,15 +16,12 @@ import org.junit.Rule;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
-import static android.support.test.espresso.Espresso.closeSoftKeyboard;
 import static android.support.test.espresso.Espresso.onView;
 import static android.support.test.espresso.action.ViewActions.click;
-import static android.support.test.espresso.action.ViewActions.pressBack;
 import static android.support.test.espresso.assertion.ViewAssertions.matches;
 import static android.support.test.espresso.intent.Intents.intended;
 import static android.support.test.espresso.intent.matcher.IntentMatchers.hasComponent;
 import static android.support.test.espresso.matcher.ViewMatchers.isAssignableFrom;
-import static android.support.test.espresso.matcher.ViewMatchers.withHint;
 import static android.support.test.espresso.matcher.ViewMatchers.withId;
 import static android.support.test.espresso.matcher.ViewMatchers.withParent;
 import static android.support.test.espresso.matcher.ViewMatchers.withText;
@@ -44,12 +40,12 @@ public class SettingsActivityTest {
     @Before
     public void setUp() throws Exception {
         this.settingsFragment = ((SettingsFragment) this.activityTestRule.getActivity()
-                                .getFragmentManager().findFragmentById(R.id.fragment_container));
+                .getFragmentManager().findFragmentById(R.id.fragment_container));
     }
 
     @Test
     public void testViewElements() throws PackageManager.NameNotFoundException {
-        onView(allOf(isAssignableFrom(TextView.class),withParent(isAssignableFrom(Toolbar.class))))
+        onView(allOf(isAssignableFrom(TextView.class), withParent(isAssignableFrom(Toolbar.class))))
                 .check(matches(withText(R.string.title_activity_settings)));
         onView(withId(R.id.tv_logout)).check(matches(withText(R.string.textview_logout)));
         onView(withId(R.id.tv_delete_account))

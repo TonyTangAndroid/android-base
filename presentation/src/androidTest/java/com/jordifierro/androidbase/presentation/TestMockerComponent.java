@@ -8,4 +8,5 @@ import dagger.Component;
 
 @ActivityScope
 @Component(modules = TestMockerModule.class, dependencies = ApplicationComponent.class)
-public interface TestMockerComponent extends FragmentInjector {}
+public interface TestMockerComponent extends FragmentInjector {
+}

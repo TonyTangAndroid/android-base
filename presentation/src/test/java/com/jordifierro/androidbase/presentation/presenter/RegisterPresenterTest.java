@@ -18,9 +18,12 @@ import static org.mockito.Mockito.verify;
 
 public class RegisterPresenterTest {
 
-    @Mock CreateUserUseCase mockCreateUserUseCase;
-    @Mock RegisterView mockRegisterView;
-    @Mock Observable mockObservable;
+    @Mock
+    CreateUserUseCase mockCreateUserUseCase;
+    @Mock
+    RegisterView mockRegisterView;
+    @Mock
+    Observable mockObservable;
 
     private RegisterPresenter registerPresenter;
     private RegisterPresenter.RegisterSubscriber registerSubscriber;
@@ -50,7 +53,7 @@ public class RegisterPresenterTest {
 
         verify(this.mockRegisterView).showLoader();
         verify(this.mockCreateUserUseCase).setParams(any(UserEntity.class));
-        verify(this.mockCreateUserUseCase).execute(any(BasePresenter.BaseSubscriber.class));
+        verify(this.mockCreateUserUseCase).execute(any(RegisterPresenter.RegisterSubscriber.class));
     }
 
     @Test

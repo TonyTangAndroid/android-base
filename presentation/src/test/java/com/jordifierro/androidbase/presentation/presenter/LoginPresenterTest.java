@@ -18,9 +18,12 @@ import static org.mockito.Mockito.verify;
 
 public class LoginPresenterTest {
 
-    @Mock DoLoginUseCase mockDoLoginUseCase;
-    @Mock LoginView mockLoginView;
-    @Mock Observable mockObservable;
+    @Mock
+    DoLoginUseCase mockDoLoginUseCase;
+    @Mock
+    LoginView mockLoginView;
+    @Mock
+    Observable mockObservable;
 
     private LoginPresenter loginPresenter;
     private LoginPresenter.LoginSubscriber loginSubscriber;
@@ -50,7 +53,7 @@ public class LoginPresenterTest {
 
         verify(this.mockLoginView).showLoader();
         verify(this.mockDoLoginUseCase).setParams(any(UserEntity.class));
-        verify(this.mockDoLoginUseCase).execute(any(BasePresenter.BaseSubscriber.class));
+        verify(this.mockDoLoginUseCase).execute(any(LoginPresenter.LoginSubscriber.class));
     }
 
     @Test

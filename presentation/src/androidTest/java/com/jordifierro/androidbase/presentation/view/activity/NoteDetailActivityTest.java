@@ -1,7 +1,6 @@
 package com.jordifierro.androidbase.presentation.view.activity;
 
 import android.content.Intent;
-import android.content.pm.PackageManager;
 import android.support.test.espresso.intent.Intents;
 import android.support.test.rule.ActivityTestRule;
 import android.support.test.runner.AndroidJUnit4;
@@ -37,6 +36,7 @@ import static org.hamcrest.CoreMatchers.allOf;
 @SmallTest
 public class NoteDetailActivityTest {
 
+    public static final String TEST_NOTE_OBJECT_ID = "3WQrZ0dyrt";
     @Rule
     public final ActivityTestRule<NoteDetailActivity> activityTestRule = new ActivityTestRule<>(
             NoteDetailActivity.class, true, false);
@@ -44,20 +44,20 @@ public class NoteDetailActivityTest {
 
     @Before
     public void setUp() throws Exception {
-        activityTestRule.launchActivity(new Intent().putExtra(NoteDetailActivity.PARAM_NOTE_ID, 2));
+        activityTestRule.launchActivity(new Intent().putExtra(NoteDetailActivity.PARAM_NOTE_ID, TEST_NOTE_OBJECT_ID));
         this.noteDetailFragment = ((NoteDetailFragment) this.activityTestRule.getActivity()
-                                .getFragmentManager().findFragmentById(R.id.fragment_container));
+                .getFragmentManager().findFragmentById(R.id.fragment_container));
     }
 
     @Test
     public void testViewElements() {
-        onView(Matchers.allOf(isAssignableFrom(TextView.class),withParent(isAssignableFrom(Toolbar.class))))
+        onView(Matchers.allOf(isAssignableFrom(TextView.class), withParent(isAssignableFrom(Toolbar.class))))
                 .check(matches(withText(R.string.title_activity_note_detail)));
     }
 
     @Test
     public void testGetNoteId() {
-        assertEquals(2, this.noteDetailFragment.getNoteId());
+        assertEquals(TEST_NOTE_OBJECT_ID, this.noteDetailFragment.getNoteObjectId());
     }
 
     @Test
@@ -83,7 +83,7 @@ public class NoteDetailActivityTest {
 
         intended(allOf(
                 hasComponent(NoteEditActivity.class.getName()),
-                hasExtra(NoteEditActivity.PARAM_NOTE_ID, 2)));
+                hasExtra(NoteEditActivity.PARAM_NOTE_ID, TEST_NOTE_OBJECT_ID)));
         Intents.release();
     }
 

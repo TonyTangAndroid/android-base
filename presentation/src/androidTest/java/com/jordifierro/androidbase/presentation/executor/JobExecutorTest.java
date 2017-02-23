@@ -43,7 +43,7 @@ public class JobExecutorTest extends InstrumentationTestCase {
         assertEquals(JobExecutor.INITIAL_POOL_SIZE, this.threadPoolExecutor.getCorePoolSize());
         assertEquals(JobExecutor.MAX_POOL_SIZE, this.threadPoolExecutor.getMaximumPoolSize());
         assertEquals(JobExecutor.KEEP_ALIVE_TIME,
-                        this.threadPoolExecutor.getKeepAliveTime(JobExecutor.KEEP_ALIVE_TIME_UNIT));
+                this.threadPoolExecutor.getKeepAliveTime(JobExecutor.KEEP_ALIVE_TIME_UNIT));
     }
 
     public void testJobThreadFactory() {

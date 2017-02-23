@@ -17,10 +17,14 @@ import static org.mockito.Mockito.verify;
 
 public class SettingsPresenterTest {
 
-    @Mock DoLogoutUseCase mockDoLogoutUseCase;
-    @Mock DeleteUserUseCase mockDeleteUserUseCase;
-    @Mock SettingsView mockSettingsView;
-    @Mock Observable mockObservable;
+    @Mock
+    DoLogoutUseCase mockDoLogoutUseCase;
+    @Mock
+    DeleteUserUseCase mockDeleteUserUseCase;
+    @Mock
+    SettingsView mockSettingsView;
+    @Mock
+    Observable mockObservable;
 
     private SettingsPresenter settingsPresenter;
 
@@ -48,7 +52,7 @@ public class SettingsPresenterTest {
 
         this.settingsPresenter.logoutUserButtonPressed();
 
-        verify(this.mockDoLogoutUseCase).execute(any(BasePresenter.BaseSubscriber.class));
+        verify(this.mockDoLogoutUseCase).execute(any(SettingsPresenter.SettingsSubscriber.class));
         verify(this.mockSettingsView).closeAndDisplayLogin();
     }
 
@@ -57,7 +61,7 @@ public class SettingsPresenterTest {
 
         this.settingsPresenter.deleteAccountButtonPressed();
 
-        verify(this.mockDeleteUserUseCase).execute(any(BasePresenter.BaseSubscriber.class));
+        verify(this.mockDeleteUserUseCase).execute(any(SettingsPresenter.SettingsSubscriber.class));
         verify(this.mockSettingsView).closeAndDisplayLogin();
     }
 

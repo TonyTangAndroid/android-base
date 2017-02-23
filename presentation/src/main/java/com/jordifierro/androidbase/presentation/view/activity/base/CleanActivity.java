@@ -31,7 +31,7 @@ public abstract class CleanActivity extends BaseActivity implements BaseView {
 
     private void initializeActivityComponent() {
         if (this.fragmentInjector == null) {
-            this.fragmentInjector = ((BaseApplication)getApplication()).getFragmentInjector();
+            this.fragmentInjector = ((BaseApplication) getApplication()).getFragmentInjector();
         }
     }
 
@@ -40,6 +40,7 @@ public abstract class CleanActivity extends BaseActivity implements BaseView {
         if (error instanceof RestApiErrorException) {
             switch (((RestApiErrorException) error).getStatusCode()) {
                 case RestApiErrorException.UNAUTHORIZED:
+                case RestApiErrorException.INVALID_SESSION_TOKEN:
                     closeAndDisplayLogin();
                     break;
                 case RestApiErrorException.UPGRADE_REQUIRED:
@@ -48,8 +49,7 @@ public abstract class CleanActivity extends BaseActivity implements BaseView {
                 default:
                     showMessage(error.getMessage());
             }
-        }
-        else Toast.makeText(context(), getResources().getString(R.string.message_error),
+        } else Toast.makeText(context(), getResources().getString(R.string.message_error),
                 Toast.LENGTH_LONG).show();
     }
 

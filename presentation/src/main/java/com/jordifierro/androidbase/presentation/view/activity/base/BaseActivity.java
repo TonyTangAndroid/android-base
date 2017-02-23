@@ -4,29 +4,22 @@ import android.app.Fragment;
 import android.app.FragmentTransaction;
 import android.app.ProgressDialog;
 import android.content.Context;
-import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
-import android.widget.Toast;
 
-import com.jordifierro.androidbase.data.net.error.RestApiErrorException;
-import com.jordifierro.androidbase.presentation.BaseApplication;
 import com.jordifierro.androidbase.presentation.R;
-import com.jordifierro.androidbase.presentation.dependency.component.FragmentInjector;
-import com.jordifierro.androidbase.presentation.view.BaseView;
-import com.jordifierro.androidbase.presentation.view.activity.LoginActivity;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
 
 public abstract class BaseActivity extends AppCompatActivity {
 
+    @Bind(R.id.toolbar)
+    Toolbar toolbar;
     private ProgressDialog progressDialog;
-
-    @Bind(R.id.toolbar) Toolbar toolbar;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -39,7 +32,7 @@ public abstract class BaseActivity extends AppCompatActivity {
 
     protected abstract void initializeActivity(Bundle savedInstanceState);
 
-    protected void initializeToolbar(){
+    protected void initializeToolbar() {
         if (this.useToolbar()) {
             setSupportActionBar(this.toolbar);
             if (this.useBackToolbar()) {
@@ -57,8 +50,13 @@ public abstract class BaseActivity extends AppCompatActivity {
         } else toolbar.setVisibility(View.GONE);
     }
 
-    protected boolean useToolbar() { return true; }
-    protected boolean useBackToolbar() { return true; }
+    protected boolean useToolbar() {
+        return true;
+    }
+
+    protected boolean useBackToolbar() {
+        return true;
+    }
 
     protected void addFragment(int containerViewId, Fragment fragment) {
         FragmentTransaction fragmentTransaction = this.getFragmentManager().beginTransaction();

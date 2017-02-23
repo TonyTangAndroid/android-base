@@ -19,6 +19,8 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
     }
+
+
     lintOptions {
         abortOnError false
     }
@@ -28,11 +30,11 @@ android {
     }
 }
 
-task copyResToDebugClasses(type: Copy){
+task copyResToDebugClasses(type: Copy) {
     from "${projectDir}/src/test/res"
     into "${buildDir}/intermediates/classes/test/debug/res"
 }
-task copyResToReleaseClasses(type: Copy){
+task copyResToReleaseClasses(type: Copy) {
     from "${projectDir}/src/test/res"
     into "${buildDir}/intermediates/classes/test/release/res"
 }
@@ -50,6 +52,9 @@ dependencies {
     compile dataDependencies.retrofit
     compile dataDependencies.retrofitGson
     compile dataDependencies.retrofitRxJava2
+    compile dataDependencies.okhttp3_log
+    compile dataDependencies.okhttp3
+    compile dataDependencies.okhttp3_mockwebserver
 
     testCompile dataTestDependencies.junit
     testCompile dataTestDependencies.mockito

@@ -1,7 +1,9 @@
 package com.jordifierro.androidbase.data.repository;
 
 import com.jordifierro.androidbase.data.net.RestApi;
+import com.jordifierro.androidbase.domain.entity.CreatedWrapper;
 import com.jordifierro.androidbase.domain.entity.NoteEntity;
+import com.jordifierro.androidbase.domain.entity.UpdatedWrapper;
 import com.jordifierro.androidbase.domain.entity.UserEntity;
 import com.jordifierro.androidbase.domain.entity.VoidEntity;
 import com.jordifierro.androidbase.domain.repository.NoteRepository;
@@ -12,8 +14,6 @@ import javax.inject.Inject;
 import javax.inject.Singleton;
 
 import io.reactivex.Observable;
-import io.reactivex.functions.Function;
-import retrofit2.Response;
 
 @Singleton
 public class NoteDataRepository extends RestApiRepository implements NoteRepository {
@@ -26,8 +26,8 @@ public class NoteDataRepository extends RestApiRepository implements NoteReposit
     }
 
     @Override
-    public Observable<NoteEntity> createNote(UserEntity user, final NoteEntity note) {
-        return this.restApi.createNote(user.getAuthToken(), note)
+    public Observable<CreatedWrapper> createNote(UserEntity user, final NoteEntity note) {
+        return this.restApi.createNote(user.getSessionToken(), note)
                 .map(noteEntityResponse -> {
                     handleResponseError(noteEntityResponse);
                     return noteEntityResponse.body();
@@ -35,8 +35,8 @@ public class NoteDataRepository extends RestApiRepository implements NoteReposit
     }
 
     @Override
-    public Observable<NoteEntity> getNote(UserEntity user, int noteId) {
-        return this.restApi.getNote(user.getAuthToken(), noteId)
+    public Observable<NoteEntity> getNote(UserEntity user, String noteObjectId) {
+        return this.restApi.getNote(user.getSessionToken(), noteObjectId)
                 .map(noteEntityResponse -> {
                     handleResponseError(noteEntityResponse);
                     return noteEntityResponse.body();
@@ -45,16 +45,16 @@ public class NoteDataRepository extends RestApiRepository implements NoteReposit
 
     @Override
     public Observable<List<NoteEntity>> getNotes(UserEntity user) {
-        return this.restApi.getNotes(user.getAuthToken())
+        return this.restApi.getNotes(user.getSessionToken())
                 .map(listResponse -> {
                     handleResponseError(listResponse);
-                    return listResponse.body();
+                    return listResponse.body().getResults();
                 });
     }
 
     @Override
-    public Observable<NoteEntity> updateNote(UserEntity user, NoteEntity note) {
-        return this.restApi.updateNote(user.getAuthToken(), note.getId(), note)
+    public Observable<UpdatedWrapper> updateNote(UserEntity user, NoteEntity note) {
+        return this.restApi.updateNote(user.getSessionToken(), note.getObjectId(), note)
                 .map(noteEntityResponse -> {
                     handleResponseError(noteEntityResponse);
                     return noteEntityResponse.body();
@@ -62,11 +62,11 @@ public class NoteDataRepository extends RestApiRepository implements NoteReposit
     }
 
     @Override
-    public Observable<VoidEntity> deleteNote(UserEntity user, int noteId) {
-        return this.restApi.deleteNote(user.getAuthToken(), noteId)
+    public Observable<VoidEntity> deleteNote(UserEntity user, String noteObjectId) {
+        return this.restApi.deleteNote(user.getSessionToken(), noteObjectId)
                 .map(response -> {
                     handleResponseError(response);
-                    return new VoidEntity();
+                    return response.body();
                 });
     }
 }

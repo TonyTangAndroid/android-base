@@ -42,21 +42,21 @@ public class NoteEditActivityTest {
 
     @Before
     public void setUp() throws Exception {
-        activityTestRule.launchActivity(new Intent().putExtra(NoteEditActivity.PARAM_NOTE_ID, 2));
+        activityTestRule.launchActivity(new Intent().putExtra(NoteEditActivity.PARAM_NOTE_ID, "2"));
         this.noteEditFragment = ((NoteEditFragment) this.activityTestRule.getActivity()
-                                .getFragmentManager().findFragmentById(R.id.fragment_container));
+                .getFragmentManager().findFragmentById(R.id.fragment_container));
     }
 
     @Test
     public void testViewElements() throws PackageManager.NameNotFoundException {
-        onView(allOf(isAssignableFrom(TextView.class),withParent(isAssignableFrom(Toolbar.class))))
+        onView(allOf(isAssignableFrom(TextView.class), withParent(isAssignableFrom(Toolbar.class))))
                 .check(matches(withText(R.string.title_activity_note_edit)));
         onView(withId(R.id.btn_submit)).check(matches(withText(R.string.button_save)));
     }
 
     @Test
     public void testGetNoteId() {
-        assertEquals(2, this.noteEditFragment.getNoteId());
+        assertEquals("2", this.noteEditFragment.getNoteObjectId());
     }
 
     @Test

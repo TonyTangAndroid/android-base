@@ -8,18 +8,18 @@ import android.view.Menu;
 import android.view.MenuItem;
 
 import com.jordifierro.androidbase.presentation.R;
-import com.jordifierro.androidbase.presentation.view.activity.base.BaseActivity;
 import com.jordifierro.androidbase.presentation.view.activity.base.CleanActivity;
 import com.jordifierro.androidbase.presentation.view.fragment.NoteEditFragment;
 
 public class NoteEditActivity extends CleanActivity implements NoteEditFragment.Listener {
 
     public static final String PARAM_NOTE_ID = "param_note_id";
+    public static final int RESULT_NOTE_DELETED = RESULT_OK + 1;
 
-    private int noteId;
+    private String noteId;
     private NoteEditFragment noteEditFragment;
 
-    public static Intent getCallingIntent(Context context, int noteId) {
+    public static Intent getCallingIntent(Context context, String noteId) {
         Intent callingIntent = new Intent(context, NoteEditActivity.class);
         callingIntent.putExtra(PARAM_NOTE_ID, noteId);
         return callingIntent;
@@ -28,23 +28,27 @@ public class NoteEditActivity extends CleanActivity implements NoteEditFragment.
     @Override
     protected void initializeActivity(Bundle savedInstanceState) {
         if (savedInstanceState == null) {
-            this.noteId = getIntent().getIntExtra(PARAM_NOTE_ID, -1);
+            this.noteId = getIntent().getStringExtra(PARAM_NOTE_ID);
             if (this.noteEditFragment == null) this.noteEditFragment = new NoteEditFragment();
             addFragment(R.id.fragment_container, this.noteEditFragment);
-        }
-        else this.noteId = savedInstanceState.getInt(PARAM_NOTE_ID);
+        } else this.noteId = savedInstanceState.getString(PARAM_NOTE_ID);
     }
 
     @Override
     protected void onSaveInstanceState(Bundle outState) {
         if (outState != null) {
-            outState.putInt(PARAM_NOTE_ID, this.noteId);
+            outState.putString(PARAM_NOTE_ID, this.noteId);
         }
         super.onSaveInstanceState(outState);
     }
 
-    public int getNoteId() {
+    public String getNoteObjectId() {
         return this.noteId;
+    }
+
+    @Override
+    public void onNoteDeleted() {
+        setResult(RESULT_NOTE_DELETED);
     }
 
     @Override

@@ -2,27 +2,27 @@ package com.jordifierro.androidbase.data.net.error;
 
 public class ResponseErrorEntity {
 
-    private String message;
-    private int status;
+    private String error;
+    private int code;
 
-    public ResponseErrorEntity(String message, int status) {
-        this.message = message;
-        this.status = status;
+    public ResponseErrorEntity(String error, int code) {
+        this.error = error;
+        this.code = code;
     }
 
-    public String getMessage() {
-        return message;
+    public String getError() {
+        return error;
     }
 
-    public void setMessage(String message) {
-        this.message = message;
+    public void setError(String error) {
+        this.error = error;
     }
 
-    public int getStatus() {
-        return status;
+    public int getCode() {
+        return code;
     }
 
-    public void setStatus(int status) {
-        this.status = status;
+    public void setCode(int code) {
+        this.code = code;
     }
 }

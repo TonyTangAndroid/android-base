@@ -18,9 +18,12 @@ import static org.mockito.Mockito.verify;
 
 public class NoteCreatePresenterTest {
 
-    @Mock CreateNoteUseCase createNoteUseCase;
-    @Mock NoteCreateView mockNoteCreateView;
-    @Mock Observable mockObservable;
+    @Mock
+    CreateNoteUseCase createNoteUseCase;
+    @Mock
+    NoteCreateView mockNoteCreateView;
+    @Mock
+    Observable mockObservable;
 
     private NoteCreatePresenter noteCreatePresenter;
     private NoteCreatePresenter.NoteCreateSubscriber noteCreateSubscriber;
@@ -64,7 +67,7 @@ public class NoteCreatePresenterTest {
     @SuppressWarnings("unchecked")
     public void testSubscriberOnNext() {
 
-        this.noteCreateSubscriber.onNext(new NoteEntity(1, "", ""));
+        this.noteCreateSubscriber.onNext(new NoteEntity("3WQrZ0dyrt", "", ""));
 
         verify(this.mockNoteCreateView).hideLoader();
         verify(this.mockNoteCreateView).close();

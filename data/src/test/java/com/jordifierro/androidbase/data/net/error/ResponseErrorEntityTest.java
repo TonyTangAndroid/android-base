@@ -15,23 +15,23 @@ public class ResponseErrorEntityTest {
 
     @Before
     public void setup() {
-        this.error =  new ResponseErrorEntity(FAKE_MESSAGE, FAKE_STATUS);
+        this.error = new ResponseErrorEntity(FAKE_MESSAGE, FAKE_STATUS);
     }
 
     @Test
     public void tesErrorConstructor() {
-        assertThat(this.error.getMessage(), is(FAKE_MESSAGE));
-        assertThat(this.error.getStatus(), is(FAKE_STATUS));
+        assertThat(this.error.getError(), is(FAKE_MESSAGE));
+        assertThat(this.error.getCode(), is(FAKE_STATUS));
     }
 
     @Test
     public void testNoteSetters() {
 
-        this.error.setMessage("Another message");
-        this.error.setStatus(200);
+        this.error.setError("Another message");
+        this.error.setCode(200);
 
-        assertThat(this.error.getMessage(), is("Another message"));
-        assertThat(this.error.getStatus(), is(200));
+        assertThat(this.error.getError(), is("Another message"));
+        assertThat(this.error.getCode(), is(200));
     }
 
 }

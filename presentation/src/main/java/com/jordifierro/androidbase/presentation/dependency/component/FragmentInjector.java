@@ -14,12 +14,19 @@ import com.jordifierro.androidbase.presentation.view.fragment.SettingsFragment;
 public interface FragmentInjector {
 
     void inject(LoginFragment loginFragment);
+
     void inject(RegisterFragment registerFragment);
+
     void inject(NotesFragment notesFragment);
+
     void inject(NoteDetailFragment noteDetailFragment);
+
     void inject(NoteCreateFragment noteCreateFragment);
+
     void inject(NoteEditFragment noteEditFragment);
+
     void inject(SettingsFragment settingsFragment);
+
     void inject(ResetPasswordFragment resetPasswordFragment);
     void inject(NotesViewPagerFragment NotesViewPagerFragment);
     void inject(NoteDetailFragmentForPager  noteDetailFragmentForPager);

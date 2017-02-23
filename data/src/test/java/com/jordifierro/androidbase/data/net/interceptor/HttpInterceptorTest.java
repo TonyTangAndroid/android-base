@@ -22,13 +22,13 @@ public class HttpInterceptorTest {
         mockWebServer.start();
         mockWebServer.enqueue(new MockResponse());
 
-        OkHttpClient okHttpClient = new OkHttpClient().newBuilder()
-                .addInterceptor(new HttpInterceptor()).build();
+        OkHttpClient okHttpClient = new OkHttpClient().newBuilder().addInterceptor(new HttpInterceptor()).build();
         okHttpClient.newCall(new Request.Builder().url(mockWebServer.url("/")).build()).execute();
 
         RecordedRequest request = mockWebServer.takeRequest();
         assertEquals(Locale.getDefault().getLanguage(), request.getHeader("Accept-Language"));
-        assertEquals(RestApi.VERSION_HEADER, request.getHeader("Accept"));
+        assertEquals(RestApi.PARSE_APPLICATION_ID_VALUE, request.getHeader(HttpInterceptor.X_PARSE_APPLICATION_ID));
+        assertEquals(HttpInterceptor.APPLICATION_JSON, request.getHeader(HttpInterceptor.CONTENT_TYPE));
 
         mockWebServer.shutdown();
     }

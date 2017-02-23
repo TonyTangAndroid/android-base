@@ -1,9 +1,7 @@
 package com.jordifierro.androidbase.presentation.view.fragment;
 
 import android.app.Fragment;
-import android.app.ProgressDialog;
 import android.os.Bundle;
-import android.support.v7.widget.Toolbar;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -12,7 +10,6 @@ import android.webkit.WebView;
 import android.widget.ProgressBar;
 
 import com.jordifierro.androidbase.presentation.R;
-import com.jordifierro.androidbase.presentation.view.activity.base.WebViewActivity;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
@@ -41,7 +38,7 @@ public class WebViewFragment extends Fragment {
                 if (progress == 100) WebViewFragment.this.hideProgressBar();
             }
         });
-        webView.loadUrl(((Listener)getActivity()).getUrl());
+        webView.loadUrl(((Listener) getActivity()).getUrl());
     }
 
     private void hideProgressBar() {

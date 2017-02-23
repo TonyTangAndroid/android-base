@@ -1,18 +1,28 @@
 package com.jordifierro.androidbase.domain.entity;
 
+import com.google.gson.annotations.Expose;
+
 public class UserEntity {
 
+
     private String email;
-    private String authToken;
+    private String username;
     private String password;
-    private String passwordConfirmation;
-    private String newPassword;
-    private String newPasswordConfirmation;
+    @Expose(deserialize = false)
+    private String objectId;
+    @Expose(deserialize = false)
+    private String createdAt;
+    @Expose(deserialize = false)
+    private String updatedAt;
+    @Expose(deserialize = false)
+    private String sessionToken;
 
-    public UserEntity() {}
+    public UserEntity() {
+    }
 
-    public UserEntity(String email) {
-        this.email = email;
+    public UserEntity(String username) {
+        this.username = username;
+        this.email = username;
     }
 
     public String getEmail() {
@@ -21,14 +31,48 @@ public class UserEntity {
 
     public void setEmail(String email) {
         this.email = email;
+        this.username = email;
     }
 
-    public String getAuthToken() {
-        return authToken;
+    public String getCreatedAt() {
+        return createdAt;
     }
 
-    public void setAuthToken(String authToken) {
-        this.authToken = authToken;
+    public void setCreatedAt(String createdAt) {
+        this.createdAt = createdAt;
+    }
+
+    public String getUpdatedAt() {
+        return updatedAt;
+    }
+
+    public void setUpdatedAt(String updatedAt) {
+        this.updatedAt = updatedAt;
+    }
+
+    public String getObjectId() {
+        return objectId;
+    }
+
+    public void setObjectId(String objectId) {
+        this.objectId = objectId;
+    }
+
+    public String getUsername() {
+        return username;
+    }
+
+    public void setUsername(String username) {
+        this.username = username;
+        this.email = username;
+    }
+
+    public String getSessionToken() {
+        return sessionToken;
+    }
+
+    public void setSessionToken(String sessionToken) {
+        this.sessionToken = sessionToken;
     }
 
     public String getPassword() {
@@ -39,27 +83,4 @@ public class UserEntity {
         this.password = password;
     }
 
-    public String getPasswordConfirmation() {
-        return passwordConfirmation;
-    }
-
-    public void setPasswordConfirmation(String passwordConfirmation) {
-        this.passwordConfirmation = passwordConfirmation;
-    }
-
-    public String getNewPassword() {
-        return newPassword;
-    }
-
-    public void setNewPassword(String newPassword) {
-        this.newPassword = newPassword;
-    }
-
-    public String getNewPasswordConfirmation() {
-        return newPasswordConfirmation;
-    }
-
-    public void setNewPasswordConfirmation(String newPasswordConfirmation) {
-        this.newPasswordConfirmation = newPasswordConfirmation;
-    }
 }

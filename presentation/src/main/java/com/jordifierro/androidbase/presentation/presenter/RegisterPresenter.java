@@ -11,8 +11,8 @@ import javax.inject.Inject;
 @ActivityScope
 public class RegisterPresenter extends BasePresenter implements Presenter {
 
-    private CreateUserUseCase createUserUseCase;
     RegisterView registerView;
+    private CreateUserUseCase createUserUseCase;
 
     @Inject
     public RegisterPresenter(CreateUserUseCase createUserUseCase) {
@@ -35,8 +35,6 @@ public class RegisterPresenter extends BasePresenter implements Presenter {
     public void registerUser(String email, String password, String passwordConfirmation) {
         UserEntity user = new UserEntity(email);
         user.setPassword(password);
-        user.setPasswordConfirmation(passwordConfirmation);
-
         this.showLoader();
         this.createUserUseCase.setParams(user);
         this.createUserUseCase.execute(new RegisterSubscriber());

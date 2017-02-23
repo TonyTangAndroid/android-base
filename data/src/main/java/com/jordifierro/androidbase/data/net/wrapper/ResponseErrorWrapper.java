@@ -1,20 +1,30 @@
 package com.jordifierro.androidbase.data.net.wrapper;
 
-import com.jordifierro.androidbase.data.net.error.ResponseErrorEntity;
-
 public class ResponseErrorWrapper {
 
-    private ResponseErrorEntity error;
 
-    public ResponseErrorWrapper(ResponseErrorEntity error) {
+    private String error;
+    private int code;
+
+    public ResponseErrorWrapper(String error, int code) {
         this.error = error;
+        this.code = code;
     }
 
-    public ResponseErrorEntity getError() {
+    public String getError() {
         return error;
     }
 
-    public void setError(ResponseErrorEntity error) {
+    public void setError(String error) {
         this.error = error;
     }
+
+    public int getCode() {
+        return code;
+    }
+
+    public void setCode(int code) {
+        this.code = code;
+    }
+
 }

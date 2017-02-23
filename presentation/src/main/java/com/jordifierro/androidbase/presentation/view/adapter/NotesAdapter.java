@@ -15,10 +15,6 @@ import java.util.List;
 
 public class NotesAdapter extends BaseAdapter {
 
-    public interface OnItemClickListener {
-        void onNoteItemClicked(NoteEntity note);
-    }
-
     private Context context;
     private OnItemClickListener listener;
     private List<NoteEntity> notes;
@@ -49,30 +45,34 @@ public class NotesAdapter extends BaseAdapter {
 
     @Override
     public long getItemId(int arg0) {
-        return notes.get(arg0).getId();
+        return notes.get(arg0).getObjectId().hashCode();
     }
 
     @Override
     public View getView(int position, View view, ViewGroup parent) {
 
-        if(view == null){
+        if (view == null) {
             LayoutInflater inflater = (LayoutInflater) context
                     .getSystemService(Context.LAYOUT_INFLATER_SERVICE);
             view = inflater.inflate(R.layout.view_cell_note, parent, false);
         }
 
-        ((TextView)view.findViewById(R.id.title)).setText(notes.get(position).getTitle());
+        ((TextView) view.findViewById(R.id.title)).setText(notes.get(position).getTitle());
         view.setTag(position);
 
         view.setOnClickListener(new View.OnClickListener() {
 
             @Override
             public void onClick(View arg0) {
-                listener.onNoteItemClicked(notes.get((int)arg0.getTag()));
+                listener.onNoteItemClicked(notes.get((int) arg0.getTag()));
             }
         });
 
         return view;
+    }
+
+    public interface OnItemClickListener {
+        void onNoteItemClicked(NoteEntity note);
     }
 
 }

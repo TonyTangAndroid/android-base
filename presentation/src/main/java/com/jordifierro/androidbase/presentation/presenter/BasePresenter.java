@@ -31,10 +31,12 @@ public class BasePresenter implements Presenter {
     }
 
     @Override
-    public void resume() {}
+    public void resume() {
+    }
 
     @Override
-    public void pause() {}
+    public void pause() {
+    }
 
     @Override
     public void destroy() {
@@ -62,17 +64,20 @@ public class BasePresenter implements Presenter {
 
     protected class BaseSubscriber<T> extends DisposableObserver<T> {
 
-        @Override public void onComplete() {
+        @Override
+        public void onComplete() {
             BasePresenter.this.hideLoader();
         }
 
-        @Override public void onError(Throwable e) {
+        @Override
+        public void onError(Throwable e) {
             BasePresenter.this.hideLoader();
             BasePresenter.this.handleError(e);
             e.printStackTrace();
         }
 
-        @Override public void onNext(T t) {
+        @Override
+        public void onNext(T t) {
             BasePresenter.this.hideLoader();
             //BasePresenter.this.showMessage(t.toString());
         }

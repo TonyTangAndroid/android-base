@@ -6,7 +6,7 @@ import com.jordifierro.androidbase.presentation.dependency.component.Application
 import com.jordifierro.androidbase.presentation.dependency.component.DaggerActivityComponent;
 import com.jordifierro.androidbase.presentation.dependency.component.DaggerApplicationComponent;
 import com.jordifierro.androidbase.presentation.dependency.component.FragmentInjector;
-import com.jordifierro.androidbase.presentation.dependency.module.ApplicationModule;
+import com.jordifierro.androidbase.presentation.dependency.module.ContextModule;
 
 public class BaseApplication extends Application {
 
@@ -20,8 +20,8 @@ public class BaseApplication extends Application {
 
     protected void initializeInjector() {
         this.applicationComponent = DaggerApplicationComponent.builder()
-                                        .applicationModule(new ApplicationModule(this))
-                                        .build();
+                .contextModule(new ContextModule(this))
+                .build();
     }
 
     public ApplicationComponent getApplicationComponent() {

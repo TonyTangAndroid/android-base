@@ -1,11 +1,13 @@
 package com.jordifierro.androidbase.data.repository;
 
 import com.jordifierro.androidbase.data.net.RestApi;
-import com.jordifierro.androidbase.data.net.wrapper.UserWrapper;
-import com.jordifierro.androidbase.domain.entity.MessageEntity;
+import com.jordifierro.androidbase.domain.entity.CreatedWrapper;
 import com.jordifierro.androidbase.domain.entity.UserEntity;
 import com.jordifierro.androidbase.domain.entity.VoidEntity;
 import com.jordifierro.androidbase.domain.repository.UserRepository;
+
+import java.util.HashMap;
+import java.util.Map;
 
 import javax.inject.Inject;
 import javax.inject.Singleton;
@@ -25,47 +27,80 @@ public class UserDataRepository extends RestApiRepository implements UserReposit
     }
 
     @Override
-    public Observable<UserEntity> createUser(UserEntity user) {
-        return this.restApi.createUser(new UserWrapper(user))
-                .map(userEntityResponse -> {
-                    handleResponseError(userEntityResponse);
-                    return userEntityResponse.body();
-                });
+    public Observable<CreatedWrapper> createUser(UserEntity user) {
+        return this.restApi.createUser(user).map(new Function<Response<CreatedWrapper>, CreatedWrapper>() {
+
+            @Override
+            public CreatedWrapper apply(Response<CreatedWrapper> createdWrapperResponse) throws Exception {
+
+                handleResponseError(createdWrapperResponse);
+                return createdWrapperResponse.body();
+
+            }
+
+        });
+
     }
+
+
 
     @Override
     public Observable<VoidEntity> deleteUser(final UserEntity user) {
-        return this.restApi.deleteUser(user.getAuthToken())
-                .map(voidResponse -> {
-                    handleResponseError(voidResponse);
-                    return new VoidEntity();
+        return this.restApi.deleteUser(user.getSessionToken(), user.getObjectId())
+                .map(new Function<Response<VoidEntity>, VoidEntity>() {
+                    @Override
+                    public VoidEntity apply(Response<VoidEntity> voidResponse) {
+                        handleResponseError(voidResponse);
+                        return voidResponse.body();
+                    }
                 });
     }
 
     @Override
-    public Observable<MessageEntity> resetPassword(UserEntity user) {
-        return this.restApi.resetPassword(user.getAuthToken(), new UserWrapper(user))
-                .map(messageEntityResponse -> {
-                    handleResponseError(messageEntityResponse);
-                    return messageEntityResponse.body();
-                });
+    public Observable<VoidEntity> resetPassword(UserEntity user) {
+        Map<String, Object> params = new HashMap<>();
+        params.put(RestApi.FIELD_EMAIL, user.getEmail());
+        return this.restApi.resetPassword(params).map(new Function<Response<VoidEntity>, VoidEntity>() {
+            @Override
+            public VoidEntity apply(Response<VoidEntity> voidResponse) {
+                handleResponseError(voidResponse);
+                return voidResponse.body();
+            }
+        });
+    }
+
+    @Override
+    public Observable<UserEntity> getUserBySessionToken(String token) {
+        return this.restApi.getUserBySessionToken(token).map(new Function<Response<UserEntity>, UserEntity>() {
+            @Override
+            public UserEntity apply(Response<UserEntity> userEntityResponse) {
+                handleResponseError(userEntityResponse);
+                return userEntityResponse.body();
+            }
+        });
     }
 
     @Override
     public Observable<UserEntity> loginUser(UserEntity user) {
-        return this.restApi.doLogin(new UserWrapper(user))
-                .map(userEntityResponse -> {
-                    handleResponseError(userEntityResponse);
-                    return userEntityResponse.body();
+        return this.restApi.doLogin(user.getUsername(), user.getPassword())
+                .map(new Function<Response<UserEntity>, UserEntity>() {
+                    @Override
+                    public UserEntity apply(Response<UserEntity> userEntityResponse) {
+                        handleResponseError(userEntityResponse);
+                        return userEntityResponse.body();
+                    }
                 });
     }
 
     @Override
     public Observable<VoidEntity> logoutUser(UserEntity user) {
-        return this.restApi.doLogout(user.getAuthToken())
-                .map(voidResponse -> {
-                    handleResponseError(voidResponse);
-                    return new VoidEntity();
+        return this.restApi.doLogout(user.getSessionToken())
+                .map(new Function<Response<VoidEntity>, VoidEntity>() {
+                    @Override
+                    public VoidEntity apply(Response<VoidEntity> emptyWrapperResponse) {
+                        handleResponseError(emptyWrapperResponse);
+                        return emptyWrapperResponse.body();
+                    }
                 });
     }
 }
