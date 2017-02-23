@@ -3,8 +3,10 @@ package com.jordifierro.androidbase.presentation.dependency.component;
 import com.jordifierro.androidbase.presentation.view.fragment.LoginFragment;
 import com.jordifierro.androidbase.presentation.view.fragment.NoteCreateFragment;
 import com.jordifierro.androidbase.presentation.view.fragment.NoteDetailFragment;
+import com.jordifierro.androidbase.presentation.view.fragment.NoteDetailFragmentForPager;
 import com.jordifierro.androidbase.presentation.view.fragment.NoteEditFragment;
 import com.jordifierro.androidbase.presentation.view.fragment.NotesFragment;
+import com.jordifierro.androidbase.presentation.view.fragment.NotesViewPagerFragment;
 import com.jordifierro.androidbase.presentation.view.fragment.RegisterFragment;
 import com.jordifierro.androidbase.presentation.view.fragment.ResetPasswordFragment;
 import com.jordifierro.androidbase.presentation.view.fragment.SettingsFragment;
@@ -26,5 +28,7 @@ public interface FragmentInjector {
     void inject(SettingsFragment settingsFragment);
 
     void inject(ResetPasswordFragment resetPasswordFragment);
+    void inject(NotesViewPagerFragment NotesViewPagerFragment);
+    void inject(NoteDetailFragmentForPager  noteDetailFragmentForPager);
 
 }

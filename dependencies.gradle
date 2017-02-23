@@ -9,11 +9,12 @@ ext {
     appVersionCode = 20161231
     appVersionName = '1.0'
     androidBuildToolsVersion = '25.0.2'
-    androidMinSdkVersion = 15
-    androidTargetSdkVersion = 25
-    androidCompileSdkVersion = 25
-    androidSupportVersion = '25.0.1'
 
+    androidMinSdkVersion = 17
+    androidTargetSdkVersion = 23
+    androidCompileSdkVersion = 23
+    androidSupportVersion = '23.2.1'
+   
     //Libraries
     daggerVersion = '2.8'
     okhttp3Version = '3.5.0'
@@ -68,15 +69,16 @@ ext {
     ]
 
     presentationDependencies = [
-            daggerCompiler  : "com.google.dagger:dagger-compiler:${daggerVersion}",
-            dagger          : "com.google.dagger:dagger:${daggerVersion}",
-            butterKnife     : "com.jakewharton:butterknife:${butterKnifeVersion}",
-            rxJava          : "io.reactivex.rxjava2:rxjava:${rxJavaVersion}",
-            rxAndroid       : "io.reactivex.rxjava2:rxandroid:${rxAndroidVersion}",
-            javaxAnnotation : "javax.annotation:jsr250-api:${javaxAnnotationVersion}",
-            androidCompatv7 : "com.android.support:appcompat-v7:${androidSupportVersion}",
-            androidSupportv4: "com.android.support:support-v4:${androidSupportVersion}",
-            androidDesign   : "com.android.support:design:${androidSupportVersion}"
+            daggerCompiler:     "com.google.dagger:dagger-compiler:${daggerVersion}",
+            dagger:             "com.google.dagger:dagger:${daggerVersion}",
+            butterKnife:        "com.jakewharton:butterknife:${butterKnifeVersion}",
+            rxJava:             "io.reactivex.rxjava2:rxjava:${rxJavaVersion}",
+            rxAndroid:          "io.reactivex.rxjava2:rxandroid:${rxAndroidVersion}",
+            javaxAnnotation:    "javax.annotation:jsr250-api:${javaxAnnotationVersion}",
+            androidCompatv7:    "com.android.support:appcompat-v7:${androidSupportVersion}",
+            androidSupportv13:   "com.android.support:support-v13:${androidSupportVersion}",
+            androidDesign:      "com.android.support:design:${androidSupportVersion}"
+
     ]
     presentationTestDependencies = [
             junit             : "junit:junit:${jUnitVersion}",
