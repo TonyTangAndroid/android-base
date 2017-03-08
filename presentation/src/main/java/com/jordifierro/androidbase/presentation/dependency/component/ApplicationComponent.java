@@ -13,9 +13,7 @@ import com.jordifierro.androidbase.presentation.dependency.module.ContextModule;
 import com.jordifierro.androidbase.presentation.dependency.module.DataModule;
 
 import dagger.Component;
-import hugo.weaving.DebugLog;
 
-@DebugLog
 @ApplicationScope
 @Component(modules = {ContextModule.class, ApplicationModule.class, DataModule.class})
 public interface ApplicationComponent {
