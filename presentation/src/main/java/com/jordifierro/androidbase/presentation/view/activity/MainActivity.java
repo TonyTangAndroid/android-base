@@ -6,14 +6,14 @@ import android.view.Menu;
 
 import com.jordifierro.androidbase.presentation.R;
 import com.jordifierro.androidbase.presentation.view.activity.base.CleanActivity;
-import com.jordifierro.androidbase.presentation.view.fragment.NotesViewPagerFragment;
+import com.jordifierro.androidbase.presentation.view.fragment.NotesFragment;
 
-public class MainActivity extends CleanActivity {
+public class MainActivity extends CleanActivity implements NotesFragment.Listener  {
 
 	@Override
 	protected void initializeActivity(Bundle savedInstanceState) {
 		if (savedInstanceState == null) {
-			addFragment(R.id.fragment_container, new NotesViewPagerFragment());
+			addFragment(R.id.fragment_container, new NotesFragment());
 		}
 	}
 
@@ -40,4 +40,13 @@ public class MainActivity extends CleanActivity {
 	}
 
 
+	@Override
+	public void diplayNoteCreator() {
+		startActivity(new Intent(this, NoteCreateActivity.class));
+	}
+
+	@Override
+	public void showNote(String noteObjectId) {
+		startActivity(NoteDetailActivity.getCallingIntent(this, noteObjectId));
+	}
 }
