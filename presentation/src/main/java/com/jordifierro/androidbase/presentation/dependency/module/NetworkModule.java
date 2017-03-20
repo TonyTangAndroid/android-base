@@ -15,19 +15,19 @@ import retrofit2.converter.gson.GsonConverterFactory;
 public class NetworkModule {
 
 
-	@Provides
-	@DebugLog
-	@ApplicationScope
-	RestApi provideRestApi(OkHttpClient okHttpClient, GsonConverterFactory gsonConverterFactory) {
+    @Provides
+    @DebugLog
+    @ApplicationScope
+    RestApi provideRestApi(OkHttpClient okHttpClient, GsonConverterFactory gsonConverterFactory) {
 
-		return new Retrofit.Builder()
-				.baseUrl(RestApi.URL_BASE)
-				.addConverterFactory(gsonConverterFactory)
-				.addCallAdapterFactory(RxJava2CallAdapterFactory.create())
-				.client(okHttpClient)
-				.build()
-				.create(RestApi.class);
-	}
+        return new Retrofit.Builder()
+                .baseUrl(RestApi.URL_BASE)
+                .addConverterFactory(gsonConverterFactory)
+                .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
+                .client(okHttpClient)
+                .build()
+                .create(RestApi.class);
+    }
 
 
 }

@@ -14,21 +14,21 @@ import retrofit2.converter.gson.GsonConverterFactory;
 @Module
 public class GsonModule {
 
-	@Provides
-	@DebugLog
-	@ApplicationScope
-	GsonConverterFactory getFactory(Gson gson) {
-		return GsonConverterFactory.create(gson);
-	}
+    @Provides
+    @DebugLog
+    @ApplicationScope
+    GsonConverterFactory getFactory(Gson gson) {
+        return GsonConverterFactory.create(gson);
+    }
 
-	@DebugLog
-	@Provides
-	@ApplicationScope
-	Gson getGson() {
-		return new GsonBuilder()
-				.registerTypeAdapter(ParsePermissionWrapper.class, new ParseACLJsonAdapter())
-				.create();
-	}
+    @DebugLog
+    @Provides
+    @ApplicationScope
+    Gson getGson() {
+        return new GsonBuilder()
+                .registerTypeAdapter(ParsePermissionWrapper.class, new ParseACLJsonAdapter())
+                .create();
+    }
 
 
 }

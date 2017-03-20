@@ -14,16 +14,16 @@ import dagger.Provides;
 public class DataNetworkModule {
 
 
-	@Provides
-	@ApplicationScope
-	UserRepository provideUserRepository(RestApi restApi) {
-		return new UserDataRepository(restApi);
-	}
+    @Provides
+    @ApplicationScope
+    UserRepository provideUserRepository(RestApi restApi) {
+        return new UserDataRepository(restApi);
+    }
 
-	@Provides
-	@ApplicationScope
-	NoteRepository provideNoteRepository(RestApi restApi) {
-		return new NoteDataRepository(restApi);
-	}
+    @Provides
+    @ApplicationScope
+    NoteRepository provideNoteRepository(RestApi restApi) {
+        return new NoteDataRepository(restApi);
+    }
 
 }

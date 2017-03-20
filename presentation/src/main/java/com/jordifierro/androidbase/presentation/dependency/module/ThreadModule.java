@@ -8,21 +8,20 @@ import com.jordifierro.androidbase.presentation.executor.UIThread;
 
 import dagger.Module;
 import dagger.Provides;
-import hugo.weaving.DebugLog;
 
 @Module
 public class ThreadModule {
 
-	@Provides
-	@ApplicationScope
-	ThreadExecutor provideThreadExecutor(JobExecutor jobExecutor) {
-		return jobExecutor;
-	}
+    @Provides
+    @ApplicationScope
+    ThreadExecutor provideThreadExecutor(JobExecutor jobExecutor) {
+        return jobExecutor;
+    }
 
-	@Provides
-	@ApplicationScope
-	PostExecutionThread providePostExecutionThread(UIThread uiThread) {
-		return uiThread;
-	}
+    @Provides
+    @ApplicationScope
+    PostExecutionThread providePostExecutionThread(UIThread uiThread) {
+        return uiThread;
+    }
 
 }

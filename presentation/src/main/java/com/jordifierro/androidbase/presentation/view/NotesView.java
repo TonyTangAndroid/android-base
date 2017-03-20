@@ -6,6 +6,6 @@ import java.util.List;
 
 public interface NotesView extends BaseView {
 
-	void showNotes(List<NoteEntity> notes);
+    void showNotes(List<NoteEntity> notes);
 
 }

@@ -14,20 +14,20 @@ import java.util.List;
 public class BadgeViewPagerAdapter extends FragmentStatePagerAdapter {
 
 
-	private List<NoteEntity> badgeIdList;
+    private List<NoteEntity> badgeIdList;
 
-	public BadgeViewPagerAdapter(FragmentManager fm, List<NoteEntity> badgeIdList) {
-		super(fm);
-		this.badgeIdList = badgeIdList;
-	}
+    public BadgeViewPagerAdapter(FragmentManager fm, List<NoteEntity> badgeIdList) {
+        super(fm);
+        this.badgeIdList = badgeIdList;
+    }
 
-	@Override
-	public Fragment getItem(int position) {
-		return NoteDetailFragmentForPager.newInstance(badgeIdList.get(position).getObjectId());
-	}
+    @Override
+    public Fragment getItem(int position) {
+        return NoteDetailFragmentForPager.newInstance(badgeIdList.get(position).getObjectId());
+    }
 
-	@Override
-	public int getCount() {
-		return badgeIdList == null ? 0 : badgeIdList.size();
-	}
+    @Override
+    public int getCount() {
+        return badgeIdList == null ? 0 : badgeIdList.size();
+    }
 }

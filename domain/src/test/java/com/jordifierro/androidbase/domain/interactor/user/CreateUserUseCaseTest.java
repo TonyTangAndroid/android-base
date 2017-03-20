@@ -38,11 +38,11 @@ public class CreateUserUseCaseTest {
     private UserEntity mockUser;
     @Mock
     private CreatedWrapper createdWrapper;
+
     @Before
     public void setup() {
         MockitoAnnotations.initMocks(this);
     }
-
 
 
     @Test

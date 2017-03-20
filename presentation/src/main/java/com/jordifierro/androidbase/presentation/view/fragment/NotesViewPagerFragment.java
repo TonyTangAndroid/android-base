@@ -18,45 +18,45 @@ import butterknife.Bind;
 
 public class NotesViewPagerFragment extends BaseFragment implements NotesViewPagerView {
 
-	@Inject
-	NotesViewPagerPresenter notesViewPagerPresenter;
+    @Inject
+    NotesViewPagerPresenter notesViewPagerPresenter;
 
-	@Bind(R.id.tab_dots)
-	TabLayout tabDots;
-	@Bind(R.id.view_pager_badge)
-	ViewPager viewPagerBadge;
-
-
-	@Override
-	protected void callInjection() {
-		this.getFragmentInjector().inject(this);
-	}
-
-	@Override
-	protected int layoutId() {
-		return R.layout.fragment_notes_view_pager;
-	}
-
-	@Override
-	protected BasePresenter presenter() {
-		return this.notesViewPagerPresenter;
-	}
+    @Bind(R.id.tab_dots)
+    TabLayout tabDots;
+    @Bind(R.id.view_pager_badge)
+    ViewPager viewPagerBadge;
 
 
-	@Override
-	public void showNotes(List<NoteEntity> notes) {
+    @Override
+    protected void callInjection() {
+        this.getFragmentInjector().inject(this);
+    }
 
-		BadgeViewPagerAdapter pagerAdapter = new BadgeViewPagerAdapter(getChildFragmentManager(), notes);
-		viewPagerBadge.setAdapter(pagerAdapter);
-		pagerAdapter.notifyDataSetChanged();
-	}
+    @Override
+    protected int layoutId() {
+        return R.layout.fragment_notes_view_pager;
+    }
+
+    @Override
+    protected BasePresenter presenter() {
+        return this.notesViewPagerPresenter;
+    }
 
 
-	@Override
-	public void initView() {
- 		tabDots.setupWithViewPager(viewPagerBadge, true);
+    @Override
+    public void showNotes(List<NoteEntity> notes) {
 
-	}
+        BadgeViewPagerAdapter pagerAdapter = new BadgeViewPagerAdapter(getChildFragmentManager(), notes);
+        viewPagerBadge.setAdapter(pagerAdapter);
+        pagerAdapter.notifyDataSetChanged();
+    }
+
+
+    @Override
+    public void initView() {
+        tabDots.setupWithViewPager(viewPagerBadge, true);
+
+    }
 
 
 }

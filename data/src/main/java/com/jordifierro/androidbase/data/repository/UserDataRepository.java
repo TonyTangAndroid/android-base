@@ -43,7 +43,6 @@ public class UserDataRepository extends RestApiRepository implements UserReposit
     }
 
 
-
     @Override
     public Observable<VoidEntity> deleteUser(final UserEntity user) {
         return this.restApi.deleteUser(user.getSessionToken(), user.getObjectId())

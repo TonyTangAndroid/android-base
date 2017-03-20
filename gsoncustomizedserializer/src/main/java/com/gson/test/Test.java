@@ -34,7 +34,8 @@ public class Test {
                 new GsonBuilder()
                         .registerTypeAdapter(ParseErrorWrapper.class, new ParseErrorDeserilizer())
                         .create();
-        Type collectionType = new TypeToken<ParseErrorWrapper>() {}.getType();
+        Type collectionType = new TypeToken<ParseErrorWrapper>() {
+        }.getType();
         ParseErrorWrapper myCustomClasses = gson.fromJson(json, collectionType);
         System.out.println(myCustomClasses);
         System.out.println(myCustomClasses.getErrorMessage());

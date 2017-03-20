@@ -13,30 +13,30 @@ import okhttp3.logging.HttpLoggingInterceptor;
 public class OkHttpModule {
 
 
-	@Provides
-	@DebugLog
-	@ApplicationScope
-	HttpLoggingInterceptor provideHttpLoggingInterceptor() {
-		final HttpLoggingInterceptor interceptor = new HttpLoggingInterceptor();
-		interceptor.setLevel(HttpLoggingInterceptor.Level.BODY);
-		return interceptor;
-	}
+    @Provides
+    @DebugLog
+    @ApplicationScope
+    HttpLoggingInterceptor provideHttpLoggingInterceptor() {
+        final HttpLoggingInterceptor interceptor = new HttpLoggingInterceptor();
+        interceptor.setLevel(HttpLoggingInterceptor.Level.BODY);
+        return interceptor;
+    }
 
 
-	@Provides
-	@ApplicationScope
-	HttpInterceptor provideHttpInterceptor() {
-		return new HttpInterceptor();
-	}
+    @Provides
+    @ApplicationScope
+    HttpInterceptor provideHttpInterceptor() {
+        return new HttpInterceptor();
+    }
 
-	@Provides
-	@DebugLog
-	@ApplicationScope
-	OkHttpClient provideOkHttpClient(HttpLoggingInterceptor httpLoggingInterceptor, HttpInterceptor httpInterceptor) {
+    @Provides
+    @DebugLog
+    @ApplicationScope
+    OkHttpClient provideOkHttpClient(HttpLoggingInterceptor httpLoggingInterceptor, HttpInterceptor httpInterceptor) {
 
-		return new OkHttpClient().newBuilder()
-				.addInterceptor(httpLoggingInterceptor)
-				.addInterceptor(httpInterceptor)
-				.build();
-	}
+        return new OkHttpClient().newBuilder()
+                .addInterceptor(httpLoggingInterceptor)
+                .addInterceptor(httpInterceptor)
+                .build();
+    }
 }

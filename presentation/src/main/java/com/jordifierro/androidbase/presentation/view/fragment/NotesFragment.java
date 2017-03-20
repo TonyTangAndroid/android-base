@@ -18,58 +18,58 @@ import butterknife.OnClick;
 
 public class NotesFragment extends BaseFragment implements NotesView {
 
-	@Inject
-	NotesPresenter notesPresenter;
+    @Inject
+    NotesPresenter notesPresenter;
 
-	@Bind(R.id.listview)
-	ListView listView;
+    @Bind(R.id.listview)
+    ListView listView;
 
-	@Override
-	protected void callInjection() {
-		this.getFragmentInjector().inject(this);
-	}
+    @Override
+    protected void callInjection() {
+        this.getFragmentInjector().inject(this);
+    }
 
-	@Override
-	protected int layoutId() {
-		return R.layout.fragment_notes;
-	}
+    @Override
+    protected int layoutId() {
+        return R.layout.fragment_notes;
+    }
 
-	@Override
-	protected BasePresenter presenter() {
-		return this.notesPresenter;
-	}
+    @Override
+    protected BasePresenter presenter() {
+        return this.notesPresenter;
+    }
 
-	public NotesPresenter getNotesPresenter() {
-		return notesPresenter;
-	}
+    public NotesPresenter getNotesPresenter() {
+        return notesPresenter;
+    }
 
-	@Override
-	public void showNotes(List<NoteEntity> notes) {
-		NotesAdapter adapter = new NotesAdapter(getActivity());
-		adapter.setOnItemClickListener(new NotesAdapter.OnItemClickListener() {
-			@Override
-			public void onNoteItemClicked(NoteEntity note) {
-				NotesFragment.this.showNote(note.getObjectId());
-			}
-		});
-		adapter.setNotes(notes);
-		listView.setAdapter(adapter);
-	}
+    @Override
+    public void showNotes(List<NoteEntity> notes) {
+        NotesAdapter adapter = new NotesAdapter(getActivity());
+        adapter.setOnItemClickListener(new NotesAdapter.OnItemClickListener() {
+            @Override
+            public void onNoteItemClicked(NoteEntity note) {
+                NotesFragment.this.showNote(note.getObjectId());
+            }
+        });
+        adapter.setNotes(notes);
+        listView.setAdapter(adapter);
+    }
 
-	@OnClick(R.id.btn_create_new_note)
-	public void createNewNoteButtonPressed() {
-		((Listener) getActivity()).diplayNoteCreator();
-	}
+    @OnClick(R.id.btn_create_new_note)
+    public void createNewNoteButtonPressed() {
+        ((Listener) getActivity()).diplayNoteCreator();
+    }
 
-	public void showNote(String noteObjectId) {
-		((Listener) getActivity()).showNote(noteObjectId);
-	}
+    public void showNote(String noteObjectId) {
+        ((Listener) getActivity()).showNote(noteObjectId);
+    }
 
 
-	public interface Listener {
-		void diplayNoteCreator();
+    public interface Listener {
+        void diplayNoteCreator();
 
-		void showNote(String noteObjectId);
-	}
+        void showNote(String noteObjectId);
+    }
 
 }
