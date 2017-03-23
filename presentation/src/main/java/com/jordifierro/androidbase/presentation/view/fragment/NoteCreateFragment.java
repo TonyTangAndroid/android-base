@@ -12,7 +12,7 @@ import javax.inject.Inject;
 import butterknife.Bind;
 import butterknife.OnClick;
 
-public class NoteCreateFragment extends BaseFragment implements NoteCreateView {
+public class NoteCreateFragment extends CleanFragment implements NoteCreateView {
 
     @Inject
     NoteCreatePresenter noteCreatePresenter;

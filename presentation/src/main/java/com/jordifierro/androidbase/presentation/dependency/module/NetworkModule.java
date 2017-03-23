@@ -6,7 +6,6 @@ import com.jordifierro.androidbase.presentation.dependency.ApplicationScope;
 
 import dagger.Module;
 import dagger.Provides;
-import hugo.weaving.DebugLog;
 import okhttp3.OkHttpClient;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
@@ -16,7 +15,7 @@ public class NetworkModule {
 
 
     @Provides
-    @DebugLog
+
     @ApplicationScope
     RestApi provideRestApi(OkHttpClient okHttpClient, GsonConverterFactory gsonConverterFactory) {
 

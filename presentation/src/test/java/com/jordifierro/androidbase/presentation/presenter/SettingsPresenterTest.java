@@ -33,7 +33,7 @@ public class SettingsPresenterTest {
         MockitoAnnotations.initMocks(this);
         this.settingsPresenter =
                 new SettingsPresenter(this.mockDoLogoutUseCase, this.mockDeleteUserUseCase);
-        this.settingsPresenter.initWithView(this.mockSettingsView);
+        this.settingsPresenter.create(this.mockSettingsView);
     }
 
     @Test
@@ -43,8 +43,7 @@ public class SettingsPresenterTest {
 
         verify(this.mockDoLogoutUseCase).unsubscribe();
         verify(this.mockDeleteUserUseCase).unsubscribe();
-        assertNull(this.settingsPresenter.settingsView);
-        assertNull(this.settingsPresenter.view);
+        assertNull(this.settingsPresenter.getCleanView());
     }
 
     @Test

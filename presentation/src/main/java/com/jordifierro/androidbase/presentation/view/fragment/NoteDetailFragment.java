@@ -4,7 +4,6 @@ import android.widget.TextView;
 
 import com.jordifierro.androidbase.domain.entity.NoteEntity;
 import com.jordifierro.androidbase.presentation.R;
-import com.jordifierro.androidbase.presentation.presenter.BasePresenter;
 import com.jordifierro.androidbase.presentation.presenter.NoteDetailPresenter;
 import com.jordifierro.androidbase.presentation.view.NoteDetailView;
 
@@ -12,7 +11,7 @@ import javax.inject.Inject;
 
 import butterknife.Bind;
 
-public class NoteDetailFragment extends BaseFragment implements NoteDetailView {
+public class NoteDetailFragment extends CleanFragment implements NoteDetailView {
 
     @Inject
     NoteDetailPresenter noteDetailPresenter;
@@ -33,12 +32,8 @@ public class NoteDetailFragment extends BaseFragment implements NoteDetailView {
     }
 
     @Override
-    protected BasePresenter presenter() {
+    protected NoteDetailPresenter presenter() {
         return this.noteDetailPresenter;
-    }
-
-    public NoteDetailPresenter getNoteDetailPresenter() {
-        return noteDetailPresenter;
     }
 
     @Override

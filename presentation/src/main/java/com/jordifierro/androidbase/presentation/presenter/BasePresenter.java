@@ -1,34 +1,35 @@
 package com.jordifierro.androidbase.presentation.presenter;
 
 import com.jordifierro.androidbase.domain.interactor.UseCase;
-import com.jordifierro.androidbase.presentation.view.BaseView;
+import com.jordifierro.androidbase.presentation.view.CleanView;
 
 import io.reactivex.observers.DisposableObserver;
 
-public class BasePresenter implements Presenter {
+public abstract class BasePresenter implements Presenter {
 
-    BaseView view;
-    private UseCase useCase0, useCase1, useCase2;
+    private UseCase[] useCases;
 
-    public BasePresenter(UseCase useCase0) {
-        this.useCase0 = useCase0;
+    public BasePresenter(UseCase... useCases) {
+        this.useCases = useCases;
     }
 
-    public BasePresenter(UseCase useCase0, UseCase useCase1) {
-        this.useCase0 = useCase0;
-        this.useCase1 = useCase1;
-    }
 
-    public BasePresenter(UseCase useCase0, UseCase useCase1, UseCase useCase2) {
-        this.useCase0 = useCase0;
-        this.useCase1 = useCase1;
-        this.useCase2 = useCase2;
-    }
+    protected abstract CleanView getCleanView();
+
 
     @Override
-    public void initWithView(BaseView view) {
-        this.view = view;
+    public void create(CleanView view) {
+        bindPresenter(view);
+        initCleanView();
+
     }
+
+    private void initCleanView() {
+        getCleanView().initUI();
+    }
+
+
+    public abstract void bindPresenter(CleanView view);
 
     @Override
     public void resume() {
@@ -40,26 +41,28 @@ public class BasePresenter implements Presenter {
 
     @Override
     public void destroy() {
-        if (this.useCase0 != null) this.useCase0.unsubscribe();
-        if (this.useCase1 != null) this.useCase1.unsubscribe();
-        if (this.useCase2 != null) this.useCase2.unsubscribe();
-        this.view = null;
+        if (useCases != null && useCases.length > 0) {
+            for (UseCase useCase : useCases) {
+                useCase.unsubscribe();
+            }
+        }
+
     }
 
     public void showLoader() {
-//        this.view.showLoader();
+        this.getCleanView().showLoader();
     }
 
     public void hideLoader() {
-        this.view.hideLoader();
+        this.getCleanView().hideLoader();
     }
 
     public void handleError(Throwable error) {
-        this.view.handleError(error);
+        this.getCleanView().handleError(error);
     }
 
     public void showMessage(String message) {
-        this.view.showMessage(message);
+        this.getCleanView().showMessage(message);
     }
 
     protected class BaseSubscriber<T> extends DisposableObserver<T> {

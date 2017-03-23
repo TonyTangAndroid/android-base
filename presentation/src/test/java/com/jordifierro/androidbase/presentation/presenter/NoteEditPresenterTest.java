@@ -43,7 +43,7 @@ public class NoteEditPresenterTest {
         MockitoAnnotations.initMocks(this);
         this.noteEditPresenter = new NoteEditPresenter(this.updateNoteUseCase,
                 this.getNoteUseCase, this.deleteNoteUseCase);
-        this.noteEditPresenter.initWithView(this.mockNoteEditView);
+        this.noteEditPresenter.create(this.mockNoteEditView);
         this.getNoteSubscriber = this.noteEditPresenter.new GetNoteSubscriber();
         this.updateNoteSubscriber = this.noteEditPresenter.new UpdateNoteSubscriber();
         this.deleteNoteSubscriber = this.noteEditPresenter.new DeleteNoteSubscriber();
@@ -56,8 +56,7 @@ public class NoteEditPresenterTest {
 
         verify(this.getNoteUseCase).unsubscribe();
         verify(this.updateNoteUseCase).unsubscribe();
-        assertNull(this.noteEditPresenter.noteEditView);
-        assertNull(this.noteEditPresenter.view);
+        assertNull(this.noteEditPresenter.getCleanView());
     }
 
     @Test

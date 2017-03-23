@@ -7,7 +7,6 @@ import com.jordifierro.androidbase.domain.repository.SessionRepository;
 
 import javax.inject.Inject;
 
-import hugo.weaving.DebugLog;
 
 public class SessionDataRepository implements SessionRepository {
 
@@ -17,7 +16,7 @@ public class SessionDataRepository implements SessionRepository {
 
     private final SharedPreferences sharedPreferences;
 
-    @DebugLog
+
     @Inject
     public SessionDataRepository(SharedPreferences sharedPreferences) {
         this.sharedPreferences = sharedPreferences;

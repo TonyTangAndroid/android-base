@@ -33,7 +33,7 @@ public class NoteDetailPresenterTest {
         MockitoAnnotations.initMocks(this);
         this.noteDetailPresenter =
                 new NoteDetailPresenter(this.getNoteUseCase);
-        this.noteDetailPresenter.initWithView(this.mockNoteDetailView);
+        this.noteDetailPresenter.create(this.mockNoteDetailView);
         this.noteDetailSubscriber = this.noteDetailPresenter.new NoteDetailSubscriber();
     }
 
@@ -43,8 +43,7 @@ public class NoteDetailPresenterTest {
         this.noteDetailPresenter.destroy();
 
         verify(this.getNoteUseCase).unsubscribe();
-        assertNull(this.noteDetailPresenter.noteDetailView);
-        assertNull(this.noteDetailPresenter.view);
+        assertNull(this.noteDetailPresenter.getCleanView());
     }
 
     @Test

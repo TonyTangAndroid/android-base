@@ -12,7 +12,7 @@ import javax.inject.Inject;
 import butterknife.Bind;
 import butterknife.OnClick;
 
-public class RegisterFragment extends BaseFragment implements RegisterView {
+public class RegisterFragment extends CleanFragment implements RegisterView {
 
     @Inject
     RegisterPresenter registerPresenter;

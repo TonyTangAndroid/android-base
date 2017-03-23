@@ -2,28 +2,31 @@ package com.jordifierro.androidbase.presentation.presenter;
 
 import com.jordifierro.androidbase.domain.entity.UserEntity;
 import com.jordifierro.androidbase.domain.interactor.user.CreateUserUseCase;
-import com.jordifierro.androidbase.presentation.view.BaseView;
+import com.jordifierro.androidbase.presentation.view.CleanView;
 import com.jordifierro.androidbase.presentation.view.RegisterView;
 
 import javax.inject.Inject;
 
-import hugo.weaving.DebugLog;
 
 public class RegisterPresenter extends BasePresenter implements Presenter {
 
-    RegisterView registerView;
+    private RegisterView registerView;
     private CreateUserUseCase createUserUseCase;
 
     @Inject
-    @DebugLog
+
     public RegisterPresenter(CreateUserUseCase createUserUseCase) {
         super(createUserUseCase);
         this.createUserUseCase = createUserUseCase;
     }
 
     @Override
-    public void initWithView(BaseView view) {
-        super.initWithView(view);
+    protected RegisterView getCleanView() {
+        return registerView;
+    }
+
+    @Override
+    public void bindPresenter(CleanView view) {
         this.registerView = (RegisterView) view;
     }
 

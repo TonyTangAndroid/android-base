@@ -1,9 +1,5 @@
 package com.jordifierro.androidbase.presentation.view.fragment;
 
-import android.os.Bundle;
-import android.view.LayoutInflater;
-import android.view.View;
-import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
 
@@ -18,7 +14,7 @@ import javax.inject.Inject;
 import butterknife.Bind;
 import butterknife.OnClick;
 
-public class NoteEditFragment extends BaseFragment implements NoteEditView {
+public class NoteEditFragment extends CleanFragment implements NoteEditView {
 
     @Inject
     NoteEditPresenter noteEditPresenter;
@@ -49,11 +45,10 @@ public class NoteEditFragment extends BaseFragment implements NoteEditView {
         return noteEditPresenter;
     }
 
+
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        View view = super.onCreateView(inflater, container, savedInstanceState);
+    public void initUI() {
         submitButton.setText(getActivity().getResources().getText(R.string.button_save));
-        return view;
     }
 
     @Override

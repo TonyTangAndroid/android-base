@@ -4,7 +4,6 @@ import android.widget.ListView;
 
 import com.jordifierro.androidbase.domain.entity.NoteEntity;
 import com.jordifierro.androidbase.presentation.R;
-import com.jordifierro.androidbase.presentation.presenter.BasePresenter;
 import com.jordifierro.androidbase.presentation.presenter.NotesPresenter;
 import com.jordifierro.androidbase.presentation.view.NotesView;
 import com.jordifierro.androidbase.presentation.view.adapter.NotesAdapter;
@@ -16,13 +15,16 @@ import javax.inject.Inject;
 import butterknife.Bind;
 import butterknife.OnClick;
 
-public class NotesFragment extends BaseFragment implements NotesView {
+public class NotesFragment extends CleanFragment implements NotesView {
 
     @Inject
     NotesPresenter notesPresenter;
 
     @Bind(R.id.listview)
     ListView listView;
+
+    @Inject
+    NotesAdapter adapter;
 
     @Override
     protected void callInjection() {
@@ -35,39 +37,32 @@ public class NotesFragment extends BaseFragment implements NotesView {
     }
 
     @Override
-    protected BasePresenter presenter() {
+    protected NotesPresenter presenter() {
         return this.notesPresenter;
-    }
-
-    public NotesPresenter getNotesPresenter() {
-        return notesPresenter;
     }
 
     @Override
     public void showNotes(List<NoteEntity> notes) {
-        NotesAdapter adapter = new NotesAdapter(getActivity());
-        adapter.setOnItemClickListener(new NotesAdapter.OnItemClickListener() {
-            @Override
-            public void onNoteItemClicked(NoteEntity note) {
-                NotesFragment.this.showNote(note.getObjectId());
-            }
-        });
         adapter.setNotes(notes);
-        listView.setAdapter(adapter);
     }
 
     @OnClick(R.id.btn_create_new_note)
     public void createNewNoteButtonPressed() {
-        ((Listener) getActivity()).diplayNoteCreator();
+        ((Listener) getActivity()).displayNoteCreator();
     }
 
     public void showNote(String noteObjectId) {
         ((Listener) getActivity()).showNote(noteObjectId);
     }
 
+    @Override
+    public void initUI() {
+        adapter.setOnItemClickListener(note -> NotesFragment.this.showNote(note.getObjectId()));
+        listView.setAdapter(adapter);
+    }
 
     public interface Listener {
-        void diplayNoteCreator();
+        void displayNoteCreator();
 
         void showNote(String noteObjectId);
     }

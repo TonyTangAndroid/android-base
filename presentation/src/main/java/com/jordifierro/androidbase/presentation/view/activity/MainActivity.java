@@ -41,7 +41,7 @@ public class MainActivity extends CleanActivity implements NotesFragment.Listene
 
 
     @Override
-    public void diplayNoteCreator() {
+    public void displayNoteCreator() {
         startActivity(new Intent(this, NoteCreateActivity.class));
     }
 

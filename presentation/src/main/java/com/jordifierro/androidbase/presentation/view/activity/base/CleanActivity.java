@@ -52,7 +52,7 @@ public abstract class CleanActivity extends BaseActivity {
                 Toast.LENGTH_LONG).show();
     }
 
-    
+
     public void closeAndDisplayLogin() {
         Intent notesIntent = new Intent(this, LoginActivity.class);
         notesIntent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
@@ -77,12 +77,12 @@ public abstract class CleanActivity extends BaseActivity {
         startActivity(intent);
     }
 
-    
+
     public void showMessage(String message) {
         Toast.makeText(context(), message, Toast.LENGTH_LONG).show();
     }
 
-    
+
     public void close() {
         this.finish();
     }

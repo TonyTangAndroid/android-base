@@ -12,7 +12,7 @@ import javax.inject.Inject;
 import butterknife.Bind;
 import butterknife.OnClick;
 
-public class ResetPasswordFragment extends BaseFragment implements ResetPasswordView {
+public class ResetPasswordFragment extends CleanFragment implements ResetPasswordView {
 
     @Inject
     ResetPasswordPresenter resetPasswordPresenter;

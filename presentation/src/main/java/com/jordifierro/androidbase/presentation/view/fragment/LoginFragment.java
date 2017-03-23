@@ -3,7 +3,6 @@ package com.jordifierro.androidbase.presentation.view.fragment;
 import android.widget.EditText;
 
 import com.jordifierro.androidbase.presentation.R;
-import com.jordifierro.androidbase.presentation.presenter.BasePresenter;
 import com.jordifierro.androidbase.presentation.presenter.LoginPresenter;
 import com.jordifierro.androidbase.presentation.view.LoginView;
 
@@ -12,7 +11,7 @@ import javax.inject.Inject;
 import butterknife.Bind;
 import butterknife.OnClick;
 
-public class LoginFragment extends BaseFragment implements LoginView {
+public class LoginFragment extends CleanFragment implements LoginView {
 
     @Inject
     LoginPresenter loginPresenter;
@@ -33,12 +32,8 @@ public class LoginFragment extends BaseFragment implements LoginView {
     }
 
     @Override
-    public BasePresenter presenter() {
+    public LoginPresenter presenter() {
         return this.loginPresenter;
-    }
-
-    public LoginPresenter getLoginPresenter() {
-        return loginPresenter;
     }
 
     @OnClick(R.id.btn_login)

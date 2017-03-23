@@ -13,12 +13,15 @@ import com.jordifierro.androidbase.presentation.R;
 import java.util.Collections;
 import java.util.List;
 
+import javax.inject.Inject;
+
 public class NotesAdapter extends BaseAdapter {
 
     private Context context;
     private OnItemClickListener listener;
     private List<NoteEntity> notes;
 
+    @Inject
     public NotesAdapter(Context context) {
         this.context = context;
         this.notes = Collections.emptyList();

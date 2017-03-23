@@ -4,7 +4,7 @@ import com.jordifierro.androidbase.domain.entity.NoteEntity;
 
 import java.util.List;
 
-public interface NotesView extends BaseView {
+public interface NotesView extends CleanView {
 
     void showNotes(List<NoteEntity> notes);
 

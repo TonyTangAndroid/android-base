@@ -9,7 +9,7 @@ import javax.inject.Inject;
 
 import butterknife.OnClick;
 
-public class SettingsFragment extends BaseFragment implements SettingsView {
+public class SettingsFragment extends CleanFragment implements SettingsView {
 
     @Inject
     SettingsPresenter settingsPresenter;

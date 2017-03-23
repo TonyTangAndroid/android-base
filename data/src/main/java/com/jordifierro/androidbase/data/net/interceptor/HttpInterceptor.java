@@ -7,7 +7,6 @@ import java.util.Locale;
 
 import javax.inject.Inject;
 
-import hugo.weaving.DebugLog;
 import okhttp3.Interceptor;
 import okhttp3.Request;
 import okhttp3.Response;
@@ -22,7 +21,7 @@ public class HttpInterceptor implements Interceptor {
     public static final String CONTENT_TYPE = "Content-Type";
     public static final String APPLICATION_JSON = "application/json";
 
-    @DebugLog
+
     @Inject
     public HttpInterceptor() {
     }

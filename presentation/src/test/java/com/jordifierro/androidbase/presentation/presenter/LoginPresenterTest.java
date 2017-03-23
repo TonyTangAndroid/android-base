@@ -32,7 +32,7 @@ public class LoginPresenterTest {
     public void setUp() throws Exception {
         MockitoAnnotations.initMocks(this);
         this.loginPresenter = new LoginPresenter(this.mockDoLoginUseCase);
-        this.loginPresenter.initWithView(this.mockLoginView);
+        this.loginPresenter.create(this.mockLoginView);
         this.loginSubscriber = this.loginPresenter.new LoginSubscriber();
     }
 
@@ -42,8 +42,7 @@ public class LoginPresenterTest {
         this.loginPresenter.destroy();
 
         verify(this.mockDoLoginUseCase).unsubscribe();
-        assertNull(this.loginPresenter.loginView);
-        assertNull(this.loginPresenter.view);
+        assertNull(this.loginPresenter.getCleanView());
     }
 
     @Test

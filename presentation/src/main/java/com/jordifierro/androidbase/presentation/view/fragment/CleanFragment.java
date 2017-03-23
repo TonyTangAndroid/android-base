@@ -11,12 +11,12 @@ import android.widget.Toast;
 
 import com.jordifierro.androidbase.presentation.dependency.component.FragmentInjector;
 import com.jordifierro.androidbase.presentation.presenter.BasePresenter;
-import com.jordifierro.androidbase.presentation.view.BaseView;
+import com.jordifierro.androidbase.presentation.view.CleanView;
 import com.jordifierro.androidbase.presentation.view.activity.base.CleanActivity;
 
 import butterknife.ButterKnife;
 
-public abstract class BaseFragment extends Fragment implements BaseView {
+public abstract class CleanFragment extends Fragment implements CleanView {
 
     private ProgressDialog progressDialog;
 
@@ -38,12 +38,17 @@ public abstract class BaseFragment extends Fragment implements BaseView {
         return fragmentView;
     }
 
+    @Override
+    public void initUI() {
+
+    }
+
     protected abstract BasePresenter presenter();
 
     @Override
     public void onViewCreated(View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        presenter().initWithView(this);
+        presenter().create(this);
     }
 
     @Override
