@@ -12,10 +12,9 @@ import com.jordifierro.androidbase.data.net.error.RestApiErrorException;
 import com.jordifierro.androidbase.presentation.BaseApplication;
 import com.jordifierro.androidbase.presentation.R;
 import com.jordifierro.androidbase.presentation.dependency.component.FragmentInjector;
-import com.jordifierro.androidbase.presentation.view.BaseView;
 import com.jordifierro.androidbase.presentation.view.activity.LoginActivity;
 
-public abstract class CleanActivity extends BaseActivity implements BaseView {
+public abstract class CleanActivity extends BaseActivity {
 
     private FragmentInjector fragmentInjector;
 
@@ -35,7 +34,7 @@ public abstract class CleanActivity extends BaseActivity implements BaseView {
         }
     }
 
-    @Override
+
     public void handleError(Throwable error) {
         if (error instanceof RestApiErrorException) {
             switch (((RestApiErrorException) error).getStatusCode()) {
@@ -53,7 +52,7 @@ public abstract class CleanActivity extends BaseActivity implements BaseView {
                 Toast.LENGTH_LONG).show();
     }
 
-    @Override
+    
     public void closeAndDisplayLogin() {
         Intent notesIntent = new Intent(this, LoginActivity.class);
         notesIntent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
@@ -78,12 +77,12 @@ public abstract class CleanActivity extends BaseActivity implements BaseView {
         startActivity(intent);
     }
 
-    @Override
+    
     public void showMessage(String message) {
         Toast.makeText(context(), message, Toast.LENGTH_LONG).show();
     }
 
-    @Override
+    
     public void close() {
         this.finish();
     }
