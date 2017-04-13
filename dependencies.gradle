@@ -15,6 +15,12 @@ ext {
     androidCompileSdkVersion = 25
     androidSupportVersion = '25.3.1'
 
+
+    autoValueVersion = '1.4.1'
+    autoValueGsonVersion = '0.4.6'
+    autoCommonVersion = '0.8'
+    gsonVersion = '2.8.0'
+
     //Libraries
     daggerVersion = '2.10'
     okhttp3Version = '3.6.0'
@@ -37,6 +43,8 @@ ext {
     domainDependencies = [
             retrofit      : "com.squareup.retrofit2:retrofit:${retrofitVersion}",
             retrofitGson  : "com.squareup.retrofit2:converter-gson:${retrofitVersion}",
+            gson             : "com.google.code.gson:gson:${gsonVersion}",
+
             retrofitRxJava: "com.squareup.retrofit2:adapter-rxjava2:${retrofitVersion}",
             javaxInject   : "javax.inject:javax.inject:${javaxInjectVersion}",
             rxJava        : "io.reactivex.rxjava2:rxjava:${rxJavaVersion}"
@@ -50,9 +58,15 @@ ext {
 
     dataDependencies = [
             retrofit             : "com.squareup.retrofit2:retrofit:${retrofitVersion}",
-            retrofitRxJava2             : "com.squareup.retrofit2:adapter-rxjava2:${retrofitVersion}",
+            retrofitRxJava2      : "com.squareup.retrofit2:adapter-rxjava2:${retrofitVersion}",
             retrofitGson         : "com.squareup.retrofit2:converter-gson:${retrofitVersion}",
             okhttp3_log          : "com.squareup.okhttp3:logging-interceptor:${okhttp3Version}",
+
+            autoValue            : "com.google.auto.value:auto-value:${autoValueVersion}",
+            autoValueGson        : "com.ryanharter.auto.value:auto-value-gson:${autoValueGsonVersion}",
+
+
+
             okhttp3              : "com.squareup.okhttp3:okhttp:${okhttp3Version}",
             okhttp3_mockwebserver: "com.squareup.okhttp3:mockwebserver:${okhttp3Version}",
             retrofitRxJava       : "com.squareup.retrofit2:adapter-rxjava2:${retrofitVersion}",
@@ -73,6 +87,14 @@ ext {
             butterKnife      : "com.jakewharton:butterknife:${butterKnifeVersion}",
             rxJava           : "io.reactivex.rxjava2:rxjava:${rxJavaVersion}",
             rxAndroid        : "io.reactivex.rxjava2:rxandroid:${rxAndroidVersion}",
+
+            autoValue        : "com.google.auto.value:auto-value:${autoValueVersion}",
+            autoValueGson    : "com.ryanharter.auto.value:auto-value-gson:${autoValueGsonVersion}",
+            autoCommon       : "com.google.auto:auto-common:${autoCommonVersion}",
+
+            gson             : "com.google.code.gson:gson:${gsonVersion}",
+
+
             javaxAnnotation  : "javax.annotation:jsr250-api:${javaxAnnotationVersion}",
             androidCompatv7  : "com.android.support:appcompat-v7:${androidSupportVersion}",
             androidSupportv13: "com.android.support:support-v13:${androidSupportVersion}",
@@ -85,6 +107,8 @@ ext {
             dexmaker          : "com.crittercism.dexmaker:dexmaker:${dexmakerVersion}",
             dexmakerDx        : "com.crittercism.dexmaker:dexmaker-dx:${dexmakerVersion}",
             dexmakerParent    : "com.crittercism.dexmaker:dexmaker-parent:${dexmakerVersion}",
+            autoValue         : "com.google.auto.value:auto-value:${autoValueVersion}",
+
             dexmakerMockito   : "com.crittercism.dexmaker:dexmaker-mockito:${dexmakerVersion}",
             androidAnnotations: "com.android.support:support-annotations:${androidSupportVersion}",
             espresso          : "com.android.support.test.espresso:espresso-core:${espressoVersion}",

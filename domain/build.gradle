@@ -8,12 +8,21 @@ dependencies {
     def domainTestDependencies = rootProject.ext.domainTestDependencies
 
     compile domainDependencies.javaxInject
+    compile domainDependencies.gson
     compile domainDependencies.rxJava
 
     testCompile domainTestDependencies.junit
     testCompile domainTestDependencies.mockito
     testCompile domainTestDependencies.jetAnnotations
-    compile 'com.google.code.gson:gson:2.4'
+
+
+
+//    provided domainDependencies.autoValue
+//    annotationProcessor domainDependencies.autoValue
+//    provided domainDependencies.autoValueGson
+//    annotationProcessor domainDependencies.autoValueGson
+//    annotationProcessor 'com.ryanharter.auto.value:auto-value-parcel:0.2.5'
+
 }
 
 tasks.withType(JavaCompile) {

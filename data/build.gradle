@@ -53,6 +53,13 @@ dependencies {
     compile project(':domain')
 
     compile dataDependencies.javaxAnnotation
+
+//    provided dataDependencies.autoValue
+//    annotationProcessor dataDependencies.autoValue
+//    provided dataDependencies.autoValueGson
+//    annotationProcessor dataDependencies.autoValueGson
+    
+
     compile dataDependencies.rxJava
     compile dataDependencies.retrofit
     compile dataDependencies.retrofitGson
