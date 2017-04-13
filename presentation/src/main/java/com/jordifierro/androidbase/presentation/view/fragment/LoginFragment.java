@@ -9,7 +9,7 @@ import com.jordifierro.androidbase.presentation.view.LoginView;
 
 import javax.inject.Inject;
 
-import butterknife.Bind;
+import butterknife.BindView;
 import butterknife.OnClick;
 
 public class LoginFragment extends BaseFragment implements LoginView {
@@ -17,9 +17,9 @@ public class LoginFragment extends BaseFragment implements LoginView {
     @Inject
     LoginPresenter loginPresenter;
 
-    @Bind(R.id.et_email)
+    @BindView(R.id.et_email)
     EditText emailEditText;
-    @Bind(R.id.et_password)
+    @BindView(R.id.et_password)
     EditText passwordEditText;
 
     @Override

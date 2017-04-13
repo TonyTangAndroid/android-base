@@ -1,5 +1,4 @@
 apply plugin: 'com.android.application'
-apply plugin: 'com.neenbedankt.android-apt'
 apply plugin: 'me.tatarka.retrolambda'
 apply plugin: 'com.jakewharton.hugo'
 
@@ -52,13 +51,12 @@ dependencies {
     compile project(':domain')
     compile project(':data')
 
-    apt presentationDependencies.daggerCompiler
+    annotationProcessor presentationDependencies.daggerCompiler
 
     compile presentationDependencies.androidDesign
     compile presentationDependencies.androidSupportv13
     compile presentationDependencies.androidCompatv7
     compile presentationDependencies.dagger
-    compile presentationDependencies.butterKnife
     compile presentationDependencies.javaxAnnotation
     compile presentationDependencies.rxJava
     compile presentationDependencies.rxAndroid
@@ -67,7 +65,10 @@ dependencies {
     testCompile presentationTestDependencies.mockito
 
 
-    androidTestApt presentationTestDependencies.daggerCompiler
+    compile 'com.jakewharton:butterknife:8.5.1'
+    annotationProcessor 'com.jakewharton:butterknife-compiler:8.5.1'
+
+    androidTestAnnotationProcessor presentationTestDependencies.daggerCompiler
 
     androidTestCompile presentationTestDependencies.androidAnnotations
     androidTestCompile presentationTestDependencies.mockito

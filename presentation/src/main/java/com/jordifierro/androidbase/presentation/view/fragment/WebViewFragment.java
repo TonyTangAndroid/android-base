@@ -11,15 +11,15 @@ import android.widget.ProgressBar;
 
 import com.jordifierro.androidbase.presentation.R;
 
-import butterknife.Bind;
+import butterknife.BindView;
 import butterknife.ButterKnife;
 
 public class WebViewFragment extends Fragment {
 
-    @Bind(R.id.webview)
+    @BindView(R.id.webview)
     WebView webView;
 
-    @Bind(R.id.progress_bar)
+    @BindView(R.id.progress_bar)
     ProgressBar progressBar;
 
     @Override

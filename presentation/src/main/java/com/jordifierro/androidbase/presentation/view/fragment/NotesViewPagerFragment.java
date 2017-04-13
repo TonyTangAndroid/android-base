@@ -14,16 +14,16 @@ import java.util.List;
 
 import javax.inject.Inject;
 
-import butterknife.Bind;
+import butterknife.BindView;
 
 public class NotesViewPagerFragment extends BaseFragment implements NotesViewPagerView {
 
     @Inject
     NotesViewPagerPresenter notesViewPagerPresenter;
 
-    @Bind(R.id.tab_dots)
+    @BindView(R.id.tab_dots)
     TabLayout tabDots;
-    @Bind(R.id.view_pager_badge)
+    @BindView(R.id.view_pager_badge)
     ViewPager viewPagerBadge;
 
 

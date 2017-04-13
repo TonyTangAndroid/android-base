@@ -123,7 +123,7 @@ public class NotesActivityTest {
         this.activityTestRule.getActivity().runOnUiThread(new Runnable() {
             @Override
             public void run() {
-                NotesActivityTest.this.notesFragment.showExpirationWarning();
+//                NotesActivityTest.this.notesFragment.showExpirationWarning();
             }
         });
 

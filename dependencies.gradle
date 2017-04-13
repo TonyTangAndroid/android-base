@@ -13,18 +13,17 @@ ext {
     androidMinSdkVersion = 17
     androidTargetSdkVersion = 25
     androidCompileSdkVersion = 25
-    androidSupportVersion = '25.1.1'
+    androidSupportVersion = '25.3.1'
 
     //Libraries
-    daggerVersion = '2.8'
-    okhttp3Version = '3.5.0'
+    daggerVersion = '2.10'
+    okhttp3Version = '3.6.0'
     butterKnifeVersion = '7.0.1'
-    rxJavaVersion = '2.0.2'
+    rxJavaVersion = '2.0.8'
     rxAndroidVersion = '2.0.1'
     javaxAnnotationVersion = '1.0'
     javaxInjectVersion = '1'
-    retrofitVersion = '2.1.0'
-    retrofitRxJava2AdapterVersion = '1.0.0'
+    retrofitVersion = '2.2.0'
 
     //Testing
     jUnitVersion = '4.12'
@@ -38,7 +37,7 @@ ext {
     domainDependencies = [
             retrofit      : "com.squareup.retrofit2:retrofit:${retrofitVersion}",
             retrofitGson  : "com.squareup.retrofit2:converter-gson:${retrofitVersion}",
-            retrofitRxJava: "com.squareup.retrofit2:adapter-rxjava:${retrofitVersion}",
+            retrofitRxJava: "com.squareup.retrofit2:adapter-rxjava2:${retrofitVersion}",
             javaxInject   : "javax.inject:javax.inject:${javaxInjectVersion}",
             rxJava        : "io.reactivex.rxjava2:rxjava:${rxJavaVersion}"
     ]
@@ -51,12 +50,12 @@ ext {
 
     dataDependencies = [
             retrofit             : "com.squareup.retrofit2:retrofit:${retrofitVersion}",
+            retrofitRxJava2             : "com.squareup.retrofit2:adapter-rxjava2:${retrofitVersion}",
             retrofitGson         : "com.squareup.retrofit2:converter-gson:${retrofitVersion}",
-            retrofitRxJava2      : "com.jakewharton.retrofit:retrofit2-rxjava2-adapter:${retrofitRxJava2AdapterVersion}",
             okhttp3_log          : "com.squareup.okhttp3:logging-interceptor:${okhttp3Version}",
             okhttp3              : "com.squareup.okhttp3:okhttp:${okhttp3Version}",
             okhttp3_mockwebserver: "com.squareup.okhttp3:mockwebserver:${okhttp3Version}",
-            retrofitRxJava       : "com.squareup.retrofit2:adapter-rxjava:${retrofitVersion}",
+            retrofitRxJava       : "com.squareup.retrofit2:adapter-rxjava2:${retrofitVersion}",
             javaxAnnotation      : "javax.annotation:jsr250-api:${javaxAnnotationVersion}",
             rxJava               : "io.reactivex.rxjava2:rxjava:${rxJavaVersion}"
     ]

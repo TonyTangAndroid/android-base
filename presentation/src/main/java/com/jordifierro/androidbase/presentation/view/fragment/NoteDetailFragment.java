@@ -10,16 +10,16 @@ import com.jordifierro.androidbase.presentation.view.NoteDetailView;
 
 import javax.inject.Inject;
 
-import butterknife.Bind;
+import butterknife.BindView;
 
 public class NoteDetailFragment extends BaseFragment implements NoteDetailView {
 
     @Inject
     NoteDetailPresenter noteDetailPresenter;
 
-    @Bind(R.id.tv_title)
+    @BindView(R.id.tv_title)
     TextView titleTV;
-    @Bind(R.id.tv_content)
+    @BindView(R.id.tv_content)
     TextView contentTV;
 
     @Override

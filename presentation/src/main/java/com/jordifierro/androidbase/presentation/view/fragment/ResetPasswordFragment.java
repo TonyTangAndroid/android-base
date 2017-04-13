@@ -9,7 +9,7 @@ import com.jordifierro.androidbase.presentation.view.ResetPasswordView;
 
 import javax.inject.Inject;
 
-import butterknife.Bind;
+import butterknife.BindView;
 import butterknife.OnClick;
 
 public class ResetPasswordFragment extends BaseFragment implements ResetPasswordView {
@@ -17,11 +17,11 @@ public class ResetPasswordFragment extends BaseFragment implements ResetPassword
     @Inject
     ResetPasswordPresenter resetPasswordPresenter;
 
-    @Bind(R.id.et_email)
+    @BindView(R.id.et_email)
     EditText emailEditText;
-    @Bind(R.id.et_password)
+    @BindView(R.id.et_password)
     EditText passwordEditText;
-    @Bind(R.id.et_password_confirmation)
+    @BindView(R.id.et_password_confirmation)
     EditText passwordConfirmationEditText;
 
     @Override

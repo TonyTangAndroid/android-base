@@ -13,7 +13,7 @@ import java.util.List;
 
 import javax.inject.Inject;
 
-import butterknife.Bind;
+import butterknife.BindView;
 import butterknife.OnClick;
 
 public class NotesFragment extends BaseFragment implements NotesView {
@@ -21,7 +21,7 @@ public class NotesFragment extends BaseFragment implements NotesView {
     @Inject
     NotesPresenter notesPresenter;
 
-    @Bind(R.id.listview)
+    @BindView(R.id.listview)
     ListView listView;
 
     @Override

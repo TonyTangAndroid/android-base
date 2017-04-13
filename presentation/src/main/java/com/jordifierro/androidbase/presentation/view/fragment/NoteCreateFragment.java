@@ -9,7 +9,7 @@ import com.jordifierro.androidbase.presentation.view.NoteCreateView;
 
 import javax.inject.Inject;
 
-import butterknife.Bind;
+import butterknife.BindView;
 import butterknife.OnClick;
 
 public class NoteCreateFragment extends BaseFragment implements NoteCreateView {
@@ -17,9 +17,9 @@ public class NoteCreateFragment extends BaseFragment implements NoteCreateView {
     @Inject
     NoteCreatePresenter noteCreatePresenter;
 
-    @Bind(R.id.et_title)
+    @BindView(R.id.et_title)
     TextView titleET;
-    @Bind(R.id.et_content)
+    @BindView(R.id.et_content)
     TextView contentET;
 
     @Override
