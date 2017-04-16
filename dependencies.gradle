@@ -24,7 +24,7 @@ ext {
     //Libraries
     daggerVersion = '2.10'
     okhttp3Version = '3.6.0'
-    butterKnifeVersion = '7.0.1'
+    butterKnifeVersion = '8.5.1'
     rxJavaVersion = '2.0.8'
     rxAndroidVersion = '2.0.1'
     javaxAnnotationVersion = '1.0'
@@ -43,8 +43,7 @@ ext {
     domainDependencies = [
             retrofit      : "com.squareup.retrofit2:retrofit:${retrofitVersion}",
             retrofitGson  : "com.squareup.retrofit2:converter-gson:${retrofitVersion}",
-            gson             : "com.google.code.gson:gson:${gsonVersion}",
-
+            gson          : "com.google.code.gson:gson:${gsonVersion}",
             retrofitRxJava: "com.squareup.retrofit2:adapter-rxjava2:${retrofitVersion}",
             javaxInject   : "javax.inject:javax.inject:${javaxInjectVersion}",
             rxJava        : "io.reactivex.rxjava2:rxjava:${rxJavaVersion}"
@@ -82,23 +81,20 @@ ext {
     ]
 
     presentationDependencies = [
-            daggerCompiler   : "com.google.dagger:dagger-compiler:${daggerVersion}",
-            dagger           : "com.google.dagger:dagger:${daggerVersion}",
-            butterKnife      : "com.jakewharton:butterknife:${butterKnifeVersion}",
-            rxJava           : "io.reactivex.rxjava2:rxjava:${rxJavaVersion}",
-            rxAndroid        : "io.reactivex.rxjava2:rxandroid:${rxAndroidVersion}",
-
-            autoValue        : "com.google.auto.value:auto-value:${autoValueVersion}",
-            autoValueGson    : "com.ryanharter.auto.value:auto-value-gson:${autoValueGsonVersion}",
-            autoCommon       : "com.google.auto:auto-common:${autoCommonVersion}",
-
-            gson             : "com.google.code.gson:gson:${gsonVersion}",
-
-
-            javaxAnnotation  : "javax.annotation:jsr250-api:${javaxAnnotationVersion}",
-            androidCompatv7  : "com.android.support:appcompat-v7:${androidSupportVersion}",
-            androidSupportv13: "com.android.support:support-v13:${androidSupportVersion}",
-            androidDesign    : "com.android.support:design:${androidSupportVersion}"
+            daggerCompiler     : "com.google.dagger:dagger-compiler:${daggerVersion}",
+            dagger             : "com.google.dagger:dagger:${daggerVersion}",
+            butterKnife        : "com.jakewharton:butterknife:${butterKnifeVersion}",
+            butterKnifeCompiler: "com.jakewharton:butterknife-compiler:${butterKnifeVersion}",
+            rxJava             : "io.reactivex.rxjava2:rxjava:${rxJavaVersion}",
+            rxAndroid          : "io.reactivex.rxjava2:rxandroid:${rxAndroidVersion}",
+            autoValue          : "com.google.auto.value:auto-value:${autoValueVersion}",
+            autoValueGson      : "com.ryanharter.auto.value:auto-value-gson:${autoValueGsonVersion}",
+            autoCommon         : "com.google.auto:auto-common:${autoCommonVersion}",
+            gson               : "com.google.code.gson:gson:${gsonVersion}",
+            javaxAnnotation    : "javax.annotation:jsr250-api:${javaxAnnotationVersion}",
+            androidCompatv7    : "com.android.support:appcompat-v7:${androidSupportVersion}",
+            androidSupportv13  : "com.android.support:support-v13:${androidSupportVersion}",
+            androidDesign      : "com.android.support:design:${androidSupportVersion}"
 
     ]
     presentationTestDependencies = [
