@@ -1,3 +1,16 @@
+buildscript {
+    repositories {
+        maven {
+            url "https://plugins.gradle.org/m2/"
+        }
+    }
+    dependencies {
+        classpath "net.ltgt.gradle:gradle-apt-plugin:0.10"
+    }
+}
+
+apply plugin: "net.ltgt.apt"
+
 apply plugin: "java"
 
 sourceCompatibility = 1.7
@@ -10,18 +23,12 @@ dependencies {
     compile domainDependencies.javaxInject
     compile domainDependencies.gson
     compile domainDependencies.rxJava
-
+    compileOnly domainDependencies.autoValue
+    apt domainDependencies.autoValue
     testCompile domainTestDependencies.junit
     testCompile domainTestDependencies.mockito
     testCompile domainTestDependencies.jetAnnotations
 
-
-
-//    provided domainDependencies.autoValue
-//    annotationProcessor domainDependencies.autoValue
-//    provided domainDependencies.autoValueGson
-//    annotationProcessor domainDependencies.autoValueGson
-//    annotationProcessor 'com.ryanharter.auto.value:auto-value-parcel:0.2.5'
 
 }
 

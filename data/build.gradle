@@ -54,10 +54,10 @@ dependencies {
 
     compile dataDependencies.javaxAnnotation
 
-//    provided dataDependencies.autoValue
-//    annotationProcessor dataDependencies.autoValue
-//    provided dataDependencies.autoValueGson
-//    annotationProcessor dataDependencies.autoValueGson
+    provided dataDependencies.autoValue
+    annotationProcessor dataDependencies.autoValue
+    provided dataDependencies.autoValueGson
+    annotationProcessor dataDependencies.autoValueGson
     
 
     compile dataDependencies.rxJava
