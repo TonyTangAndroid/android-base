@@ -82,7 +82,7 @@ public abstract class BaseFragment extends Fragment implements BaseView {
 
     @Override
     public void handleError(Throwable error) {
-        ((CleanActivity) getActivity()).handleError(error);
+        ((BaseView) getActivity()).handleError(error);
     }
 
     @Override
@@ -92,11 +92,11 @@ public abstract class BaseFragment extends Fragment implements BaseView {
 
     @Override
     public void close() {
-        ((CleanActivity) getActivity()).close();
+        ((BaseView) getActivity()).close();
     }
 
     public void closeAndDisplayLogin() {
-        ((CleanActivity) getActivity()).closeAndDisplayLogin();
+        ((BaseView) getActivity()).closeAndDisplayLogin();
     }
 
     protected FragmentInjector getFragmentInjector() {
