@@ -3,9 +3,16 @@ apply plugin: 'me.tatarka.retrolambda'
 apply plugin: 'com.jakewharton.hugo'
 
 android {
+    signingConfigs {
+        tony_dev_sign {
+            keyAlias 'tony_dev_sign'
+            keyPassword 'tony_dev_sign'
+            storeFile file('tony_dev_sign.jks')
+            storePassword 'tony_dev_sign'
+        }
+    }
     compileSdkVersion rootProject.ext.androidCompileSdkVersion
     buildToolsVersion rootProject.ext.androidBuildToolsVersion
-
     defaultConfig {
 
         applicationId 'com.jordifierro.androidbase.presentation'
@@ -15,12 +22,14 @@ android {
         versionName rootProject.ext.appVersionName
         testInstrumentationRunner 'com.jordifierro.androidbase.presentation.TestMockerRunner'
     }
-
-
     buildTypes {
         release {
-            minifyEnabled false
+            minifyEnabled true
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+            signingConfig signingConfigs.tony_dev_sign
+        }
+        debug {
+            signingConfig signingConfigs.tony_dev_sign
         }
     }
     packagingOptions {
@@ -30,12 +39,10 @@ android {
     lintOptions {
         abortOnError false
     }
-
     compileOptions {
         sourceCompatibility JavaVersion.VERSION_1_8
         targetCompatibility JavaVersion.VERSION_1_8
     }
-
 }
 
 
@@ -48,6 +55,7 @@ dependencies {
     compile project(':data')
 
 
+    compile presentationDependencies.proguardSnippets
     compile presentationDependencies.androidDesign
     compile presentationDependencies.androidSupportv13
     compile presentationDependencies.androidCompatv7

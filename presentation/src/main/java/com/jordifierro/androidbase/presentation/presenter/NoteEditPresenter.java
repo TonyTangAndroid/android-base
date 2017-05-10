@@ -17,7 +17,6 @@ public class NoteEditPresenter extends BasePresenter implements Presenter {
     private DeleteNoteUseCase deleteNoteUseCase;
     NoteEditView noteEditView;
 
-    //@DebugLog
     @Inject
     public NoteEditPresenter(UpdateNoteUseCase updateNoteUseCase,
                              GetNoteUseCase getNoteUseCase, DeleteNoteUseCase deleteNoteUseCase) {
@@ -42,7 +41,6 @@ public class NoteEditPresenter extends BasePresenter implements Presenter {
         super.destroy();
         this.noteEditView = null;
     }
-
     protected class GetNoteSubscriber extends BaseSubscriber<NoteEntity> {
 
         @Override

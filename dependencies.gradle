@@ -20,12 +20,13 @@ ext {
     autoValueGsonVersion = '0.4.6'
     autoCommonVersion = '0.8'
     gsonVersion = '2.8.0'
+    proguardSnippetsVersion = '1.0.0'
 
     //Libraries
-    daggerVersion = '2.10'
-    okhttp3Version = '3.6.0'
+    daggerVersion = '2.11-rc2'
+    okhttp3Version = '3.7.0'
     butterKnifeVersion = '8.5.1'
-    rxJavaVersion = '2.0.8'
+    rxJavaVersion = '2.1.0'
     rxAndroidVersion = '2.0.1'
     javaxAnnotationVersion = '1.0'
     javaxInjectVersion = '1'
@@ -85,6 +86,7 @@ ext {
             daggerCompiler     : "com.google.dagger:dagger-compiler:${daggerVersion}",
             dagger             : "com.google.dagger:dagger:${daggerVersion}",
             butterKnife        : "com.jakewharton:butterknife:${butterKnifeVersion}",
+            proguardSnippets   : "com.infstory:proguard-snippets:${proguardSnippetsVersion}",
             butterKnifeCompiler: "com.jakewharton:butterknife-compiler:${butterKnifeVersion}",
             rxJava             : "io.reactivex.rxjava2:rxjava:${rxJavaVersion}",
             rxAndroid          : "io.reactivex.rxjava2:rxandroid:${rxAndroidVersion}",
