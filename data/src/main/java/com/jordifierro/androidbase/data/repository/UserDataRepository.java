@@ -20,7 +20,7 @@ public class UserDataRepository extends RestApiRepository implements UserReposit
 
     private final RestApi restApi;
 
-    @DebugLog
+    //@DebugLog
     @Inject
     public UserDataRepository(RestApi restApi) {
         this.restApi = restApi;

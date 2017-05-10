@@ -8,15 +8,13 @@ import com.jordifierro.androidbase.presentation.view.ResetPasswordView;
 
 import javax.inject.Inject;
 
-import hugo.weaving.DebugLog;
-
 public class ResetPasswordPresenter extends BasePresenter implements Presenter {
 
     ResetPasswordView resetPasswordView;
     private ResetPasswordUseCase resetPasswordUseCase;
 
     @Inject
-    @DebugLog
+    //@DebugLog
     public ResetPasswordPresenter(ResetPasswordUseCase resetPasswordUseCase) {
         super(resetPasswordUseCase);
         this.resetPasswordUseCase = resetPasswordUseCase;

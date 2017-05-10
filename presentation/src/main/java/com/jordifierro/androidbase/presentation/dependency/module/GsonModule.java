@@ -15,13 +15,13 @@ import retrofit2.converter.gson.GsonConverterFactory;
 public class GsonModule {
 
     @Provides
-    @DebugLog
+    //@DebugLog
     @ApplicationScope
     GsonConverterFactory getFactory(Gson gson) {
         return GsonConverterFactory.create(gson);
     }
 
-    @DebugLog
+    //@DebugLog
     @Provides
     @ApplicationScope
     Gson getGson() {

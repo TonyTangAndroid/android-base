@@ -15,7 +15,7 @@ public class LoginPresenter extends BasePresenter implements Presenter {
     LoginView loginView;
     private DoLoginUseCase doLoginUseCase;
 
-    @DebugLog
+    //@DebugLog
     @Inject
     public LoginPresenter(DoLoginUseCase doLoginUseCase) {
         super(doLoginUseCase);

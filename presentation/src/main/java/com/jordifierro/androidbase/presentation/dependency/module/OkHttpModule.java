@@ -14,7 +14,7 @@ public class OkHttpModule {
 
 
     @Provides
-    @DebugLog
+    //@DebugLog
     @ApplicationScope
     HttpLoggingInterceptor provideHttpLoggingInterceptor() {
         final HttpLoggingInterceptor interceptor = new HttpLoggingInterceptor();
@@ -30,7 +30,7 @@ public class OkHttpModule {
     }
 
     @Provides
-    @DebugLog
+    //@DebugLog
     @ApplicationScope
     OkHttpClient provideOkHttpClient(HttpLoggingInterceptor httpLoggingInterceptor, HttpInterceptor httpInterceptor) {
 

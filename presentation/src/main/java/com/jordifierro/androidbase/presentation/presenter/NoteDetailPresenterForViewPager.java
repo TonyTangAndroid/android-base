@@ -9,7 +9,7 @@ import javax.inject.Inject;
 
 import hugo.weaving.DebugLog;
 
-@DebugLog
+//@DebugLog
 public class NoteDetailPresenterForViewPager extends BasePresenter implements Presenter {
 
     NoteDetailView noteDetailView;

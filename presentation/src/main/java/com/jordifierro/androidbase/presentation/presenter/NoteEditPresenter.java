@@ -10,8 +10,6 @@ import com.jordifierro.androidbase.presentation.view.NoteEditView;
 
 import javax.inject.Inject;
 
-import hugo.weaving.DebugLog;
-
 public class NoteEditPresenter extends BasePresenter implements Presenter {
 
     private UpdateNoteUseCase updateNoteUseCase;
@@ -19,7 +17,7 @@ public class NoteEditPresenter extends BasePresenter implements Presenter {
     private DeleteNoteUseCase deleteNoteUseCase;
     NoteEditView noteEditView;
 
-    @DebugLog
+    //@DebugLog
     @Inject
     public NoteEditPresenter(UpdateNoteUseCase updateNoteUseCase,
                              GetNoteUseCase getNoteUseCase, DeleteNoteUseCase deleteNoteUseCase) {

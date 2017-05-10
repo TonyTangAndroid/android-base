@@ -1,1 +1,1 @@
-include ':presentation', ':domain', ':data', ':gsoncustomizedserializer'
+include ':presentation', ':domain', ':data'

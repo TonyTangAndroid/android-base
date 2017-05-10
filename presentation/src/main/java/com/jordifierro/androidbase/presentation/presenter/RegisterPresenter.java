@@ -15,7 +15,7 @@ public class RegisterPresenter extends BasePresenter implements Presenter {
     private CreateUserUseCase createUserUseCase;
 
     @Inject
-    @DebugLog
+    //@DebugLog
     public RegisterPresenter(CreateUserUseCase createUserUseCase) {
         super(createUserUseCase);
         this.createUserUseCase = createUserUseCase;

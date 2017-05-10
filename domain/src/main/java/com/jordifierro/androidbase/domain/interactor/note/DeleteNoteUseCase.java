@@ -1,5 +1,6 @@
 package com.jordifierro.androidbase.domain.interactor.note;
 
+import com.jordifierro.androidbase.domain.entity.UserEntity;
 import com.jordifierro.androidbase.domain.entity.VoidEntity;
 import com.jordifierro.androidbase.domain.executor.PostExecutionThread;
 import com.jordifierro.androidbase.domain.executor.ThreadExecutor;
@@ -32,6 +33,8 @@ public class DeleteNoteUseCase extends UseCase<VoidEntity> {
 
     @Override
     protected Observable<VoidEntity> buildUseCaseObservable() {
-        return this.noteRepository.deleteNote(this.sessionRepository.getCurrentUser(), this.noteObjectId);
+        UserEntity currentUser = this.sessionRepository.getCurrentUser();
+        String s = sessionRepository.toString();
+        return this.noteRepository.deleteNote(currentUser, this.noteObjectId);
     }
 }

@@ -17,7 +17,7 @@ public class SessionDataRepository implements SessionRepository {
 
     private final SharedPreferences sharedPreferences;
 
-    @DebugLog
+    //@DebugLog
     @Inject
     public SessionDataRepository(SharedPreferences sharedPreferences) {
         this.sharedPreferences = sharedPreferences;

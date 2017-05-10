@@ -17,7 +17,7 @@ public class SettingsPresenter extends BasePresenter implements Presenter {
     private DeleteUserUseCase deleteUserUseCase;
 
     @Inject
-    @DebugLog
+    //@DebugLog
     public SettingsPresenter(DoLogoutUseCase doLogoutUseCase, DeleteUserUseCase deleteUserUseCase) {
         super(doLogoutUseCase, deleteUserUseCase);
         this.doLogoutUseCase = doLogoutUseCase;

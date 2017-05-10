@@ -23,7 +23,7 @@ public class JobExecutor implements ThreadExecutor {
 
     ThreadPoolExecutor threadPoolExecutor;
 
-    @DebugLog
+    //@DebugLog
     @Inject
     public JobExecutor() {
         BlockingQueue<Runnable> workQueue = new LinkedBlockingQueue<>();

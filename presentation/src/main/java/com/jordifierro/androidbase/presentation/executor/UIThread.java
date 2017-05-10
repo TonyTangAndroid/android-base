@@ -11,7 +11,7 @@ import io.reactivex.android.schedulers.AndroidSchedulers;
 
 public class UIThread implements PostExecutionThread {
 
-    @DebugLog
+    //@DebugLog
     @Inject
     public UIThread() {
     }

@@ -19,7 +19,7 @@ public class NoteDataRepository extends RestApiRepository implements NoteReposit
 
     private final RestApi restApi;
 
-    @DebugLog
+    //@DebugLog
     @Inject
     public NoteDataRepository(RestApi restApi) {
         this.restApi = restApi;

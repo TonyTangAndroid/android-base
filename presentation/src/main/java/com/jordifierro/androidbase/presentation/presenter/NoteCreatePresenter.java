@@ -14,7 +14,7 @@ public class NoteCreatePresenter extends BasePresenter implements Presenter {
     private CreateNoteUseCase createNoteUseCase;
     NoteCreateView noteCreateView;
 
-    @DebugLog
+    //@DebugLog
     @Inject
     public NoteCreatePresenter(CreateNoteUseCase createNoteUseCase) {
         super(createNoteUseCase);

@@ -16,7 +16,7 @@ public class NetworkModule {
 
 
     @Provides
-    @DebugLog
+    //@DebugLog
     @ApplicationScope
     RestApi provideRestApi(OkHttpClient okHttpClient, GsonConverterFactory gsonConverterFactory) {
 

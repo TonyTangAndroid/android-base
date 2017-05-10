@@ -17,7 +17,7 @@ public class NotesPresenter extends BasePresenter implements Presenter {
     private GetNotesUseCase getNotesUseCase;
 
     @Inject
-    @DebugLog
+    //@DebugLog
     public NotesPresenter(GetNotesUseCase getNotesUseCase) {
         super(getNotesUseCase);
         this.getNotesUseCase = getNotesUseCase;

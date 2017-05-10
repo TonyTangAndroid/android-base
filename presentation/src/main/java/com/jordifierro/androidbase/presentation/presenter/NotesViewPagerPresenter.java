@@ -17,7 +17,7 @@ public class NotesViewPagerPresenter extends BasePresenter implements Presenter 
     private GetNotesUseCase getNotesUseCase;
 
     @Inject
-    @DebugLog
+    //@DebugLog
     public NotesViewPagerPresenter(GetNotesUseCase getNotesUseCase) {
         super(getNotesUseCase);
         this.getNotesUseCase = getNotesUseCase;

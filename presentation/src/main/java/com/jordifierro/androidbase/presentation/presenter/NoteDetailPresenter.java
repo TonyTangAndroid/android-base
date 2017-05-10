@@ -14,7 +14,7 @@ public class NoteDetailPresenter extends BasePresenter implements Presenter {
     NoteDetailView noteDetailView;
     private GetNoteUseCase getNoteUseCase;
 
-    @DebugLog
+    //@DebugLog
     @Inject
     public NoteDetailPresenter(GetNoteUseCase getNoteUseCase) {
         super(getNoteUseCase);
