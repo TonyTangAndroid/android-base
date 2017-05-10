@@ -1,4 +1,4 @@
--dontwarn 
+-dontwarn
 -optimizationpasses 5
 -dontusemixedcaseclassnames
 -dontskipnonpubliclibraryclasses
@@ -211,4 +211,5 @@
 
 
 # ALSO REMEMBER KEEPING YOUR MODEL CLASSES
--keep class com.your.package.model.** { *; }
+-keep class com.jordifierro.androidbase.data.net.wrapper.** { *; }
+-keep class com.jordifierro.androidbase.domain.entity.** { *; }
