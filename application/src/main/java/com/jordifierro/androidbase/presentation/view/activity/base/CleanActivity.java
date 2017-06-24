@@ -12,9 +12,10 @@ import com.jordifierro.androidbase.domain.exception.RestApiErrorException;
 import com.jordifierro.androidbase.presentation.BaseApplication;
 import com.jordifierro.androidbase.presentation.R;
 import com.jordifierro.androidbase.presentation.dependency.component.FragmentInjector;
+import com.jordifierro.androidbase.presentation.view.CleanView;
 import com.jordifierro.androidbase.presentation.view.activity.LoginActivity;
 
-public abstract class CleanActivity extends BaseActivity {
+public abstract class CleanActivity extends BaseActivity implements CleanView {
 
     private FragmentInjector fragmentInjector;
 
@@ -81,6 +82,10 @@ public abstract class CleanActivity extends BaseActivity {
     public void showMessage(String message) {
         Toast.makeText(context(), message, Toast.LENGTH_LONG).show();
     }
+
+   public void initUI(){
+
+   }
 
 
     public void close() {
