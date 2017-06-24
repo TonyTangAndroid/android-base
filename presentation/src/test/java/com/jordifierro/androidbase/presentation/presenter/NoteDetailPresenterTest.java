@@ -1,6 +1,6 @@
 package com.jordifierro.androidbase.presentation.presenter;
 
-import com.jordifierro.androidbase.data.net.error.RestApiErrorException;
+import com.jordifierro.androidbase.domain.exception.RestApiErrorException;
 import com.jordifierro.androidbase.domain.entity.NoteEntity;
 import com.jordifierro.androidbase.domain.interactor.note.GetNoteUseCase;
 import com.jordifierro.androidbase.presentation.view.NoteDetailView;

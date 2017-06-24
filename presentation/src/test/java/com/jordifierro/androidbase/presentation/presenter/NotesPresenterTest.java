@@ -1,6 +1,7 @@
 package com.jordifierro.androidbase.presentation.presenter;
 
-import com.jordifierro.androidbase.data.net.error.RestApiErrorException;
+import com.jordifierro.androidbase.domain.entity.NoteEntity;
+import com.jordifierro.androidbase.domain.exception.RestApiErrorException;
 import com.jordifierro.androidbase.domain.interactor.note.GetNotesUseCase;
 import com.jordifierro.androidbase.presentation.view.NotesView;
 
@@ -77,7 +78,7 @@ public class NotesPresenterTest {
     @SuppressWarnings("unchecked")
     public void testSubscriberOnNext() {
 
-        this.notesSubscriber.onNext(new ArrayList<>());
+        this.notesSubscriber.onNext(new ArrayList<NoteEntity>());
 
         verify(this.mockNotesView).hideLoader();
         verify(this.mockNotesView).showNotes(any(List.class));

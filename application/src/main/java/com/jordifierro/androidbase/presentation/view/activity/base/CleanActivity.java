@@ -8,7 +8,7 @@ import android.support.annotation.Nullable;
 import android.support.v7.app.AlertDialog;
 import android.widget.Toast;
 
-import com.jordifierro.androidbase.data.net.error.RestApiErrorException;
+import com.jordifierro.androidbase.domain.exception.RestApiErrorException;
 import com.jordifierro.androidbase.presentation.BaseApplication;
 import com.jordifierro.androidbase.presentation.R;
 import com.jordifierro.androidbase.presentation.dependency.component.FragmentInjector;

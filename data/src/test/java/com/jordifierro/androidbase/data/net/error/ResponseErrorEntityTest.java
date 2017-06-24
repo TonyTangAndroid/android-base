@@ -1,5 +1,7 @@
 package com.jordifierro.androidbase.data.net.error;
 
+import com.jordifierro.androidbase.domain.exception.ResponseErrorEntity;
+
 import org.junit.Before;
 import org.junit.Test;
 

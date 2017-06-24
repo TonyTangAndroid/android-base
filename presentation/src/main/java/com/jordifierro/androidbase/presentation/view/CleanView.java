@@ -1,12 +1,8 @@
 package com.jordifierro.androidbase.presentation.view;
 
-import android.content.Context;
-
 public interface CleanView {
 
     void initUI();
-
-    Context context();
 
     void showLoader();
 

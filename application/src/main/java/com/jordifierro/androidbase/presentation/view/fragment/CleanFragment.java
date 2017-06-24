@@ -69,7 +69,6 @@ public abstract class CleanFragment extends Fragment implements CleanView {
         presenter().destroy();
     }
 
-    @Override
     public Context context() {
         return getActivity().getApplicationContext();
     }

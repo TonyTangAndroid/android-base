@@ -1,7 +1,7 @@
 package com.jordifierro.androidbase.presentation.presenter;
 
-import com.jordifierro.androidbase.data.net.error.RestApiErrorException;
 import com.jordifierro.androidbase.domain.entity.UserEntity;
+import com.jordifierro.androidbase.domain.exception.RestApiErrorException;
 import com.jordifierro.androidbase.domain.interactor.user.DoLoginUseCase;
 import com.jordifierro.androidbase.presentation.view.LoginView;
 

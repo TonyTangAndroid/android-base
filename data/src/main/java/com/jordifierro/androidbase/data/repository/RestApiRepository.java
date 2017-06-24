@@ -1,7 +1,7 @@
 package com.jordifierro.androidbase.data.repository;
 
 import com.google.gson.Gson;
-import com.jordifierro.androidbase.data.net.error.RestApiErrorException;
+import com.jordifierro.androidbase.domain.exception.RestApiErrorException;
 import com.jordifierro.androidbase.data.net.wrapper.ResponseErrorWrapper;
 
 import java.io.IOException;

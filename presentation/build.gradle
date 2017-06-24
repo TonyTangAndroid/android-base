@@ -1,85 +1,36 @@
-apply plugin: 'com.android.application'
-apply plugin: 'me.tatarka.retrolambda'
-apply plugin: 'com.jakewharton.hugo'
-
-android {
-    signingConfigs {
-        tony_dev_sign {
-            keyAlias 'tony_dev_sign'
-            keyPassword 'tony_dev_sign'
-            storeFile file('tony_dev_sign.jks')
-            storePassword 'tony_dev_sign'
+buildscript {
+    repositories {
+        maven {
+            url "https://plugins.gradle.org/m2/"
         }
     }
-    compileSdkVersion rootProject.ext.androidCompileSdkVersion
-    buildToolsVersion rootProject.ext.androidBuildToolsVersion
-    defaultConfig {
-
-        applicationId 'com.jordifierro.androidbase.presentation'
-        minSdkVersion rootProject.ext.androidMinSdkVersion
-        targetSdkVersion rootProject.ext.androidTargetSdkVersion
-        versionCode rootProject.ext.appVersionCode
-        versionName rootProject.ext.appVersionName
-        testInstrumentationRunner 'com.jordifierro.androidbase.presentation.TestMockerRunner'
-    }
-    buildTypes {
-        release {
-            minifyEnabled true
-            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
-            signingConfig signingConfigs.tony_dev_sign
-        }
-        debug {
-            signingConfig signingConfigs.tony_dev_sign
-        }
-    }
-    packagingOptions {
-        exclude 'META-INF/maven/com.google.guava/guava/pom.properties'
-        exclude 'META-INF/maven/com.google.guava/guava/pom.xml'
-    }
-    lintOptions {
-        abortOnError false
-    }
-    compileOptions {
-        sourceCompatibility JavaVersion.VERSION_1_8
-        targetCompatibility JavaVersion.VERSION_1_8
+    dependencies {
+        classpath "net.ltgt.gradle:gradle-apt-plugin:0.10"
     }
 }
 
+apply plugin: "net.ltgt.apt"
 
+apply plugin: "java"
+
+sourceCompatibility = 1.7
+targetCompatibility = 1.7
 
 dependencies {
+
     def presentationDependencies = rootProject.ext.presentationDependencies
     def presentationTestDependencies = rootProject.ext.presentationTestDependencies
 
     compile project(':domain')
-    compile project(':data')
 
-
-    compile presentationDependencies.proguardSnippets
-    compile presentationDependencies.androidDesign
-    compile presentationDependencies.androidSupportv13
-    compile presentationDependencies.androidCompatv7
-    compile presentationDependencies.dagger
     compile presentationDependencies.javaxAnnotation
     compile presentationDependencies.rxJava
-    compile presentationDependencies.rxAndroid
-    compile presentationDependencies.butterKnife
-
     testCompile presentationTestDependencies.junit
     testCompile presentationTestDependencies.mockito
 
-    annotationProcessor presentationDependencies.butterKnifeCompiler
-    annotationProcessor presentationDependencies.daggerCompiler
+}
 
-    androidTestAnnotationProcessor presentationTestDependencies.daggerCompiler
-
-    androidTestCompile presentationTestDependencies.androidAnnotations
-    androidTestCompile presentationTestDependencies.mockito
-    androidTestCompile presentationTestDependencies.dexmaker
-    androidTestCompile presentationTestDependencies.dexmakerDx
-    androidTestCompile presentationTestDependencies.dexmakerParent
-    androidTestCompile presentationTestDependencies.dexmakerMockito
-    androidTestCompile presentationTestDependencies.espresso
-    androidTestCompile presentationTestDependencies.espressoIntents
-    androidTestCompile presentationTestDependencies.espressoWeb
+tasks.withType(JavaCompile) {
+    sourceCompatibility = "1.7"
+    targetCompatibility = "1.7"
 }

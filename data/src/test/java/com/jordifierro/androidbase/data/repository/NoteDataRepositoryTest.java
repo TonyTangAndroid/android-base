@@ -3,7 +3,7 @@ package com.jordifierro.androidbase.data.repository;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.jordifierro.androidbase.data.net.RestApi;
-import com.jordifierro.androidbase.data.net.error.RestApiErrorException;
+import com.jordifierro.androidbase.domain.exception.RestApiErrorException;
 import com.jordifierro.androidbase.data.utils.TestUtils;
 import com.jordifierro.androidbase.domain.entity.CreatedWrapper;
 import com.jordifierro.androidbase.domain.entity.NoteEntity;
