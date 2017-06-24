@@ -15,12 +15,12 @@ android {
     buildToolsVersion rootProject.ext.androidBuildToolsVersion
     defaultConfig {
 
-        applicationId 'com.jordifierro.androidbase.presentation'
+        applicationId 'com.jordifierro.androidbase.application'
         minSdkVersion rootProject.ext.androidMinSdkVersion
         targetSdkVersion rootProject.ext.androidTargetSdkVersion
         versionCode rootProject.ext.appVersionCode
         versionName rootProject.ext.appVersionName
-        testInstrumentationRunner 'com.jordifierro.androidbase.presentation.TestMockerRunner'
+        testInstrumentationRunner 'com.jordifierro.androidbase.application.TestMockerRunner'
     }
     buildTypes {
         release {
@@ -48,36 +48,39 @@ android {
 
 
 dependencies {
-    def presentationDependencies = rootProject.ext.presentationDependencies
-    def presentationTestDependencies = rootProject.ext.presentationTestDependencies
+    def applicationDependencies = rootProject.ext.applicationDependencies
+    def applicationTestDependencies = rootProject.ext.applicationTestDependencies
 
     compile project(':domain')
     compile project(':data')
     compile project(':presentation')
 
 
-    compile presentationDependencies.proguardSnippets
-    compile presentationDependencies.androidDesign
-    compile presentationDependencies.androidSupportv13
-    compile presentationDependencies.androidCompatv7
-    compile presentationDependencies.dagger
-    compile presentationDependencies.javaxAnnotation
-    compile presentationDependencies.rxJava
-    compile presentationDependencies.rxAndroid
-    compile presentationDependencies.butterKnife
+    compile applicationDependencies.proguardSnippets
+    compile applicationDependencies.androidDesign
+    compile applicationDependencies.androidSupportv13
+    compile applicationDependencies.androidCompatv7
+    compile applicationDependencies.daggerAndroid
+    compile applicationDependencies.dagger
+    compile applicationDependencies.javaxAnnotation
+    compile applicationDependencies.rxJava
+    compile applicationDependencies.rxAndroid
+    compile applicationDependencies.butterKnife
 
-    annotationProcessor presentationDependencies.butterKnifeCompiler
-    annotationProcessor presentationDependencies.daggerCompiler
+    annotationProcessor applicationDependencies.butterKnifeCompiler
+    annotationProcessor applicationDependencies.daggerCompiler
 
-    androidTestAnnotationProcessor presentationTestDependencies.daggerCompiler
+    androidTestAnnotationProcessor applicationTestDependencies.daggerCompiler
 
-    androidTestCompile presentationTestDependencies.androidAnnotations
-    androidTestCompile presentationTestDependencies.mockito
-    androidTestCompile presentationTestDependencies.dexmaker
-    androidTestCompile presentationTestDependencies.dexmakerDx
-    androidTestCompile presentationTestDependencies.dexmakerParent
-    androidTestCompile presentationTestDependencies.dexmakerMockito
-    androidTestCompile presentationTestDependencies.espresso
-    androidTestCompile presentationTestDependencies.espressoIntents
-    androidTestCompile presentationTestDependencies.espressoWeb
+    androidTestCompile applicationTestDependencies.androidAnnotations
+    androidTestCompile applicationTestDependencies.mockito
+    androidTestCompile applicationTestDependencies.dexmaker
+    androidTestCompile applicationTestDependencies.dexmakerDx
+    androidTestCompile applicationTestDependencies.dexmakerParent
+    androidTestCompile applicationTestDependencies.dexmakerMockito
+    androidTestCompile applicationTestDependencies.espresso
+    androidTestCompile applicationTestDependencies.espressoIntents
+    androidTestCompile applicationTestDependencies.espressoWeb
+    androidTestCompile applicationTestDependencies.findbugsJsr305
+
 }

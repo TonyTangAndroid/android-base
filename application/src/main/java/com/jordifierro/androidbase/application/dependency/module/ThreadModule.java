@@ -1,0 +1,27 @@
+package com.jordifierro.androidbase.application.dependency.module;
+
+import com.jordifierro.androidbase.application.dependency.ApplicationScope;
+import com.jordifierro.androidbase.application.executor.JobExecutor;
+import com.jordifierro.androidbase.application.executor.UIThread;
+import com.jordifierro.androidbase.domain.executor.PostExecutionThread;
+import com.jordifierro.androidbase.domain.executor.ThreadExecutor;
+
+import dagger.Module;
+import dagger.Provides;
+
+@Module
+public class ThreadModule {
+
+    @Provides
+    @ApplicationScope
+    ThreadExecutor provideThreadExecutor(JobExecutor jobExecutor) {
+        return jobExecutor;
+    }
+
+    @Provides
+    @ApplicationScope
+    PostExecutionThread providePostExecutionThread(UIThread uiThread) {
+        return uiThread;
+    }
+
+}

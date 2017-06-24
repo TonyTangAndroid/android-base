@@ -23,7 +23,8 @@ ext {
     proguardSnippetsVersion = '1.0.0'
 
     //Libraries
-    daggerVersion = '2.11-rc2'
+    daggerVersion = '2.11'
+    findbugsJsr305Version = '3.0.1'
     okhttp3Version = '3.7.0'
     butterKnifeVersion = '8.5.1'
     rxJavaVersion = '2.1.0'
@@ -82,9 +83,17 @@ ext {
             commonsIO    : "commons-io:commons-io:${commonsIOVersion}"
     ]
 
-    presentationDependencies = [
+
+
+    presentationTestDependencies = [
+            junit  : "junit:junit:${jUnitVersion}",
+            mockito: "org.mockito:mockito-core:${mockitoVersion}",
+    ]
+
+    applicationDependencies = [
             daggerCompiler     : "com.google.dagger:dagger-compiler:${daggerVersion}",
             dagger             : "com.google.dagger:dagger:${daggerVersion}",
+            daggerAndroid      : "com.google.dagger:dagger-android-support:${daggerVersion}",
             butterKnife        : "com.jakewharton:butterknife:${butterKnifeVersion}",
             proguardSnippets   : "com.infstory:proguard-snippets:${proguardSnippetsVersion}",
             butterKnifeCompiler: "com.jakewharton:butterknife-compiler:${butterKnifeVersion}",
@@ -97,10 +106,12 @@ ext {
             javaxAnnotation    : "javax.annotation:jsr250-api:${javaxAnnotationVersion}",
             androidCompatv7    : "com.android.support:appcompat-v7:${androidSupportVersion}",
             androidSupportv13  : "com.android.support:support-v13:${androidSupportVersion}",
-            androidDesign      : "com.android.support:design:${androidSupportVersion}"
+            androidDesign      : "com.android.support:design:${androidSupportVersion}",
+
 
     ]
-    presentationTestDependencies = [
+
+    applicationTestDependencies = [
             junit             : "junit:junit:${jUnitVersion}",
             mockito           : "org.mockito:mockito-core:${mockitoVersion}",
             dexmaker          : "com.crittercism.dexmaker:dexmaker:${dexmakerVersion}",
@@ -112,7 +123,8 @@ ext {
             espresso          : "com.android.support.test.espresso:espresso-core:${espressoVersion}",
             espressoIntents   : "com.android.support.test.espresso:espresso-intents:${espressoVersion}",
             espressoWeb       : "com.android.support.test.espresso:espresso-web:${espressoVersion}",
-            daggerCompiler    : "com.google.dagger:dagger-compiler:${daggerVersion}"
+            daggerCompiler    : "com.google.dagger:dagger-compiler:${daggerVersion}",
+            findbugsJsr305    : "com.google.code.findbugs:jsr305:${findbugsJsr305Version}",
     ]
 
 

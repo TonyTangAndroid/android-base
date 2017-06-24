@@ -1,4 +1,4 @@
-package com.jordifierro.androidbase.presentation;
+package package com.jordifierro.androidbase.application;
 
 import com.jordifierro.androidbase.presentation.dependency.ActivityScope;
 import com.jordifierro.androidbase.presentation.presenter.LoginPresenter;
