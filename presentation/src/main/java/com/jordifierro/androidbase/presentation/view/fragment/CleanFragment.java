@@ -87,7 +87,7 @@ public abstract class CleanFragment extends Fragment implements CleanView {
 
     @Override
     public void handleError(Throwable error) {
-        ((BaseView) getActivity()).handleError(error);
+        ((CleanView) getActivity()).handleError(error);
     }
 
     @Override
@@ -97,11 +97,11 @@ public abstract class CleanFragment extends Fragment implements CleanView {
 
     @Override
     public void close() {
-        ((BaseView) getActivity()).close();
+        ((CleanView) getActivity()).close();
     }
 
     public void closeAndDisplayLogin() {
-        ((BaseView) getActivity()).closeAndDisplayLogin();
+        ((CleanView) getActivity()).closeAndDisplayLogin();
     }
 
     protected FragmentInjector getFragmentInjector() {
