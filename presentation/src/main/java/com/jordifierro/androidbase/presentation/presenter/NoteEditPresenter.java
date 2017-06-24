@@ -5,17 +5,19 @@ import com.jordifierro.androidbase.domain.entity.VoidEntity;
 import com.jordifierro.androidbase.domain.interactor.note.DeleteNoteUseCase;
 import com.jordifierro.androidbase.domain.interactor.note.GetNoteUseCase;
 import com.jordifierro.androidbase.domain.interactor.note.UpdateNoteUseCase;
-import com.jordifierro.androidbase.presentation.view.BaseView;
+import com.jordifierro.androidbase.presentation.view.CleanView;
 import com.jordifierro.androidbase.presentation.view.NoteEditView;
 
 import javax.inject.Inject;
+
 
 public class NoteEditPresenter extends BasePresenter implements Presenter {
 
     private UpdateNoteUseCase updateNoteUseCase;
     private GetNoteUseCase getNoteUseCase;
     private DeleteNoteUseCase deleteNoteUseCase;
-    NoteEditView noteEditView;
+    private NoteEditView noteEditView;
+
 
     @Inject
     public NoteEditPresenter(UpdateNoteUseCase updateNoteUseCase,
@@ -27,8 +29,12 @@ public class NoteEditPresenter extends BasePresenter implements Presenter {
     }
 
     @Override
-    public void initWithView(BaseView view) {
-        super.initWithView(view);
+    protected NoteEditView getCleanView() {
+        return noteEditView;
+    }
+
+    @Override
+    public void bindPresenter(CleanView view) {
         this.noteEditView = (NoteEditView) view;
 
         this.showLoader();
@@ -41,14 +47,6 @@ public class NoteEditPresenter extends BasePresenter implements Presenter {
         super.destroy();
         this.noteEditView = null;
     }
-    protected class GetNoteSubscriber extends BaseSubscriber<NoteEntity> {
-
-        @Override
-        public void onNext(NoteEntity note) {
-            NoteEditPresenter.this.hideLoader();
-            NoteEditPresenter.this.noteEditView.showNote(note);
-        }
-    }
 
     public void updateNote(String title, String content) {
         NoteEntity updatedNote = new NoteEntity(title, content);
@@ -59,6 +57,21 @@ public class NoteEditPresenter extends BasePresenter implements Presenter {
         this.updateNoteUseCase.execute(new UpdateNoteSubscriber());
     }
 
+    public void deleteNoteButtonPressed() {
+        this.noteEditView.showLoader();
+        this.deleteNoteUseCase.setParams(this.noteEditView.getNoteObjectId());
+        this.deleteNoteUseCase.execute(new DeleteNoteSubscriber());
+    }
+
+    protected class GetNoteSubscriber extends BaseSubscriber<NoteEntity> {
+
+        @Override
+        public void onNext(NoteEntity note) {
+            NoteEditPresenter.this.hideLoader();
+            NoteEditPresenter.this.noteEditView.showNote(note);
+        }
+    }
+
     protected class UpdateNoteSubscriber extends BaseSubscriber<NoteEntity> {
 
         @Override
@@ -67,12 +80,6 @@ public class NoteEditPresenter extends BasePresenter implements Presenter {
             NoteEditPresenter.this.noteEditView.close();
         }
 
-    }
-
-    public void deleteNoteButtonPressed() {
-        this.noteEditView.showLoader();
-        this.deleteNoteUseCase.setParams(this.noteEditView.getNoteObjectId());
-        this.deleteNoteUseCase.execute(new DeleteNoteSubscriber());
     }
 
     protected class DeleteNoteSubscriber extends BaseSubscriber<VoidEntity> {

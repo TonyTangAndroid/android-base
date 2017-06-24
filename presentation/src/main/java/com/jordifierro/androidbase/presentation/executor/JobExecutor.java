@@ -12,7 +12,6 @@ import java.util.concurrent.TimeUnit;
 
 import javax.inject.Inject;
 
-import hugo.weaving.DebugLog;
 
 public class JobExecutor implements ThreadExecutor {
 
@@ -23,7 +22,7 @@ public class JobExecutor implements ThreadExecutor {
 
     ThreadPoolExecutor threadPoolExecutor;
 
-    //@DebugLog
+
     @Inject
     public JobExecutor() {
         BlockingQueue<Runnable> workQueue = new LinkedBlockingQueue<>();

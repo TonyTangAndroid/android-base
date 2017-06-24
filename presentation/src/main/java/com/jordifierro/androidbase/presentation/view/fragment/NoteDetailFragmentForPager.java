@@ -13,7 +13,7 @@ import javax.inject.Inject;
 
 import butterknife.BindView;
 
-public class NoteDetailFragmentForPager extends BaseFragment implements NoteDetailView {
+public class NoteDetailFragmentForPager extends CleanFragment implements NoteDetailView {
 
     @Inject
     NoteDetailPresenter noteDetailPresenter;

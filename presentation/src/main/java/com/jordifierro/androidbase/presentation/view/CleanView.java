@@ -2,7 +2,9 @@ package com.jordifierro.androidbase.presentation.view;
 
 import android.content.Context;
 
-public interface BaseView {
+public interface CleanView {
+
+    void initUI();
 
     Context context();
 

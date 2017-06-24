@@ -8,20 +8,19 @@ import com.jordifierro.androidbase.presentation.dependency.ApplicationScope;
 
 import dagger.Module;
 import dagger.Provides;
-import hugo.weaving.DebugLog;
 import retrofit2.converter.gson.GsonConverterFactory;
 
 @Module
 public class GsonModule {
 
     @Provides
-    //@DebugLog
+
     @ApplicationScope
     GsonConverterFactory getFactory(Gson gson) {
         return GsonConverterFactory.create(gson);
     }
 
-    //@DebugLog
+
     @Provides
     @ApplicationScope
     Gson getGson() {

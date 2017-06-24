@@ -16,7 +16,7 @@ import javax.inject.Inject;
 
 import butterknife.BindView;
 
-public class NotesViewPagerFragment extends BaseFragment implements NotesViewPagerView {
+public class NotesViewPagerFragment extends CleanFragment implements NotesViewPagerView {
 
     @Inject
     NotesViewPagerPresenter notesViewPagerPresenter;
@@ -53,7 +53,7 @@ public class NotesViewPagerFragment extends BaseFragment implements NotesViewPag
 
 
     @Override
-    public void initView() {
+    public void initUI() {
         tabDots.setupWithViewPager(viewPagerBadge, true);
 
     }

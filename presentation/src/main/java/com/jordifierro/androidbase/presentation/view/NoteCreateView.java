@@ -1,4 +1,4 @@
 package com.jordifierro.androidbase.presentation.view;
 
-public interface NoteCreateView extends BaseView {
+public interface NoteCreateView extends CleanView {
 }

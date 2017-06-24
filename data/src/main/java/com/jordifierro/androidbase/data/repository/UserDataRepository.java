@@ -11,7 +11,7 @@ import java.util.Map;
 
 import javax.inject.Inject;
 
-import hugo.weaving.DebugLog;
+
 import io.reactivex.Observable;
 import io.reactivex.functions.Function;
 import retrofit2.Response;
@@ -20,7 +20,7 @@ public class UserDataRepository extends RestApiRepository implements UserReposit
 
     private final RestApi restApi;
 
-    //@DebugLog
+
     @Inject
     public UserDataRepository(RestApi restApi) {
         this.restApi = restApi;

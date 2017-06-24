@@ -1,10 +1,10 @@
 package com.jordifierro.androidbase.presentation.presenter;
 
-import com.jordifierro.androidbase.presentation.view.BaseView;
+import com.jordifierro.androidbase.presentation.view.CleanView;
 
 public interface Presenter {
 
-    void initWithView(BaseView view);
+    void create(CleanView view);
 
     void resume();
 

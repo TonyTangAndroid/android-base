@@ -58,7 +58,7 @@ public class LoginActivityTest {
         onView(withId(R.id.et_password)).perform(typeText("87654321"));
         onView(withId(R.id.btn_login)).perform(click());
 
-        verify(this.loginFragment.getLoginPresenter()).loginUser("email@test.com", "87654321");
+        verify(this.loginFragment.presenter()).loginUser("email@test.com", "87654321");
     }
 
     @Test

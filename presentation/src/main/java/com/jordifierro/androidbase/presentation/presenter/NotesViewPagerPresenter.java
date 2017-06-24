@@ -2,32 +2,34 @@ package com.jordifierro.androidbase.presentation.presenter;
 
 import com.jordifierro.androidbase.domain.entity.NoteEntity;
 import com.jordifierro.androidbase.domain.interactor.note.GetNotesUseCase;
-import com.jordifierro.androidbase.presentation.view.BaseView;
+import com.jordifierro.androidbase.presentation.view.CleanView;
 import com.jordifierro.androidbase.presentation.view.NotesViewPagerView;
 
 import java.util.List;
 
 import javax.inject.Inject;
 
-import hugo.weaving.DebugLog;
 
 public class NotesViewPagerPresenter extends BasePresenter implements Presenter {
 
-    NotesViewPagerView notesView;
+    private NotesViewPagerView notesView;
     private GetNotesUseCase getNotesUseCase;
 
     @Inject
-    //@DebugLog
+
     public NotesViewPagerPresenter(GetNotesUseCase getNotesUseCase) {
         super(getNotesUseCase);
         this.getNotesUseCase = getNotesUseCase;
     }
 
     @Override
-    public void initWithView(BaseView view) {
-        super.initWithView(view);
+    protected NotesViewPagerView getCleanView() {
+        return notesView;
+    }
+
+    @Override
+    public void bindPresenter(CleanView view) {
         this.notesView = (NotesViewPagerView) view;
-        this.notesView.initView();
     }
 
     @Override

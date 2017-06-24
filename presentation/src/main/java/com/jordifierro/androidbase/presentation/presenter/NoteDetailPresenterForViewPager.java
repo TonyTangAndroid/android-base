@@ -2,17 +2,15 @@ package com.jordifierro.androidbase.presentation.presenter;
 
 import com.jordifierro.androidbase.domain.entity.NoteEntity;
 import com.jordifierro.androidbase.domain.interactor.note.GetNoteUseCase;
-import com.jordifierro.androidbase.presentation.view.BaseView;
+import com.jordifierro.androidbase.presentation.view.CleanView;
 import com.jordifierro.androidbase.presentation.view.NoteDetailView;
 
 import javax.inject.Inject;
 
-import hugo.weaving.DebugLog;
 
-//@DebugLog
 public class NoteDetailPresenterForViewPager extends BasePresenter implements Presenter {
 
-    NoteDetailView noteDetailView;
+   private NoteDetailView noteDetailView;
     private GetNoteUseCase getNoteUseCase;
 
     @Inject
@@ -22,8 +20,12 @@ public class NoteDetailPresenterForViewPager extends BasePresenter implements Pr
     }
 
     @Override
-    public void initWithView(BaseView view) {
-        super.initWithView(view);
+    protected NoteDetailView getCleanView() {
+        return noteDetailView;
+    }
+
+    @Override
+    public void bindPresenter(CleanView view) {
         this.noteDetailView = (NoteDetailView) view;
     }
 

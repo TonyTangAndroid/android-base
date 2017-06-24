@@ -34,7 +34,7 @@ public class NotesPresenterTest {
     public void setUp() throws Exception {
         MockitoAnnotations.initMocks(this);
         this.notesPresenter = new NotesPresenter(this.getNotesUseCase);
-        this.notesPresenter.initWithView(this.mockNotesView);
+        this.notesPresenter.create(this.mockNotesView);
         this.notesSubscriber = this.notesPresenter.new NotesSubscriber();
     }
 
@@ -44,8 +44,7 @@ public class NotesPresenterTest {
         this.notesPresenter.destroy();
 
         verify(this.getNotesUseCase).unsubscribe();
-        assertNull(this.notesPresenter.notesView);
-        assertNull(this.notesPresenter.view);
+        assertNull(this.notesPresenter.getCleanView());
     }
 
     @Test
