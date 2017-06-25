@@ -5,6 +5,7 @@ import com.jordifierro.androidbase.domain.interactor.note.GetNoteUseCase;
 
 import javax.inject.Inject;
 
+import hugo.weaving.DebugLog;
 import io.reactivex.annotations.NonNull;
 import io.reactivex.observers.DisposableObserver;
 
@@ -13,6 +14,7 @@ public class NoteDetailPresenter {
     GetNoteUseCase getNoteUseCase;
     NoteDetailView detailFragmentView;
 
+    @DebugLog
     @Inject
     public NoteDetailPresenter(NoteDetailView detailFragmentView,
                                GetNoteUseCase getNoteUseCase) {

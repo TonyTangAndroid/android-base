@@ -1,5 +1,5 @@
 include ':domain', ':data'
-include ':presentation'
-include ':application'
+//include ':presentation'
+//include ':application'
 include ':presentation_v2'
 include ':application_v2'

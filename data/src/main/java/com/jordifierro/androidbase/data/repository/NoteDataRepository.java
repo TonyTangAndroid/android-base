@@ -12,13 +12,14 @@ import java.util.List;
 
 import javax.inject.Inject;
 
+import hugo.weaving.DebugLog;
 import io.reactivex.Observable;
 
 public class NoteDataRepository extends RestApiRepository implements NoteRepository {
 
     private final RestApi restApi;
 
-
+    @DebugLog
     @Inject
     public NoteDataRepository(RestApi restApi) {
         this.restApi = restApi;

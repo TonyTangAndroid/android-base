@@ -4,6 +4,7 @@ import com.jordifierro.androidbase.domain.interactor.note.GetNotesUseCase;
 
 import dagger.Module;
 import dagger.Provides;
+import hugo.weaving.DebugLog;
 
 /**
 
@@ -11,11 +12,13 @@ import dagger.Provides;
 @Module
 public class NoteListActivityModule {
 
+    @DebugLog
     @Provides
     NoteListView provideMainView(NoteListActivity mainActivity) {
         return mainActivity;
     }
 
+    @DebugLog
     @Provides
     NoteListPresenter provideMainPresenter(NoteListView noteListView, GetNotesUseCase getNotesUseCase) {
         return new NoteListPresenterImpl(noteListView, getNotesUseCase);

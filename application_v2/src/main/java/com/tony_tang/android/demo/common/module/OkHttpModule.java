@@ -16,7 +16,7 @@ public class OkHttpModule {
     @ApplicationScope
     HttpLoggingInterceptor provideHttpLoggingInterceptor() {
         final HttpLoggingInterceptor interceptor = new HttpLoggingInterceptor();
-        interceptor.setLevel(HttpLoggingInterceptor.Level.BODY);
+        interceptor.setLevel(HttpLoggingInterceptor.Level.BASIC);
         return interceptor;
     }
 

@@ -7,6 +7,7 @@ import java.util.List;
 
 import javax.inject.Inject;
 
+import hugo.weaving.DebugLog;
 import io.reactivex.annotations.NonNull;
 import io.reactivex.observers.DisposableObserver;
 
@@ -18,6 +19,7 @@ public class NoteListPresenterImpl implements NoteListPresenter {
     NoteListView noteListView;
     GetNotesUseCase apiService;
 
+    @DebugLog
     @Inject
     public NoteListPresenterImpl(NoteListView noteListView, GetNotesUseCase getNotesUseCase) {
         this.noteListView = noteListView;
