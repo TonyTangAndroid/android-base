@@ -1,0 +1,45 @@
+apply plugin: 'com.android.application'
+
+android {
+    compileSdkVersion 25
+    buildToolsVersion "25.0.3"
+    defaultConfig {
+        applicationId "iammert.com.dagger_android_injection"
+        minSdkVersion 17
+        targetSdkVersion 25
+        versionCode 1
+        versionName "1.0"
+    }
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+    }
+}
+
+dependencies {
+
+    def applicationDependencies = rootProject.ext.applicationDependencies
+
+    compile project(':domain')
+    compile project(':data')
+    compile project(':presentation')
+
+
+    compile applicationDependencies.proguardSnippets
+    compile applicationDependencies.androidDesign
+    compile applicationDependencies.androidSupportv13
+    compile applicationDependencies.androidCompatv7
+    compile applicationDependencies.daggerAndroid
+    compile applicationDependencies.dagger
+    compile applicationDependencies.javaxAnnotation
+    compile applicationDependencies.rxJava
+    compile applicationDependencies.rxAndroid
+    compile applicationDependencies.butterKnife
+
+    annotationProcessor applicationDependencies.butterKnifeCompiler
+    annotationProcessor applicationDependencies.daggerCompiler
+
+
+}

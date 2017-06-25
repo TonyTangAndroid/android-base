@@ -13,7 +13,7 @@ ext {
     androidMinSdkVersion = 17
     androidTargetSdkVersion = 25
     androidCompileSdkVersion = 25
-    androidSupportVersion = '25.3.1'
+    androidSupportVersion = '25.4.0'
 
 
     autoValueVersion = '1.4.1'

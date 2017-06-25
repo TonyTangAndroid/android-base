@@ -3,11 +3,11 @@ apply from: 'dependencies.gradle'
 buildscript {
     repositories {
         jcenter()
+        maven { url 'https://maven.google.com' }
         mavenCentral()
     }
     dependencies {
         classpath 'com.android.tools.build:gradle:2.3.3'
-//        classpath 'com.neenbedankt.gradle.plugins:android-apt:1.8'
         classpath 'me.tatarka:gradle-retrolambda:3.4.0'
         classpath 'com.jakewharton.hugo:hugo-plugin:1.2.1'
 
@@ -17,6 +17,8 @@ buildscript {
 allprojects {
     repositories {
         jcenter()
+        maven { url 'https://maven.google.com' }
+
     }
 }
 
