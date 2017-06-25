@@ -1,26 +1,55 @@
 apply plugin: 'com.android.application'
+apply plugin: 'me.tatarka.retrolambda'
+apply plugin: 'com.jakewharton.hugo'
 
 android {
-    compileSdkVersion 25
-    buildToolsVersion "25.0.3"
+    signingConfigs {
+        tony_dev_sign {
+            keyAlias 'tony_dev_sign'
+            keyPassword 'tony_dev_sign'
+            storeFile file('tony_dev_sign.jks')
+            storePassword 'tony_dev_sign'
+        }
+    }
+    compileSdkVersion rootProject.ext.androidCompileSdkVersion
+    buildToolsVersion rootProject.ext.androidBuildToolsVersion
     defaultConfig {
-        applicationId "iammert.com.dagger_android_injection"
-        minSdkVersion 17
-        targetSdkVersion 25
-        versionCode 1
-        versionName "1.0"
+
+        applicationId  "com.tony_tang.android.demo"
+        minSdkVersion rootProject.ext.androidMinSdkVersion
+        targetSdkVersion rootProject.ext.androidTargetSdkVersion
+        versionCode rootProject.ext.appVersionCode
+        versionName rootProject.ext.appVersionName
+        testInstrumentationRunner 'com.jordifierro.androidbase.application.TestMockerRunner'
     }
     buildTypes {
         release {
-            minifyEnabled false
+            minifyEnabled true
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+            signingConfig signingConfigs.tony_dev_sign
         }
+        debug {
+            signingConfig signingConfigs.tony_dev_sign
+        }
+    }
+    packagingOptions {
+        exclude 'META-INF/maven/com.google.guava/guava/pom.properties'
+        exclude 'META-INF/maven/com.google.guava/guava/pom.xml'
+    }
+    lintOptions {
+        abortOnError false
+    }
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
     }
 }
 
-dependencies {
 
+
+dependencies {
     def applicationDependencies = rootProject.ext.applicationDependencies
+    def applicationTestDependencies = rootProject.ext.applicationTestDependencies
 
     compile project(':domain')
     compile project(':data')
@@ -41,5 +70,17 @@ dependencies {
     annotationProcessor applicationDependencies.butterKnifeCompiler
     annotationProcessor applicationDependencies.daggerCompiler
 
+    androidTestAnnotationProcessor applicationTestDependencies.daggerCompiler
+
+    androidTestCompile applicationTestDependencies.androidAnnotations
+    androidTestCompile applicationTestDependencies.mockito
+    androidTestCompile applicationTestDependencies.dexmaker
+    androidTestCompile applicationTestDependencies.dexmakerDx
+    androidTestCompile applicationTestDependencies.dexmakerParent
+    androidTestCompile applicationTestDependencies.dexmakerMockito
+    androidTestCompile applicationTestDependencies.espresso
+    androidTestCompile applicationTestDependencies.espressoIntents
+    androidTestCompile applicationTestDependencies.espressoWeb
+    androidTestCompile applicationTestDependencies.findbugsJsr305
 
 }

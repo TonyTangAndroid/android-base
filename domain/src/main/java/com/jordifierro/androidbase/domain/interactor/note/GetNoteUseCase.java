@@ -28,8 +28,9 @@ public class GetNoteUseCase extends UseCase<NoteEntity> {
         this.sessionRepository = sessionRepository;
     }
 
-    public void setParams(String noteObjectId) {
+    public GetNoteUseCase setParams(String noteObjectId) {
         this.noteObjectId = noteObjectId;
+        return this;
     }
 
     @Override

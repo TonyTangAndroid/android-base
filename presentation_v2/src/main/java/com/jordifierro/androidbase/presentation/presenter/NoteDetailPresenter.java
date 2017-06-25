@@ -2,7 +2,6 @@ package com.jordifierro.androidbase.presentation.presenter;
 
 import com.jordifierro.androidbase.domain.entity.NoteEntity;
 import com.jordifierro.androidbase.domain.interactor.note.GetNoteUseCase;
-import com.jordifierro.androidbase.presentation.view.CleanView;
 import com.jordifierro.androidbase.presentation.view.NoteDetailView;
 
 import javax.inject.Inject;
@@ -15,19 +14,10 @@ public class NoteDetailPresenter extends BasePresenter implements Presenter {
 
 
     @Inject
-    public NoteDetailPresenter(GetNoteUseCase getNoteUseCase) {
-        super(getNoteUseCase);
+    public NoteDetailPresenter(NoteDetailView noteDetailView, GetNoteUseCase getNoteUseCase) {
+        super(noteDetailView, getNoteUseCase);
+        this.noteDetailView = noteDetailView;
         this.getNoteUseCase = getNoteUseCase;
-    }
-
-    @Override
-    protected NoteDetailView getCleanView() {
-        return noteDetailView;
-    }
-
-    @Override
-    public void bindPresenter(CleanView view) {
-        this.noteDetailView = (NoteDetailView) view;
     }
 
     @Override

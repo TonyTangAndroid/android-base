@@ -1,7 +1,7 @@
 package com.jordifierro.androidbase.presentation.presenter;
 
-import com.jordifierro.androidbase.domain.exception.RestApiErrorException;
 import com.jordifierro.androidbase.domain.entity.NoteEntity;
+import com.jordifierro.androidbase.domain.exception.RestApiErrorException;
 import com.jordifierro.androidbase.domain.interactor.note.GetNoteUseCase;
 import com.jordifierro.androidbase.presentation.view.NoteDetailView;
 
@@ -32,8 +32,8 @@ public class NoteDetailPresenterTest {
     public void setUp() throws Exception {
         MockitoAnnotations.initMocks(this);
         this.noteDetailPresenter =
-                new NoteDetailPresenter(this.getNoteUseCase);
-        this.noteDetailPresenter.create(this.mockNoteDetailView);
+                new NoteDetailPresenter(mockNoteDetailView, this.getNoteUseCase);
+        this.noteDetailPresenter.create();
         this.noteDetailSubscriber = this.noteDetailPresenter.new NoteDetailSubscriber();
     }
 

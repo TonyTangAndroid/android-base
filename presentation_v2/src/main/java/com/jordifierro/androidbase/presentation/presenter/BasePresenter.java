@@ -7,29 +7,19 @@ import io.reactivex.observers.DisposableObserver;
 
 public abstract class BasePresenter implements Presenter {
 
+    private CleanView cleanView;
     private UseCase[] useCases;
 
-    public BasePresenter(UseCase... useCases) {
+    public BasePresenter(CleanView cleanView, UseCase... useCases) {
+        this.cleanView = cleanView;
         this.useCases = useCases;
     }
 
-
-    protected abstract CleanView getCleanView();
-
-
     @Override
-    public void create(CleanView view) {
-        bindPresenter(view);
-        initCleanView();
-
+    public void create() {
+        cleanView.initUI();
     }
 
-    private void initCleanView() {
-        getCleanView().initUI();
-    }
-
-
-    public abstract void bindPresenter(CleanView view);
 
     @Override
     public void resume() {
@@ -46,23 +36,27 @@ public abstract class BasePresenter implements Presenter {
                 useCase.unsubscribe();
             }
         }
-
+        cleanView = null;
     }
 
     public void showLoader() {
-        this.getCleanView().showLoader();
+        cleanView.showLoader();
     }
 
     public void hideLoader() {
-        this.getCleanView().hideLoader();
+        cleanView.hideLoader();
     }
 
     public void handleError(Throwable error) {
-        this.getCleanView().handleError(error);
+        cleanView.handleError(error);
     }
 
     public void showMessage(String message) {
-        this.getCleanView().showMessage(message);
+        cleanView.showMessage(message);
+    }
+
+    public CleanView getCleanView() {
+        return cleanView;
     }
 
     protected class BaseSubscriber<T> extends DisposableObserver<T> {
@@ -76,13 +70,11 @@ public abstract class BasePresenter implements Presenter {
         public void onError(Throwable e) {
             BasePresenter.this.hideLoader();
             BasePresenter.this.handleError(e);
-            e.printStackTrace();
         }
 
         @Override
         public void onNext(T t) {
             BasePresenter.this.hideLoader();
-            //BasePresenter.this.showMessage(t.toString());
         }
     }
 }
