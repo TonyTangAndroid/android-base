@@ -1,6 +1,6 @@
 package com.tony_tang.android.demo.feature.note_list;
 
-import com.jordifierro.androidbase.domain.interactor.note.GetNotesUseCase;
+import com.jordifierro.androidbase.presentation.view.NoteListView;
 
 import dagger.Module;
 import dagger.Provides;
@@ -18,9 +18,9 @@ public class NoteListActivityModule {
         return mainActivity;
     }
 
-    @DebugLog
-    @Provides
-    NoteListPresenter provideMainPresenter(NoteListView noteListView, GetNotesUseCase getNotesUseCase) {
-        return new NoteListPresenterImpl(noteListView, getNotesUseCase);
-    }
+//    @DebugLog
+//    @Provides
+//    NoteListPresenter provideMainPresenter(NoteListView noteListView, GetNotesUseCase getNotesUseCase) {
+//        return new NoteListPresenter(noteListView, getNotesUseCase);
+//    }
 }

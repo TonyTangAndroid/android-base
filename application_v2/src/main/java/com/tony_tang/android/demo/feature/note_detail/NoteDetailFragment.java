@@ -1,24 +1,27 @@
 package com.tony_tang.android.demo.feature.note_detail;
 
-import android.os.Bundle;
-import android.support.annotation.Nullable;
-import android.view.LayoutInflater;
-import android.view.View;
-import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.jordifierro.androidbase.domain.entity.NoteEntity;
+import com.jordifierro.androidbase.presentation.presenter.BasePresenter;
+import com.jordifierro.androidbase.presentation.presenter.NoteDetailPresenter;
+import com.jordifierro.androidbase.presentation.view.NoteDetailView;
 import com.tony_tang.android.demo.R;
-import com.tony_tang.android.demo.common.base.BaseFragment;
+import com.tony_tang.android.demo.common.base.CleanFragment;
 
 import javax.inject.Inject;
 
-public class NoteDetailFragment extends BaseFragment implements NoteDetailView {
+import butterknife.BindView;
+
+public class NoteDetailFragment extends CleanFragment implements NoteDetailView {
 
 
     @Inject
     NoteDetailPresenter noteDetailPresenter;
+
+    @BindView(R.id.tv_title)
     TextView titleTV;
+    @BindView(R.id.tv_content)
     TextView contentTV;
 
     public static NoteDetailFragment newInstance() {
@@ -26,23 +29,19 @@ public class NoteDetailFragment extends BaseFragment implements NoteDetailView {
         return new NoteDetailFragment();
     }
 
-    @Nullable
     @Override
-    public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        View rootView = inflater.inflate(R.layout.fragment_note_detail, container, false);
-        titleTV = (TextView) rootView.findViewById(R.id.tv_title);
-        contentTV = (TextView) rootView.findViewById(R.id.tv_content);
-        return rootView;
+    protected int layoutId() {
+        return R.layout.fragment_note_detail;
+    }
+
+
+    @Override
+    protected BasePresenter presenter() {
+        return noteDetailPresenter;
     }
 
     @Override
-    public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
-        super.onViewCreated(view, savedInstanceState);
-        noteDetailPresenter.loadData();
-    }
-
-    @Override
-    public void onNoteEntityLoaded(NoteEntity note) {
+    public void showNote(NoteEntity note) {
         titleTV.setText(note.getTitle());
         contentTV.setText(note.getContent());
     }

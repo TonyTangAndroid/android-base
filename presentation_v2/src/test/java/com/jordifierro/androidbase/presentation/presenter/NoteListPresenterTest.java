@@ -81,7 +81,7 @@ public class NoteListPresenterTest {
         this.noteListSubscriber.onNext(new ArrayList<NoteEntity>());
 
         verify(this.mockNoteListView).hideLoader();
-        verify(this.mockNoteListView).showNoteList(any(List.class));
+        verify(this.mockNoteListView).showNoteEntityList(any(List.class));
     }
 
 }

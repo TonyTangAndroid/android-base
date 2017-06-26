@@ -15,7 +15,6 @@ public class NoteListPresenter extends BasePresenter implements Presenter {
     private GetNotesUseCase getNotesUseCase;
 
     @Inject
-
     public NoteListPresenter(NoteListView noteListView, GetNotesUseCase getNotesUseCase) {
         super(noteListView, getNotesUseCase);
         this.noteListView = noteListView;
@@ -39,7 +38,7 @@ public class NoteListPresenter extends BasePresenter implements Presenter {
         @Override
         public void onNext(List<NoteEntity> notes) {
             NoteListPresenter.this.hideLoader();
-            NoteListPresenter.this.noteListView.showNoteList(notes);
+            NoteListPresenter.this.noteListView.showNoteEntityList(notes);
         }
     }
 

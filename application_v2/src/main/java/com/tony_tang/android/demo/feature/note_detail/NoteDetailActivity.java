@@ -5,13 +5,13 @@ import android.content.Intent;
 import android.os.Bundle;
 
 import com.tony_tang.android.demo.R;
-import com.tony_tang.android.demo.common.base.BaseActivityWithFragmentInjector;
+import com.tony_tang.android.demo.common.base.CleanActivity;
 
 /**
 
  */
 
-public class NoteDetailActivity extends BaseActivityWithFragmentInjector implements NoteDetailFragment.Listener {
+public class NoteDetailActivity extends CleanActivity implements NoteDetailFragment.Listener {
 
     public static final String PARAM_NOTE_ID = "param_note_id";
 
@@ -25,20 +25,17 @@ public class NoteDetailActivity extends BaseActivityWithFragmentInjector impleme
 
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_note_detail);
+    protected void initializeActivity(Bundle savedInstanceState) {
         if (savedInstanceState == null) {
             noteObjectId = getIntent().getStringExtra(PARAM_NOTE_ID);
-            getSupportFragmentManager()
+            getFragmentManager()
                     .beginTransaction()
-                    .add(R.id.container, NoteDetailFragment.newInstance())
+                    .add(R.id.fragment_container, NoteDetailFragment.newInstance())
                     .commit();
         } else {
             this.noteObjectId = savedInstanceState.getString(PARAM_NOTE_ID);
         }
     }
-
 
     @Override
     protected void onSaveInstanceState(Bundle outState) {

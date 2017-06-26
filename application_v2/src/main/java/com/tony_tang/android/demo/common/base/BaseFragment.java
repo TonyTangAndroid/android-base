@@ -1,15 +1,15 @@
 package com.tony_tang.android.demo.common.base;
 
+import android.app.Fragment;
 import android.content.Context;
-import android.support.v4.app.Fragment;
 
-import dagger.android.support.AndroidSupportInjection;
+import dagger.android.AndroidInjection;
 
 public class BaseFragment extends Fragment {
 
     @Override
     public void onAttach(Context context) {
-        AndroidSupportInjection.inject(this);
+        AndroidInjection.inject(this);
         super.onAttach(context);
     }
 

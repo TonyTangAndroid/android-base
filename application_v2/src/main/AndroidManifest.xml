@@ -10,16 +10,19 @@
         android:name="com.tony_tang.android.demo.common.DemoApplication"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
-        android:theme="@style/AppTheme"
+        android:theme="@style/AppThemeNoTitleBar"
         tools:ignore="AllowBackup,GoogleAppIndexingWarning">
-        <activity android:name="com.tony_tang.android.demo.feature.note_list.NoteListActivity">
+        <activity
+            android:name="com.tony_tang.android.demo.feature.note_list.NoteListActivity"
+            android:label="@string/note_list">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN"/>
-
                 <category android:name="android.intent.category.LAUNCHER"/>
             </intent-filter>
         </activity>
-        <activity android:name="com.tony_tang.android.demo.feature.note_detail.NoteDetailActivity"/>
+        <activity
+            android:name="com.tony_tang.android.demo.feature.note_detail.NoteDetailActivity"
+            android:label="@string/note_detail"/>
     </application>
 
 </manifest>
