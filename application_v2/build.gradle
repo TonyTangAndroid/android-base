@@ -69,6 +69,7 @@ dependencies {
 
     annotationProcessor applicationDependencies.butterKnifeCompiler
     annotationProcessor applicationDependencies.daggerCompiler
+    annotationProcessor applicationDependencies.daggerProcessor
 
     androidTestAnnotationProcessor applicationTestDependencies.daggerCompiler
 

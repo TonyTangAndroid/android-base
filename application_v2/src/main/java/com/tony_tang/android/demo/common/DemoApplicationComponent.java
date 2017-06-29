@@ -3,6 +3,8 @@ package com.tony_tang.android.demo.common;
 import android.app.Application;
 
 import com.tony_tang.android.demo.common.module.DataModule;
+import com.tony_tang.android.demo.common.module.SharedPreferenceModule;
+import com.tony_tang.android.demo.common.module.ThreadModule;
 import com.tony_tang.android.demo.common.scope.ApplicationScope;
 
 import dagger.BindsInstance;
@@ -16,6 +18,8 @@ import dagger.android.AndroidInjectionModule;
 @Component(modules = {
         AndroidInjectionModule.class,
         DemoApplicationModule.class,
+        SharedPreferenceModule.class,
+        ThreadModule.class,
         DataModule.class,
         DemoActivityInjector.class})
 public interface DemoApplicationComponent {

@@ -91,6 +91,7 @@ ext {
     ]
 
     applicationDependencies = [
+            daggerProcessor    : "com.google.dagger:dagger-android-processor:${daggerVersion}",
             daggerCompiler     : "com.google.dagger:dagger-compiler:${daggerVersion}",
             dagger             : "com.google.dagger:dagger:${daggerVersion}",
             daggerAndroid      : "com.google.dagger:dagger-android-support:${daggerVersion}",
