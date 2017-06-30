@@ -21,7 +21,8 @@ import dagger.android.AndroidInjectionModule;
         SharedPreferenceModule.class,
         ThreadModule.class,
         DataModule.class,
-        DemoActivityInjector.class})
+        DemoActivityInjector.class,
+        DemoFragmentInjector.class})
 public interface DemoApplicationComponent {
 
     void inject(DemoApplication app);

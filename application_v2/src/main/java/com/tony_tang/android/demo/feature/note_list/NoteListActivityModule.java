@@ -18,9 +18,4 @@ public class NoteListActivityModule {
         return mainActivity;
     }
 
-//    @DebugLog
-//    @Provides
-//    NoteListPresenter provideMainPresenter(NoteListView noteListView, GetNotesUseCase getNotesUseCase) {
-//        return new NoteListPresenter(noteListView, getNotesUseCase);
-//    }
 }

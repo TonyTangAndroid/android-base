@@ -1,41 +1,14 @@
 package com.tony_tang.android.demo.common.base;
 
-import android.app.Fragment;
 import android.content.Intent;
 import android.net.Uri;
-import android.os.Bundle;
-import android.support.annotation.Nullable;
 import android.widget.Toast;
 
 import com.jordifierro.androidbase.domain.exception.RestApiErrorException;
 import com.jordifierro.androidbase.presentation.view.CleanView;
 import com.tony_tang.android.demo.R;
 
-import javax.inject.Inject;
-
-import dagger.android.AndroidInjection;
-import dagger.android.AndroidInjector;
-import dagger.android.DispatchingAndroidInjector;
-import dagger.android.HasFragmentInjector;
-
-public abstract class CleanActivity extends BaseActivity implements CleanView, HasFragmentInjector {
-
-
-    @Inject
-    DispatchingAndroidInjector<Fragment> fragmentDispatchingAndroidInjector;
-
-
-    @Override
-    public AndroidInjector<Fragment> fragmentInjector() {
-        return fragmentDispatchingAndroidInjector;
-    }
-
-
-    @Override
-    protected void onCreate(@Nullable Bundle savedInstanceState) {
-        AndroidInjection.inject(this);
-        super.onCreate(savedInstanceState);
-    }
+public abstract class CleanActivity extends BaseActivity implements CleanView {
 
 
     public void handleError(Throwable error) {

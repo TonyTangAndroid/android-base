@@ -6,14 +6,18 @@ import android.support.annotation.Nullable;
 import com.jordifierro.androidbase.presentation.presenter.BasePresenter;
 import com.tony_tang.android.demo.common.base.CleanActivity;
 
+import dagger.android.AndroidInjection;
+
 public abstract class PresenterActivity extends CleanActivity {
 
     protected abstract BasePresenter presenter();
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
+        AndroidInjection.inject(this);
         super.onCreate(savedInstanceState);
         presenter().create();
+
     }
 
     @Override
