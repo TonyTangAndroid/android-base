@@ -12,10 +12,17 @@ import com.jordifierro.androidbase.presentation.presenter.BasePresenter;
 import com.jordifierro.androidbase.presentation.view.CleanView;
 
 import butterknife.ButterKnife;
+import dagger.android.AndroidInjection;
 
 public abstract class CleanFragment extends BaseFragment implements CleanView {
 
     private ProgressDialog progressDialog;
+
+    @Override
+    public void onAttach(Context context) {
+        AndroidInjection.inject(this);
+        super.onAttach(context);
+    }
 
     protected abstract int layoutId();
 

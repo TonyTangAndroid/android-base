@@ -8,7 +8,7 @@ import com.tony_tang.android.demo.common.base.CleanActivity;
 
 import dagger.android.AndroidInjection;
 
-public abstract class PresenterActivity extends CleanActivity {
+public abstract class PresenterActivity extends CleanActivity  {
 
     protected abstract BasePresenter presenter();
 
