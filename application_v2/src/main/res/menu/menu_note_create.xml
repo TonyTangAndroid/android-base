@@ -5,6 +5,7 @@
         android:id="@+id/item_create"
         android:icon="@android:drawable/ic_menu_add"
         android:title="@string/button_create"
+        android:visible="false"
         app:showAsAction="ifRoom"/>
     <item
         android:id="@+id/item_generate"
