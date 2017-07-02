@@ -9,7 +9,7 @@ import javax.inject.Inject;
 
 public class NoteDetailPresenter extends BasePresenter implements Presenter {
 
-    NoteDetailView noteDetailView;
+    private NoteDetailView noteDetailView;
     private GetNoteUseCase getNoteUseCase;
 
 
@@ -25,12 +25,6 @@ public class NoteDetailPresenter extends BasePresenter implements Presenter {
         this.showLoader();
         this.getNoteUseCase.setParams(this.noteDetailView.getNoteObjectId());
         this.getNoteUseCase.execute(new NoteDetailSubscriber());
-    }
-
-    @Override
-    public void destroy() {
-        super.destroy();
-        this.noteDetailView = null;
     }
 
     protected class NoteDetailSubscriber extends BaseSubscriber<NoteEntity> {

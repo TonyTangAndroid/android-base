@@ -23,6 +23,9 @@
         <activity
             android:name="com.tony_tang.android.demo.feature.note_detail.NoteDetailActivity"
             android:label="@string/note_detail"/>
+        <activity
+            android:name="com.tony_tang.android.demo.feature.note_creation.NoteCreateActivity"
+            android:label="@string/note_create"/>
     </application>
 
 </manifest>

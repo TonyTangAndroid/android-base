@@ -3,12 +3,16 @@ package com.tony_tang.android.demo.feature.note_list;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.support.v7.widget.Toolbar;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 
 import com.jordifierro.androidbase.domain.entity.NoteEntity;
 import com.jordifierro.androidbase.presentation.presenter.NoteListPresenter;
 import com.jordifierro.androidbase.presentation.view.NoteListView;
 import com.tony_tang.android.demo.R;
+import com.tony_tang.android.demo.feature.note_creation.NoteCreateActivity;
 import com.tony_tang.android.demo.feature.note_detail.NoteDetailActivity;
 
 import java.util.List;
@@ -80,5 +84,25 @@ public class NoteListActivity extends PresenterActivity implements NoteListView,
     @Override
     public void bottomViewClicked() {
 
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.menu_note_create, menu);
+        this.getToolbar().setOnMenuItemClickListener(new Toolbar.OnMenuItemClickListener() {
+            @Override
+            public boolean onMenuItemClick(MenuItem item) {
+                if (item.getItemId() == R.id.item_create) {
+                    NoteListActivity.this.navigateCreate();
+                    return true;
+                }
+                return false;
+            }
+        });
+        return true;
+    }
+
+    private void navigateCreate() {
+        startActivity(NoteCreateActivity.constructIntent(this));
     }
 }
