@@ -30,8 +30,9 @@ public abstract class NoteEntityModel extends EpoxyModelWithHolder<NoteEntityMod
 
     @Override
     public void bind(NoteEntityViewHolder holder) {
-        holder.tvTitle.setOnClickListener(itemClickListener);
+        holder.llNoteItem.setOnClickListener(itemClickListener);
         holder.tvTitle.setText(item.getTitle());
+        holder.tvContent.setText(item.getContent());
     }
 
 
@@ -50,8 +51,13 @@ public abstract class NoteEntityModel extends EpoxyModelWithHolder<NoteEntityMod
     static class NoteEntityViewHolder extends BaseEpoxyHolder {
 
 
+        @BindView(R.id.ll_note_item)
+        View llNoteItem;
         @BindView(R.id.tv_title)
         TextView tvTitle;
+        @BindView(R.id.tv_content)
+        TextView tvContent;
+
 
     }
 }

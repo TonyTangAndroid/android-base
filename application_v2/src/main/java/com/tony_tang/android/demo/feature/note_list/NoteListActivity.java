@@ -2,6 +2,7 @@ package com.tony_tang.android.demo.feature.note_list;
 
 import android.os.Bundle;
 import android.support.v4.widget.SwipeRefreshLayout;
+import android.support.v7.widget.DividerItemDecoration;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.Menu;
@@ -12,7 +13,6 @@ import com.jordifierro.androidbase.domain.entity.NoteEntity;
 import com.jordifierro.androidbase.presentation.presenter.NoteListPresenter;
 import com.jordifierro.androidbase.presentation.view.NoteListView;
 import com.tony_tang.android.demo.R;
-import com.tony_tang.android.demo.feature.common.InfiniteScrollListener;
 import com.tony_tang.android.demo.feature.note_creation.NoteCreateActivity;
 import com.tony_tang.android.demo.feature.note_detail.NoteDetailActivity;
 
@@ -40,24 +40,7 @@ public class NoteListActivity extends PresenterActivity implements NoteListView,
         LinearLayoutManager layout = new LinearLayoutManager(this);
         rvNoteList.setLayoutManager(layout);
         rvNoteList.setAdapter(controller.getAdapter());
-        rvNoteList.addOnScrollListener(new InfiniteScrollListener(layout) {
-            @Override
-            public void onLoadMore(int currentPage) {
-                loadMore();
-            }
-        });
-    }
-
-    private void loadMore() {
-
-        rvNoteList.post(new Runnable() {
-            @Override
-            public void run() {
-//                presenter().loadMoreData();
-            }
-        });
-
-
+        rvNoteList.addItemDecoration(new DividerItemDecoration(this, layout.getOrientation()));
     }
 
     protected int getLayoutId() {
