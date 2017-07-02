@@ -81,8 +81,8 @@ public abstract class CleanFragment extends BaseFragment implements CleanView {
     }
 
     @Override
-    public void handleError(Throwable error) {
-        ((CleanView) getActivity()).handleError(error);
+    public void handleError(Throwable throwable) {
+        ((CleanView) getActivity()).handleError(throwable);
     }
 
     @Override

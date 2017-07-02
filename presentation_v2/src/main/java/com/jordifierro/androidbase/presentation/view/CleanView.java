@@ -8,7 +8,7 @@ public interface CleanView {
 
     void hideLoader();
 
-    void handleError(Throwable error);
+    void handleError(Throwable throwable);
 
     void showMessage(String message);
 

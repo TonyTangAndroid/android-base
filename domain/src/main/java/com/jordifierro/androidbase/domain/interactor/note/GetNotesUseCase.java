@@ -53,7 +53,7 @@ public class GetNotesUseCase extends UseCase<List<NoteEntity>> {
 
     @Override
     protected Observable<List<NoteEntity>> buildUseCaseObservable() {
-        return Observable.timer(300, TimeUnit.MILLISECONDS).flatMap(new Function<Long, ObservableSource<List<NoteEntity>>>() {
+        return Observable.timer(500, TimeUnit.MILLISECONDS).flatMap(new Function<Long, ObservableSource<List<NoteEntity>>>() {
             @Override
             public ObservableSource<List<NoteEntity>> apply(@NonNull Long aLong) throws Exception {
                 return doGetNotes();

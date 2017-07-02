@@ -11,15 +11,15 @@ import com.tony_tang.android.demo.R;
 public abstract class CleanActivity extends BaseActivity implements CleanView {
 
 
-    public void handleError(Throwable error) {
-        if (error instanceof RestApiErrorException) {
-            switch (((RestApiErrorException) error).getStatusCode()) {
+    public void handleError(Throwable throwable) {
+        if (throwable instanceof RestApiErrorException) {
+            switch (((RestApiErrorException) throwable).getStatusCode()) {
                 case RestApiErrorException.UNAUTHORIZED:
                 case RestApiErrorException.UPGRADE_REQUIRED:
                     createUpgradeDialog();
                     break;
                 default:
-                    showMessage(error.getMessage());
+                    showMessage(throwable.getMessage());
             }
         } else Toast.makeText(context(), getResources().getString(R.string.message_error),
                 Toast.LENGTH_LONG).show();

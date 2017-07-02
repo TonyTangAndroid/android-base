@@ -22,7 +22,7 @@ ext {
     autoCommonVersion = '0.8'
     gsonVersion = '2.8.0'
     proguardSnippetsVersion = '1.0.0'
-
+    chuckVersion = '1.0.4'
     //Libraries
     daggerVersion = '2.11'
     findbugsJsr305Version = '3.0.1'
@@ -92,6 +92,8 @@ ext {
     ]
 
     applicationDependencies = [
+            chuck              : "com.readystatesoftware.chuck:library:${chuckVersion}",
+            chuckNoOp          : "com.readystatesoftware.chuck:library-no-op:${chuckVersion}",
             epoxy              : "com.airbnb.android:epoxy:${epoxyVersion}",
             epoxyProcessor     : "com.airbnb.android:epoxy-processor:${epoxyVersion}",
             daggerProcessor    : "com.google.dagger:dagger-android-processor:${daggerVersion}",

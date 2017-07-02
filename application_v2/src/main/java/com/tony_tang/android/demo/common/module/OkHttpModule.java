@@ -1,6 +1,9 @@
 package com.tony_tang.android.demo.common.module;
 
+import android.content.Context;
+
 import com.jordifierro.androidbase.data.net.interceptor.HttpInterceptor;
+import com.readystatesoftware.chuck.ChuckInterceptor;
 import com.tony_tang.android.demo.common.scope.ApplicationScope;
 
 import dagger.Module;
@@ -20,6 +23,12 @@ public class OkHttpModule {
         return interceptor;
     }
 
+    @Provides
+    @ApplicationScope
+    ChuckInterceptor provideChuckInterceptor(Context context) {
+        return new ChuckInterceptor(context);
+    }
+
 
     @Provides
     @ApplicationScope
@@ -29,11 +38,14 @@ public class OkHttpModule {
 
     @Provides
     @ApplicationScope
-    OkHttpClient provideOkHttpClient(HttpLoggingInterceptor httpLoggingInterceptor, HttpInterceptor httpInterceptor) {
+    OkHttpClient provideOkHttpClient(HttpLoggingInterceptor httpLoggingInterceptor,
+                                     HttpInterceptor httpInterceptor,
+                                     ChuckInterceptor chuckInterceptor) {
 
         return new OkHttpClient().newBuilder()
                 .addInterceptor(httpLoggingInterceptor)
                 .addInterceptor(httpInterceptor)
+                .addInterceptor(chuckInterceptor)
                 .build();
     }
 }

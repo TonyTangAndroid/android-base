@@ -70,6 +70,9 @@ dependencies {
     compile applicationDependencies.butterKnife
     compile applicationDependencies.cardview
     compile applicationDependencies.recyclerview
+    debugCompile applicationDependencies.chuck
+    releaseCompile applicationDependencies.chuckNoOp
+
 
     annotationProcessor applicationDependencies.epoxyProcessor
     annotationProcessor applicationDependencies.butterKnifeCompiler

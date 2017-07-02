@@ -12,4 +12,7 @@
     <string name="note_create">Create Note</string>
     <string name="button_generate">Generate</string>
     <string name="button_clear">Clear</string>
+    <string name="network_not_available">Network Not Available</string>
+    <string name="unknown_error">Unknown Error</string>
+    <string name="network_connection_timeout">Network Connection Timeout</string>
 </resources>
