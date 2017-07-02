@@ -204,6 +204,7 @@ public class NoteListActivity extends PresenterActivity implements NoteListView,
             case CleanViewStatus.LOADING_MORE:
                 showLoadingMoreError(errorMessage);
                 break;
+            case CleanViewStatus.IDLE:
             default:
                 break;
         }
