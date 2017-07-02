@@ -12,8 +12,8 @@ import javax.inject.Inject;
 public class NoteEntityListModelController extends BaseModelController {
 
     @Inject
-    public NoteEntityListModelController(ItemCommonClickListenerCallback itemCommonClickListenerCallback, EmptyViewEntity emptyViewEntity, FooterViewEntity footerViewEntity) {
-        super(itemCommonClickListenerCallback, emptyViewEntity, footerViewEntity);
+    public NoteEntityListModelController(ItemClickListenerCallback itemClickListenerCallback, EmptyViewEntity emptyViewEntity, FooterViewEntity footerViewEntity) {
+        super(itemClickListenerCallback, emptyViewEntity, footerViewEntity);
     }
 
     @Override
@@ -22,6 +22,6 @@ public class NoteEntityListModelController extends BaseModelController {
         return new NoteEntityModel_()
                 .id(noteEntity.getObjectId())
                 .item(noteEntity)
-                .itemClickListener(itemView -> itemCommonClickListenerCallback.onItemClicked(itemView, bean));
+                .itemClickListener(itemView -> itemClickListenerCallback.onItemClicked(itemView, bean));
     }
 }

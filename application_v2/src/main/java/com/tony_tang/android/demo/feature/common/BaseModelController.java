@@ -13,7 +13,7 @@ import java.util.List;
 
 public abstract class BaseModelController extends TypedEpoxyController<List<?>> {
 
-    protected final ItemCommonClickListenerCallback itemCommonClickListenerCallback;
+    protected final ItemClickListenerCallback itemClickListenerCallback;
 
     @AutoModel
     FooterModel_ footerModel;
@@ -24,17 +24,17 @@ public abstract class BaseModelController extends TypedEpoxyController<List<?>> 
     EmptyViewEntity emptyViewEntity;
 
 
-    public BaseModelController(ItemCommonClickListenerCallback itemCommonClickListenerCallback,
+    public BaseModelController(ItemClickListenerCallback itemClickListenerCallback,
                                EmptyViewEntity emptyViewEntity,
                                FooterViewEntity footerViewEntity) {
-        this.itemCommonClickListenerCallback = itemCommonClickListenerCallback;
+        this.itemClickListenerCallback = itemClickListenerCallback;
         this.emptyViewEntity = emptyViewEntity;
         this.footerViewEntity = footerViewEntity;
         setDebugLoggingEnabled(true);
     }
 
-    public void bindDataListToUI(List<?> noticeEntityList) {
-        setData(noticeEntityList);
+    public void bindDataListToUI(List<?> entityList) {
+        setData(entityList);
     }
 
     @Override
@@ -59,7 +59,7 @@ public abstract class BaseModelController extends TypedEpoxyController<List<?>> 
 
     private void buildFooterView(List<?> dataList) {
         footerModel.footerViewEntity(footerViewEntity)
-                .clickListener(v -> itemCommonClickListenerCallback.onFooterClicked())
+                .clickListener(v -> itemClickListenerCallback.onFooterClicked())
                 .addIf(dataList != null && dataList.size() >= Constants.DEFAULT_LIMIT_VALUE, this);
     }
 
@@ -76,8 +76,8 @@ public abstract class BaseModelController extends TypedEpoxyController<List<?>> 
 
     private void buildEmptyView(List<?> dataList) {
         emptyViewModel.emptyViewEntity(emptyViewEntity)
-                .retryListener(v -> itemCommonClickListenerCallback.retry())
-                .bottomViewClickListener(v -> itemCommonClickListenerCallback.bottomViewClicked())
+                .retryListener(v -> itemClickListenerCallback.retry())
+                .bottomViewClickListener(v -> itemClickListenerCallback.bottomViewClicked())
                 .addIf(isEmptyList(dataList), this);
     }
 
@@ -91,7 +91,7 @@ public abstract class BaseModelController extends TypedEpoxyController<List<?>> 
         }
     }
 
-    public interface ItemCommonClickListenerCallback {
+    public interface ItemClickListenerCallback {
         void onItemClicked(View view, Object entity);
 
         void onFooterClicked();

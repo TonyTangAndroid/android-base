@@ -3,6 +3,8 @@ package com.jordifierro.androidbase.presentation.presenter;
 import com.jordifierro.androidbase.domain.entity.NoteEntity;
 import com.jordifierro.androidbase.domain.exception.RestApiErrorException;
 import com.jordifierro.androidbase.domain.interactor.note.GetNotesUseCase;
+import com.jordifierro.androidbase.presentation.presenter.base.BaseListPresenter;
+import com.jordifierro.androidbase.presentation.view.base.BaseListView;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -23,19 +25,19 @@ public class NoteListPresenterTest {
     @Mock
     GetNotesUseCase getNotesUseCase;
     @Mock
-    NoteListView mockNoteListView;
+    BaseListView mockNoteListView;
     @Mock
     Observable mockObservable;
 
     private NoteListPresenter noteListPresenter;
-    private NoteListPresenter.NoteListSubscriber noteListSubscriber;
+    private BaseListPresenter.BaseListSubscriber baseListSubscriber;
 
     @Before
     public void setUp() throws Exception {
         MockitoAnnotations.initMocks(this);
-        this.noteListPresenter = new NoteListPresenter(mockNoteListView, this.getNotesUseCase);
+        this.noteListPresenter = new NoteListPresenter(mockNoteListView, this.getNotesUseCase, null, null);
         this.noteListPresenter.create();
-        this.noteListSubscriber = this.noteListPresenter.new NoteListSubscriber();
+        this.baseListSubscriber = this.noteListPresenter.new BaseListSubscriber();
     }
 
     @Test
@@ -53,13 +55,13 @@ public class NoteListPresenterTest {
         this.noteListPresenter.resume();
 
         verify(this.mockNoteListView).showLoader();
-        verify(this.getNotesUseCase).execute(any(NoteListPresenter.NoteListSubscriber.class));
+        verify(this.getNotesUseCase).execute(any(BaseListPresenter.BaseListSubscriber.class));
     }
 
     @Test
     public void testSubscriberOnComplete() {
 
-        this.noteListSubscriber.onComplete();
+        this.baseListSubscriber.onComplete();
 
         verify(this.mockNoteListView).hideLoader();
     }
@@ -67,7 +69,7 @@ public class NoteListPresenterTest {
     @Test
     public void testSubscriberOnError() {
 
-        this.noteListSubscriber.onError(new RestApiErrorException("Error message", 500));
+        this.baseListSubscriber.onError(new RestApiErrorException("Error message", 500));
 
         verify(this.mockNoteListView).hideLoader();
         verify(this.mockNoteListView).handleError(any(Throwable.class));
@@ -77,10 +79,10 @@ public class NoteListPresenterTest {
     @SuppressWarnings("unchecked")
     public void testSubscriberOnNext() {
 
-        this.noteListSubscriber.onNext(new ArrayList<NoteEntity>());
+        this.baseListSubscriber.onNext(new ArrayList<NoteEntity>());
 
         verify(this.mockNoteListView).hideLoader();
-        verify(this.mockNoteListView).showNoteEntityList(any(List.class));
+        verify(this.mockNoteListView).showEntityList(any(List.class));
     }
 
 }

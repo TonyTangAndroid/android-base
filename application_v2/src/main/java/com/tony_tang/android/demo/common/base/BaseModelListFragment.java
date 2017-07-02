@@ -27,7 +27,7 @@ import butterknife.BindView;
 
 public abstract class BaseModelListFragment extends CleanFragment implements BaseListView,
         EndlessRecyclerOnScrollListenerTrial.RecyclerViewScrollListener,
-        BaseModelController.ItemCommonClickListenerCallback,
+        BaseModelController.ItemClickListenerCallback,
         SwipeRefreshLayout.OnRefreshListener {
 
     @Inject
@@ -35,8 +35,8 @@ public abstract class BaseModelListFragment extends CleanFragment implements Bas
     @Inject
     FooterViewEntity defaultFooterViewEntity;
 
-    @BindView(R.id.rv_note_list)
-    RecyclerView rvNoteList;
+    @BindView(R.id.rv_entity_list)
+    RecyclerView rvEntityList;
     @BindView(R.id.swipe_refresh_layout)
     SwipeRefreshLayout swipeRefreshLayout;
 
@@ -49,10 +49,10 @@ public abstract class BaseModelListFragment extends CleanFragment implements Bas
     public void initUI() {
         swipeRefreshLayout.setOnRefreshListener(this);
         RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(getActivity());
-        rvNoteList.setLayoutManager(layoutManager);
-        rvNoteList.addOnScrollListener(new EndlessRecyclerOnScrollListenerTrial(layoutManager, this));
-        rvNoteList.setAdapter(controller().getAdapter());
-        rvNoteList.addItemDecoration(new DividerItemDecoration(getActivity(), DividerItemDecoration.VERTICAL));
+        rvEntityList.setLayoutManager(layoutManager);
+        rvEntityList.addOnScrollListener(new EndlessRecyclerOnScrollListenerTrial(layoutManager, this));
+        rvEntityList.setAdapter(controller().getAdapter());
+        rvEntityList.addItemDecoration(new DividerItemDecoration(getActivity(), DividerItemDecoration.VERTICAL));
 
         loadData();
     }
@@ -78,8 +78,8 @@ public abstract class BaseModelListFragment extends CleanFragment implements Bas
 
 
     @Override
-    public void showNoteEntityList(List<?> noteEntityList) {
-        controller().bindDataListToUI(noteEntityList);
+    public void showEntityList(List<?> entityList) {
+        controller().bindDataListToUI(entityList);
     }
 
     @Override

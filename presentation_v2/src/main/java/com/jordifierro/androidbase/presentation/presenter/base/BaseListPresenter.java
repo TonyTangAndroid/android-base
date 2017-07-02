@@ -9,16 +9,16 @@ import java.util.List;
 public abstract class BaseListPresenter extends BasePresenter implements Presenter {
 
 
-    private BaseListView noteListView;
+    private BaseListView baseListView;
 
-    public BaseListPresenter(BaseListView noteListView,
+    public BaseListPresenter(BaseListView baseListView,
                              UseCase... useCases) {
-        super(noteListView, useCases);
-        this.noteListView = noteListView;
+        super(baseListView, useCases);
+        this.baseListView = baseListView;
     }
 
-    public BaseListView getNoteListView() {
-        return noteListView;
+    public BaseListView getBaseListView() {
+        return baseListView;
     }
 
     public abstract void loadData();
@@ -28,22 +28,22 @@ public abstract class BaseListPresenter extends BasePresenter implements Present
     public abstract void loadMoreData();
 
 
-    public class NoteListSubscriber extends BaseSubscriber<List<?>> {
+    public class BaseListSubscriber extends BaseSubscriber<List<?>> {
 
         @Override
         public void onComplete() {
-            noteListView.onRetrievingDataCompleted();
+            baseListView.onRetrievingDataCompleted();
         }
 
         @Override
         public void onError(Throwable e) {
             super.onError(e);
-            noteListView.onRetrievingDataCompleted();
+            baseListView.onRetrievingDataCompleted();
         }
 
         @Override
-        public void onNext(List<?> notes) {
-            BaseListPresenter.this.noteListView.showNoteEntityList(notes);
+        public void onNext(List<?> entityList) {
+            BaseListPresenter.this.baseListView.showEntityList(entityList);
         }
     }
 

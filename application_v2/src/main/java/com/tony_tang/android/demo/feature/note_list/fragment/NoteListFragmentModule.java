@@ -18,7 +18,7 @@ public abstract class NoteListFragmentModule {
 
     @FragmentScope
     @Binds
-    abstract BaseModelController.ItemCommonClickListenerCallback provideItemCommonClickListenerCallback(NoteListFragment noteListFragment);
+    abstract BaseModelController.ItemClickListenerCallback provideItemClickListenerCallback(NoteListFragment noteListFragment);
 
 
 }

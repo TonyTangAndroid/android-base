@@ -4,7 +4,7 @@ import java.util.List;
 
 public interface BaseListView extends CleanView {
 
-    void showNoteEntityList(List<?> notes);
+    void showEntityList(List<?> entityList);
 
     void showProcessing();
 

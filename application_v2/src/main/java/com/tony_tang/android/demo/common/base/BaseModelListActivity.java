@@ -28,7 +28,7 @@ import butterknife.BindView;
 
 public abstract class BaseModelListActivity extends PresenterActivity implements BaseListView,
         EndlessRecyclerOnScrollListenerTrial.RecyclerViewScrollListener,
-        BaseModelController.ItemCommonClickListenerCallback,
+        BaseModelController.ItemClickListenerCallback,
         SwipeRefreshLayout.OnRefreshListener {
 
     @Inject
@@ -36,8 +36,8 @@ public abstract class BaseModelListActivity extends PresenterActivity implements
 
     @Inject
     FooterViewEntity defaultFooterViewEntity;
-    @BindView(R.id.rv_note_list)
-    RecyclerView rvNoteList;
+    @BindView(R.id.rv_entity_list)
+    RecyclerView rvEntityList;
     @BindView(R.id.swipe_refresh_layout)
     SwipeRefreshLayout swipeRefreshLayout;
     @LoadingStatus
@@ -49,10 +49,10 @@ public abstract class BaseModelListActivity extends PresenterActivity implements
     public void initUI() {
         swipeRefreshLayout.setOnRefreshListener(this);
         RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(this);
-        rvNoteList.setLayoutManager(layoutManager);
-        rvNoteList.addOnScrollListener(new EndlessRecyclerOnScrollListenerTrial(layoutManager, this));
-        rvNoteList.setAdapter(controller().getAdapter());
-        rvNoteList.addItemDecoration(new DividerItemDecoration(this, DividerItemDecoration.VERTICAL));
+        rvEntityList.setLayoutManager(layoutManager);
+        rvEntityList.addOnScrollListener(new EndlessRecyclerOnScrollListenerTrial(layoutManager, this));
+        rvEntityList.setAdapter(controller().getAdapter());
+        rvEntityList.addItemDecoration(new DividerItemDecoration(this, DividerItemDecoration.VERTICAL));
 
         loadData();
     }
@@ -72,7 +72,7 @@ public abstract class BaseModelListActivity extends PresenterActivity implements
     }
 
     protected int getLayoutId() {
-        return R.layout.activity_note_list;
+        return R.layout.activity_entity_list;
     }
 
     @Override
@@ -81,8 +81,8 @@ public abstract class BaseModelListActivity extends PresenterActivity implements
     }
 
     @Override
-    public void showNoteEntityList(List<?> noteEntityList) {
-        controller().bindDataListToUI(noteEntityList);
+    public void showEntityList(List<?> entityList) {
+        controller().bindDataListToUI(entityList);
     }
 
     @Override

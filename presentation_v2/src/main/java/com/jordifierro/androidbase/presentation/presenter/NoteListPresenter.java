@@ -30,25 +30,25 @@ public class NoteListPresenter extends BaseListPresenter implements Presenter {
 
     public void loadData() {
         this.showLoader();
-        this.getNotesUseCase.resetQueryParam().execute(new NoteListSubscriber());
+        this.getNotesUseCase.resetQueryParam().execute(new BaseListSubscriber());
     }
 
     public void refreshData() {
-        this.getNotesUseCase.resetQueryParam().execute(new NoteListSubscriber());
+        this.getNotesUseCase.resetQueryParam().execute(new BaseListSubscriber());
     }
 
     public void loadMoreData() {
-        this.getNotesUseCase.execute(new NoteListSubscriber());
+        this.getNotesUseCase.execute(new BaseListSubscriber());
     }
 
 
     public void generateNotes() {
-        getNoteListView().showProcessing();
+        getBaseListView().showProcessing();
         generateNoteListUseCase.execute(new GenerateNoteListCountSubscriber());
     }
 
     public void clearNotes() {
-        getNoteListView().showProcessing();
+        getBaseListView().showProcessing();
         clearNoteListUseCase.execute(new ClearNoteListCountSubscriber());
     }
 
