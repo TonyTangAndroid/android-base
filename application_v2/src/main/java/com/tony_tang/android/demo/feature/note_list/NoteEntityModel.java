@@ -22,9 +22,6 @@ public abstract class NoteEntityModel extends EpoxyModelWithHolder<NoteEntityMod
     @EpoxyAttribute
     NoteEntity item;
 
-    @EpoxyAttribute
-    int index;
-
     @EpoxyAttribute(DoNotHash)
     View.OnClickListener itemClickListener;
 

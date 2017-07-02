@@ -13,6 +13,7 @@ import com.jordifierro.androidbase.domain.entity.NoteEntity;
 import com.jordifierro.androidbase.presentation.presenter.NoteListPresenter;
 import com.jordifierro.androidbase.presentation.view.NoteListView;
 import com.tony_tang.android.demo.R;
+import com.tony_tang.android.demo.feature.common.BaseModelController;
 import com.tony_tang.android.demo.feature.common.CleanViewStatus;
 import com.tony_tang.android.demo.feature.common.EmptyViewEntity;
 import com.tony_tang.android.demo.feature.common.EndlessRecyclerOnScrollListenerTrial;
@@ -31,11 +32,9 @@ import javax.inject.Inject;
 
 import butterknife.BindView;
 
-public class NoteListActivity extends PresenterActivity implements
-        NoteListView,
+public class NoteListActivity extends PresenterActivity implements NoteListView,
         EndlessRecyclerOnScrollListenerTrial.RecyclerViewScrollListener,
-        NoteEntityListModelController.ItemClickListenerCallback,
-        NoteEntityListModelController.ItemCommonClickListenerCallback,
+        BaseModelController.ItemCommonClickListenerCallback,
         SwipeRefreshLayout.OnRefreshListener {
 
     @Inject
@@ -123,9 +122,10 @@ public class NoteListActivity extends PresenterActivity implements
         return noteListPresenter;
     }
 
+
     @Override
-    public void onItemClicked(View view, NoteEntity entity) {
-        showNote(entity.getObjectId());
+    public void onItemClicked(View view, Object entity) {
+        showNote(((NoteEntity) entity).getObjectId());
     }
 
     @Override
