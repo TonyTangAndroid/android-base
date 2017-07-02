@@ -3,6 +3,7 @@ package com.tony_tang.android.demo.feature.note_list;
 import android.os.Bundle;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.DividerItemDecoration;
+import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -34,10 +35,6 @@ public class NoteListActivity extends PresenterActivity implements
     @Inject
     NoteListPresenter noteListPresenter;
     @Inject
-    RecyclerView.LayoutManager layoutManager;
-    @Inject
-    RecyclerView.OnScrollListener endlessRecyclerOnScrollListenerProd;
-    @Inject
     NoteEntityListModelController controller;
 
     @BindView(R.id.rv_note_list)
@@ -50,8 +47,9 @@ public class NoteListActivity extends PresenterActivity implements
     @Override
     public void initUI() {
         swipeRefreshLayout.setOnRefreshListener(this);
+        RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(this);
         rvNoteList.setLayoutManager(layoutManager);
-        rvNoteList.addOnScrollListener(endlessRecyclerOnScrollListenerProd);
+        rvNoteList.addOnScrollListener(new EndlessRecyclerOnScrollListenerTrial(layoutManager, this));
         rvNoteList.setAdapter(controller.getAdapter());
         rvNoteList.addItemDecoration(new DividerItemDecoration(this, DividerItemDecoration.VERTICAL));
 
