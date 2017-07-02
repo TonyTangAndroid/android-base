@@ -13,7 +13,6 @@ import com.tony_tang.android.demo.feature.common.EmptyViewModel_;
 import com.tony_tang.android.demo.feature.common.FooterModel_;
 import com.tony_tang.android.demo.feature.common.FooterViewEntity;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import javax.inject.Inject;
@@ -22,6 +21,7 @@ import javax.inject.Inject;
 public class NoteEntityListModelController extends TypedEpoxyController<List<NoteEntity>> {
 
     protected final ItemClickListenerCallback itemClickListenerCallback;
+    protected final ItemCommonClickListenerCallback itemCommonClickListenerCallback;
 
     @AutoModel
     FooterModel_ footerModel;
@@ -34,9 +34,11 @@ public class NoteEntityListModelController extends TypedEpoxyController<List<Not
 
     @Inject
     public NoteEntityListModelController(ItemClickListenerCallback itemClickListenerCallback,
+                                         ItemCommonClickListenerCallback itemCommonClickListenerCallback,
                                          EmptyViewEntity emptyViewEntity,
                                          FooterViewEntity footerViewEntity) {
         this.itemClickListenerCallback = itemClickListenerCallback;
+        this.itemCommonClickListenerCallback = itemCommonClickListenerCallback;
         this.emptyViewEntity = emptyViewEntity;
         this.footerViewEntity = footerViewEntity;
         setDebugLoggingEnabled(true);
@@ -50,16 +52,6 @@ public class NoteEntityListModelController extends TypedEpoxyController<List<Not
         this.emptyViewEntity = emptyViewEntity;
         setData(getCurrentData());
     }
-
-
-    public void bindEmptyViewEntityToUI() {
-        setData(getCurrentData());
-    }
-
-    public void bindFooterViewEntityToUI() {
-        setData(getCurrentData());
-    }
-
 
     public void bindFooterViewEntityToUI(FooterViewEntity footerViewEntity) {
         this.footerViewEntity = footerViewEntity;
@@ -77,7 +69,7 @@ public class NoteEntityListModelController extends TypedEpoxyController<List<Not
 
     private void buildFooterView(List<?> noticeEntityList) {
         footerModel.footerViewEntity(footerViewEntity)
-                .clickListener(v -> itemClickListenerCallback.onFooterClicked())
+                .clickListener(v -> itemCommonClickListenerCallback.onFooterClicked())
                 .addIf(noticeEntityList != null && noticeEntityList.size() >= Constants.DEFAULT_LIMIT_VALUE, this);
     }
 
@@ -104,8 +96,8 @@ public class NoteEntityListModelController extends TypedEpoxyController<List<Not
 
     private void buildEmptyView(List<NoteEntity> noticeEntityList) {
         emptyViewModel.emptyViewEntity(emptyViewEntity)
-                .retryListener(v -> itemClickListenerCallback.retry())
-                .bottomViewClickListener(v -> itemClickListenerCallback.bottomViewClicked())
+                .retryListener(v -> itemCommonClickListenerCallback.retry())
+                .bottomViewClickListener(v -> itemCommonClickListenerCallback.bottomViewClicked())
                 .addIf(isEmptyList(noticeEntityList), this);
     }
 
@@ -119,29 +111,17 @@ public class NoteEntityListModelController extends TypedEpoxyController<List<Not
         }
     }
 
-    public void updateItem(NoteEntity legacyItemBean, NoteEntity newItemBean) {
-        final List<NoteEntity> currentData = getCurrentData();
-        if (currentData != null) {
-            List<NoteEntity> newDataList = new ArrayList<>(currentData.size());
-            for (NoteEntity object : currentData) {
-                if (object.equals(legacyItemBean)) {
-                    newDataList.add(newItemBean);
-                } else {
-                    newDataList.add(object);
-                }
-            }
-            setData(newDataList);
-        }
-
-    }
-
     public interface ItemClickListenerCallback {
         void onItemClicked(View view, NoteEntity entity);
 
+    }
+
+    public interface ItemCommonClickListenerCallback {
         void onFooterClicked();
 
         void retry();
 
         void bottomViewClicked();
     }
+
 }

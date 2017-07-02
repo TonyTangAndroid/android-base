@@ -35,6 +35,7 @@ public class NoteListActivity extends PresenterActivity implements
         NoteListView,
         EndlessRecyclerOnScrollListenerTrial.RecyclerViewScrollListener,
         NoteEntityListModelController.ItemClickListenerCallback,
+        NoteEntityListModelController.ItemCommonClickListenerCallback,
         SwipeRefreshLayout.OnRefreshListener {
 
     @Inject

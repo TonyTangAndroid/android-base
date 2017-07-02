@@ -19,5 +19,9 @@ public abstract class NoteListActivityModule {
     @Binds
     abstract NoteEntityListModelController.ItemClickListenerCallback provideItemClickListenerCallback(NoteListActivity mainActivity);
 
+    @ActivityScope
+    @Binds
+    abstract NoteEntityListModelController.ItemCommonClickListenerCallback provideItemCommonClickListenerCallback(NoteListActivity mainActivity);
+
 
 }
