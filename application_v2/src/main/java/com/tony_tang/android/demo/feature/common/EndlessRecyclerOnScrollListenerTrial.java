@@ -4,6 +4,7 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.StaggeredGridLayoutManager;
 
+import hugo.weaving.DebugLog;
 
 
 public class EndlessRecyclerOnScrollListenerTrial extends RecyclerView.OnScrollListener {
@@ -46,12 +47,11 @@ public class EndlessRecyclerOnScrollListenerTrial extends RecyclerView.OnScrollL
 
     }
 
-    //DebugLog
     private boolean isScrollingDown(int dy) {
         return dy > 0;
     }
 
-    //DebugLog
+    @DebugLog
     private boolean isReachingBottom(int totalItemCount, int visibleItemCount, int firstVisibleItem, int visibleThreshold) {
         return totalItemCount <= (firstVisibleItem + visibleThreshold + visibleItemCount);
     }

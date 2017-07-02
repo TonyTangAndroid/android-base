@@ -13,6 +13,7 @@ import javax.inject.Inject;
 
 public class NoteListPresenter extends BasePresenter implements Presenter {
 
+
     private NoteListView noteListView;
     private GetNotesUseCase getNotesUseCase;
     private ClearNoteListUseCase clearNoteListUseCase;
@@ -30,14 +31,9 @@ public class NoteListPresenter extends BasePresenter implements Presenter {
         this.generateNoteListUseCase = generateNoteListUseCase;
     }
 
-    @Override
-    public void resume() {
-        loadData();
-    }
-
     public void loadData() {
         this.showLoader();
-        this.getNotesUseCase.execute(new NoteListSubscriber());
+        this.getNotesUseCase.resetQueryParam().execute(new NoteListSubscriber());
     }
 
     public void refreshData() {

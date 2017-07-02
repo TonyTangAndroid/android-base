@@ -3,7 +3,6 @@ package com.tony_tang.android.demo.feature.note_list;
 import android.os.Bundle;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.DividerItemDecoration;
-import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -13,6 +12,9 @@ import com.jordifierro.androidbase.domain.entity.NoteEntity;
 import com.jordifierro.androidbase.presentation.presenter.NoteListPresenter;
 import com.jordifierro.androidbase.presentation.view.NoteListView;
 import com.tony_tang.android.demo.R;
+import com.tony_tang.android.demo.feature.common.CleanViewStatus;
+import com.tony_tang.android.demo.feature.common.EndlessRecyclerOnScrollListenerTrial;
+import com.tony_tang.android.demo.feature.common.LoadingStatus;
 import com.tony_tang.android.demo.feature.note_creation.NoteCreateActivity;
 import com.tony_tang.android.demo.feature.note_detail.NoteDetailActivity;
 
@@ -22,10 +24,19 @@ import javax.inject.Inject;
 
 import butterknife.BindView;
 
-public class NoteListActivity extends PresenterActivity implements NoteListView, NoteEntityListModelController.ItemClickListenerCallback, SwipeRefreshLayout.OnRefreshListener {
+public class NoteListActivity extends PresenterActivity implements
+        NoteListView,
+        EndlessRecyclerOnScrollListenerTrial.RecyclerViewScrollListener,
+        NoteEntityListModelController.ItemClickListenerCallback,
+        SwipeRefreshLayout.OnRefreshListener {
+
 
     @Inject
     NoteListPresenter noteListPresenter;
+    @Inject
+    RecyclerView.LayoutManager layoutManager;
+    @Inject
+    RecyclerView.OnScrollListener endlessRecyclerOnScrollListenerProd;
     @Inject
     NoteEntityListModelController controller;
 
@@ -33,14 +44,35 @@ public class NoteListActivity extends PresenterActivity implements NoteListView,
     RecyclerView rvNoteList;
     @BindView(R.id.swipe_refresh_layout)
     SwipeRefreshLayout swipeRefreshLayout;
+    @LoadingStatus
+    private int status;
 
     @Override
     public void initUI() {
         swipeRefreshLayout.setOnRefreshListener(this);
-        LinearLayoutManager layout = new LinearLayoutManager(this);
-        rvNoteList.setLayoutManager(layout);
+        rvNoteList.setLayoutManager(layoutManager);
+        rvNoteList.addOnScrollListener(endlessRecyclerOnScrollListenerProd);
         rvNoteList.setAdapter(controller.getAdapter());
-        rvNoteList.addItemDecoration(new DividerItemDecoration(this, layout.getOrientation()));
+        rvNoteList.addItemDecoration(new DividerItemDecoration(this, DividerItemDecoration.VERTICAL));
+
+        loadData();
+    }
+
+    private void loadData() {
+        if (isIdle()) {
+            status = CleanViewStatus.LOADING;
+            presenter().loadData();
+        }
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        loadData();
+    }
+
+    private boolean isIdle() {
+        return status == CleanViewStatus.IDLE;
     }
 
     protected int getLayoutId() {
@@ -60,7 +92,7 @@ public class NoteListActivity extends PresenterActivity implements NoteListView,
     public void showNoteEntityList(List<NoteEntity> noteEntityList) {
         controller.bindDataListToUI(noteEntityList);
         swipeRefreshLayout.setRefreshing(false);
-
+        status = CleanViewStatus.IDLE;
     }
 
     @Override
@@ -126,6 +158,24 @@ public class NoteListActivity extends PresenterActivity implements NoteListView,
 
     @Override
     public void onRefresh() {
-        presenter().refreshData();
+        if (isIdle()) {
+            status = CleanViewStatus.REFRESHING;
+            presenter().refreshData();
+        }
+
+    }
+
+    @Override
+    public void onBottomToBeReached() {
+        if (isIdle()) {
+            status = CleanViewStatus.LOADING_MORE;
+            presenter().loadMoreData();
+        }
+    }
+
+    @Override
+    public void handleError(Throwable error) {
+        super.handleError(error);
+        status = CleanViewStatus.IDLE;
     }
 }

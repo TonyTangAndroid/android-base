@@ -4,7 +4,9 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.StaggeredGridLayoutManager;
 
-public abstract class EndlessRecyclerOnScrollListenerProd extends RecyclerView.OnScrollListener {
+import javax.inject.Inject;
+
+public class EndlessRecyclerOnScrollListenerProd extends RecyclerView.OnScrollListener {
     public static final int STAGGER_VIEW_COLUMN_COUNT = 2;
 
     int firstVisibleItem, visibleItemCount, totalItemCount;
@@ -12,11 +14,17 @@ public abstract class EndlessRecyclerOnScrollListenerProd extends RecyclerView.O
     private boolean loading = true; // True if we are still waiting for the last set of data to load.
     private int visibleThreshold = 5; // The minimum amount of items to have below your current scroll position before loading more.
     private int currentPage = 1;
+    private RecyclerViewScrollListener listener;
 
     private RecyclerView.LayoutManager layoutManager;
     private boolean isFirstItemVisible;
 
-    public EndlessRecyclerOnScrollListenerProd(RecyclerView.LayoutManager layoutManager) {
+    @Inject
+    public EndlessRecyclerOnScrollListenerProd(RecyclerView.LayoutManager layoutManager, RecyclerViewScrollListener listener) {
+        if (listener == null) {
+            throw new IllegalArgumentException("RecyclerViewScrollListener must not be null");
+        }
+        this.listener = listener;
         this.layoutManager = layoutManager;
     }
 
@@ -40,7 +48,7 @@ public abstract class EndlessRecyclerOnScrollListenerProd extends RecyclerView.O
 //        Log.d("onScrolled", "firstVisibleItem:" + firstVisibleItem + ", visibleItemCount:" + visibleItemCount + ", position: " + (visibleItemCount > 0 ? recyclerView.getChildAt(0).getTop() : -999));
         boolean isFirstItemVisible = firstVisibleItem < STAGGER_VIEW_COLUMN_COUNT && visibleItemCount > 0 && reachedTop(recyclerView);
         if (isFirstItemVisible != this.isFirstItemVisible) {
-            onFirstItemVisibilityChange(isFirstItemVisible);
+            listener.onFirstItemVisibilityChange(isFirstItemVisible);
             this.isFirstItemVisible = isFirstItemVisible;
         }
         if (loading) {
@@ -53,7 +61,7 @@ public abstract class EndlessRecyclerOnScrollListenerProd extends RecyclerView.O
                 <= (firstVisibleItem + visibleThreshold)) {
             // End has been reached
             currentPage++;
-            triggerLoadMore(currentPage);
+            listener.triggerLoadMore(currentPage);
             loading = true;
         }
     }
@@ -83,7 +91,13 @@ public abstract class EndlessRecyclerOnScrollListenerProd extends RecyclerView.O
         return result;
     }
 
-    public abstract void triggerLoadMore(int currentPage);
 
-    public abstract void onFirstItemVisibilityChange(boolean visible);
+    public interface RecyclerViewScrollListener {
+
+        void triggerLoadMore(int currentPage);
+
+        void onFirstItemVisibilityChange(boolean visible);
+
+    }
+
 }
