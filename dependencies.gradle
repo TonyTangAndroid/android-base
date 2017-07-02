@@ -14,7 +14,7 @@ ext {
     androidTargetSdkVersion = 25
     androidCompileSdkVersion = 25
     androidSupportVersion = '25.4.0'
-
+    epoxyVersion = '2.2.0'
 
     autoValueVersion = '1.4.1'
     autoValueGsonVersion = '0.4.6'
@@ -91,6 +91,8 @@ ext {
     ]
 
     applicationDependencies = [
+            epoxy              : "com.airbnb.android:epoxy:${epoxyVersion}",
+            epoxyProcessor     : "com.airbnb.android:epoxy-processor:${epoxyVersion}",
             daggerProcessor    : "com.google.dagger:dagger-android-processor:${daggerVersion}",
             daggerCompiler     : "com.google.dagger:dagger-compiler:${daggerVersion}",
             dagger             : "com.google.dagger:dagger:${daggerVersion}",

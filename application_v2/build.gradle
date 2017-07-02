@@ -57,6 +57,7 @@ dependencies {
 
 
     compile applicationDependencies.proguardSnippets
+    compile applicationDependencies.epoxy
     compile applicationDependencies.androidDesign
     compile applicationDependencies.androidSupportv13
     compile applicationDependencies.androidCompatv7
@@ -67,6 +68,7 @@ dependencies {
     compile applicationDependencies.rxAndroid
     compile applicationDependencies.butterKnife
 
+    annotationProcessor applicationDependencies.epoxyProcessor
     annotationProcessor applicationDependencies.butterKnifeCompiler
     annotationProcessor applicationDependencies.daggerCompiler
     annotationProcessor applicationDependencies.daggerProcessor
