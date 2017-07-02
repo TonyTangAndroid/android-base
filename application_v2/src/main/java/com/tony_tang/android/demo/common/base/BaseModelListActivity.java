@@ -1,13 +1,10 @@
 package com.tony_tang.android.demo.common.base;
 
-import android.os.Bundle;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.DividerItemDecoration;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 
-import com.tony_tang.android.demo.presentation.presenter.base.BaseListPresenter;
-import com.tony_tang.android.demo.presentation.view.base.BaseListView;
 import com.tony_tang.android.demo.R;
 import com.tony_tang.android.demo.feature.common.BaseModelController;
 import com.tony_tang.android.demo.feature.common.CleanViewStatus;
@@ -15,6 +12,8 @@ import com.tony_tang.android.demo.feature.common.EmptyViewEntity;
 import com.tony_tang.android.demo.feature.common.EndlessRecyclerOnScrollListenerTrial;
 import com.tony_tang.android.demo.feature.common.FooterViewEntity;
 import com.tony_tang.android.demo.feature.common.LoadingStatus;
+import com.tony_tang.android.demo.presentation.presenter.base.BaseListPresenter;
+import com.tony_tang.android.demo.presentation.view.base.BaseListView;
 
 import java.net.ConnectException;
 import java.net.SocketException;
@@ -75,10 +74,6 @@ public abstract class BaseModelListActivity extends PresenterActivity implements
         return R.layout.activity_entity_list;
     }
 
-    @Override
-    protected void initializeActivity(Bundle savedInstanceState) {
-
-    }
 
     @Override
     public void showEntityList(List<?> entityList) {

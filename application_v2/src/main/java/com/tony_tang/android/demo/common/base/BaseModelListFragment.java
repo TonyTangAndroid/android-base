@@ -32,6 +32,7 @@ public abstract class BaseModelListFragment extends CleanFragment implements Bas
 
     @Inject
     EmptyViewEntity defaultEmptyViewEntity;
+
     @Inject
     FooterViewEntity defaultFooterViewEntity;
 
@@ -72,7 +73,7 @@ public abstract class BaseModelListFragment extends CleanFragment implements Bas
     }
 
     @Override
-    protected int layoutId() {
+    protected int getLayoutId() {
         return R.layout.fragment_entity_list;
     }
 

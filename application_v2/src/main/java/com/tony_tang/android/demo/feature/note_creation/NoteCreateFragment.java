@@ -24,7 +24,7 @@ public class NoteCreateFragment extends CleanFragment implements NoteCreateView 
     EditText etContent;
 
     @Override
-    protected int layoutId() {
+    protected int getLayoutId() {
         return R.layout.fragment_note_create_edit;
     }
 

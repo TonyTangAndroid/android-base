@@ -30,7 +30,7 @@ public class NoteDetailFragment extends CleanFragment implements NoteDetailView 
     }
 
     @Override
-    protected int layoutId() {
+    protected int getLayoutId() {
         return R.layout.fragment_note_detail;
     }
 

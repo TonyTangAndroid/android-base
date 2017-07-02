@@ -24,12 +24,12 @@ public abstract class CleanFragment extends BaseFragment implements CleanView {
         super.onAttach(context);
     }
 
-    protected abstract int layoutId();
+    protected abstract int getLayoutId();
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        final View fragmentView = inflater.inflate(layoutId(), container, false);
+        final View fragmentView = inflater.inflate(getLayoutId(), container, false);
         ButterKnife.bind(this, fragmentView);
         return fragmentView;
     }

@@ -1,13 +1,14 @@
 package com.tony_tang.android.demo.feature.note_list;
 
+import android.os.Bundle;
 import android.view.View;
 
 import com.jordifierro.androidbase.domain.entity.NoteEntity;
-import com.tony_tang.android.demo.presentation.presenter.NoteListPresenter;
-import com.tony_tang.android.demo.presentation.presenter.base.BaseListPresenter;
 import com.tony_tang.android.demo.common.base.BaseModelListActivity;
 import com.tony_tang.android.demo.feature.common.BaseModelController;
 import com.tony_tang.android.demo.feature.note_detail.NoteDetailActivity;
+import com.tony_tang.android.demo.presentation.presenter.NoteListPresenter;
+import com.tony_tang.android.demo.presentation.presenter.base.BaseListPresenter;
 
 import javax.inject.Inject;
 
@@ -38,4 +39,8 @@ public class NoteListActivity extends BaseModelListActivity {
         startActivity(NoteDetailActivity.getCallingIntent(this, noteObjectId));
     }
 
+    @Override
+    protected void initializeActivity(Bundle savedInstanceState) {
+
+    }
 }
