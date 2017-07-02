@@ -1,6 +1,5 @@
 package com.tony_tang.android.demo.common.base;
 
-import android.os.Bundle;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.DividerItemDecoration;
 import android.support.v7.widget.LinearLayoutManager;
@@ -26,20 +25,21 @@ import javax.inject.Inject;
 
 import butterknife.BindView;
 
-public abstract class BaseModelListActivity extends PresenterActivity implements BaseListView,
+public abstract class BaseModelListFragment extends CleanFragment implements BaseListView,
         EndlessRecyclerOnScrollListenerTrial.RecyclerViewScrollListener,
         BaseModelController.ItemCommonClickListenerCallback,
         SwipeRefreshLayout.OnRefreshListener {
 
     @Inject
     EmptyViewEntity defaultEmptyViewEntity;
-
     @Inject
     FooterViewEntity defaultFooterViewEntity;
+
     @BindView(R.id.rv_note_list)
     RecyclerView rvNoteList;
     @BindView(R.id.swipe_refresh_layout)
     SwipeRefreshLayout swipeRefreshLayout;
+
     @LoadingStatus
     private int status;
 
@@ -48,11 +48,11 @@ public abstract class BaseModelListActivity extends PresenterActivity implements
     @Override
     public void initUI() {
         swipeRefreshLayout.setOnRefreshListener(this);
-        RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(this);
+        RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(getActivity());
         rvNoteList.setLayoutManager(layoutManager);
         rvNoteList.addOnScrollListener(new EndlessRecyclerOnScrollListenerTrial(layoutManager, this));
         rvNoteList.setAdapter(controller().getAdapter());
-        rvNoteList.addItemDecoration(new DividerItemDecoration(this, DividerItemDecoration.VERTICAL));
+        rvNoteList.addItemDecoration(new DividerItemDecoration(getActivity(), DividerItemDecoration.VERTICAL));
 
         loadData();
     }
@@ -71,14 +71,11 @@ public abstract class BaseModelListActivity extends PresenterActivity implements
         return status == CleanViewStatus.IDLE;
     }
 
-    protected int getLayoutId() {
-        return R.layout.activity_note_list;
-    }
-
     @Override
-    protected void initializeActivity(Bundle savedInstanceState) {
-
+    protected int layoutId() {
+        return R.layout.fragment_entity_list;
     }
+
 
     @Override
     public void showNoteEntityList(List<?> noteEntityList) {
