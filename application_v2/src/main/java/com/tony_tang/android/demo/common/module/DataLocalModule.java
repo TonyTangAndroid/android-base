@@ -40,7 +40,7 @@ public class DataLocalModule {
     FooterViewEntity provideFooterViewEntity() {
         return FooterViewEntity.builder()
                 .showLoading(true)
-                .showFooterView(true).build();
+                .showFooterView(false).build();
     }
 
 }

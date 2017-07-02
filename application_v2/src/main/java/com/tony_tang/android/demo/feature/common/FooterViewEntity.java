@@ -16,6 +16,8 @@ public abstract class FooterViewEntity {
 
     public abstract boolean showFooterView();
 
+    public abstract FooterViewEntity withShowFooterView(boolean showFooterView);
+
     @Nullable
     public abstract String footerHint();
 

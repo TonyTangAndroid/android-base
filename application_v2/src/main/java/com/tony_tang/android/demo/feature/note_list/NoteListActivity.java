@@ -100,12 +100,16 @@ public class NoteListActivity extends PresenterActivity implements
     @Override
     public void showNoteEntityList(List<NoteEntity> noteEntityList) {
         controller.bindDataListToUI(noteEntityList);
-        resetViewStatus();
     }
 
     @Override
     public void showProcessing() {
         super.showLoader();
+    }
+
+    @Override
+    public void onRetrievingDataCompleted() {
+        resetViewStatus();
     }
 
     @Override
@@ -169,6 +173,8 @@ public class NoteListActivity extends PresenterActivity implements
         if (isIdle()) {
             status = CleanViewStatus.REFRESHING;
             presenter().refreshData();
+        } else {
+            swipeRefreshLayout.setEnabled(false);
         }
 
     }
@@ -181,7 +187,7 @@ public class NoteListActivity extends PresenterActivity implements
     private void loadMoreData() {
         if (isIdle()) {
             status = CleanViewStatus.LOADING_MORE;
-            controller.bindFooterViewEntityToUI(defaultFooterViewEntity);
+            controller.bindFooterViewEntityToUI(defaultFooterViewEntity.withShowFooterView(true));
             presenter().loadMoreData();
         }
     }
@@ -200,8 +206,6 @@ public class NoteListActivity extends PresenterActivity implements
             default:
                 break;
         }
-        resetViewStatus();
-
     }
 
     private void showLoadingMoreError(String errorMessage) {
@@ -234,6 +238,7 @@ public class NoteListActivity extends PresenterActivity implements
     private void resetViewStatus() {
         status = CleanViewStatus.IDLE;
         swipeRefreshLayout.setRefreshing(false);
+        swipeRefreshLayout.setEnabled(true);
     }
 
     private void doShowErrorView(String message) {

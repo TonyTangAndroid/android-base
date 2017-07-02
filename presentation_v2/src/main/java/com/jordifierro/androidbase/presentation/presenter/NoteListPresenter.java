@@ -58,8 +58,18 @@ public class NoteListPresenter extends BasePresenter implements Presenter {
     protected class NoteListSubscriber extends BaseSubscriber<List<NoteEntity>> {
 
         @Override
+        public void onComplete() {
+            noteListView.onRetrievingDataCompleted();
+        }
+
+        @Override
+        public void onError(Throwable e) {
+            super.onError(e);
+            noteListView.onRetrievingDataCompleted();
+        }
+
+        @Override
         public void onNext(List<NoteEntity> notes) {
-            NoteListPresenter.this.hideLoader();
             NoteListPresenter.this.noteListView.showNoteEntityList(notes);
         }
     }

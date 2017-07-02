@@ -19,6 +19,7 @@ ext {
 
     autoValueVersion = '1.4.1'
     autoValueGsonVersion = '0.4.6'
+    autoValueWithVersion = '1.0.0'
     autoCommonVersion = '0.8'
     gsonVersion = '2.8.0'
     proguardSnippetsVersion = '1.0.0'
@@ -110,6 +111,7 @@ ext {
             cardview           : "com.android.support:cardview-v7:${androidSupportVersion}",
             recyclerview       : "com.android.support:recyclerview-v7:${androidSupportVersion}",
             autoCommon         : "com.google.auto:auto-common:${autoCommonVersion}",
+            autoValueWith      : "com.gabrielittner.auto.value:auto-value-with:${autoValueWithVersion}",
             gson               : "com.google.code.gson:gson:${gsonVersion}",
             javaxAnnotation    : "javax.annotation:jsr250-api:${javaxAnnotationVersion}",
             androidCompatv7    : "com.android.support:appcompat-v7:${androidSupportVersion}",

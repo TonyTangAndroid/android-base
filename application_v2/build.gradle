@@ -86,6 +86,7 @@ dependencies {
     annotationProcessor applicationDependencies.autoValue
     provided applicationDependencies.autoValueGson
     annotationProcessor applicationDependencies.autoValueGson
+    annotationProcessor applicationDependencies.autoValueWith
 
 
     androidTestAnnotationProcessor applicationTestDependencies.daggerCompiler
