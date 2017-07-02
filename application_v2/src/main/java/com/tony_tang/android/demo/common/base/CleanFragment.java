@@ -88,8 +88,4 @@ public abstract class CleanFragment extends BaseFragment implements CleanView {
         ((CleanView) getActivity()).close();
     }
 
-    public void closeAndDisplayLogin() {
-        ((CleanView) getActivity()).closeAndDisplayLogin();
-    }
-
 }

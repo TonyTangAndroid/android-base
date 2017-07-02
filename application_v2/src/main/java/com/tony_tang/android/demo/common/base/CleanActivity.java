@@ -15,9 +15,6 @@ public abstract class CleanActivity extends BaseActivity implements CleanView {
         if (error instanceof RestApiErrorException) {
             switch (((RestApiErrorException) error).getStatusCode()) {
                 case RestApiErrorException.UNAUTHORIZED:
-                case RestApiErrorException.INVALID_SESSION_TOKEN:
-                    closeAndDisplayLogin();
-                    break;
                 case RestApiErrorException.UPGRADE_REQUIRED:
                     createUpgradeDialog();
                     break;
@@ -28,12 +25,6 @@ public abstract class CleanActivity extends BaseActivity implements CleanView {
                 Toast.LENGTH_LONG).show();
     }
 
-
-    public void closeAndDisplayLogin() {
-//        Intent notesIntent = new Intent(this, LoginActivity.class);
-//        notesIntent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
-//        startActivity(notesIntent);
-    }
 
     private void createUpgradeDialog() {
 //        AlertDialog.Builder builder = new AlertDialog.Builder(this);

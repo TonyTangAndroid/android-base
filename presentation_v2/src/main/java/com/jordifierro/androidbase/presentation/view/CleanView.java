@@ -14,5 +14,4 @@ public interface CleanView {
 
     void close();
 
-    void closeAndDisplayLogin();
 }
