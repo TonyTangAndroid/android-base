@@ -7,5 +7,6 @@ import java.util.List;
 public interface NoteListView extends CleanView {
 
     void showNoteEntityList(List<NoteEntity> notes);
+    void showProcessing();
 
 }

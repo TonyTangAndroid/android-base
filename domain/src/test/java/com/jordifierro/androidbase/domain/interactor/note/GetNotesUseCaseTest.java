@@ -49,7 +49,7 @@ public class GetNotesUseCaseTest {
         TestObserver<List<NoteEntity>> testObserver = new TestObserver<>();
         List<NoteEntity> notes =
                 Arrays.asList(new NoteEntity("t1", "c1"), new NoteEntity("t2", "c2"));
-        given(mockNoteRepository.getNotes(any(UserEntity.class)))
+        given(mockNoteRepository.getNotes(any(UserEntity.class), queryParam))
                 .willReturn(Observable.just(notes));
 
         getNotesUseCase.buildUseCaseObservable().subscribe(testObserver);
@@ -60,7 +60,7 @@ public class GetNotesUseCaseTest {
                 ((List<NoteEntity>) (testObserver.getEvents().get(0)).get(0)).get(1).getContent());
         verify(mockSessionRepository).getCurrentUser();
         verifyNoMoreInteractions(mockSessionRepository);
-        verify(mockNoteRepository).getNotes(null);
+        verify(mockNoteRepository).getNotes(null, queryParam);
         verifyNoMoreInteractions(mockNoteRepository);
         verifyZeroInteractions(mockThreadExecutor);
         verifyZeroInteractions(mockPostExecutionThread);

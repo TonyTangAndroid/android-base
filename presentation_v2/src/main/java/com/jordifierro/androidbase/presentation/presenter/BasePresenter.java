@@ -59,6 +59,7 @@ public abstract class BasePresenter implements Presenter {
         return cleanView;
     }
 
+
     protected class BaseSubscriber<T> extends DisposableObserver<T> {
 
         @Override

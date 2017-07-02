@@ -30,8 +30,9 @@ public class CreateNoteUseCase extends UseCase<NoteEntity> {
         this.sessionRepository = sessionRepository;
     }
 
-    public void setParams(NoteEntity note) {
+    public CreateNoteUseCase setParams(NoteEntity note) {
         this.note = note;
+        return this;
     }
 
     @Override

@@ -27,8 +27,9 @@ public class DeleteNoteUseCase extends UseCase<VoidEntity> {
         this.sessionRepository = sessionRepository;
     }
 
-    public void setParams(String noteObjectId) {
+    public DeleteNoteUseCase setParams(String noteObjectId) {
         this.noteObjectId = noteObjectId;
+        return this;
     }
 
     @Override

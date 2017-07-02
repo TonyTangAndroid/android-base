@@ -112,7 +112,7 @@ public class NoteDataRepositoryTest extends BaseDataRepositoryTest {
     public void testGetNotesRequest() throws Exception {
         this.mockWebServer.enqueue(new MockResponse());
 
-        this.noteDataRepository.getNotes(this.fakeUser).subscribe(this.testObserver);
+        this.noteDataRepository.getNotes(this.fakeUser, queryParam).subscribe(this.testObserver);
         RecordedRequest request = this.mockWebServer.takeRequest();
         assertEquals(MOCK_SERVER + RestApi.URL_PATH_CLASSES_NOTE, request.getPath());
         assertEquals("GET", request.getMethod());
@@ -197,7 +197,7 @@ public class NoteDataRepositoryTest extends BaseDataRepositoryTest {
                 FileUtils.readFileToString(
                         TestUtils.getFileFromPath(this, "res/note_getall_ok.json"))));
 
-        this.noteDataRepository.getNotes(this.fakeUser).subscribe(this.testObserver);
+        this.noteDataRepository.getNotes(this.fakeUser, queryParam).subscribe(this.testObserver);
         this.testObserver.awaitTerminalEvent();
 
         List<NoteEntity> responseNotes = (List<NoteEntity>) ((List) this.testObserver.getEvents().get(0)).get(0);
@@ -210,7 +210,7 @@ public class NoteDataRepositoryTest extends BaseDataRepositoryTest {
     public void testGetNotesErrorResponse() throws Exception {
         this.mockWebServer.enqueue(new MockResponse().setResponseCode(401));
 
-        this.noteDataRepository.getNotes(this.fakeUser).subscribe(this.testObserver);
+        this.noteDataRepository.getNotes(this.fakeUser, queryParam).subscribe(this.testObserver);
         this.testObserver.awaitTerminalEvent();
 
         this.testObserver.assertValueCount(0);

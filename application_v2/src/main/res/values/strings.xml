@@ -10,4 +10,6 @@
     <string name="edit_text_content">Edit Content</string>
     <string name="button_create">Create</string>
     <string name="note_create">Create Note</string>
+    <string name="button_generate">Generate</string>
+    <string name="button_clear">Clear</string>
 </resources>

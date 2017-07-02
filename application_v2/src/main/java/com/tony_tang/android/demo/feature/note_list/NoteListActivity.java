@@ -1,9 +1,9 @@
 package com.tony_tang.android.demo.feature.note_list;
 
 import android.os.Bundle;
+import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -12,6 +12,7 @@ import com.jordifierro.androidbase.domain.entity.NoteEntity;
 import com.jordifierro.androidbase.presentation.presenter.NoteListPresenter;
 import com.jordifierro.androidbase.presentation.view.NoteListView;
 import com.tony_tang.android.demo.R;
+import com.tony_tang.android.demo.feature.common.InfiniteScrollListener;
 import com.tony_tang.android.demo.feature.note_creation.NoteCreateActivity;
 import com.tony_tang.android.demo.feature.note_detail.NoteDetailActivity;
 
@@ -21,7 +22,7 @@ import javax.inject.Inject;
 
 import butterknife.BindView;
 
-public class NoteListActivity extends PresenterActivity implements NoteListView, NoteEntityListModelController.ItemClickListenerCallback {
+public class NoteListActivity extends PresenterActivity implements NoteListView, NoteEntityListModelController.ItemClickListenerCallback, SwipeRefreshLayout.OnRefreshListener {
 
     @Inject
     NoteListPresenter noteListPresenter;
@@ -30,11 +31,33 @@ public class NoteListActivity extends PresenterActivity implements NoteListView,
 
     @BindView(R.id.rv_note_list)
     RecyclerView rvNoteList;
+    @BindView(R.id.swipe_refresh_layout)
+    SwipeRefreshLayout swipeRefreshLayout;
 
     @Override
     public void initUI() {
-        rvNoteList.setLayoutManager(new LinearLayoutManager(this));
+        swipeRefreshLayout.setOnRefreshListener(this);
+        LinearLayoutManager layout = new LinearLayoutManager(this);
+        rvNoteList.setLayoutManager(layout);
         rvNoteList.setAdapter(controller.getAdapter());
+        rvNoteList.addOnScrollListener(new InfiniteScrollListener(layout) {
+            @Override
+            public void onLoadMore(int currentPage) {
+                loadMore();
+            }
+        });
+    }
+
+    private void loadMore() {
+
+        rvNoteList.post(new Runnable() {
+            @Override
+            public void run() {
+//                presenter().loadMoreData();
+            }
+        });
+
+
     }
 
     protected int getLayoutId() {
@@ -53,7 +76,13 @@ public class NoteListActivity extends PresenterActivity implements NoteListView,
     @Override
     public void showNoteEntityList(List<NoteEntity> noteEntityList) {
         controller.bindDataListToUI(noteEntityList);
+        swipeRefreshLayout.setRefreshing(false);
 
+    }
+
+    @Override
+    public void showProcessing() {
+        super.showLoader();
     }
 
     @Override
@@ -89,20 +118,31 @@ public class NoteListActivity extends PresenterActivity implements NoteListView,
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.menu_note_create, menu);
-        this.getToolbar().setOnMenuItemClickListener(new Toolbar.OnMenuItemClickListener() {
-            @Override
-            public boolean onMenuItemClick(MenuItem item) {
-                if (item.getItemId() == R.id.item_create) {
-                    NoteListActivity.this.navigateCreate();
-                    return true;
-                }
-                return false;
-            }
-        });
+        this.getToolbar().setOnMenuItemClickListener(this::onMenuItemClicked);
         return true;
+    }
+
+    private boolean onMenuItemClicked(MenuItem item) {
+        switch (item.getItemId()) {
+            case R.id.item_create:
+                NoteListActivity.this.navigateCreate();
+                return true;
+            case R.id.item_generate:
+                presenter().generateNotes();
+                break;
+            case R.id.item_clear:
+                presenter().clearNotes();
+                break;
+        }
+        return false;
     }
 
     private void navigateCreate() {
         startActivity(NoteCreateActivity.constructIntent(this));
+    }
+
+    @Override
+    public void onRefresh() {
+        presenter().refreshData();
     }
 }

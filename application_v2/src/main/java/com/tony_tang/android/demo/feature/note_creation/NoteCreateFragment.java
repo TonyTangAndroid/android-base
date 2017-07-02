@@ -1,5 +1,6 @@
 package com.tony_tang.android.demo.feature.note_creation;
 
+import android.annotation.SuppressLint;
 import android.widget.EditText;
 
 import com.jordifierro.androidbase.presentation.presenter.NoteCreatePresenter;
@@ -25,6 +26,13 @@ public class NoteCreateFragment extends CleanFragment implements NoteCreateView 
     @Override
     protected int layoutId() {
         return R.layout.fragment_note_create_edit;
+    }
+
+    @SuppressLint("SetTextI18n")
+    @Override
+    public void initUI() {
+        etTitle.setText(getText(R.string.edit_text_title).toString() + System.currentTimeMillis());
+        etContent.setText(getText(R.string.edit_text_content).toString() + System.currentTimeMillis());
     }
 
     @Override

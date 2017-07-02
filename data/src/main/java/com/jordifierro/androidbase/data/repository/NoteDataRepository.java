@@ -9,6 +9,7 @@ import com.jordifierro.androidbase.domain.entity.VoidEntity;
 import com.jordifierro.androidbase.domain.repository.NoteRepository;
 
 import java.util.List;
+import java.util.Map;
 
 import javax.inject.Inject;
 
@@ -44,8 +45,8 @@ public class NoteDataRepository extends RestApiRepository implements NoteReposit
     }
 
     @Override
-    public Observable<List<NoteEntity>> getNotes(UserEntity user) {
-        return this.restApi.getNotes(user.getSessionToken())
+    public Observable<List<NoteEntity>> getNotes(UserEntity user, Map<String, Object> queryParam) {
+        return this.restApi.getNotes(user.getSessionToken(), queryParam)
                 .map(listResponse -> {
                     handleResponseError(listResponse);
                     return listResponse.body().getResults();

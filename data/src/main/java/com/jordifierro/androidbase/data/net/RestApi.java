@@ -19,6 +19,7 @@ import retrofit2.http.POST;
 import retrofit2.http.PUT;
 import retrofit2.http.Path;
 import retrofit2.http.Query;
+import retrofit2.http.QueryMap;
 
 public interface RestApi {
 
@@ -66,7 +67,7 @@ public interface RestApi {
     Observable<Response<UserEntity>> getUserBySessionToken(@Header(PARSE_SESSION_KEY) String token);
 
     @GET(URL_PATH_CLASSES_NOTE)
-    Observable<Response<NoteEntitiesWrapper>> getNotes(@Header(PARSE_SESSION_KEY) String token);
+    Observable<Response<NoteEntitiesWrapper>> getNotes(@Header(PARSE_SESSION_KEY) String token, @QueryMap Map<String, Object> queryParams);
 
     @PUT(URL_PATH_CLASSES_NOTE_OBJECT_ID)
     Observable<Response<UpdatedWrapper>> updateNote(@Header(PARSE_SESSION_KEY) String token,

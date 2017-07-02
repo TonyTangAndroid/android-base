@@ -7,6 +7,7 @@ import com.jordifierro.androidbase.domain.entity.UserEntity;
 import com.jordifierro.androidbase.domain.entity.VoidEntity;
 
 import java.util.List;
+import java.util.Map;
 
 import io.reactivex.Observable;
 
@@ -18,7 +19,7 @@ public interface NoteRepository {
 
     Observable<NoteEntity> getNote(UserEntity user, String noteObjectId);
 
-    Observable<List<NoteEntity>> getNotes(UserEntity user);
+    Observable<List<NoteEntity>> getNotes(UserEntity user, Map<String, Object> queryParam);
 
     Observable<UpdatedWrapper> updateNote(UserEntity user, NoteEntity note);
 
