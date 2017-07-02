@@ -3,7 +3,7 @@ package com.tony_tang.android.demo.common.base;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 
-import com.jordifierro.androidbase.presentation.presenter.base.BasePresenter;
+import com.tony_tang.android.demo.presentation.presenter.base.BasePresenter;
 
 import dagger.android.AndroidInjection;
 

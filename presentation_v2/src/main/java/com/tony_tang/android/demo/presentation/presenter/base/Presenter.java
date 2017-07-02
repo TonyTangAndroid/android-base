@@ -1,4 +1,4 @@
-package com.jordifierro.androidbase.presentation.presenter.base;
+package com.tony_tang.android.demo.presentation.presenter.base;
 
 public interface Presenter {
 

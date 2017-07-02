@@ -8,8 +8,8 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Toast;
 
-import com.jordifierro.androidbase.presentation.presenter.base.BasePresenter;
-import com.jordifierro.androidbase.presentation.view.base.CleanView;
+import com.tony_tang.android.demo.presentation.presenter.base.BasePresenter;
+import com.tony_tang.android.demo.presentation.view.base.CleanView;
 
 import butterknife.ButterKnife;
 import dagger.android.AndroidInjection;

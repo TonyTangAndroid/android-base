@@ -1,7 +1,7 @@
-package com.jordifierro.androidbase.presentation.view;
+package com.tony_tang.android.demo.presentation.view;
 
 import com.jordifierro.androidbase.domain.entity.NoteEntity;
-import com.jordifierro.androidbase.presentation.view.base.CleanView;
+import com.tony_tang.android.demo.presentation.view.base.CleanView;
 
 public interface NoteDetailView extends CleanView {
 

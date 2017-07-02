@@ -6,8 +6,8 @@ import android.support.v7.widget.DividerItemDecoration;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 
-import com.jordifierro.androidbase.presentation.presenter.base.BaseListPresenter;
-import com.jordifierro.androidbase.presentation.view.base.BaseListView;
+import com.tony_tang.android.demo.presentation.presenter.base.BaseListPresenter;
+import com.tony_tang.android.demo.presentation.view.base.BaseListView;
 import com.tony_tang.android.demo.R;
 import com.tony_tang.android.demo.feature.common.BaseModelController;
 import com.tony_tang.android.demo.feature.common.CleanViewStatus;

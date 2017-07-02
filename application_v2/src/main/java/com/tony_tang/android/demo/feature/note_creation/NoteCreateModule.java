@@ -1,6 +1,6 @@
 package com.tony_tang.android.demo.feature.note_creation;
 
-import com.jordifierro.androidbase.presentation.view.NoteCreateView;
+import com.tony_tang.android.demo.presentation.view.NoteCreateView;
 
 import dagger.Module;
 import dagger.Provides;

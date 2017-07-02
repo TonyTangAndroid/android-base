@@ -1,10 +1,10 @@
-package com.jordifierro.androidbase.presentation.presenter;
+package com.tony_tang.android.demo.presentation.presenter;
 
 import com.jordifierro.androidbase.domain.entity.NoteEntity;
 import com.jordifierro.androidbase.domain.interactor.note.CreateNoteUseCase;
-import com.jordifierro.androidbase.presentation.presenter.base.BasePresenter;
-import com.jordifierro.androidbase.presentation.presenter.base.Presenter;
-import com.jordifierro.androidbase.presentation.view.NoteCreateView;
+import com.tony_tang.android.demo.presentation.presenter.base.BasePresenter;
+import com.tony_tang.android.demo.presentation.presenter.base.Presenter;
+import com.tony_tang.android.demo.presentation.view.NoteCreateView;
 
 import javax.inject.Inject;
 

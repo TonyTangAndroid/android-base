@@ -1,10 +1,10 @@
-package com.jordifierro.androidbase.presentation.presenter;
+package com.tony_tang.android.demo.presentation.presenter;
 
 import com.jordifierro.androidbase.domain.entity.NoteEntity;
 import com.jordifierro.androidbase.domain.exception.RestApiErrorException;
 import com.jordifierro.androidbase.domain.interactor.note.GetNotesUseCase;
-import com.jordifierro.androidbase.presentation.presenter.base.BaseListPresenter;
-import com.jordifierro.androidbase.presentation.view.base.BaseListView;
+import com.tony_tang.android.demo.presentation.presenter.base.BaseListPresenter;
+import com.tony_tang.android.demo.presentation.view.base.BaseListView;
 
 import org.junit.Before;
 import org.junit.Test;

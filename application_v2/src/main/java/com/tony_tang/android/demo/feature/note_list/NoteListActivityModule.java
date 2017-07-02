@@ -1,6 +1,6 @@
 package com.tony_tang.android.demo.feature.note_list;
 
-import com.jordifierro.androidbase.presentation.view.base.BaseListView;
+import com.tony_tang.android.demo.presentation.view.base.BaseListView;
 import com.tony_tang.android.demo.common.scope.ActivityScope;
 import com.tony_tang.android.demo.feature.common.BaseModelController;
 

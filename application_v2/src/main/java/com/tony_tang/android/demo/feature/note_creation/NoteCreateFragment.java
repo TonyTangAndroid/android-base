@@ -3,8 +3,8 @@ package com.tony_tang.android.demo.feature.note_creation;
 import android.annotation.SuppressLint;
 import android.widget.EditText;
 
-import com.jordifierro.androidbase.presentation.presenter.NoteCreatePresenter;
-import com.jordifierro.androidbase.presentation.view.NoteCreateView;
+import com.tony_tang.android.demo.presentation.presenter.NoteCreatePresenter;
+import com.tony_tang.android.demo.presentation.view.NoteCreateView;
 import com.tony_tang.android.demo.R;
 import com.tony_tang.android.demo.common.base.CleanFragment;
 
