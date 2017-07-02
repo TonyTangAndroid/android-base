@@ -5,6 +5,7 @@ import android.view.View;
 import com.airbnb.epoxy.AutoModel;
 import com.airbnb.epoxy.EpoxyModel;
 import com.airbnb.epoxy.TypedEpoxyController;
+import com.jordifierro.androidbase.domain.constant.Constants;
 import com.jordifierro.androidbase.domain.entity.NoteEntity;
 import com.tony_tang.android.demo.BuildConfig;
 import com.tony_tang.android.demo.feature.common.EmptyViewEntity;
@@ -77,7 +78,7 @@ public class NoteEntityListModelController extends TypedEpoxyController<List<Not
     private void buildFooterView(List<?> noticeEntityList) {
         footerModel.footerViewEntity(footerViewEntity)
                 .clickListener(v -> itemClickListenerCallback.onFooterClicked())
-                .addIf(noticeEntityList != null && noticeEntityList.size() > 12, this);
+                .addIf(noticeEntityList != null && noticeEntityList.size() >= Constants.DEFAULT_LIMIT_VALUE, this);
     }
 
     private void buildDataListView(List<NoteEntity> noticeEntityList) {
