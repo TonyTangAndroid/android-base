@@ -15,10 +15,11 @@ android {
     buildToolsVersion rootProject.ext.androidBuildToolsVersion
     defaultConfig {
 
-        applicationId  "com.tony_tang.android.demo"
+        applicationId "com.tony_tang.android.demo"
         minSdkVersion rootProject.ext.androidMinSdkVersion
         targetSdkVersion rootProject.ext.androidTargetSdkVersion
         versionCode rootProject.ext.appVersionCode
+        multiDexEnabled true
         versionName rootProject.ext.appVersionName
         testInstrumentationRunner 'com.jordifierro.androidbase.application.TestMockerRunner'
     }
@@ -55,7 +56,7 @@ dependencies {
     compile project(':data')
     compile project(':presentation_v2')
 
-
+    compile applicationDependencies.multidex
     compile applicationDependencies.proguardSnippets
     compile applicationDependencies.epoxy
     compile applicationDependencies.androidDesign
@@ -67,11 +68,22 @@ dependencies {
     compile applicationDependencies.rxJava
     compile applicationDependencies.rxAndroid
     compile applicationDependencies.butterKnife
+    compile applicationDependencies.cardview
+    compile applicationDependencies.recyclerview
 
     annotationProcessor applicationDependencies.epoxyProcessor
     annotationProcessor applicationDependencies.butterKnifeCompiler
     annotationProcessor applicationDependencies.daggerCompiler
     annotationProcessor applicationDependencies.daggerProcessor
+
+
+
+    compile applicationDependencies.autoValue
+    provided applicationDependencies.autoValue
+    annotationProcessor applicationDependencies.autoValue
+    provided applicationDependencies.autoValueGson
+    annotationProcessor applicationDependencies.autoValueGson
+
 
     androidTestAnnotationProcessor applicationTestDependencies.daggerCompiler
 

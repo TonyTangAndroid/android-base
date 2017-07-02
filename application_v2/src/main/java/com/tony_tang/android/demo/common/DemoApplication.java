@@ -1,8 +1,8 @@
 package com.tony_tang.android.demo.common;
 
 import android.app.Activity;
-import android.app.Application;
 import android.app.Fragment;
+import android.support.multidex.MultiDexApplication;
 
 import javax.inject.Inject;
 
@@ -11,7 +11,7 @@ import dagger.android.DispatchingAndroidInjector;
 import dagger.android.HasActivityInjector;
 import dagger.android.HasFragmentInjector;
 
-public class DemoApplication extends Application implements HasActivityInjector, HasFragmentInjector {
+public class DemoApplication extends MultiDexApplication implements HasActivityInjector, HasFragmentInjector {
 
     @Inject
     DispatchingAndroidInjector<Activity> activityDispatchingAndroidInjector;

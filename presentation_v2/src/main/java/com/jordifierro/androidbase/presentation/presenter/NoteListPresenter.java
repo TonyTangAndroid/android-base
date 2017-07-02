@@ -23,6 +23,10 @@ public class NoteListPresenter extends BasePresenter implements Presenter {
 
     @Override
     public void resume() {
+        loadData();
+    }
+
+    public void loadData() {
         this.showLoader();
         this.getNotesUseCase.execute(new NoteListSubscriber());
     }

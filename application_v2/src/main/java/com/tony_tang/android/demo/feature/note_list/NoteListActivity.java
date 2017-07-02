@@ -1,10 +1,11 @@
 package com.tony_tang.android.demo.feature.note_list;
 
 import android.os.Bundle;
-import android.widget.ListView;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
+import android.view.View;
 
 import com.jordifierro.androidbase.domain.entity.NoteEntity;
-import com.jordifierro.androidbase.presentation.presenter.BasePresenter;
 import com.jordifierro.androidbase.presentation.presenter.NoteListPresenter;
 import com.jordifierro.androidbase.presentation.view.NoteListView;
 import com.tony_tang.android.demo.R;
@@ -16,20 +17,20 @@ import javax.inject.Inject;
 
 import butterknife.BindView;
 
-public class NoteListActivity extends PresenterActivity implements NoteListView {
+public class NoteListActivity extends PresenterActivity implements NoteListView, NoteEntityListModelController.ItemClickListenerCallback {
 
     @Inject
     NoteListPresenter noteListPresenter;
     @Inject
-    NoteListAdapter adapter;
+    NoteEntityListModelController controller;
 
-    @BindView(R.id.list_view)
-    ListView listView;
+    @BindView(R.id.rv_note_list)
+    RecyclerView rvNoteList;
 
     @Override
     public void initUI() {
-        adapter.setOnItemClickListener(note -> NoteListActivity.this.showNote(note.getObjectId()));
-        listView.setAdapter(adapter);
+        rvNoteList.setLayoutManager(new LinearLayoutManager(this));
+        rvNoteList.setAdapter(controller.getAdapter());
     }
 
     protected int getLayoutId() {
@@ -47,12 +48,37 @@ public class NoteListActivity extends PresenterActivity implements NoteListView 
 
     @Override
     public void showNoteEntityList(List<NoteEntity> noteEntityList) {
-        adapter.setNotes(noteEntityList);
+        controller.bindDataListToUI(noteEntityList);
 
     }
 
     @Override
-    protected BasePresenter presenter() {
+    public void showLoader() {
+        controller.setData(null);
+    }
+
+    @Override
+    protected NoteListPresenter presenter() {
         return noteListPresenter;
+    }
+
+    @Override
+    public void onItemClicked(View view, NoteEntity entity) {
+        showNote(entity.getObjectId());
+    }
+
+    @Override
+    public void onFooterClicked() {
+
+    }
+
+    @Override
+    public void retry() {
+        presenter().loadData();
+    }
+
+    @Override
+    public void bottomViewClicked() {
+
     }
 }

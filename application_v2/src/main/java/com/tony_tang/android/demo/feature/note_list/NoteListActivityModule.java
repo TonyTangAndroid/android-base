@@ -18,4 +18,10 @@ public class NoteListActivityModule {
         return mainActivity;
     }
 
+    @DebugLog
+    @Provides
+    NoteEntityListModelController.ItemClickListenerCallback provideItemClickListenerCallback(NoteListActivity mainActivity) {
+        return mainActivity;
+    }
+
 }

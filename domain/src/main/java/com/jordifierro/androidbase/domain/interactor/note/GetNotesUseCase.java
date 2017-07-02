@@ -8,10 +8,14 @@ import com.jordifierro.androidbase.domain.repository.NoteRepository;
 import com.jordifierro.androidbase.domain.repository.SessionRepository;
 
 import java.util.List;
+import java.util.concurrent.TimeUnit;
 
 import javax.inject.Inject;
 
 import io.reactivex.Observable;
+import io.reactivex.ObservableSource;
+import io.reactivex.annotations.NonNull;
+import io.reactivex.functions.Function;
 
 public class GetNotesUseCase extends UseCase<List<NoteEntity>> {
 
@@ -28,6 +32,15 @@ public class GetNotesUseCase extends UseCase<List<NoteEntity>> {
 
     @Override
     protected Observable<List<NoteEntity>> buildUseCaseObservable() {
+        return Observable.timer(1500, TimeUnit.MILLISECONDS).flatMap(new Function<Long, ObservableSource<List<NoteEntity>>>() {
+            @Override
+            public ObservableSource<List<NoteEntity>> apply(@NonNull Long aLong) throws Exception {
+                return doGetNotes();
+            }
+        });
+    }
+
+    private Observable<List<NoteEntity>> doGetNotes() {
         return this.noteRepository.getNotes(this.sessionRepository.getCurrentUser());
     }
 }
