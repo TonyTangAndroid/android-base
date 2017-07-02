@@ -3,7 +3,7 @@ package com.tony_tang.android.demo.feature.note_detail;
 import android.widget.TextView;
 
 import com.jordifierro.androidbase.domain.entity.NoteEntity;
-import com.jordifierro.androidbase.presentation.presenter.BasePresenter;
+import com.jordifierro.androidbase.presentation.presenter.base.BasePresenter;
 import com.jordifierro.androidbase.presentation.presenter.NoteDetailPresenter;
 import com.jordifierro.androidbase.presentation.view.NoteDetailView;
 import com.tony_tang.android.demo.R;

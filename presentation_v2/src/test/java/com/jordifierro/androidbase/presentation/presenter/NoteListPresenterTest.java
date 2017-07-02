@@ -3,7 +3,6 @@ package com.jordifierro.androidbase.presentation.presenter;
 import com.jordifierro.androidbase.domain.entity.NoteEntity;
 import com.jordifierro.androidbase.domain.exception.RestApiErrorException;
 import com.jordifierro.androidbase.domain.interactor.note.GetNotesUseCase;
-import com.jordifierro.androidbase.presentation.view.NoteListView;
 
 import org.junit.Before;
 import org.junit.Test;

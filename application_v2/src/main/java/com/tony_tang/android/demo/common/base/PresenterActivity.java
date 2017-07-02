@@ -1,10 +1,9 @@
-package com.tony_tang.android.demo.feature.note_list;
+package com.tony_tang.android.demo.common.base;
 
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 
-import com.jordifierro.androidbase.presentation.presenter.BasePresenter;
-import com.tony_tang.android.demo.common.base.CleanActivity;
+import com.jordifierro.androidbase.presentation.presenter.base.BasePresenter;
 
 import dagger.android.AndroidInjection;
 

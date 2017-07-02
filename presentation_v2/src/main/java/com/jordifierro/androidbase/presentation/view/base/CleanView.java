@@ -1,4 +1,4 @@
-package com.jordifierro.androidbase.presentation.view;
+package com.jordifierro.androidbase.presentation.view.base;
 
 public interface CleanView {
 

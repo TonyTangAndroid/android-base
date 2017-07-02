@@ -31,6 +31,7 @@ public class ClearNoteListUseCase extends UseCase<Long> {
     protected Observable<Long> buildUseCaseObservable() {
 
         return getNotesUseCase.buildUseCaseObservable().flatMap(Observable::fromIterable)
+                .map(entity -> (NoteEntity) entity)
                 .map(NoteEntity::getObjectId)
                 .flatMap(this::delete)
                 .count()
@@ -38,6 +39,7 @@ public class ClearNoteListUseCase extends UseCase<Long> {
 
 
     }
+
 
     private ObservableSource<VoidEntity> delete(String objectId) {
         return deleteNoteUseCase.setParams(objectId).buildUseCaseObservable();

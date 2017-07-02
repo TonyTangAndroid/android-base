@@ -19,10 +19,9 @@ import javax.inject.Inject;
 import io.reactivex.Observable;
 import io.reactivex.ObservableSource;
 import io.reactivex.annotations.NonNull;
-import io.reactivex.functions.Consumer;
 import io.reactivex.functions.Function;
 
-public class GetNotesUseCase extends UseCase<List<NoteEntity>> {
+public class GetNotesUseCase extends UseCase<List<?>> {
 
     private NoteRepository noteRepository;
     private SessionRepository sessionRepository;
@@ -52,7 +51,7 @@ public class GetNotesUseCase extends UseCase<List<NoteEntity>> {
 
 
     @Override
-    protected Observable<List<NoteEntity>> buildUseCaseObservable() {
+    protected Observable<List<?>> buildUseCaseObservable() {
         return Observable.timer(500, TimeUnit.MILLISECONDS).flatMap(new Function<Long, ObservableSource<List<NoteEntity>>>() {
             @Override
             public ObservableSource<List<NoteEntity>> apply(@NonNull Long aLong) throws Exception {
@@ -62,17 +61,10 @@ public class GetNotesUseCase extends UseCase<List<NoteEntity>> {
     }
 
     private Observable<List<NoteEntity>> doGetNotes() {
-        return this.noteRepository.getNotes(this.sessionRepository.getCurrentUser(), queryParam).doOnNext(new Consumer<List<NoteEntity>>() {
-            @Override
-            public void accept(@NonNull List<NoteEntity> noteEntities) throws Exception {
-                updateNoteEntityCount(noteEntities.size());
-            }
-        }).map(new Function<List<NoteEntity>, List<NoteEntity>>() {
-            @Override
-            public List<NoteEntity> apply(@NonNull List<NoteEntity> noteEntities) throws Exception {
-                noteEntityList.addAll(noteEntities);
-                return noteEntityList;
-            }
+        return this.noteRepository.getNotes(this.sessionRepository.getCurrentUser(), queryParam)
+                .doOnNext(noteEntities -> updateNoteEntityCount(noteEntities.size())).map(noteEntities -> {
+            noteEntityList.addAll(noteEntities);
+            return noteEntityList;
         });
     }
 

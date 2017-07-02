@@ -5,7 +5,7 @@ import android.net.Uri;
 import android.widget.Toast;
 
 import com.jordifierro.androidbase.domain.exception.RestApiErrorException;
-import com.jordifierro.androidbase.presentation.view.CleanView;
+import com.jordifierro.androidbase.presentation.view.base.CleanView;
 import com.tony_tang.android.demo.R;
 
 public abstract class CleanActivity extends BaseActivity implements CleanView {

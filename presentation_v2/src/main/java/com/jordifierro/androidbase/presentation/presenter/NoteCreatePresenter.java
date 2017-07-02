@@ -2,6 +2,8 @@ package com.jordifierro.androidbase.presentation.presenter;
 
 import com.jordifierro.androidbase.domain.entity.NoteEntity;
 import com.jordifierro.androidbase.domain.interactor.note.CreateNoteUseCase;
+import com.jordifierro.androidbase.presentation.presenter.base.BasePresenter;
+import com.jordifierro.androidbase.presentation.presenter.base.Presenter;
 import com.jordifierro.androidbase.presentation.view.NoteCreateView;
 
 import javax.inject.Inject;

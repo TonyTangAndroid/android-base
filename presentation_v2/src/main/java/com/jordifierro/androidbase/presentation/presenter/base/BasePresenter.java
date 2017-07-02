@@ -1,7 +1,7 @@
-package com.jordifierro.androidbase.presentation.presenter;
+package com.jordifierro.androidbase.presentation.presenter.base;
 
 import com.jordifierro.androidbase.domain.interactor.UseCase;
-import com.jordifierro.androidbase.presentation.view.CleanView;
+import com.jordifierro.androidbase.presentation.view.base.CleanView;
 
 import io.reactivex.observers.DisposableObserver;
 
