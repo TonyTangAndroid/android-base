@@ -28,6 +28,9 @@ public abstract class EmptyViewModel extends EpoxyModelWithHolder<EmptyViewModel
     @EpoxyAttribute(DoNotHash)
     View.OnClickListener bottomViewClickListener;
 
+    public int getSpanSize(int totalSpanCount, int position, int itemCount) {
+        return totalSpanCount;
+    }
 
     @Override
     public void bind(EmptyViewItemViewHolder holder) {

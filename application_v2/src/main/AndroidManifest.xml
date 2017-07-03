@@ -15,15 +15,16 @@
         <activity
             android:name="com.tony_tang.android.demo.feature.note_list.NoteListActivity"
             android:label="@string/note_list">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN"/>
+                <category android:name="android.intent.category.LAUNCHER"/>
+            </intent-filter>
         </activity>
 
         <activity
             android:name="com.tony_tang.android.demo.feature.note_list.fragment.NoteListFragmentActivity"
             android:label="@string/note_list">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN"/>
-                <category android:name="android.intent.category.LAUNCHER"/>
-            </intent-filter>
+
         </activity>
         <activity
             android:name="com.tony_tang.android.demo.feature.note_detail.NoteDetailActivity"

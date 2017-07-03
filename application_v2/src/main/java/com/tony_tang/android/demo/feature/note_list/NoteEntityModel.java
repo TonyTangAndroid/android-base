@@ -10,6 +10,7 @@ import com.airbnb.epoxy.EpoxyModelWithHolder;
 import com.jordifierro.androidbase.domain.entity.NoteEntity;
 import com.tony_tang.android.demo.R;
 import com.tony_tang.android.demo.feature.common.BaseEpoxyHolder;
+import com.tony_tang.android.demo.feature.common.SpanType;
 
 import butterknife.BindView;
 
@@ -32,6 +33,9 @@ public abstract class NoteEntityModel extends EpoxyModelWithHolder<NoteEntityMod
         holder.tvContent.setText(item.getContent());
     }
 
+    public int getSpanSize(int totalSpanCount, int position, int itemCount) {
+        return SpanType.HALF;
+    }
 
     @Override
     public void bind(NoteEntityViewHolder holder, EpoxyModel<?> previouslyBoundModel) {

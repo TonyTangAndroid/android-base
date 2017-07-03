@@ -2,11 +2,9 @@ package com.tony_tang.android.demo.common.base;
 
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.DividerItemDecoration;
-import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
 
-import com.tony_tang.android.demo.presentation.presenter.base.BaseListPresenter;
-import com.tony_tang.android.demo.presentation.view.base.BaseListView;
 import com.tony_tang.android.demo.R;
 import com.tony_tang.android.demo.feature.common.BaseModelController;
 import com.tony_tang.android.demo.feature.common.CleanViewStatus;
@@ -14,6 +12,9 @@ import com.tony_tang.android.demo.feature.common.EmptyViewEntity;
 import com.tony_tang.android.demo.feature.common.EndlessRecyclerOnScrollListenerTrial;
 import com.tony_tang.android.demo.feature.common.FooterViewEntity;
 import com.tony_tang.android.demo.feature.common.LoadingStatus;
+import com.tony_tang.android.demo.feature.common.SpanType;
+import com.tony_tang.android.demo.presentation.presenter.base.BaseListPresenter;
+import com.tony_tang.android.demo.presentation.view.base.BaseListView;
 
 import java.net.ConnectException;
 import java.net.SocketException;
@@ -49,9 +50,11 @@ public abstract class BaseModelListFragment extends CleanFragment implements Bas
     @Override
     public void initUI() {
         swipeRefreshLayout.setOnRefreshListener(this);
-        RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(getActivity());
-        rvEntityList.setLayoutManager(layoutManager);
-        rvEntityList.addOnScrollListener(new EndlessRecyclerOnScrollListenerTrial(layoutManager, this));
+        GridLayoutManager gridLayoutManager = new GridLayoutManager(getActivity(), SpanType.FULL);
+        controller().setSpanCount(SpanType.FULL);
+        gridLayoutManager.setSpanSizeLookup(controller().getSpanSizeLookup());
+        rvEntityList.setLayoutManager(gridLayoutManager);
+        rvEntityList.addOnScrollListener(new EndlessRecyclerOnScrollListenerTrial(gridLayoutManager, this));
         rvEntityList.setAdapter(controller().getAdapter());
         rvEntityList.addItemDecoration(new DividerItemDecoration(getActivity(), DividerItemDecoration.VERTICAL));
 

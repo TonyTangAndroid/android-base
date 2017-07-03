@@ -46,6 +46,10 @@ public abstract class FooterModel extends EpoxyModelWithHolder<FooterModel.Foote
         }
     }
 
+    public int getSpanSize(int totalSpanCount, int position, int itemCount) {
+        return totalSpanCount;
+    }
+
     @Override
     public void unbind(FooterViewHolder holder) {
         holder.cv_footer_view.setOnClickListener(null);
