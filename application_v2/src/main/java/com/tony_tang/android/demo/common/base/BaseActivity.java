@@ -10,6 +10,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
 
+import com.evernote.android.state.StateSaver;
 import com.tony_tang.android.demo.R;
 
 import butterknife.BindView;
@@ -29,11 +30,20 @@ public abstract class BaseActivity extends AppCompatActivity {
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        StateSaver.restoreInstanceState(this, savedInstanceState);
         setContentView(getLayoutId());
         ButterKnife.bind(this);
         this.initializeActivity(savedInstanceState);
         this.initializeToolbar();
     }
+
+
+    @Override
+    protected void onSaveInstanceState(Bundle outState) {
+        super.onSaveInstanceState(outState);
+        StateSaver.saveInstanceState(this, outState);
+    }
+
 
     protected int getLayoutId() {
         return R.layout.activity_layout;
