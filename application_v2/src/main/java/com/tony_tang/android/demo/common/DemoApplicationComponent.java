@@ -15,12 +15,14 @@ import dagger.android.AndroidInjectionModule;
 
  */
 @ApplicationScope
+//终极boss
 @Component(modules = {
         AndroidInjectionModule.class,
-        DemoApplicationModule.class,
+        DemoApplicationModule.class,//小Boss
         SharedPreferenceModule.class,
         ThreadModule.class,
         DataModule.class,
+
         DemoActivityInjector.class,
         DemoFragmentInjector.class})
 public interface DemoApplicationComponent {
