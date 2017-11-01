@@ -5,13 +5,13 @@ buildscript {
         }
     }
     dependencies {
-        classpath "net.ltgt.gradle:gradle-apt-plugin:0.10"
+        classpath "net.ltgt.gradle:gradle-apt-plugin:0.12"
     }
 }
 
-apply plugin: "net.ltgt.apt"
-apply plugin: "java"
-apply plugin: 'me.tatarka.retrolambda'
+apply plugin: 'java'
+apply plugin: 'net.ltgt.apt-idea'
+apply plugin: 'idea'
 
 dependencies {
     def domainDependencies = rootProject.ext.domainDependencies
