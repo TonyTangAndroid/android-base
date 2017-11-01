@@ -5,8 +5,6 @@ import android.content.SharedPreferences;
 import com.jordifierro.androidbase.domain.entity.UserEntity;
 import com.jordifierro.androidbase.domain.repository.SessionRepository;
 
-import javax.inject.Inject;
-
 
 public class SessionDataRepository implements SessionRepository {
 
@@ -17,7 +15,6 @@ public class SessionDataRepository implements SessionRepository {
     private final SharedPreferences sharedPreferences;
 
 
-    @Inject
     public SessionDataRepository(SharedPreferences sharedPreferences) {
         this.sharedPreferences = sharedPreferences;
     }

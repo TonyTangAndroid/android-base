@@ -11,18 +11,17 @@ import java.util.Map;
 
 import javax.inject.Inject;
 
-
 import io.reactivex.Observable;
 import io.reactivex.functions.Function;
 import retrofit2.Response;
 
-public class UserDataRepository extends RestApiRepository implements UserRepository {
+public class UserDataRepositoryV2 extends RestApiRepository implements UserRepository {
 
     private final RestApi restApi;
 
 
     @Inject
-    public UserDataRepository(RestApi restApi) {
+    public UserDataRepositoryV2(RestApi restApi) {
         this.restApi = restApi;
     }
 
@@ -45,7 +44,14 @@ public class UserDataRepository extends RestApiRepository implements UserReposit
 
     @Override
     public Observable<VoidEntity> deleteUser(final UserEntity user) {
-     throw new RuntimeException("todo");
+        return this.restApi.deleteUser(user.getSessionToken(), user.getObjectId())
+                .map(new Function<Response<VoidEntity>, VoidEntity>() {
+                    @Override
+                    public VoidEntity apply(Response<VoidEntity> voidResponse) {
+                        handleResponseError(voidResponse);
+                        return voidResponse.body();
+                    }
+                });
     }
 
     @Override

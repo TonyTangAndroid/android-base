@@ -1,5 +1,6 @@
 package com.tony_tang.android.demo.feature.note_list;
 
+import android.content.Context;
 import android.view.View;
 import android.widget.TextView;
 
@@ -20,8 +21,13 @@ import static com.airbnb.epoxy.EpoxyAttribute.Option.DoNotHash;
 @EpoxyModelClass(layout = R.layout.item_note)
 public abstract class NoteEntityModel extends EpoxyModelWithHolder<NoteEntityModel.NoteEntityViewHolder> {
 
+    //epoxy, auto-value, auto-value-gson
+    //annotation.
+    //Command+F9
     @EpoxyAttribute
     NoteEntity item;
+    @EpoxyAttribute
+    Context context;
 
     @EpoxyAttribute(DoNotHash)
     View.OnClickListener itemClickListener;
@@ -30,11 +36,12 @@ public abstract class NoteEntityModel extends EpoxyModelWithHolder<NoteEntityMod
     public void bind(NoteEntityViewHolder holder) {
         holder.llNoteItem.setOnClickListener(itemClickListener);
         holder.tvTitle.setText(item.getTitle());
-        holder.tvContent.setText(item.getContent());
+        holder.tvContent.setText(context.getString(R.string.edit_text_content));
+
     }
 
     public int getSpanSize(int totalSpanCount, int position, int itemCount) {
-        return SpanType.HALF;
+        return SpanType.QUARTER;
     }
 
     @Override
