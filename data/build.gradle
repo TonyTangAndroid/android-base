@@ -57,7 +57,8 @@ dependencies {
     annotationProcessor dataDependencies.autoValue
     provided dataDependencies.autoValueGson
     annotationProcessor dataDependencies.autoValueGson
-    
+
+    errorprone dataDependencies.errorProneCore
 
     compile dataDependencies.rxJava
     compile dataDependencies.retrofit

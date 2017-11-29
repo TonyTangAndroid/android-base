@@ -12,6 +12,7 @@ buildscript {
 apply plugin: 'java'
 apply plugin: 'net.ltgt.apt-idea'
 apply plugin: 'idea'
+apply plugin: 'net.ltgt.apt'
 
 sourceCompatibility = 1.7
 targetCompatibility = 1.7
@@ -19,7 +20,12 @@ targetCompatibility = 1.7
 dependencies {
 
     compile project(':domain')
+
+    def presentationDependencies = rootProject.ext.presentationDependencies
     def presentationTestDependencies = rootProject.ext.presentationTestDependencies
+
+    errorprone presentationDependencies.errorProneCore
+
     testCompile presentationTestDependencies.junit
     testCompile presentationTestDependencies.mockito
 

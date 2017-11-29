@@ -44,15 +44,18 @@ ext {
     commonsIOVersion = '2.4'
     jetAnnotationVersion = '15.0'
     espressoVersion = '2.2.2'
-
+    errorProneCoreVersion = '2.1.2'
+    errorProneAnnotationVersion = '2.1.2'
     domainDependencies = [
-            retrofit      : "com.squareup.retrofit2:retrofit:${retrofitVersion}",
-            retrofitGson  : "com.squareup.retrofit2:converter-gson:${retrofitVersion}",
-            gson          : "com.google.code.gson:gson:${gsonVersion}",
-            retrofitRxJava: "com.squareup.retrofit2:adapter-rxjava2:${retrofitVersion}",
-            javaxInject   : "javax.inject:javax.inject:${javaxInjectVersion}",
-            autoValue     : "com.google.auto.value:auto-value:${autoValueVersion}",
-            rxJava        : "io.reactivex.rxjava2:rxjava:${rxJavaVersion}"
+            retrofit            : "com.squareup.retrofit2:retrofit:${retrofitVersion}",
+            retrofitGson        : "com.squareup.retrofit2:converter-gson:${retrofitVersion}",
+            gson                : "com.google.code.gson:gson:${gsonVersion}",
+            retrofitRxJava      : "com.squareup.retrofit2:adapter-rxjava2:${retrofitVersion}",
+            javaxInject         : "javax.inject:javax.inject:${javaxInjectVersion}",
+            autoValue           : "com.google.auto.value:auto-value:${autoValueVersion}",
+            rxJava              : "io.reactivex.rxjava2:rxjava:${rxJavaVersion}",
+            errorProneCore      : "com.google.errorprone:error_prone_core:${errorProneCoreVersion}",
+            errorProneAnnotation: "com.google.errorprone:error_prone_annotations:${errorProneAnnotationVersion}",
     ]
 
     domainTestDependencies = [
@@ -76,7 +79,9 @@ ext {
             okhttp3_mockwebserver: "com.squareup.okhttp3:mockwebserver:${okhttp3Version}",
             retrofitRxJava       : "com.squareup.retrofit2:adapter-rxjava2:${retrofitVersion}",
             javaxAnnotation      : "javax.annotation:jsr250-api:${javaxAnnotationVersion}",
-            rxJava               : "io.reactivex.rxjava2:rxjava:${rxJavaVersion}"
+            rxJava               : "io.reactivex.rxjava2:rxjava:${rxJavaVersion}",
+            errorProneCore       : "com.google.errorprone:error_prone_core:${errorProneCoreVersion}",
+
     ]
 
     dataTestDependencies = [
@@ -91,6 +96,10 @@ ext {
     presentationTestDependencies = [
             junit  : "junit:junit:${jUnitVersion}",
             mockito: "org.mockito:mockito-core:${mockitoVersion}",
+    ]
+
+    presentationDependencies = [
+            errorProneCore: "com.google.errorprone:error_prone_core:${errorProneCoreVersion}",
     ]
 
     applicationDependencies = [
@@ -122,6 +131,7 @@ ext {
             androidSupportv13            : "com.android.support:support-v13:${androidSupportVersion}",
             androidDesign                : "com.android.support:design:${androidSupportVersion}",
             multidex                     : "com.android.support:multidex:${multidexVersion}",
+            errorProneCore               : "com.google.errorprone:error_prone_core:${errorProneCoreVersion}",
 
 
     ]

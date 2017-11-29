@@ -8,7 +8,7 @@ import dagger.Binds;
 import dagger.Module;
 import hugo.weaving.DebugLog;
 
-@DebugLog
+//@DebugLog
 @Module
 public abstract class NoteListFragmentModule {
 

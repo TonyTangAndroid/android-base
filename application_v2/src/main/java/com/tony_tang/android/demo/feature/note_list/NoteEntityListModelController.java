@@ -26,7 +26,7 @@ public class NoteEntityListModelController extends BaseModelController {
 
 
     //Command + F9
-    @DebugLog
+    //@DebugLog
     @Inject
     public NoteEntityListModelController(ItemClickListenerCallback itemClickListenerCallback,
                                          EmptyViewEntity emptyViewEntity,

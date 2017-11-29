@@ -9,7 +9,7 @@ import hugo.weaving.DebugLog;
 @Module
 public class NoteCreateModule {
 
-    @DebugLog
+    //@DebugLog
     @Provides
     NoteCreateView provideNoteCreateView(NoteCreateFragment noteCreateFragment) {
         return noteCreateFragment;

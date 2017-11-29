@@ -81,6 +81,7 @@ dependencies {
     annotationProcessor applicationDependencies.daggerCompiler
     annotationProcessor applicationDependencies.daggerProcessor
 
+    errorprone applicationDependencies.errorProneCore
 
 
     compile applicationDependencies.autoValue

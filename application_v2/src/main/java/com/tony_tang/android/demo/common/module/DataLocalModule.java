@@ -14,8 +14,7 @@ import javax.inject.Named;
 
 import dagger.Module;
 import dagger.Provides;
-import hugo.weaving.DebugLog;
-@DebugLog
+//@DebugLog
 @Module
 public class DataLocalModule {
 
@@ -25,7 +24,7 @@ public class DataLocalModule {
     //3,使用的地方如果没有使用named 那么它会自动引用默认的类型。
     //4,如果使用的地方使用没有注册named，Dagger 会报错。
     //String, Boolean 都建议使用named来区别它。
-    @DebugLog
+    //@DebugLog
     @Named("session_from_mini_boss_1")
     @Provides
     @ApplicationScope
@@ -35,7 +34,7 @@ public class DataLocalModule {
     }
 
 
-    @DebugLog
+    //@DebugLog
     @Named("sdsdsds")
     @Provides
     @ApplicationScope

@@ -40,7 +40,7 @@ public class UseCaseTest {
         testScheduler.triggerActions();
 
         this.testObserver.assertNoErrors();
-        this.testObserver.assertResult(1, 2, 3);
+        this.testObserver.assertResult(1, 23, 3);
     }
 
     @Test

@@ -6,9 +6,8 @@ import com.tony_tang.android.demo.presentation.view.base.BaseListView;
 
 import dagger.Binds;
 import dagger.Module;
-import hugo.weaving.DebugLog;
 
-@DebugLog
+//@DebugLog
 @Module
 public abstract class NoteListActivityModule {
 
