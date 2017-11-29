@@ -6,8 +6,6 @@ import com.jordifierro.androidbase.domain.executor.ThreadExecutor;
 import com.jordifierro.androidbase.domain.repository.SessionRepository;
 import com.jordifierro.androidbase.domain.repository.UserRepository;
 
-import junit.framework.Assert;
-
 import org.junit.Before;
 import org.junit.Test;
 import org.mockito.Mock;
@@ -16,6 +14,7 @@ import org.mockito.MockitoAnnotations;
 import io.reactivex.Observable;
 import io.reactivex.observers.TestObserver;
 
+import static org.junit.Assert.assertEquals;
 import static org.mockito.BDDMockito.given;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.verifyNoMoreInteractions;
@@ -49,10 +48,10 @@ public class DoLoginUseCaseTest {
         given(mockUserRepository.loginUser(mockUser)).willReturn(Observable.just(mockUser));
 
         doLoginUseCase.setParams(mockUser);
-        doLoginUseCase.buildUseCaseObservable().subscribeWith(testObserver);
+        @SuppressWarnings("unused") TestObserver<UserEntity> noteEntityTestObserver = doLoginUseCase.buildUseCaseObservable().subscribeWith(testObserver);
 
         verify(mockUserRepository).loginUser(mockUser);
-        Assert.assertEquals(mockUser, (testObserver.getEvents().get(0)).get(0));
+        assertEquals(mockUser, (testObserver.getEvents().get(0)).get(0));
         verifyNoMoreInteractions(mockUserRepository);
         verify(mockSessionRepository).setCurrentUser(mockUser);
         verifyNoMoreInteractions(mockSessionRepository);

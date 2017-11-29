@@ -61,7 +61,7 @@ public class GenerateNoteListUseCase extends UseCase<Integer> {
         return new NoteEntity(index + " " + quote.title, index + " " + quote.content);
     }
 
-    class Quote {
+    static class Quote {
         String title;
         String content;
 

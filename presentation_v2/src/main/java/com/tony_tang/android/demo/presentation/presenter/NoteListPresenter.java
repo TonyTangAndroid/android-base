@@ -28,15 +28,18 @@ public class NoteListPresenter extends BaseListPresenter implements Presenter {
         this.generateNoteListUseCase = generateNoteListUseCase;
     }
 
+    @Override
     public void loadData() {
         this.showLoader();
         this.getNotesUseCase.resetQueryParam().execute(new BaseListSubscriber());
     }
 
+    @Override
     public void refreshData() {
         this.getNotesUseCase.resetQueryParam().execute(new BaseListSubscriber());
     }
 
+    @Override
     public void loadMoreData() {
         this.getNotesUseCase.execute(new BaseListSubscriber());
     }

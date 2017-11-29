@@ -3,6 +3,7 @@ package com.jordifierro.androidbase.domain.interactor;
 import com.jordifierro.androidbase.domain.executor.PostExecutionThread;
 import com.jordifierro.androidbase.domain.executor.ThreadExecutor;
 
+import org.jetbrains.annotations.NotNull;
 import org.junit.Before;
 import org.junit.Test;
 import org.mockito.Mock;
@@ -40,7 +41,7 @@ public class UseCaseTest {
         testScheduler.triggerActions();
 
         this.testObserver.assertNoErrors();
-        this.testObserver.assertResult(1, 23, 3);
+        this.testObserver.assertResult(1, 2, 3);
     }
 
     @Test
@@ -69,10 +70,10 @@ public class UseCaseTest {
 
     }
 
-    private class DefaultThreadExecutor implements ThreadExecutor {
+    private static class DefaultThreadExecutor implements ThreadExecutor {
 
         @Override
-        public void execute(Runnable command) {
+        public void execute(@NotNull Runnable command) {
             command.run();
         }
 

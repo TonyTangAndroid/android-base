@@ -3,7 +3,6 @@ package com.jordifierro.androidbase.data.repository;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.jordifierro.androidbase.data.net.RestApi;
-import com.jordifierro.androidbase.domain.exception.RestApiErrorException;
 import com.jordifierro.androidbase.data.utils.TestUtils;
 import com.jordifierro.androidbase.domain.entity.CreatedWrapper;
 import com.jordifierro.androidbase.domain.entity.NoteEntity;
@@ -11,6 +10,7 @@ import com.jordifierro.androidbase.domain.entity.ParseACLJsonAdapter;
 import com.jordifierro.androidbase.domain.entity.ParsePermissionWrapper;
 import com.jordifierro.androidbase.domain.entity.UpdatedWrapper;
 import com.jordifierro.androidbase.domain.entity.UserEntity;
+import com.jordifierro.androidbase.domain.exception.RestApiErrorException;
 
 import org.apache.commons.io.FileUtils;
 import org.junit.After;
@@ -18,7 +18,9 @@ import org.junit.Before;
 import org.junit.Test;
 
 import java.io.IOException;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import io.reactivex.observers.TestObserver;
 import okhttp3.mockwebserver.MockResponse;
@@ -42,6 +44,7 @@ public class NoteDataRepositoryTest extends BaseDataRepositoryTest {
 
     private UserEntity fakeUser;
     private NoteEntity fakeNote;
+    private Map<String, Object> fakeQueryParam;
 
     @Before
     public void setUp() throws IOException {
@@ -66,6 +69,7 @@ public class NoteDataRepositoryTest extends BaseDataRepositoryTest {
         this.fakeUser = new UserEntity("some@mail");
         this.fakeUser.setSessionToken(MOCK_AUTH_TOKEN);
         this.fakeNote = new NoteEntity(MOCK_NOTE_OBJECT_ID, MOCK_NOTE_TITLE, MOCK_NOTE_CONTENT);
+        fakeQueryParam = new HashMap<>();
     }
 
     @After
@@ -112,7 +116,7 @@ public class NoteDataRepositoryTest extends BaseDataRepositoryTest {
     public void testGetNotesRequest() throws Exception {
         this.mockWebServer.enqueue(new MockResponse());
 
-        this.noteDataRepository.getNotes(this.fakeUser, null).subscribe(this.testObserver);
+        this.noteDataRepository.getNotes(this.fakeUser, fakeQueryParam).subscribe(this.testObserver);
         RecordedRequest request = this.mockWebServer.takeRequest();
         assertEquals(MOCK_SERVER + RestApi.URL_PATH_CLASSES_NOTE, request.getPath());
         assertEquals("GET", request.getMethod());
@@ -197,7 +201,7 @@ public class NoteDataRepositoryTest extends BaseDataRepositoryTest {
                 FileUtils.readFileToString(
                         TestUtils.getFileFromPath(this, "res/note_getall_ok.json"))));
 
-        this.noteDataRepository.getNotes(this.fakeUser, null).subscribe(this.testObserver);
+        this.noteDataRepository.getNotes(this.fakeUser, fakeQueryParam).subscribe(this.testObserver);
         this.testObserver.awaitTerminalEvent();
 
         List<NoteEntity> responseNotes = (List<NoteEntity>) ((List) this.testObserver.getEvents().get(0)).get(0);
@@ -209,8 +213,7 @@ public class NoteDataRepositoryTest extends BaseDataRepositoryTest {
     @Test
     public void testGetNotesErrorResponse() throws Exception {
         this.mockWebServer.enqueue(new MockResponse().setResponseCode(401));
-
-        this.noteDataRepository.getNotes(this.fakeUser, null).subscribe(this.testObserver);
+        this.noteDataRepository.getNotes(this.fakeUser, fakeQueryParam).subscribe(this.testObserver);
         this.testObserver.awaitTerminalEvent();
 
         this.testObserver.assertValueCount(0);

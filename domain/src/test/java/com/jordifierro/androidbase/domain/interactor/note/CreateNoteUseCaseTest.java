@@ -65,7 +65,7 @@ public class CreateNoteUseCaseTest {
                 mockPostExecutionThread, mockNoteRepository, mockSessionRepository);
 
         createNoteUseCase.setParams(note);
-        createNoteUseCase.buildUseCaseObservable().subscribeWith(testObserver);
+        @SuppressWarnings("unused") TestObserver<NoteEntity> noteEntityTestObserver = createNoteUseCase.buildUseCaseObservable().subscribeWith(testObserver);
 
         Assert.assertEquals(FAKE_TITLE,
                 ((NoteEntity) (testObserver.getEvents().get(0)).get(0)).getTitle());

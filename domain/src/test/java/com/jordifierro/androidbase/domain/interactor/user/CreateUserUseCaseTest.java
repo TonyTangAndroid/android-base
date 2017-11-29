@@ -58,7 +58,7 @@ public class CreateUserUseCaseTest {
         given(mockUserRepository.getUserBySessionToken(FAKE_SESSION_TOKEN)).willReturn(Observable.just(mockUser));
 
         createUserUseCase.setParams(mockUser);
-        createUserUseCase.buildUseCaseObservable().subscribeWith(testObserver);
+       @SuppressWarnings("unused") TestObserver<UserEntity> userEntityTestObserver = createUserUseCase.buildUseCaseObservable().subscribeWith(testObserver);
 
         verify(mockUserRepository).createUser(mockUser);
         verify(mockUserRepository).getUserBySessionToken(FAKE_SESSION_TOKEN);
