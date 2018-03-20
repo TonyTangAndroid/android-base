@@ -16,8 +16,7 @@ apply plugin: 'net.ltgt.apt'
 
 dependencies {
 
-    compile project(':repo')
-
+    compile project(':entity')
     def domainDependencies = rootProject.ext.domainDependencies
     def domainTestDependencies = rootProject.ext.domainTestDependencies
 

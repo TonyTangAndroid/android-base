@@ -8,7 +8,6 @@ import com.jordifierro.androidbase.domain.repository.NoteRepository;
 import com.jordifierro.androidbase.domain.repository.SessionRepository;
 
 import javax.inject.Inject;
-import javax.inject.Named;
 
 import io.reactivex.Observable;
 public class GetNoteUseCase extends UseCase<NoteEntity> {
@@ -22,7 +21,6 @@ public class GetNoteUseCase extends UseCase<NoteEntity> {
     public GetNoteUseCase(ThreadExecutor threadExecutor,
                           PostExecutionThread postExecutionThread,
                           NoteRepository noteRepository,
-                          @Named("sdsdsds") String testString,
                           SessionRepository sessionRepository) {
 
         super(threadExecutor, postExecutionThread);

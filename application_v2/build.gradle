@@ -51,6 +51,7 @@ dependencies {
     def applicationDependencies = rootProject.ext.applicationDependencies
     def applicationTestDependencies = rootProject.ext.applicationTestDependencies
 
+    compile project(':cache')
     compile project(':domain')
     compile project(':data')
     compile project(':presentation_v2')

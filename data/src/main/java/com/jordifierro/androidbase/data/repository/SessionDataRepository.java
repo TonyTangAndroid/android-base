@@ -1,50 +1,39 @@
 package com.jordifierro.androidbase.data.repository;
 
-import android.content.SharedPreferences;
-
+import com.google.gson.Gson;
+import com.jordifierro.androidbase.domain.cache.UserCache;
 import com.jordifierro.androidbase.domain.entity.UserEntity;
 import com.jordifierro.androidbase.domain.repository.SessionRepository;
 
 
 public class SessionDataRepository implements SessionRepository {
 
-    private static final String OBJECT_ID = "objectId";
-    private static final String EMAIL = "email";
-    private static final String AUTH_TOKEN = "auth_token";
 
-    private final SharedPreferences sharedPreferences;
+    private final UserCache userCache;
+    private final Gson gson;
 
 
-    public SessionDataRepository(SharedPreferences sharedPreferences) {
-        this.sharedPreferences = sharedPreferences;
+    public SessionDataRepository(UserCache userCache, Gson gson) {
+        this.userCache = userCache;
+        this.gson = gson;
     }
 
     @Override
     public UserEntity getCurrentUser() {
-        if (sharedPreferences.contains(EMAIL) && sharedPreferences.contains(AUTH_TOKEN) && sharedPreferences.contains(OBJECT_ID)) {
-            UserEntity user = new UserEntity(sharedPreferences.getString(EMAIL, null));
-            user.setSessionToken(sharedPreferences.getString(AUTH_TOKEN, null));
-            user.setObjectId(sharedPreferences.getString(OBJECT_ID, null));
-            return user;
+        String jsonString = userCache.get();
+        if (jsonString != null) {
+            return gson.fromJson(jsonString, UserEntity.class);
         }
         return new UserEntity();
     }
 
     @Override
     public void setCurrentUser(UserEntity user) {
-        SharedPreferences.Editor editor = sharedPreferences.edit();
-        editor.putString(OBJECT_ID, user.getObjectId());
-        editor.putString(EMAIL, user.getUsername());
-        editor.putString(AUTH_TOKEN, user.getSessionToken());
-        editor.apply();
+        userCache.save(gson.toJson(user));
     }
 
     @Override
     public void invalidateSession() {
-        SharedPreferences.Editor editor = sharedPreferences.edit();
-        editor.remove(EMAIL);
-        editor.remove(OBJECT_ID);
-        editor.remove(AUTH_TOKEN);
-        editor.apply();
+        userCache.remove();
     }
 }

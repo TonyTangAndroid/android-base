@@ -1,62 +1,34 @@
-apply plugin: 'com.android.library'
-apply plugin: 'com.jakewharton.hugo'
-
-android {
-    compileSdkVersion rootProject.ext.androidCompileSdkVersion
-    buildToolsVersion rootProject.ext.androidBuildToolsVersion
-
-    defaultConfig {
-        minSdkVersion rootProject.ext.androidMinSdkVersion
-        targetSdkVersion rootProject.ext.androidTargetSdkVersion
-        versionCode rootProject.ext.appVersionCode
-        versionName rootProject.ext.appVersionName
-        testInstrumentationRunner 'android.test.InstrumentationTestRunner'
-    }
-    buildTypes {
-        release {
-            minifyEnabled false
-            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+buildscript {
+    repositories {
+        maven {
+            url "https://plugins.gradle.org/m2/"
         }
-
-        debug {
-            defaultPublishConfig "debug"
-        }
-
     }
-
-
-    lintOptions {
-        abortOnError false
-    }
-    compileOptions {
-        sourceCompatibility JavaVersion.VERSION_1_8
-        targetCompatibility JavaVersion.VERSION_1_8
+    dependencies {
+        classpath "net.ltgt.gradle:gradle-apt-plugin:0.13"
     }
 }
 
-task copyResToDebugClasses(type: Copy) {
-    from "${projectDir}/src/test/res"
-    into "${buildDir}/intermediates/classes/test/debug/res"
-}
-task copyResToReleaseClasses(type: Copy) {
-    from "${projectDir}/src/test/res"
-    into "${buildDir}/intermediates/classes/test/release/res"
-}
-preBuild.dependsOn(copyResToDebugClasses)
-preBuild.dependsOn(copyResToReleaseClasses)
+apply plugin: 'java'
+apply plugin: 'net.ltgt.apt-idea'
+apply plugin: 'idea'
+apply plugin: 'net.ltgt.apt'
 
 dependencies {
+
+    compile project(':repo')
+    compile project(':cache_interface')
+
+
     def dataDependencies = rootProject.ext.dataDependencies
     def dataTestDependencies = rootProject.ext.dataTestDependencies
 
-    compile project(':domain')
-
     compile dataDependencies.javaxAnnotation
 
-    provided dataDependencies.autoValue
-    annotationProcessor dataDependencies.autoValue
-    provided dataDependencies.autoValueGson
-    annotationProcessor dataDependencies.autoValueGson
+    compileOnly dataDependencies.autoValue
+    apt dataDependencies.autoValue
+    compileOnly dataDependencies.autoValueGson
+    apt dataDependencies.autoValueGson
 
     errorprone dataDependencies.errorProneCore
 
@@ -68,8 +40,23 @@ dependencies {
     compile dataDependencies.okhttp3
     compile dataDependencies.okhttp3_mockwebserver
 
+
+    def domainDependencies = rootProject.ext.domainDependencies
+    def domainTestDependencies = rootProject.ext.domainTestDependencies
+
+    compile domainDependencies.javaxInject
+    compile domainDependencies.gson
+    compile domainDependencies.rxJava
+    compileOnly domainDependencies.autoValue
+    compile domainDependencies.errorProneAnnotation
+    errorprone dataDependencies.errorProneCore
+    apt domainDependencies.autoValue
+
     testCompile dataTestDependencies.junit
     testCompile dataTestDependencies.mockito
     testCompile dataTestDependencies.mockWebServer
     testCompile dataTestDependencies.commonsIO
+    testCompile domainTestDependencies.jetAnnotations
+
+
 }

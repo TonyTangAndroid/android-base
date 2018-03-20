@@ -8,13 +8,13 @@ ext {
     //Android
     appVersionCode = 20161231
     appVersionName = '1.0'
-    androidBuildToolsVersion = '26.0.2'
+    androidBuildToolsVersion = '27.0.3'
 
     androidMinSdkVersion = 17
-    androidTargetSdkVersion = 26
-    androidCompileSdkVersion = 26
-    androidSupportVersion = '26.0.2'
-    multidexVersion = '1.0.1'
+    androidTargetSdkVersion = 27
+    androidCompileSdkVersion = 27
+    androidSupportVersion = '27.1.0'
+    multidexVersion = '1.0.2'
     epoxyVersion = '2.2.0'
 
     autoValueVersion = '1.4.1'
