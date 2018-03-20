@@ -4,6 +4,8 @@ import android.app.Activity;
 import android.app.Fragment;
 import android.support.multidex.MultiDexApplication;
 
+import com.tony_tang.android.demo.common.module.DaggerGsonComponent;
+
 import javax.inject.Inject;
 
 import dagger.android.AndroidInjector;
@@ -25,6 +27,7 @@ public class DemoApplication extends MultiDexApplication implements HasActivityI
         DaggerDemoApplicationComponent
                 .builder()
                 .application(this)
+                .gsonComponent(DaggerGsonComponent.create())
                 .build()
                 .inject(this);
 

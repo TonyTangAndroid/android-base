@@ -4,6 +4,7 @@ import android.app.Application;
 
 import com.tony_tang.android.demo.common.module.CacheModule;
 import com.tony_tang.android.demo.common.module.DataModule;
+import com.tony_tang.android.demo.common.module.GsonComponent;
 import com.tony_tang.android.demo.common.module.SharedPreferenceModule;
 import com.tony_tang.android.demo.common.module.ThreadModule;
 import com.tony_tang.android.demo.common.scope.ApplicationScope;
@@ -16,7 +17,6 @@ import dagger.android.AndroidInjectionModule;
 
  */
 @ApplicationScope
-//终极boss
 @Component(modules = {
         AndroidInjectionModule.class,
         DemoApplicationModule.class,//小Boss
@@ -25,7 +25,7 @@ import dagger.android.AndroidInjectionModule;
         DataModule.class,
         CacheModule.class,
         DemoActivityInjector.class,
-        DemoFragmentInjector.class})
+        DemoFragmentInjector.class}, dependencies = {GsonComponent.class})
 public interface DemoApplicationComponent {
 
     void inject(DemoApplication app);
@@ -35,6 +35,8 @@ public interface DemoApplicationComponent {
 
         @BindsInstance
         Builder application(Application application);
+
+        Builder gsonComponent(GsonComponent gsonComponent);
 
         DemoApplicationComponent build();
     }
