@@ -22,9 +22,15 @@ public class GsonModule {
 
     @Provides
     @ApplicationScope
-    Gson getGson() {
-        return new GsonBuilder()
-                .registerTypeAdapter(ParsePermissionWrapper.class, new ParseACLJsonAdapter())
+    GsonBuilder gsonBuilder() {
+        return new GsonBuilder();
+    }
+
+
+    @Provides
+    @ApplicationScope
+    Gson getGson(GsonBuilder gsonBuilder) {
+        return gsonBuilder.registerTypeAdapter(ParsePermissionWrapper.class, new ParseACLJsonAdapter())
                 .create();
     }
 

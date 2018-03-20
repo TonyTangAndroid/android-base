@@ -2,6 +2,7 @@ package com.tony_tang.android.demo.common;
 
 import android.app.Application;
 
+import com.tony_tang.android.demo.common.module.CacheModule;
 import com.tony_tang.android.demo.common.module.DataModule;
 import com.tony_tang.android.demo.common.module.SharedPreferenceModule;
 import com.tony_tang.android.demo.common.module.ThreadModule;
@@ -22,7 +23,7 @@ import dagger.android.AndroidInjectionModule;
         SharedPreferenceModule.class,
         ThreadModule.class,
         DataModule.class,
-
+        CacheModule.class,
         DemoActivityInjector.class,
         DemoFragmentInjector.class})
 public interface DemoApplicationComponent {

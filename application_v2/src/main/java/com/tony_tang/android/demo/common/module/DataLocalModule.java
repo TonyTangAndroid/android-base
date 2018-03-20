@@ -1,11 +1,9 @@
 package com.tony_tang.android.demo.common.module;
 
 import android.content.Context;
-import android.content.SharedPreferences;
 
 import com.google.gson.Gson;
 import com.jordifierro.androidbase.data.repository.SessionDataRepository;
-import com.jordifierro.androidbase.data.repository.UserCacheImpl;
 import com.jordifierro.androidbase.domain.cache.UserCache;
 import com.jordifierro.androidbase.domain.repository.SessionRepository;
 import com.tony_tang.android.demo.R;
@@ -20,12 +18,6 @@ import hugo.weaving.DebugLog;
 @DebugLog
 @Module
 public class DataLocalModule {
-
-    @Provides
-    @ApplicationScope
-    UserCache provideUserCache(SharedPreferences sharedPreferences) {
-        return new UserCacheImpl(sharedPreferences);
-    }
 
     @Provides
     @ApplicationScope
