@@ -6,7 +6,7 @@ import android.test.InstrumentationTestCase;
 
 import com.jordifierro.androidbase.domain.cache.UserCache;
 
-public class SessionDataRepositoryTest extends InstrumentationTestCase {
+public class UserCacheImplTest extends InstrumentationTestCase {
 
     private static final String SHARED_PACKAGE = "SharedPreferencesTest";
     private static final String FAKE_JSON = "test@email.com";
