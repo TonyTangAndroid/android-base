@@ -5,7 +5,7 @@ import javax.inject.Inject;
 import sdk.api.Configuration;
 import sdk.api.interval.Usher;
 
-public class AppSampleWithDagger {
+public class AppSampleWithDaggerInjectUsherInstance {
 
 
     @Inject
@@ -30,7 +30,7 @@ public class AppSampleWithDagger {
         System.out.println("Usher sdk initialized");
         System.out.println();
         System.out.println();
-        new AppSampleWithDagger().doIt();
+        new AppSampleWithDaggerInjectUsherInstance().doIt();
     }
 
     public void doIt() {

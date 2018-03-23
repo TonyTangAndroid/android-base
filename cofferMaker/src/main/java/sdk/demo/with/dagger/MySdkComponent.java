@@ -9,7 +9,7 @@ import sdk.api.interval.Usher;
 @Component(modules = {UsherModule.class, MyBadgeModule.class})
 interface MySdkComponent {
 
-    void inject(AppSampleWithDagger mySdkSample);
+    void inject(AppSampleWithDaggerInjectUsherInstance mySdkSample);
 
     @Component.Builder
     interface Builder {
