@@ -8,4 +8,4 @@
 //include ':application_v2'
 
 
-include ':cofferMaker', ':dummy'
+include ':sdk',':sample', ':dummy'
