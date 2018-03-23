@@ -2,12 +2,11 @@ package sdk.demo.with.dagger;
 
 import dagger.BindsInstance;
 import dagger.Component;
-import sdk.api.interval.ApplicationScope;
 import sdk.api.interval.Usher;
 
-@ApplicationScope
-@Component(modules = {UsherModule.class, MyBadgeModule.class})
-interface MySdkComponent {
+//@ApplicationScope
+@Component(modules = {UsherModule.class, JakeBadgeModule.class})
+interface JakeSdkComponent {
 
     void inject(AppSampleWithDaggerInjectUsherInstance mySdkSample);
 
@@ -17,7 +16,7 @@ interface MySdkComponent {
         @BindsInstance
         Builder usher(Usher usher);
 
-        MySdkComponent build();
+        JakeSdkComponent build();
     }
 
 }

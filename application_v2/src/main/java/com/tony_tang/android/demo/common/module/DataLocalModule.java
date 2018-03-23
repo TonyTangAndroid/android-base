@@ -20,13 +20,13 @@ import hugo.weaving.DebugLog;
 public class DataLocalModule {
 
     @Provides
-    @ApplicationScope
+    //@ApplicationScope
     SessionRepository provideSessionRepository(UserCache userCache, Gson gson) {
         return new SessionDataRepository(userCache, gson);
     }
 
     @Provides
-    @ApplicationScope
+    //@ApplicationScope
     EmptyViewEntity provideEmptyViewEntity(Context applicationContext) {
         EmptyViewEntity build = EmptyViewEntity.builder()
                 .showLoading(true)
@@ -40,7 +40,7 @@ public class DataLocalModule {
 
 
     @Provides
-    @ApplicationScope
+    //@ApplicationScope
     FooterViewEntity provideFooterViewEntity() {
         return FooterViewEntity.builder()
                 .showLoading(true)

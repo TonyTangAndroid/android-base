@@ -6,11 +6,11 @@ import sdk.api.BadgeRepo;
 import sdk.api.interval.ApplicationScope;
 
 @Module
-class MyBadgeModule {
+class JakeBadgeModule {
 
-    @ApplicationScope
+    //@ApplicationScope
     @Provides
-    MyBadgeRepo badgeRepo(BadgeRepo badgeRepo) {
-        return new MyBadgeRepo(badgeRepo);
+    JakeBadgeRepo badgeRepo(BadgeRepo badgeRepo) {
+        return new JakeBadgeRepo(badgeRepo);
     }
 }

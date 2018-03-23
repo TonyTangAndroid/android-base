@@ -13,12 +13,12 @@ import dagger.Module;
 public abstract class DataNetworkModule {
     
     @Binds
-    @ApplicationScope
+    //@ApplicationScope
     abstract UserRepository provideUserRepository
             (UserDataRepositoryV2 userDataRepository);
 
     @Binds
-    @ApplicationScope
+    //@ApplicationScope
     abstract NoteRepository provideNoteRepository(NoteDataRepository noteDataRepository);
 
 }

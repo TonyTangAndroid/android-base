@@ -2,12 +2,12 @@ package sdk.demo.with.dagger;
 
 import javax.inject.Inject;
 
-public class MyLoginBadgeUseCase {
+public class JakeLoginBadgeUseCase {
 
-    private final MyBadgeRepo badgeRepo;
+    private final JakeBadgeRepo badgeRepo;
 
     @Inject
-    public MyLoginBadgeUseCase(MyBadgeRepo badgeRepo) {
+    public JakeLoginBadgeUseCase(JakeBadgeRepo badgeRepo) {
         System.out.println("creating MyLoginBadgeUseCase ");
         this.badgeRepo = badgeRepo;
     }

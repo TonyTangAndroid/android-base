@@ -15,7 +15,7 @@ public class NetworkModule {
 
 
     @Provides
-    @ApplicationScope
+    //@ApplicationScope
     RestApi provideRestApi(OkHttpClient okHttpClient, GsonConverterFactory gsonConverterFactory) {
 
         return new Retrofit.Builder()

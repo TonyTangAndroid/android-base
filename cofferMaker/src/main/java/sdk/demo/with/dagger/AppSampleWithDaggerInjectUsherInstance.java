@@ -9,14 +9,14 @@ public class AppSampleWithDaggerInjectUsherInstance {
 
 
     @Inject
-    MyLoginBadgeUseCase myLoginBadgeUseCase;
+    JakeLoginBadgeUseCase myLoginBadgeUseCase;
     @Inject
-    MyBadgeRepo myBadgeRepo;
+    JakeBadgeRepo myBadgeRepo;
 
     @Inject
-    MyLoginBadgeUseCase myLoginBadgeUseCase1;
+    JakeLoginBadgeUseCase myLoginBadgeUseCase1;
     @Inject
-    MyBadgeRepo myBadgeRepo1;
+    JakeBadgeRepo myBadgeRepo1;
 
 
     public static void main(String[] args) {
@@ -35,7 +35,7 @@ public class AppSampleWithDaggerInjectUsherInstance {
 
     public void doIt() {
 
-        DaggerMySdkComponent.builder().usher(Usher.get()).build().inject(this);
+        DaggerJakeSdkComponent.builder().usher(Usher.get()).build().inject(this);
         System.out.println("App initialized");
         System.out.println();
         System.out.println();

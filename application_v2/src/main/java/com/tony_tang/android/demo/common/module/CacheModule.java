@@ -15,7 +15,7 @@ import hugo.weaving.DebugLog;
 public class CacheModule {
 
     @Provides
-    @ApplicationScope
+    //@ApplicationScope
     UserCache provideUserCache(SharedPreferences sharedPreferences) {
         return new UserCacheImpl(sharedPreferences);
     }

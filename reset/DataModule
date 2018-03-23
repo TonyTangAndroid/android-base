@@ -26,13 +26,13 @@ import retrofit2.converter.gson.GsonConverterFactory;
 public class DataModule {
 
     @Provides
-    @ApplicationScope
+    //@ApplicationScope
     SessionRepository provideSessionRepository(SharedPreferences sharedPreferences) {
         return new SessionDataRepository(sharedPreferences);
     }
 
     @Provides
-    @ApplicationScope
+    //@ApplicationScope
     RestApi provideRestApi() {
         OkHttpClient client = new OkHttpClient().newBuilder()
                                                 .addInterceptor(new HttpInterceptor())
@@ -50,13 +50,13 @@ public class DataModule {
     }
 
     @Provides
-    @ApplicationScope
+    //@ApplicationScope
     UserRepository provideUserRepository(RestApi restApi) {
         return new UserDataRepository(restApi);
     }
 
     @Provides
-    @ApplicationScope
+    //@ApplicationScope
     VersionRepository provideVersionRepository(RestApi restApi) {
         return new VersionDataRepository(restApi);
     }

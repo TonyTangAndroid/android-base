@@ -16,7 +16,7 @@ import dagger.android.AndroidInjectionModule;
 /**
 
  */
-@ApplicationScope
+//@ApplicationScope
 @Component(modules = {
         AndroidInjectionModule.class,
         DemoApplicationModule.class,//小Boss

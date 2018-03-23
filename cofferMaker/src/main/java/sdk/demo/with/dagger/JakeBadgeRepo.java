@@ -5,13 +5,13 @@ import javax.inject.Inject;
 
 import sdk.api.BadgeRepo;
 
-public class MyBadgeRepo {
+public class JakeBadgeRepo {
 
 
     private final BadgeRepo badgeRepo;
 
     @Inject
-    public MyBadgeRepo(BadgeRepo badgeRepo) {
+    public JakeBadgeRepo(BadgeRepo badgeRepo) {
         System.out.println("creating MyBadgeRepo");
         this.badgeRepo = badgeRepo;
     }
