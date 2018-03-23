@@ -10,6 +10,7 @@ public class Usher {
     private SdkComponent sdkComponent;
     private Configuration configuration;
 
+
     private Usher() {
     }
 

@@ -7,6 +7,7 @@ import sdk.api.BadgeRepo;
 @Module
 abstract class BadgeModule {
 
+    @ApplicationScope
     @Binds
     abstract BadgeRepo badgeRepo(BadgeRepoImpl badgeRepoImpl);
 }

@@ -1,18 +1,20 @@
 package sdk.demo;
 
-import sdk.api.BadgeRepo;
 import sdk.api.Configuration;
+import sdk.api.interval.Badge;
 import sdk.api.interval.Usher;
 
 public class SdkSample {
 
+
     public static void main(String[] args) {
         Usher.init(new Configuration("tony", "123"));
+        new SdkSample().doIt();
+    }
 
-        BadgeRepo badgeRepo1 = Usher.get().badgeRepo();
-        BadgeRepo badgeRepo2 = Usher.get().badgeRepo();
+    public void doIt() {
 
-        System.out.println(badgeRepo1.login("tony", "123"));
-        System.out.println(badgeRepo2.login("tonytang", "123"));
+        System.out.println(Badge.login("tony", "123"));
+        System.out.println(Badge.login("tonytang", "123"));
     }
 }
