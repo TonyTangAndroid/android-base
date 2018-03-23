@@ -1,5 +1,8 @@
-package sdk.api;
+package sdk.api.interval;
 
+
+import sdk.api.BadgeRepo;
+import sdk.api.Configuration;
 
 public class Usher {
 

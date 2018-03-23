@@ -1,9 +1,10 @@
-package sdk.api;
+package sdk.api.interval;
 
 import javax.inject.Named;
 
 import dagger.Module;
 import dagger.Provides;
+import sdk.api.Configuration;
 
 @Module
 class ConfigureModule {

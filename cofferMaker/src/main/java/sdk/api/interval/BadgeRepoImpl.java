@@ -1,7 +1,9 @@
-package sdk.api;
+package sdk.api.interval;
 
 import javax.inject.Inject;
 import javax.inject.Named;
+
+import sdk.api.BadgeRepo;
 
 class BadgeRepoImpl implements BadgeRepo {
 

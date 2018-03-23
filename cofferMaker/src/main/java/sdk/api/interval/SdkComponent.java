@@ -1,7 +1,9 @@
-package sdk.api;
+package sdk.api.interval;
 
 import dagger.BindsInstance;
 import dagger.Component;
+import sdk.api.BadgeRepo;
+import sdk.api.Configuration;
 
 @Component(modules = {ConfigureModule.class, BadgeModule.class})
 interface SdkComponent {

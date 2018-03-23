@@ -2,7 +2,7 @@ package sdk.demo;
 
 import sdk.api.BadgeRepo;
 import sdk.api.Configuration;
-import sdk.api.Usher;
+import sdk.api.interval.Usher;
 
 public class SdkSample {
 
