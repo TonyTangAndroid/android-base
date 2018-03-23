@@ -1,7 +1,6 @@
 package sdk.demo;
 
 import sdk.api.Configuration;
-import sdk.api.interval.Badge;
 import sdk.api.interval.Usher;
 
 public class SdkSample {
@@ -14,7 +13,9 @@ public class SdkSample {
 
     public void doIt() {
 
-        System.out.println(Badge.login("tony", "123"));
-        System.out.println(Badge.login("tonytang", "123"));
+//        System.out.println(Badge.login("tony", "123"));
+//        System.out.println(Badge.login("tonytang", "123"));
+//        System.out.println(Usher.get().loginBadgeUseCase1().login("tonytang", "123"));
+//        System.out.println(Usher.get().loginBadgeUseCase1().login("tonytang", "123"));
     }
 }

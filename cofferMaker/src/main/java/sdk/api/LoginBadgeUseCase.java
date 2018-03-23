@@ -8,6 +8,7 @@ public class LoginBadgeUseCase {
 
     @Inject
     public LoginBadgeUseCase(BadgeRepo badgeRepo) {
+        System.out.println("creating LoginBadgeUseCase ");
         this.badgeRepo = badgeRepo;
     }
 

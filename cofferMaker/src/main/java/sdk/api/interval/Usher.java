@@ -1,15 +1,30 @@
 package sdk.api.interval;
 
 
+import javax.inject.Inject;
+
 import sdk.api.BadgeRepo;
 import sdk.api.Configuration;
+import sdk.api.LoginBadgeUseCase;
 
 public class Usher {
 
 
-    private SdkComponent sdkComponent;
-    private Configuration configuration;
+    @Inject
+    BadgeRepo badgeRepo1;
 
+    @Inject
+    BadgeRepo badgeRepo2;
+
+
+    @Inject
+    LoginBadgeUseCase loginBadgeUseCase1;
+
+    @Inject
+    LoginBadgeUseCase loginBadgeUseCase2;
+
+
+    private Configuration configuration;
 
     private Usher() {
     }
@@ -29,11 +44,15 @@ public class Usher {
 
 
     public BadgeRepo badgeRepo() {
-        return sdkComponent.badgeRepo();
+        return badgeRepo1;
+    }
+
+    public LoginBadgeUseCase loginBadgeUseCase1() {
+        return loginBadgeUseCase1;
     }
 
     protected void initializeDaggerInjector() {
-        sdkComponent = DaggerSdkComponent.builder().configuration(configuration).build();
+        DaggerSdkComponent.builder().configuration(configuration).build().injectUsher(this);
     }
 
 
