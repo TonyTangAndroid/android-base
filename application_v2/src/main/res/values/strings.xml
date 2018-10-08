@@ -15,4 +15,6 @@
     <string name="network_not_available">Network Not Available</string>
     <string name="unknown_error">Unknown Error</string>
     <string name="network_connection_timeout">Network Connection Timeout</string>
+    <string name="paging">Paging</string>
+    <string name="note_list_paging">Note Paging List</string>
 </resources>

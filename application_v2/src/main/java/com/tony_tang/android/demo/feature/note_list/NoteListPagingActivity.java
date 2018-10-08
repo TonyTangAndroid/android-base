@@ -1,12 +1,11 @@
 package com.tony_tang.android.demo.feature.note_list;
 
+import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
-import android.view.Menu;
-import android.view.MenuItem;
 import android.view.View;
 
 import com.jordifierro.androidbase.domain.entity.NoteEntity;
-import com.tony_tang.android.demo.R;
 import com.tony_tang.android.demo.common.base.BaseModelListActivity;
 import com.tony_tang.android.demo.feature.common.BaseModelController;
 import com.tony_tang.android.demo.feature.note_detail.NoteDetailActivity;
@@ -15,13 +14,17 @@ import com.tony_tang.android.demo.presentation.presenter.base.BaseListPresenter;
 
 import javax.inject.Inject;
 
-public class NoteListActivity extends BaseModelListActivity {
+public class NoteListPagingActivity extends BaseModelListActivity {
 
     @Inject
     NoteListPresenter noteListPresenter;
 
     @Inject
     NoteEntityListModelController controller;
+
+    public static Intent constructIntent(Activity activity) {
+        return new Intent(activity, NoteListPagingActivity.class);
+    }
 
     @Override
     protected BaseModelController controller() {
@@ -47,20 +50,4 @@ public class NoteListActivity extends BaseModelListActivity {
 
     }
 
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        getMenuInflater().inflate(R.menu.menu_note_create, menu);
-        return super.onCreateOptionsMenu(menu);
-    }
-
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        switch (item.getItemId()) {
-            case R.id.item_show_paging:
-                startActivity(NoteListPagingActivity.constructIntent(this));
-                return true;
-            default:
-                return super.onOptionsItemSelected(item);
-        }
-    }
 }
