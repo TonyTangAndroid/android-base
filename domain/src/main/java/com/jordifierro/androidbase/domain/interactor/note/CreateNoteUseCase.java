@@ -1,33 +1,27 @@
 package com.jordifierro.androidbase.domain.interactor.note;
 
-import com.jordifierro.androidbase.domain.entity.CreatedWrapper;
 import com.jordifierro.androidbase.domain.entity.NoteEntity;
-import com.jordifierro.androidbase.domain.entity.UserEntity;
-import com.jordifierro.androidbase.domain.executor.PostExecutionThread;
 import com.jordifierro.androidbase.domain.executor.ThreadExecutor;
-import com.jordifierro.androidbase.domain.interactor.UseCase;
+import com.jordifierro.androidbase.domain.executor.UIThread;
+import com.jordifierro.androidbase.domain.interactor.SingleUseCase;
 import com.jordifierro.androidbase.domain.repository.NoteRepository;
-import com.jordifierro.androidbase.domain.repository.SessionRepository;
 
 import javax.inject.Inject;
 
-import io.reactivex.Observable;
-import io.reactivex.ObservableSource;
-import io.reactivex.functions.Function;
+import io.reactivex.Single;
+import io.reactivex.SingleSource;
 
-public class CreateNoteUseCase extends UseCase<NoteEntity> {
+public class CreateNoteUseCase extends SingleUseCase<NoteEntity> {
 
     private NoteRepository noteRepository;
-    private SessionRepository sessionRepository;
 
     private NoteEntity note;
 
     @Inject
-    public CreateNoteUseCase(ThreadExecutor threadExecutor, PostExecutionThread postExecutionThread,
-                             NoteRepository noteRepository, SessionRepository sessionRepository) {
-        super(threadExecutor, postExecutionThread);
+    public CreateNoteUseCase(ThreadExecutor threadExecutor, UIThread UIThread,
+                             NoteRepository noteRepository) {
+        super(threadExecutor, UIThread);
         this.noteRepository = noteRepository;
-        this.sessionRepository = sessionRepository;
     }
 
     public CreateNoteUseCase setParams(NoteEntity note) {
@@ -36,14 +30,12 @@ public class CreateNoteUseCase extends UseCase<NoteEntity> {
     }
 
     @Override
-    protected Observable<NoteEntity> buildUseCaseObservable() {
-        final UserEntity currentUser = this.sessionRepository.getCurrentUser();
-        return this.noteRepository.createNote(currentUser, this.note)
-                .flatMap(new Function<CreatedWrapper, ObservableSource<NoteEntity>>() {
-                    @Override
-                    public ObservableSource<NoteEntity> apply(CreatedWrapper createdWrapper) throws Exception {
-                        return noteRepository.getNote(currentUser, createdWrapper.getObjectId());
-                    }
-                });
+    protected Single<NoteEntity> build() {
+        return this.noteRepository.createNote(this.note)
+                .flatMap(this::toEntity);
+    }
+
+    private SingleSource<NoteEntity> toEntity(String objectId) {
+        return noteRepository.getNote(objectId);
     }
 }

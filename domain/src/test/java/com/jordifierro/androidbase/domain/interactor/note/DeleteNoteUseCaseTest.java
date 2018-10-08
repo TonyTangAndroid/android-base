@@ -1,6 +1,6 @@
 package com.jordifierro.androidbase.domain.interactor.note;
 
-import com.jordifierro.androidbase.domain.executor.PostExecutionThread;
+import com.jordifierro.androidbase.domain.executor.UIThread;
 import com.jordifierro.androidbase.domain.executor.ThreadExecutor;
 import com.jordifierro.androidbase.domain.repository.NoteRepository;
 import com.jordifierro.androidbase.domain.repository.SessionRepository;
@@ -21,7 +21,7 @@ public class DeleteNoteUseCaseTest {
     @Mock
     private ThreadExecutor mockThreadExecutor;
     @Mock
-    private PostExecutionThread mockPostExecutionThread;
+    private UIThread mockUIThread;
     @Mock
     private NoteRepository mockNoteRepository;
     @Mock
@@ -35,16 +35,16 @@ public class DeleteNoteUseCaseTest {
     @Test
     public void testDeleteNoteUseCaseSuccess() {
         DeleteNoteUseCase deleteNoteUseCase = new DeleteNoteUseCase(mockThreadExecutor,
-                mockPostExecutionThread, mockNoteRepository, mockSessionRepository);
+                mockUIThread, mockNoteRepository);
 
         deleteNoteUseCase.setParams(FAKE_ID);
-        deleteNoteUseCase.buildUseCaseObservable();
+        deleteNoteUseCase.build();
 
         verify(mockSessionRepository).getCurrentUser();
         verifyNoMoreInteractions(mockSessionRepository);
         verify(mockNoteRepository).deleteNote(null, FAKE_ID);
         verifyNoMoreInteractions(mockNoteRepository);
         verifyZeroInteractions(mockThreadExecutor);
-        verifyZeroInteractions(mockPostExecutionThread);
+        verifyZeroInteractions(mockUIThread);
     }
 }

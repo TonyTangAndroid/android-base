@@ -16,7 +16,7 @@ public class OkHttpModule {
 
 
     @Provides
-    //@ApplicationScope
+    @ApplicationScope
     HttpLoggingInterceptor provideHttpLoggingInterceptor() {
         final HttpLoggingInterceptor interceptor = new HttpLoggingInterceptor();
         interceptor.setLevel(HttpLoggingInterceptor.Level.BASIC);
@@ -24,20 +24,20 @@ public class OkHttpModule {
     }
 
     @Provides
-    //@ApplicationScope
+    @ApplicationScope
     ChuckInterceptor provideChuckInterceptor(Context context) {
         return new ChuckInterceptor(context);
     }
 
 
     @Provides
-    //@ApplicationScope
+    @ApplicationScope
     HttpInterceptor provideHttpInterceptor() {
         return new HttpInterceptor();
     }
 
     @Provides
-    //@ApplicationScope
+    @ApplicationScope
     OkHttpClient provideOkHttpClient(HttpLoggingInterceptor httpLoggingInterceptor,
                                      HttpInterceptor httpInterceptor,
                                      ChuckInterceptor chuckInterceptor) {

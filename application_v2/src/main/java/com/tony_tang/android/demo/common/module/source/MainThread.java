@@ -1,6 +1,6 @@
 package com.tony_tang.android.demo.common.module.source;
 
-import com.jordifierro.androidbase.domain.executor.PostExecutionThread;
+import com.jordifierro.androidbase.domain.executor.UIThread;
 
 import javax.inject.Inject;
 
@@ -8,11 +8,11 @@ import io.reactivex.Scheduler;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 
 
-public class UIThread implements PostExecutionThread {
+public class MainThread implements UIThread {
 
 
     @Inject
-    public UIThread() {
+    public MainThread() {
     }
 
     @Override

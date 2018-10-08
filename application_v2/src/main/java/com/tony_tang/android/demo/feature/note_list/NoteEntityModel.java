@@ -40,6 +40,7 @@ public abstract class NoteEntityModel extends EpoxyModelWithHolder<NoteEntityMod
 
     }
 
+    @Override
     public int getSpanSize(int totalSpanCount, int position, int itemCount) {
         return SpanType.FULL;
     }

@@ -66,6 +66,7 @@ public abstract class BaseModelListActivity extends PresenterActivity implements
         }
     }
 
+    @Override
     protected abstract BaseListPresenter presenter();
 
 
@@ -73,6 +74,7 @@ public abstract class BaseModelListActivity extends PresenterActivity implements
         return status == CleanViewStatus.IDLE;
     }
 
+    @Override
     protected int getLayoutId() {
         return R.layout.activity_entity_list;
     }

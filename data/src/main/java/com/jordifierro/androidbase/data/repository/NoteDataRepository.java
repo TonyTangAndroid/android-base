@@ -3,8 +3,6 @@ package com.jordifierro.androidbase.data.repository;
 import com.jordifierro.androidbase.data.net.RestApi;
 import com.jordifierro.androidbase.domain.entity.CreatedWrapper;
 import com.jordifierro.androidbase.domain.entity.NoteEntity;
-import com.jordifierro.androidbase.domain.entity.UpdatedWrapper;
-import com.jordifierro.androidbase.domain.entity.UserEntity;
 import com.jordifierro.androidbase.domain.entity.VoidEntity;
 import com.jordifierro.androidbase.domain.repository.NoteRepository;
 
@@ -13,60 +11,64 @@ import java.util.Map;
 
 import javax.inject.Inject;
 
-import io.reactivex.Observable;
+import io.reactivex.Completable;
+import io.reactivex.Single;
+import retrofit2.Response;
 
 public class NoteDataRepository extends RestApiRepository implements NoteRepository {
 
     private final RestApi restApi;
+    private final BadgeDataStoreFactory badgeDataStoreFactory;
 
-    //@DebugLog
     @Inject
-    public NoteDataRepository(RestApi restApi) {
+    public NoteDataRepository(RestApi restApi, BadgeDataStoreFactory badgeDataStoreFactory) {
         this.restApi = restApi;
+        this.badgeDataStoreFactory = badgeDataStoreFactory;
     }
 
     @Override
-    public Observable<CreatedWrapper> createNote(UserEntity user, final NoteEntity note) {
-        return this.restApi.createNote(user.getSessionToken(), note)
+    public Single<String> createNote(final NoteEntity note) {
+        return this.restApi.createNote(note)
+                .map(this::validResponse)
+                .map(CreatedWrapper::getObjectId);
+    }
+
+    private CreatedWrapper validResponse(Response<CreatedWrapper> noteEntityResponse) {
+        handleResponseError(noteEntityResponse);
+        return noteEntityResponse.body();
+    }
+
+    @Override
+    public Single<NoteEntity> getNote(String noteObjectId) {
+        return Single.just(noteObjectId).flatMap(this::get);
+    }
+
+    private Single<NoteEntity> get(String noteObjectId) {
+        return this.badgeDataStoreFactory.getDataStore(noteObjectId).getNoteEntity(noteObjectId);
+    }
+
+    @Override
+    public Single<List<NoteEntity>> getNotes(Map<String, Object> queryParam) {
+        return badgeDataStoreFactory.getCloudDataStore()
+                .getNotes(queryParam);
+    }
+
+    @Override
+    public Completable updateNote(NoteEntity note) {
+        return this.restApi.updateNote(note.getObjectId(), note)
                 .map(noteEntityResponse -> {
                     handleResponseError(noteEntityResponse);
                     return noteEntityResponse.body();
-                });
+                }).toCompletable();
     }
 
     @Override
-    public Observable<NoteEntity> getNote(UserEntity user, String noteObjectId) {
-        return this.restApi.getNote(user.getSessionToken(), noteObjectId)
-                .map(noteEntityResponse -> {
-                    handleResponseError(noteEntityResponse);
-                    return noteEntityResponse.body();
-                });
+    public Completable deleteNote(String noteObjectId) {
+        return this.restApi.deleteNote(noteObjectId).map(this::validateResponse).toCompletable();
     }
 
-    @Override
-    public Observable<List<NoteEntity>> getNotes(UserEntity user, Map<String, Object> queryParam) {
-        return this.restApi.getNotes(user.getSessionToken(), queryParam)
-                .map(listResponse -> {
-                    handleResponseError(listResponse);
-                    return listResponse.body().getResults();
-                });
-    }
-
-    @Override
-    public Observable<UpdatedWrapper> updateNote(UserEntity user, NoteEntity note) {
-        return this.restApi.updateNote(user.getSessionToken(), note.getObjectId(), note)
-                .map(noteEntityResponse -> {
-                    handleResponseError(noteEntityResponse);
-                    return noteEntityResponse.body();
-                });
-    }
-
-    @Override
-    public Observable<VoidEntity> deleteNote(UserEntity user, String noteObjectId) {
-        return this.restApi.deleteNote(user.getSessionToken(), noteObjectId)
-                .map(response -> {
-                    handleResponseError(response);
-                    return response.body();
-                });
+    private VoidEntity validateResponse(Response<VoidEntity> response) {
+        handleResponseError(response);
+        return response.body();
     }
 }

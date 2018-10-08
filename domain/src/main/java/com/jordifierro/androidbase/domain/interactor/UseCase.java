@@ -1,6 +1,6 @@
 package com.jordifierro.androidbase.domain.interactor;
 
-import com.jordifierro.androidbase.domain.executor.PostExecutionThread;
+import com.jordifierro.androidbase.domain.executor.UIThread;
 import com.jordifierro.androidbase.domain.executor.ThreadExecutor;
 
 import io.reactivex.Observable;
@@ -12,21 +12,21 @@ import io.reactivex.schedulers.Schedulers;
 public abstract class UseCase<T> {
 
     private final ThreadExecutor threadExecutor;
-    private final PostExecutionThread postExecutionThread;
+    private final UIThread UIThread;
 
     protected Disposable disposable = Disposables.empty();
 
-    protected UseCase(ThreadExecutor threadExecutor, PostExecutionThread postExecutionThread) {
+    protected UseCase(ThreadExecutor threadExecutor, UIThread UIThread) {
         this.threadExecutor = threadExecutor;
-        this.postExecutionThread = postExecutionThread;
+        this.UIThread = UIThread;
     }
 
-    protected abstract Observable<T> buildUseCaseObservable();
+    protected abstract Observable<T> build();
 
     public <S extends Observer<T> & Disposable> void execute(S useCaseDisposable) {
-        this.disposable = this.buildUseCaseObservable()
+        this.disposable = this.build()
                 .subscribeOn(Schedulers.from(threadExecutor))
-                .observeOn(postExecutionThread.getScheduler())
+                .observeOn(UIThread.getScheduler())
                 .subscribeWith(useCaseDisposable);
     }
 

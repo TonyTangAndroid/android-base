@@ -63,4 +63,13 @@ dependencies {
     testCompile dataTestDependencies.junit
     testCompile dataTestDependencies.mockito
     testCompile dataTestDependencies.commonsIO
+
+    compile dataDependencies.roomRxjava2
+    compile dataDependencies.roomRuntime
+    annotationProcessor dataDependencies.roomCompiler
+
+    compile dataDependencies.paging
+    compile dataDependencies.lifecycle
+    compile dataDependencies.archExtensions
+
 }

@@ -3,7 +3,7 @@ package com.jordifierro.androidbase.domain.interactor.note;
 import com.jordifierro.androidbase.domain.entity.NoteEntity;
 import com.jordifierro.androidbase.domain.entity.UpdatedWrapper;
 import com.jordifierro.androidbase.domain.entity.UserEntity;
-import com.jordifierro.androidbase.domain.executor.PostExecutionThread;
+import com.jordifierro.androidbase.domain.executor.UIThread;
 import com.jordifierro.androidbase.domain.executor.ThreadExecutor;
 import com.jordifierro.androidbase.domain.repository.NoteRepository;
 import com.jordifierro.androidbase.domain.repository.SessionRepository;
@@ -36,7 +36,7 @@ public class UpdateNoteUseCaseTest {
     @Mock
     private ThreadExecutor mockThreadExecutor;
     @Mock
-    private PostExecutionThread mockPostExecutionThread;
+    private UIThread mockUIThread;
     @Mock
     private NoteRepository mockNoteRepository;
     @Mock
@@ -66,10 +66,10 @@ public class UpdateNoteUseCaseTest {
 
 
         UpdateNoteUseCase updateNoteUseCase = new UpdateNoteUseCase(mockThreadExecutor,
-                mockPostExecutionThread, mockNoteRepository, mockSessionRepository);
+                mockUIThread, mockNoteRepository, mockSessionRepository);
         updateNoteUseCase.setParams(note);
         TestObserver<NoteEntity> testObserver = new TestObserver<>();
-        updateNoteUseCase.buildUseCaseObservable().subscribe(testObserver);
+        updateNoteUseCase.build().subscribe(testObserver);
 
         assertEquals(FAKE_UPDATED_TIME,
                 ((NoteEntity) (testObserver.getEvents().get(0)).get(0)).getUpdatedAt());
@@ -85,7 +85,7 @@ public class UpdateNoteUseCaseTest {
         verify(mockNoteRepository).getNote(null, note.getObjectId());
         verifyNoMoreInteractions(mockNoteRepository);
         verifyZeroInteractions(mockThreadExecutor);
-        verifyZeroInteractions(mockPostExecutionThread);
+        verifyZeroInteractions(mockUIThread);
     }
 
 

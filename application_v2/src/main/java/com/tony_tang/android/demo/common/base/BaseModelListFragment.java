@@ -68,6 +68,7 @@ public abstract class BaseModelListFragment extends CleanFragment implements Bas
         }
     }
 
+    @Override
     protected abstract BaseListPresenter presenter();
 
 

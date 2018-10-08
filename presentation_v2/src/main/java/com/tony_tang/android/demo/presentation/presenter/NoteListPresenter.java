@@ -9,6 +9,9 @@ import com.tony_tang.android.demo.presentation.view.base.BaseListView;
 
 import javax.inject.Inject;
 
+import io.reactivex.observers.DisposableCompletableObserver;
+import io.reactivex.observers.DisposableSingleObserver;
+
 
 public class NoteListPresenter extends BaseListPresenter implements Presenter {
 
@@ -52,7 +55,17 @@ public class NoteListPresenter extends BaseListPresenter implements Presenter {
 
     public void clearNotes() {
         getBaseListView().showProcessing();
-        clearNoteListUseCase.execute(new ClearNoteListCountSubscriber());
+        clearNoteListUseCase.execute(new DisposableCompletableObserver() {
+            @Override
+            public void onComplete() {
+
+            }
+
+            @Override
+            public void onError(Throwable e) {
+
+            }
+        });
     }
 
 

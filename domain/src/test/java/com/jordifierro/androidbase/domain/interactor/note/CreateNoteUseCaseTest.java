@@ -3,7 +3,7 @@ package com.jordifierro.androidbase.domain.interactor.note;
 import com.jordifierro.androidbase.domain.entity.CreatedWrapper;
 import com.jordifierro.androidbase.domain.entity.NoteEntity;
 import com.jordifierro.androidbase.domain.entity.UserEntity;
-import com.jordifierro.androidbase.domain.executor.PostExecutionThread;
+import com.jordifierro.androidbase.domain.executor.UIThread;
 import com.jordifierro.androidbase.domain.executor.ThreadExecutor;
 import com.jordifierro.androidbase.domain.repository.NoteRepository;
 import com.jordifierro.androidbase.domain.repository.SessionRepository;
@@ -35,7 +35,7 @@ public class CreateNoteUseCaseTest {
     @Mock
     private ThreadExecutor mockThreadExecutor;
     @Mock
-    private PostExecutionThread mockPostExecutionThread;
+    private UIThread mockUIThread;
     @Mock
     private NoteRepository mockNoteRepository;
     @Mock
@@ -62,10 +62,10 @@ public class CreateNoteUseCaseTest {
 
 
         CreateNoteUseCase createNoteUseCase = new CreateNoteUseCase(mockThreadExecutor,
-                mockPostExecutionThread, mockNoteRepository, mockSessionRepository);
+                mockUIThread, mockNoteRepository);
 
         createNoteUseCase.setParams(note);
-        @SuppressWarnings("unused") TestObserver<NoteEntity> noteEntityTestObserver = createNoteUseCase.buildUseCaseObservable().subscribeWith(testObserver);
+        @SuppressWarnings("unused") TestObserver<NoteEntity> noteEntityTestObserver = createNoteUseCase.build().subscribeWith(testObserver);
 
         Assert.assertEquals(FAKE_TITLE,
                 ((NoteEntity) (testObserver.getEvents().get(0)).get(0)).getTitle());
@@ -81,6 +81,6 @@ public class CreateNoteUseCaseTest {
 
         verifyNoMoreInteractions(mockNoteRepository);
         verifyZeroInteractions(mockThreadExecutor);
-        verifyZeroInteractions(mockPostExecutionThread);
+        verifyZeroInteractions(mockUIThread);
     }
 }

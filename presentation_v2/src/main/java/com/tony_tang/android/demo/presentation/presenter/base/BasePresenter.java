@@ -1,16 +1,16 @@
 package com.tony_tang.android.demo.presentation.presenter.base;
 
-import com.jordifierro.androidbase.domain.interactor.UseCase;
+import com.jordifierro.androidbase.domain.interactor.SingleUseCase;
 import com.tony_tang.android.demo.presentation.view.base.CleanView;
 
-import io.reactivex.observers.DisposableObserver;
+import io.reactivex.observers.DisposableSingleObserver;
 
 public abstract class BasePresenter implements Presenter {
 
     private CleanView cleanView;
-    private UseCase[] useCases;
+    private SingleUseCase[] useCases;
 
-    public BasePresenter(CleanView cleanView, UseCase... useCases) {
+    public BasePresenter(CleanView cleanView, SingleUseCase... useCases) {
         this.cleanView = cleanView;
         this.useCases = useCases;
     }
@@ -32,7 +32,7 @@ public abstract class BasePresenter implements Presenter {
     @Override
     public void destroy() {
         if (useCases != null && useCases.length > 0) {
-            for (UseCase useCase : useCases) {
+            for (SingleUseCase useCase : useCases) {
                 useCase.unsubscribe();
             }
         }
@@ -60,12 +60,8 @@ public abstract class BasePresenter implements Presenter {
     }
 
 
-    protected class BaseSubscriber<T> extends DisposableObserver<T> {
+    protected class BaseSubscriber<T> extends DisposableSingleObserver<T> {
 
-        @Override
-        public void onComplete() {
-            BasePresenter.this.hideLoader();
-        }
 
         @Override
         public void onError(Throwable e) {
@@ -74,7 +70,7 @@ public abstract class BasePresenter implements Presenter {
         }
 
         @Override
-        public void onNext(T t) {
+        public void onSuccess(T t) {
             BasePresenter.this.hideLoader();
         }
     }

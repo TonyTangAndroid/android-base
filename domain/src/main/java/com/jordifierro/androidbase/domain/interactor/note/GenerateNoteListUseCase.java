@@ -1,9 +1,9 @@
 package com.jordifierro.androidbase.domain.interactor.note;
 
 import com.jordifierro.androidbase.domain.entity.NoteEntity;
-import com.jordifierro.androidbase.domain.executor.PostExecutionThread;
 import com.jordifierro.androidbase.domain.executor.ThreadExecutor;
-import com.jordifierro.androidbase.domain.interactor.UseCase;
+import com.jordifierro.androidbase.domain.executor.UIThread;
+import com.jordifierro.androidbase.domain.interactor.SingleUseCase;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -11,12 +11,9 @@ import java.util.Random;
 
 import javax.inject.Inject;
 
-import io.reactivex.Observable;
-import io.reactivex.ObservableSource;
-import io.reactivex.annotations.NonNull;
-import io.reactivex.functions.Function;
+import io.reactivex.Single;
 
-public class GenerateNoteListUseCase extends UseCase<Integer> {
+public class GenerateNoteListUseCase extends SingleUseCase<Integer> {
 
 
     public static final int COUNT = 1000;
@@ -25,9 +22,9 @@ public class GenerateNoteListUseCase extends UseCase<Integer> {
 
     @Inject
     public GenerateNoteListUseCase(ThreadExecutor threadExecutor,
-                                   PostExecutionThread postExecutionThread,
+                                   UIThread UIThread,
                                    CreateNoteUseCase createNoteUseCase) {
-        super(threadExecutor, postExecutionThread);
+        super(threadExecutor, UIThread);
         this.createNoteUseCase = createNoteUseCase;
         quoteArrayList.add(new Quote("Christopher Moltisanti", " It's an idea, I don't know. Who knows where it fucking came from? Isaac Newton invented gravity because some asshole hit him with an apple."));
         quoteArrayList.add(new Quote("Anthony 'Tony' Soprano Sr.", "Even a broken clock is right twice a day."));
@@ -41,19 +38,9 @@ public class GenerateNoteListUseCase extends UseCase<Integer> {
     }
 
     @Override
-    protected Observable<Integer> buildUseCaseObservable() {
+    protected Single<Integer> build() {
 
-        return Observable.range(1, COUNT).flatMap(new Function<Integer, ObservableSource<NoteEntity>>() {
-            @Override
-            public ObservableSource<NoteEntity> apply(@NonNull Integer index) throws Exception {
-                return createNoteUseCase.setParams(constructNote(index)).buildUseCaseObservable();
-            }
-        }).toList().toObservable().map(new Function<List<NoteEntity>, Integer>() {
-            @Override
-            public Integer apply(@NonNull List<NoteEntity> noteEntities) throws Exception {
-                return noteEntities.size();
-            }
-        });
+        throw new RuntimeException();
     }
 
     private NoteEntity constructNote(int index) {

@@ -48,7 +48,7 @@ public class NoteDetailPresenter extends BasePresenter implements Presenter {
         }
 
         @Override
-        public void onNext(NoteEntity note) {
+        public void onSuccess(NoteEntity note) {
             NoteDetailPresenter.this.hideLoader();
             NoteDetailPresenter.this.noteDetailView.showNote(note);
         }

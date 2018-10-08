@@ -32,6 +32,7 @@ dependencies {
 
     errorprone dataDependencies.errorProneCore
 
+    compile dataDependencies.findbugsJsr305
     compile dataDependencies.rxJava
     compile dataDependencies.retrofit
     compile dataDependencies.retrofitGson

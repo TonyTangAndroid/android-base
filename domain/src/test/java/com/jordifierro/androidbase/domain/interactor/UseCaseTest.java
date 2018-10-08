@@ -1,6 +1,6 @@
 package com.jordifierro.androidbase.domain.interactor;
 
-import com.jordifierro.androidbase.domain.executor.PostExecutionThread;
+import com.jordifierro.androidbase.domain.executor.UIThread;
 import com.jordifierro.androidbase.domain.executor.ThreadExecutor;
 
 import org.jetbrains.annotations.NotNull;
@@ -23,19 +23,19 @@ public class UseCaseTest {
     private FakeUseCase fakeUseCase;
 
     @Mock
-    private PostExecutionThread mockPostExecutionThread;
+    private UIThread mockUIThread;
 
     @Before
     public void setUp() {
         MockitoAnnotations.initMocks(this);
         this.testObserver = new TestObserver<>();
-        this.fakeUseCase = new FakeUseCase(new DefaultThreadExecutor(), mockPostExecutionThread);
+        this.fakeUseCase = new FakeUseCase(new DefaultThreadExecutor(), mockUIThread);
     }
 
     @Test
     public void testUseCaseExecutionResult() {
         TestScheduler testScheduler = new TestScheduler();
-        given(this.mockPostExecutionThread.getScheduler()).willReturn(testScheduler);
+        given(this.mockUIThread.getScheduler()).willReturn(testScheduler);
 
         this.fakeUseCase.execute(testObserver);
         testScheduler.triggerActions();
@@ -47,7 +47,7 @@ public class UseCaseTest {
     @Test
     public void testUseCaseUnsubscription() {
         TestScheduler testScheduler = new TestScheduler();
-        given(this.mockPostExecutionThread.getScheduler()).willReturn(testScheduler);
+        given(this.mockUIThread.getScheduler()).willReturn(testScheduler);
 
         this.fakeUseCase.execute(testObserver);
         assertThat(this.fakeUseCase.isUnsubscribed(), is(false));
@@ -59,12 +59,12 @@ public class UseCaseTest {
     private static class FakeUseCase extends UseCase<Integer> {
 
         protected FakeUseCase(ThreadExecutor threadExecutor,
-                              PostExecutionThread postExecutionThread) {
-            super(threadExecutor, postExecutionThread);
+                              UIThread UIThread) {
+            super(threadExecutor, UIThread);
         }
 
         @Override
-        protected Observable<Integer> buildUseCaseObservable() {
+        protected Observable<Integer> build() {
             return Observable.just(1, 2, 3);
         }
 

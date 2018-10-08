@@ -35,6 +35,7 @@ public class NoteDetailActivity extends CleanActivity implements NoteDetailFragm
     }
 
 
+    @Override
     public String getNoteObjectId() {
         return this.noteObjectId;
     }

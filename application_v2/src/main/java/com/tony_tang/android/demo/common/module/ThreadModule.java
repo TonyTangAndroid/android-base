@@ -1,10 +1,10 @@
 package com.tony_tang.android.demo.common.module;
 
-import com.jordifierro.androidbase.domain.executor.PostExecutionThread;
+import com.jordifierro.androidbase.domain.executor.UIThread;
 import com.jordifierro.androidbase.domain.executor.ThreadExecutor;
+import com.tony_tang.android.demo.common.module.source.MainThread;
 import com.tony_tang.android.demo.common.scope.ApplicationScope;
 import com.tony_tang.android.demo.common.module.source.JobExecutor;
-import com.tony_tang.android.demo.common.module.source.UIThread;
 
 import dagger.Module;
 import dagger.Provides;
@@ -13,15 +13,15 @@ import dagger.Provides;
 public class ThreadModule {
 
     @Provides
-    //@ApplicationScope
+    @ApplicationScope
     ThreadExecutor provideThreadExecutor(JobExecutor jobExecutor) {
         return jobExecutor;
     }
 
     @Provides
-    //@ApplicationScope
-    PostExecutionThread providePostExecutionThread(UIThread uiThread) {
-        return uiThread;
+    @ApplicationScope
+    UIThread providePostExecutionThread(MainThread mainThread) {
+        return mainThread;
     }
 
 }

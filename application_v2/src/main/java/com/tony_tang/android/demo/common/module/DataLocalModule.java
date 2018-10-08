@@ -16,31 +16,28 @@ import dagger.Provides;
 import hugo.weaving.DebugLog;
 
 @DebugLog
-@Module
+@Module(includes = DbModule.class)
 public class DataLocalModule {
 
     @Provides
-    //@ApplicationScope
+    @ApplicationScope
     SessionRepository provideSessionRepository(UserCache userCache, Gson gson) {
         return new SessionDataRepository(userCache, gson);
     }
 
     @Provides
-    //@ApplicationScope
     EmptyViewEntity provideEmptyViewEntity(Context applicationContext) {
-        EmptyViewEntity build = EmptyViewEntity.builder()
+        return EmptyViewEntity.builder()
                 .showLoading(true)
                 .showRetry(false)
                 .showImage(false)
                 .imageDrawableRes(R.drawable.ic_launcher)
                 .middleHint1(applicationContext.getString(R.string.loading))
                 .build();
-        return build;
     }
 
 
     @Provides
-    //@ApplicationScope
     FooterViewEntity provideFooterViewEntity() {
         return FooterViewEntity.builder()
                 .showLoading(true)

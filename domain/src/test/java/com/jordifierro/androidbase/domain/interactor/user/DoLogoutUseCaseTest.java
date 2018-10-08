@@ -2,7 +2,7 @@ package com.jordifierro.androidbase.domain.interactor.user;
 
 import com.jordifierro.androidbase.domain.entity.UserEntity;
 import com.jordifierro.androidbase.domain.entity.VoidEntity;
-import com.jordifierro.androidbase.domain.executor.PostExecutionThread;
+import com.jordifierro.androidbase.domain.executor.UIThread;
 import com.jordifierro.androidbase.domain.executor.ThreadExecutor;
 import com.jordifierro.androidbase.domain.repository.SessionRepository;
 import com.jordifierro.androidbase.domain.repository.UserRepository;
@@ -29,7 +29,7 @@ public class DoLogoutUseCaseTest {
     @Mock
     private ThreadExecutor mockThreadExecutor;
     @Mock
-    private PostExecutionThread mockPostExecutionThread;
+    private UIThread mockUIThread;
     @Mock
     private UserRepository mockUserRepository;
     @Mock
@@ -49,7 +49,7 @@ public class DoLogoutUseCaseTest {
     @Test
     public void testDoLogoutUseCaseSuccess() {
         DoLogoutUseCase doLogoutUseCase = new DoLogoutUseCase(mockThreadExecutor,
-                mockPostExecutionThread, mockUserRepository, mockSessionRepository);
+                mockUIThread, mockUserRepository, mockSessionRepository);
 
         given(mockSessionRepository.getCurrentUser()).willReturn(mockUser);
 
@@ -57,7 +57,7 @@ public class DoLogoutUseCaseTest {
 
         TestObserver<VoidEntity> testObserver = new TestObserver<>();
         TestScheduler testScheduler = new TestScheduler();
-        final Observable<VoidEntity> voidEntityObservable = doLogoutUseCase.buildUseCaseObservable();
+        final Observable<VoidEntity> voidEntityObservable = doLogoutUseCase.build();
         voidEntityObservable.observeOn(testScheduler).subscribe(testObserver);
         testScheduler.triggerActions();
 
@@ -72,6 +72,6 @@ public class DoLogoutUseCaseTest {
         verify(mockUserRepository).logoutUser(mockUser);
         verifyNoMoreInteractions(mockUserRepository);
         verifyZeroInteractions(mockThreadExecutor);
-        verifyZeroInteractions(mockPostExecutionThread);
+        verifyZeroInteractions(mockUIThread);
     }
 }

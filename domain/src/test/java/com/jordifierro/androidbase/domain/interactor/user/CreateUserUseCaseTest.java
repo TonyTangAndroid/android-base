@@ -2,7 +2,7 @@ package com.jordifierro.androidbase.domain.interactor.user;
 
 import com.jordifierro.androidbase.domain.entity.CreatedWrapper;
 import com.jordifierro.androidbase.domain.entity.UserEntity;
-import com.jordifierro.androidbase.domain.executor.PostExecutionThread;
+import com.jordifierro.androidbase.domain.executor.UIThread;
 import com.jordifierro.androidbase.domain.executor.ThreadExecutor;
 import com.jordifierro.androidbase.domain.repository.SessionRepository;
 import com.jordifierro.androidbase.domain.repository.UserRepository;
@@ -29,7 +29,7 @@ public class CreateUserUseCaseTest {
     @Mock
     private ThreadExecutor mockThreadExecutor;
     @Mock
-    private PostExecutionThread mockPostExecutionThread;
+    private UIThread mockUIThread;
     @Mock
     private UserRepository mockUserRepository;
     @Mock
@@ -52,13 +52,13 @@ public class CreateUserUseCaseTest {
 
 
         CreateUserUseCase createUserUseCase = new CreateUserUseCase(mockThreadExecutor,
-                mockPostExecutionThread, mockUserRepository, mockSessionRepository);
+                mockUIThread, mockUserRepository, mockSessionRepository);
         TestObserver<UserEntity> testObserver = new TestObserver<>();
         given(mockUserRepository.createUser(mockUser)).willReturn(Observable.just(createdWrapper));
         given(mockUserRepository.getUserBySessionToken(FAKE_SESSION_TOKEN)).willReturn(Observable.just(mockUser));
 
         createUserUseCase.setParams(mockUser);
-       @SuppressWarnings("unused") TestObserver<UserEntity> userEntityTestObserver = createUserUseCase.buildUseCaseObservable().subscribeWith(testObserver);
+       @SuppressWarnings("unused") TestObserver<UserEntity> userEntityTestObserver = createUserUseCase.build().subscribeWith(testObserver);
 
         verify(mockUserRepository).createUser(mockUser);
         verify(mockUserRepository).getUserBySessionToken(FAKE_SESSION_TOKEN);
@@ -67,6 +67,6 @@ public class CreateUserUseCaseTest {
         verify(mockSessionRepository).setCurrentUser(mockUser);
         verifyNoMoreInteractions(mockSessionRepository);
         verifyZeroInteractions(mockThreadExecutor);
-        verifyZeroInteractions(mockPostExecutionThread);
+        verifyZeroInteractions(mockUIThread);
     }
 }

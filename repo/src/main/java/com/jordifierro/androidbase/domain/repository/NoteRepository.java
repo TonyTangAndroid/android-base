@@ -1,27 +1,24 @@
 package com.jordifierro.androidbase.domain.repository;
 
-import com.jordifierro.androidbase.domain.entity.CreatedWrapper;
 import com.jordifierro.androidbase.domain.entity.NoteEntity;
-import com.jordifierro.androidbase.domain.entity.UpdatedWrapper;
-import com.jordifierro.androidbase.domain.entity.UserEntity;
-import com.jordifierro.androidbase.domain.entity.VoidEntity;
 
 import java.util.List;
 import java.util.Map;
 
-import io.reactivex.Observable;
+import io.reactivex.Completable;
+import io.reactivex.Single;
 
 
 public interface NoteRepository {
 
 
-    Observable<CreatedWrapper> createNote(UserEntity user, NoteEntity note);
+    Single<String> createNote(NoteEntity note);
 
-    Observable<NoteEntity> getNote(UserEntity user, String noteObjectId);
+    Single<NoteEntity> getNote(String noteObjectId);
 
-    Observable<List<NoteEntity>> getNotes(UserEntity user, Map<String, Object> queryParam);
+    Single<List<NoteEntity>> getNotes(Map<String, Object> queryParam);
 
-    Observable<UpdatedWrapper> updateNote(UserEntity user, NoteEntity note);
+    Completable updateNote(NoteEntity note);
 
-    Observable<VoidEntity> deleteNote(UserEntity user, String noteObjectId);
+    Completable deleteNote(String noteObjectId);
 }

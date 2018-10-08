@@ -2,9 +2,9 @@ package com.jordifierro.androidbase.domain.interactor.note;
 
 import com.jordifierro.androidbase.domain.constant.Constants;
 import com.jordifierro.androidbase.domain.entity.NoteEntity;
-import com.jordifierro.androidbase.domain.executor.PostExecutionThread;
 import com.jordifierro.androidbase.domain.executor.ThreadExecutor;
-import com.jordifierro.androidbase.domain.interactor.UseCase;
+import com.jordifierro.androidbase.domain.executor.UIThread;
+import com.jordifierro.androidbase.domain.interactor.SingleUseCase;
 import com.jordifierro.androidbase.domain.repository.NoteRepository;
 import com.jordifierro.androidbase.domain.repository.SessionRepository;
 
@@ -16,12 +16,12 @@ import java.util.concurrent.TimeUnit;
 
 import javax.inject.Inject;
 
-import io.reactivex.Observable;
-import io.reactivex.ObservableSource;
+import io.reactivex.Single;
+import io.reactivex.SingleSource;
 import io.reactivex.annotations.NonNull;
 import io.reactivex.functions.Function;
 
-public class GetNotesUseCase extends UseCase<List<?>> {
+public class GetNotesUseCase extends SingleUseCase<List<?>> {
 
     private NoteRepository noteRepository;
     private SessionRepository sessionRepository;
@@ -29,9 +29,9 @@ public class GetNotesUseCase extends UseCase<List<?>> {
     private List<NoteEntity> noteEntityList = new ArrayList<>();
 
     @Inject
-    public GetNotesUseCase(ThreadExecutor threadExecutor, PostExecutionThread postExecutionThread,
+    public GetNotesUseCase(ThreadExecutor threadExecutor, UIThread UIThread,
                            NoteRepository noteRepository, SessionRepository sessionRepository) {
-        super(threadExecutor, postExecutionThread);
+        super(threadExecutor, UIThread);
         this.noteRepository = noteRepository;
         this.sessionRepository = sessionRepository;
         initQueryParam();
@@ -51,21 +51,21 @@ public class GetNotesUseCase extends UseCase<List<?>> {
 
 
     @Override
-    protected Observable<List<?>> buildUseCaseObservable() {
-        return Observable.timer(500, TimeUnit.MILLISECONDS).flatMap(new Function<Long, ObservableSource<List<NoteEntity>>>() {
+    protected Single<List<?>> build() {
+        return Single.timer(500, TimeUnit.MILLISECONDS).flatMap(new Function<Long, SingleSource<List<NoteEntity>>>() {
             @Override
-            public ObservableSource<List<NoteEntity>> apply(@NonNull Long aLong) throws Exception {
+            public SingleSource<List<NoteEntity>> apply(@NonNull Long aLong) throws Exception {
                 return doGetNotes();
             }
         });
     }
 
-    private Observable<List<NoteEntity>> doGetNotes() {
-        return this.noteRepository.getNotes(this.sessionRepository.getCurrentUser(), queryParam)
-                .doOnNext(noteEntities -> updateNoteEntityCount(noteEntities.size())).map(noteEntities -> {
-            noteEntityList.addAll(noteEntities);
-            return noteEntityList;
-        });
+    private Single<List<NoteEntity>> doGetNotes() {
+        return this.noteRepository.getNotes(queryParam)
+                .doOnSuccess(noteEntities -> updateNoteEntityCount(noteEntities.size())).map(noteEntities -> {
+                    noteEntityList.addAll(noteEntities);
+                    return noteEntityList;
+                });
     }
 
     private void updateNoteEntityCount(int newNoteEntitySize) {

@@ -15,6 +15,11 @@ apply plugin: 'idea'
 apply plugin: 'net.ltgt.apt'
 
 dependencies {
+
+    compile project(':entity')
+
+    compile dataDependencies.findbugsJsr305
+
     def domainDependencies = rootProject.ext.domainDependencies
     def domainTestDependencies = rootProject.ext.domainTestDependencies
 

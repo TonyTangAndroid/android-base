@@ -1,17 +1,14 @@
 package com.jordifierro.androidbase.domain.interactor.note;
 
-import com.jordifierro.androidbase.domain.entity.NoteEntity;
-import com.jordifierro.androidbase.domain.entity.VoidEntity;
-import com.jordifierro.androidbase.domain.executor.PostExecutionThread;
 import com.jordifierro.androidbase.domain.executor.ThreadExecutor;
-import com.jordifierro.androidbase.domain.interactor.UseCase;
+import com.jordifierro.androidbase.domain.executor.UIThread;
+import com.jordifierro.androidbase.domain.interactor.CompletableUseCase;
 
 import javax.inject.Inject;
 
-import io.reactivex.Observable;
-import io.reactivex.ObservableSource;
+import io.reactivex.Completable;
 
-public class ClearNoteListUseCase extends UseCase<Long> {
+public class ClearNoteListUseCase extends CompletableUseCase {
 
 
     private GetNotesUseCase getNotesUseCase;
@@ -19,30 +16,25 @@ public class ClearNoteListUseCase extends UseCase<Long> {
 
     @Inject
     public ClearNoteListUseCase(ThreadExecutor threadExecutor,
-                                PostExecutionThread postExecutionThread,
+                                UIThread UIThread,
                                 GetNotesUseCase getNotesUseCase,
                                 DeleteNoteUseCase deleteNoteUseCase) {
-        super(threadExecutor, postExecutionThread);
+        super(threadExecutor, UIThread);
         this.getNotesUseCase = getNotesUseCase;
         this.deleteNoteUseCase = deleteNoteUseCase;
     }
 
     @Override
-    protected Observable<Long> buildUseCaseObservable() {
+    protected Completable build() {
 
-        return getNotesUseCase.buildUseCaseObservable().flatMap(Observable::fromIterable)
-                .map(entity -> (NoteEntity) entity)
-                .map(NoteEntity::getObjectId)
-                .flatMap(this::delete)
-                .count()
-                .toObservable();
+        throw new RuntimeException();
 
 
     }
 
 
-    private ObservableSource<VoidEntity> delete(String objectId) {
-        return deleteNoteUseCase.setParams(objectId).buildUseCaseObservable();
+    private Completable delete(String objectId) {
+        return deleteNoteUseCase.setParams(objectId).build();
     }
 
 }

@@ -1,32 +1,28 @@
 package com.jordifierro.androidbase.domain.interactor.note;
 
 import com.jordifierro.androidbase.domain.entity.NoteEntity;
-import com.jordifierro.androidbase.domain.executor.PostExecutionThread;
 import com.jordifierro.androidbase.domain.executor.ThreadExecutor;
-import com.jordifierro.androidbase.domain.interactor.UseCase;
+import com.jordifierro.androidbase.domain.executor.UIThread;
+import com.jordifierro.androidbase.domain.interactor.SingleUseCase;
 import com.jordifierro.androidbase.domain.repository.NoteRepository;
-import com.jordifierro.androidbase.domain.repository.SessionRepository;
 
 import javax.inject.Inject;
 
-import io.reactivex.Observable;
-public class GetNoteUseCase extends UseCase<NoteEntity> {
+import io.reactivex.Single;
+
+public class GetNoteUseCase extends SingleUseCase<NoteEntity> {
 
     private NoteRepository noteRepository;
-    private SessionRepository sessionRepository;
 
     private String noteObjectId;
 
     @Inject
     public GetNoteUseCase(ThreadExecutor threadExecutor,
-                          PostExecutionThread postExecutionThread,
-                          NoteRepository noteRepository,
-                          SessionRepository sessionRepository) {
+                          UIThread UIThread,
+                          NoteRepository noteRepository) {
 
-        super(threadExecutor, postExecutionThread);
-        System.out.println("GetNoteUseCase Created");
+        super(threadExecutor, UIThread);
         this.noteRepository = noteRepository;
-        this.sessionRepository = sessionRepository;
     }
 
     public GetNoteUseCase setParams(String noteObjectId) {
@@ -35,7 +31,7 @@ public class GetNoteUseCase extends UseCase<NoteEntity> {
     }
 
     @Override
-    protected Observable<NoteEntity> buildUseCaseObservable() {
-        return this.noteRepository.getNote(this.sessionRepository.getCurrentUser(), this.noteObjectId);
+    protected Single<NoteEntity> build() {
+        return this.noteRepository.getNote(this.noteObjectId);
     }
 }

@@ -10,6 +10,7 @@ import com.jordifierro.androidbase.domain.entity.VoidEntity;
 import java.util.Map;
 
 import io.reactivex.Observable;
+import io.reactivex.Single;
 import retrofit2.Response;
 import retrofit2.http.Body;
 import retrofit2.http.DELETE;
@@ -44,7 +45,7 @@ public interface RestApi {
     Observable<Response<CreatedWrapper>> createUser(@Body UserEntity userEntity);
 
     @DELETE(URL_PATH_USERS_OBJECT_ID)
-    Observable<Response<VoidEntity>> deleteUser(@Header(PARSE_SESSION_KEY) String token, @Path("objectId") String objectId);
+    Observable<Response<VoidEntity>> deleteUser(@Path("objectId") String objectId);
 
     @POST(URL_PATH_REQUEST_PASSWORD_RESET)
     Observable<Response<VoidEntity>> resetPassword(@Body Map<String, Object> params);
@@ -56,25 +57,22 @@ public interface RestApi {
     Observable<Response<VoidEntity>> doLogout(@Header(PARSE_SESSION_KEY) String token);
 
     @POST(URL_PATH_CLASSES_NOTE)
-    Observable<Response<CreatedWrapper>> createNote(@Header(PARSE_SESSION_KEY) String token,
-                                                    @Body NoteEntity note);
+    Single<Response<CreatedWrapper>> createNote(@Body NoteEntity note);
 
     @GET(URL_PATH_CLASSES_NOTE_OBJECT_ID)
-    Observable<Response<NoteEntity>> getNote(@Header(PARSE_SESSION_KEY) String token,
-                                             @Path("objectId") String objectId);
+    Single<Response<NoteEntity>> getNote(
+            @Path("objectId") String objectId);
 
     @GET(URL_PATH_USERS_ME)
     Observable<Response<UserEntity>> getUserBySessionToken(@Header(PARSE_SESSION_KEY) String token);
 
     @GET(URL_PATH_CLASSES_NOTE)
-    Observable<Response<NoteEntitiesWrapper>> getNotes(@Header(PARSE_SESSION_KEY) String token, @QueryMap Map<String, Object> queryParams);
+    Single<Response<NoteEntitiesWrapper>> getNotes(@Header(PARSE_SESSION_KEY) String token, @QueryMap Map<String, Object> queryParams);
 
     @PUT(URL_PATH_CLASSES_NOTE_OBJECT_ID)
-    Observable<Response<UpdatedWrapper>> updateNote(@Header(PARSE_SESSION_KEY) String token,
-                                                    @Path("objectId") String objectId, @Body NoteEntity note);
+    Single<Response<UpdatedWrapper>> updateNote(@Path("objectId") String objectId, @Body NoteEntity note);
 
     @DELETE(URL_PATH_CLASSES_NOTE_OBJECT_ID)
-    Observable<Response<VoidEntity>> deleteNote(@Header(PARSE_SESSION_KEY) String token,
-                                                @Path("objectId") String objectId);
+    Single<Response<VoidEntity>> deleteNote(@Path("objectId") String objectId);
 
 }

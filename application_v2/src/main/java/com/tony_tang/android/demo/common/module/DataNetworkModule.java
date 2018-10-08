@@ -11,14 +11,14 @@ import dagger.Module;
 
 @Module(includes = {NetworkModule.class})
 public abstract class DataNetworkModule {
-    
+
     @Binds
-    //@ApplicationScope
+    @ApplicationScope
     abstract UserRepository provideUserRepository
             (UserDataRepositoryV2 userDataRepository);
 
     @Binds
-    //@ApplicationScope
+    @ApplicationScope
     abstract NoteRepository provideNoteRepository(NoteDataRepository noteDataRepository);
 
 }

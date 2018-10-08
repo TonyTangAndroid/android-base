@@ -1,6 +1,7 @@
 package com.tony_tang.android.demo.common.module;
 
 import com.jordifierro.androidbase.data.net.RestApi;
+import com.jordifierro.androidbase.data.repository.NoteInMemoryImpl;
 import com.tony_tang.android.demo.common.scope.ApplicationScope;
 
 import dagger.Module;
@@ -15,7 +16,7 @@ public class NetworkModule {
 
 
     @Provides
-    //@ApplicationScope
+    @ApplicationScope
     RestApi provideRestApi(OkHttpClient okHttpClient, GsonConverterFactory gsonConverterFactory) {
 
         return new Retrofit.Builder()
@@ -27,5 +28,11 @@ public class NetworkModule {
                 .create(RestApi.class);
     }
 
+
+    @Provides
+    @ApplicationScope
+    static NoteInMemoryImpl badgeCacheMemoryImpl() {
+        return new NoteInMemoryImpl(5 * 1000);
+    }
 
 }

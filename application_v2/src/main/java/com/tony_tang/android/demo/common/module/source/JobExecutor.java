@@ -35,6 +35,11 @@ public class JobExecutor implements ThreadExecutor {
         this.threadPoolExecutor.execute(runnable);
     }
 
+    @Override
+    public Exception map(Throwable throwable) {
+        return new RuntimeException(throwable);
+    }
+
     static class JobThreadFactory implements ThreadFactory {
         static final String THREAD_NAME = "android_";
         private int counter = 0;

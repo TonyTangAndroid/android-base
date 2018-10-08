@@ -44,7 +44,7 @@ public class UserDataRepository extends RestApiRepository implements UserReposit
 
     @Override
     public Observable<VoidEntity> deleteUser(final UserEntity user) {
-        return this.restApi.deleteUser(user.getSessionToken(), user.getObjectId())
+        return this.restApi.deleteUser(user.getObjectId())
                 .map(new Function<Response<VoidEntity>, VoidEntity>() {
                     @Override
                     public VoidEntity apply(Response<VoidEntity> voidResponse) {

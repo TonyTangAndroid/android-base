@@ -11,6 +11,7 @@ import com.tony_tang.android.demo.R;
 public abstract class CleanActivity extends BaseActivity implements CleanView {
 
 
+    @Override
     public void handleError(Throwable throwable) {
         if (throwable instanceof RestApiErrorException) {
             switch (((RestApiErrorException) throwable).getStatusCode()) {
@@ -44,16 +45,17 @@ public abstract class CleanActivity extends BaseActivity implements CleanView {
         startActivity(intent);
     }
 
-
+    @Override
     public void showMessage(String message) {
         Toast.makeText(context(), message, Toast.LENGTH_LONG).show();
     }
 
+    @Override
     public void initUI() {
 
     }
 
-
+    @Override
     public void close() {
         this.finish();
     }

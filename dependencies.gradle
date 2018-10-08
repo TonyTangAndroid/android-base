@@ -36,6 +36,11 @@ ext {
     javaxInjectVersion = '1'
     retrofitVersion = '2.2.0'
 
+    archVersion = '1.1.1'
+    roomVersion = '1.1.1'
+    pagingVersion = '1.0.0'
+
+
     //Testing
     jUnitVersion = '4.12'
     mockitoVersion = '1.9.5'//'2.0.43-beta', wait for dexmaker
@@ -66,12 +71,23 @@ ext {
 
     dataDependencies = [
             retrofit             : "com.squareup.retrofit2:retrofit:${retrofitVersion}",
+            findbugsJsr305    : "com.google.code.findbugs:jsr305:${findbugsJsr305Version}",
             retrofitRxJava2      : "com.squareup.retrofit2:adapter-rxjava2:${retrofitVersion}",
             retrofitGson         : "com.squareup.retrofit2:converter-gson:${retrofitVersion}",
             okhttp3_log          : "com.squareup.okhttp3:logging-interceptor:${okhttp3Version}",
 
             autoValue            : "com.google.auto.value:auto-value:${autoValueVersion}",
             autoValueGson        : "com.ryanharter.auto.value:auto-value-gson:${autoValueGsonVersion}",
+
+
+
+            lifecycle        : "android.arch.lifecycle:runtime:${archVersion}",
+            archExtensions   : "android.arch.lifecycle:extensions:${archVersion}",
+            archCompiler     : "android.arch.lifecycle:common-java8:${archVersion}",
+            roomRuntime      : "android.arch.persistence.room:runtime:${roomVersion}",
+            roomCompiler     : "android.arch.persistence.room:compiler:${roomVersion}",
+            roomRxjava2      : "android.arch.persistence.room:rxjava2:${roomVersion}",
+            paging           : "android.arch.paging:runtime:${pagingVersion}",
 
 
 

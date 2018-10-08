@@ -1,6 +1,6 @@
 package com.tony_tang.android.demo.presentation.presenter.base;
 
-import com.jordifierro.androidbase.domain.interactor.UseCase;
+import com.jordifierro.androidbase.domain.interactor.SingleUseCase;
 import com.tony_tang.android.demo.presentation.view.base.BaseListView;
 
 import java.util.List;
@@ -12,7 +12,7 @@ public abstract class BaseListPresenter extends BasePresenter implements Present
     private BaseListView baseListView;
 
     public BaseListPresenter(BaseListView baseListView,
-                             UseCase... useCases) {
+                             SingleUseCase... useCases) {
         super(baseListView, useCases);
         this.baseListView = baseListView;
     }
@@ -31,18 +31,14 @@ public abstract class BaseListPresenter extends BasePresenter implements Present
     public class BaseListSubscriber extends BaseSubscriber<List<?>> {
 
         @Override
-        public void onComplete() {
-            baseListView.onRetrievingDataCompleted();
-        }
-
-        @Override
         public void onError(Throwable e) {
             super.onError(e);
             baseListView.onRetrievingDataCompleted();
         }
 
         @Override
-        public void onNext(List<?> entityList) {
+        public void onSuccess(List<?> entityList) {
+            baseListView.onRetrievingDataCompleted();
             BaseListPresenter.this.baseListView.showEntityList(entityList);
         }
     }

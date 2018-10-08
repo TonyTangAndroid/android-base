@@ -85,6 +85,7 @@ public abstract class BaseModelController extends TypedEpoxyController<List<?>> 
         return dataList == null || dataList.size() == 0;
     }
 
+    @Override
     protected void onExceptionSwallowed(RuntimeException exception) {
         if (BuildConfig.DEBUG) {
             throw exception;
