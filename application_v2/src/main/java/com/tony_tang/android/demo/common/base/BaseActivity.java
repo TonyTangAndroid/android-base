@@ -5,16 +5,14 @@ import android.app.FragmentTransaction;
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.os.Bundle;
-import android.support.annotation.Nullable;
-import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.Toolbar;
 import android.view.View;
 
 import com.evernote.android.state.StateSaver;
 import com.tony_tang.android.demo.R;
 
-import butterknife.BindView;
-import butterknife.ButterKnife;
+import androidx.annotation.Nullable;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
 
 /**
 
@@ -23,7 +21,6 @@ import butterknife.ButterKnife;
 public abstract class BaseActivity extends AppCompatActivity {
 
     @Nullable
-    @BindView(R.id.toolbar)
     Toolbar toolbar;
     private ProgressDialog progressDialog;
 
@@ -32,10 +29,19 @@ public abstract class BaseActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         StateSaver.restoreInstanceState(this, savedInstanceState);
         setContentView(getLayoutId());
-        ButterKnife.bind(this);
+
+        bindToolbar();
         this.initializeActivity(savedInstanceState);
         this.initializeToolbar();
     }
+
+
+    private void bindToolbar() {
+        toolbar = findViewById(R.id.toolbar);
+        bindView();
+    }
+
+    protected abstract void bindView();
 
 
     @Override

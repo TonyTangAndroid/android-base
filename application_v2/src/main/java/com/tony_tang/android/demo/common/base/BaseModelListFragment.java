@@ -1,9 +1,6 @@
 package com.tony_tang.android.demo.common.base;
 
-import android.support.v4.widget.SwipeRefreshLayout;
-import android.support.v7.widget.DividerItemDecoration;
-import android.support.v7.widget.GridLayoutManager;
-import android.support.v7.widget.RecyclerView;
+import android.view.View;
 
 import com.tony_tang.android.demo.R;
 import com.tony_tang.android.demo.feature.common.BaseModelController;
@@ -24,7 +21,11 @@ import java.util.List;
 
 import javax.inject.Inject;
 
-import butterknife.BindView;
+import androidx.recyclerview.widget.DividerItemDecoration;
+import androidx.recyclerview.widget.GridLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
+
 
 public abstract class BaseModelListFragment extends CleanFragment implements BaseListView,
         EndlessRecyclerOnScrollListenerTrial.RecyclerViewScrollListener,
@@ -37,9 +38,7 @@ public abstract class BaseModelListFragment extends CleanFragment implements Bas
     @Inject
     FooterViewEntity defaultFooterViewEntity;
 
-    @BindView(R.id.rv_entity_list)
     RecyclerView rvEntityList;
-    @BindView(R.id.swipe_refresh_layout)
     SwipeRefreshLayout swipeRefreshLayout;
 
     @LoadingStatus
@@ -59,6 +58,12 @@ public abstract class BaseModelListFragment extends CleanFragment implements Bas
         rvEntityList.addItemDecoration(new DividerItemDecoration(getActivity(), DividerItemDecoration.VERTICAL));
 
         loadData();
+    }
+
+    @Override
+    public void bindView(View rootView) {
+        rvEntityList = rootView.findViewById(R.id.rv_entity_list);
+        swipeRefreshLayout = rootView.findViewById(R.id.swipe_refresh_layout);
     }
 
     private void loadData() {

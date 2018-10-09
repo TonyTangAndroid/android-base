@@ -64,12 +64,12 @@ dependencies {
     testCompile dataTestDependencies.mockito
     testCompile dataTestDependencies.commonsIO
 
-    compile dataDependencies.roomRxjava2
-    compile dataDependencies.roomRuntime
-    annotationProcessor dataDependencies.roomCompiler
+    compile 'androidx.room:room-rxjava2:2.0.0'
+    compile 'androidx.room:room-runtime:2.0.0'
+    annotationProcessor 'androidx.room:room-compiler:2.0.0'
 
-    compile dataDependencies.paging
-    compile dataDependencies.lifecycle
-    compile dataDependencies.archExtensions
+    compile 'androidx.paging:paging-runtime:2.0.0'
+    compile 'androidx.lifecycle:lifecycle-runtime:2.0.0'
+    compile 'androidx.lifecycle:lifecycle-extensions:2.0.0'
 
 }

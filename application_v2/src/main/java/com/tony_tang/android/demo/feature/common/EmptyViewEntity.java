@@ -1,7 +1,7 @@
 package com.tony_tang.android.demo.feature.common;
 
-import android.support.annotation.DrawableRes;
-import android.support.annotation.Nullable;
+import androidx.annotation.DrawableRes;
+import androidx.annotation.Nullable;
 
 import com.google.auto.value.AutoValue;
 

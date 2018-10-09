@@ -13,7 +13,6 @@ import com.tony_tang.android.demo.R;
 import com.tony_tang.android.demo.feature.common.BaseEpoxyHolder;
 import com.tony_tang.android.demo.feature.common.SpanType;
 
-import butterknife.BindView;
 
 import static com.airbnb.epoxy.EpoxyAttribute.Option.DoNotHash;
 
@@ -60,13 +59,16 @@ public abstract class NoteEntityModel extends EpoxyModelWithHolder<NoteEntityMod
     static class NoteEntityViewHolder extends BaseEpoxyHolder {
 
 
-        @BindView(R.id.ll_note_item)
         View llNoteItem;
-        @BindView(R.id.tv_title)
         TextView tvTitle;
-        @BindView(R.id.tv_content)
         TextView tvContent;
 
 
+        @Override
+        protected void bindView(View itemView) {
+            llNoteItem = itemView.findViewById(R.id.ll_note_item);
+            tvTitle = itemView.findViewById(R.id.tv_title);
+            tvContent = itemView.findViewById(R.id.tv_content);
+        }
     }
 }

@@ -11,7 +11,6 @@ import android.widget.Toast;
 import com.tony_tang.android.demo.presentation.presenter.base.BasePresenter;
 import com.tony_tang.android.demo.presentation.view.base.CleanView;
 
-import butterknife.ButterKnife;
 import dagger.android.AndroidInjection;
 
 public abstract class CleanFragment extends BaseFragment implements CleanView {
@@ -30,9 +29,11 @@ public abstract class CleanFragment extends BaseFragment implements CleanView {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         final View fragmentView = inflater.inflate(getLayoutId(), container, false);
-        ButterKnife.bind(this, fragmentView);
+        bindView(fragmentView);
         return fragmentView;
     }
+
+    protected abstract void bindView(View rootView);
 
     @Override
     public void initUI() {

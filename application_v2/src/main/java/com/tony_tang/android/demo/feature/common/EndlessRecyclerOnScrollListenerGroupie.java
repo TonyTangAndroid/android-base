@@ -1,7 +1,7 @@
 package com.tony_tang.android.demo.feature.common;
 
-import android.support.v7.widget.LinearLayoutManager;
-import android.support.v7.widget.RecyclerView;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 public abstract class EndlessRecyclerOnScrollListenerGroupie extends RecyclerView.OnScrollListener {
 

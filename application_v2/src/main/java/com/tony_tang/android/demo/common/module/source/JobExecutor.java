@@ -1,6 +1,6 @@
 package com.tony_tang.android.demo.common.module.source;
 
-import android.support.annotation.NonNull;
+import androidx.annotation.NonNull;
 
 import com.jordifierro.androidbase.domain.executor.ThreadExecutor;
 

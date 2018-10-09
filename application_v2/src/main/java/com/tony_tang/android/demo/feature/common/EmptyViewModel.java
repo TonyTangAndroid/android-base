@@ -11,8 +11,6 @@ import com.airbnb.epoxy.EpoxyModelClass;
 import com.airbnb.epoxy.EpoxyModelWithHolder;
 import com.tony_tang.android.demo.R;
 
-import butterknife.BindView;
-
 import static com.airbnb.epoxy.EpoxyAttribute.Option.DoNotHash;
 
 
@@ -95,20 +93,23 @@ public abstract class EmptyViewModel extends EpoxyModelWithHolder<EmptyViewModel
 
     static class EmptyViewItemViewHolder extends BaseEpoxyHolder {
 
-        @BindView(R.id.pb_loading)
         ProgressBar pb_loading;
-        @BindView(R.id.iv_empty_image)
         ImageView iv_empty_image;
-        @BindView(R.id.tv_empty_hint_middle_1)
         TextView tv_empty_hint_middle_1;
-        @BindView(R.id.tv_empty_hint_middle_2)
         TextView tv_empty_hint_middle_2;
-        @BindView(R.id.tv_empty_hint_top)
         TextView tv_empty_hint_top;
-        @BindView(R.id.tv_empty_hint_bottom)
         TextView tv_empty_hint_bottom;
-        @BindView(R.id.btn_retry)
         Button btClickRetry;
 
+        @Override
+        protected void bindView(View itemView) {
+            pb_loading = itemView.findViewById(R.id.pb_loading);
+            iv_empty_image = itemView.findViewById(R.id.iv_empty_image);
+            tv_empty_hint_middle_1 = itemView.findViewById(R.id.tv_empty_hint_middle_1);
+            tv_empty_hint_middle_2 = itemView.findViewById(R.id.tv_empty_hint_middle_2);
+            tv_empty_hint_top = itemView.findViewById(R.id.tv_empty_hint_top);
+            tv_empty_hint_bottom = itemView.findViewById(R.id.tv_empty_hint_bottom);
+            btClickRetry = itemView.findViewById(R.id.btn_retry);
+        }
     }
 }

@@ -1,10 +1,10 @@
 package com.tony_tang.android.demo.common.base;
 
 import android.os.Bundle;
-import android.support.annotation.Nullable;
 
 import com.tony_tang.android.demo.presentation.presenter.base.BasePresenter;
 
+import androidx.annotation.Nullable;
 import dagger.android.AndroidInjection;
 
 public abstract class PresenterActivity extends CleanActivity  {

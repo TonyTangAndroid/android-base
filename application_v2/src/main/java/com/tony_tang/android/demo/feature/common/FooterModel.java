@@ -1,6 +1,5 @@
 package com.tony_tang.android.demo.feature.common;
 
-import android.support.v7.widget.CardView;
 import android.text.TextUtils;
 import android.view.View;
 import android.widget.ProgressBar;
@@ -11,7 +10,7 @@ import com.airbnb.epoxy.EpoxyModelClass;
 import com.airbnb.epoxy.EpoxyModelWithHolder;
 import com.tony_tang.android.demo.R;
 
-import butterknife.BindView;
+import androidx.cardview.widget.CardView;
 
 import static com.airbnb.epoxy.EpoxyAttribute.Option.DoNotHash;
 
@@ -58,13 +57,16 @@ public abstract class FooterModel extends EpoxyModelWithHolder<FooterModel.Foote
 
     static class FooterViewHolder extends BaseEpoxyHolder {
 
-        @BindView(R.id.cv_footer_view)
         CardView cv_footer_view;
-        @BindView(R.id.tv_footer_view_loading_hint)
         TextView tv_footer_view_loading_hint;
-        @BindView(R.id.pb_footer_view_loading)
         ProgressBar pb_footer_view_loading;
 
 
+        @Override
+        protected void bindView(View itemView) {
+            cv_footer_view = itemView.findViewById(R.id.cv_footer_view);
+            tv_footer_view_loading_hint = itemView.findViewById(R.id.tv_footer_view_loading_hint);
+            pb_footer_view_loading = itemView.findViewById(R.id.pb_footer_view_loading);
+        }
     }
 }

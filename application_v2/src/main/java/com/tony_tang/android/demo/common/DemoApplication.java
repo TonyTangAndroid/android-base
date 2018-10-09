@@ -2,7 +2,7 @@ package com.tony_tang.android.demo.common;
 
 import android.app.Activity;
 import android.app.Fragment;
-import android.support.multidex.MultiDexApplication;
+import androidx.multidex.MultiDexApplication;
 
 import javax.inject.Inject;
 

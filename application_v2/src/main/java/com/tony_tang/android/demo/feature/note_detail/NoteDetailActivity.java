@@ -27,6 +27,11 @@ public class NoteDetailActivity extends CleanActivity implements NoteDetailFragm
 
 
     @Override
+    protected void bindView() {
+
+    }
+
+    @Override
     protected void initializeActivity(Bundle savedInstanceState) {
         if (savedInstanceState == null) {
             noteObjectId = getIntent().getStringExtra(PARAM_NOTE_ID);

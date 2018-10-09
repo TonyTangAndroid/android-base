@@ -1,6 +1,6 @@
 package com.tony_tang.android.demo.common.module;
 
-import android.arch.persistence.room.Room;
+import androidx.room.Room;
 import android.content.Context;
 
 import com.jordifierro.androidbase.data.repository.NoteBeanDao;

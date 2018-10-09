@@ -8,6 +8,11 @@ import com.tony_tang.android.demo.common.base.CleanActivity;
 public class NoteListFragmentActivity extends CleanActivity {
 
     @Override
+    protected void bindView() {
+
+    }
+
+    @Override
     protected void initializeActivity(Bundle savedInstanceState) {
         if (savedInstanceState == null) {
             getFragmentManager()
