@@ -49,7 +49,7 @@ public class NoteDiskCacheImpl {
     }
 
     public boolean isValid(String objectId) {
-        return !noteEntityDao.isExpired(objectId);
+        return noteEntityDao.isExist(objectId) && !noteEntityDao.isExpired(objectId);
     }
 
     public void put(List<NoteEntity> list) {

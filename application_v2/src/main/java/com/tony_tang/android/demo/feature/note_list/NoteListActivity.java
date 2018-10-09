@@ -9,6 +9,7 @@ import com.jordifierro.androidbase.domain.entity.NoteEntity;
 import com.tony_tang.android.demo.R;
 import com.tony_tang.android.demo.common.base.BaseModelListActivity;
 import com.tony_tang.android.demo.feature.common.BaseModelController;
+import com.tony_tang.android.demo.feature.note_creation.NoteCreateActivity;
 import com.tony_tang.android.demo.feature.note_detail.NoteDetailActivity;
 import com.tony_tang.android.demo.feature.note_list_paging.NoteListPagingActivity;
 import com.tony_tang.android.demo.presentation.presenter.NoteListPresenter;
@@ -57,6 +58,9 @@ public class NoteListActivity extends BaseModelListActivity {
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
+            case R.id.item_create:
+                startActivity(NoteCreateActivity.constructIntent(this));
+                return true;
             case R.id.item_show_paging:
                 startActivity(NoteListPagingActivity.constructIntent(this));
                 return true;

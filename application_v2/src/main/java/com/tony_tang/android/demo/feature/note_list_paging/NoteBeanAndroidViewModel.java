@@ -13,7 +13,9 @@ import androidx.lifecycle.AndroidViewModel;
 import androidx.lifecycle.LiveData;
 import androidx.paging.LivePagedListBuilder;
 import androidx.paging.PagedList;
+import hugo.weaving.DebugLog;
 
+@DebugLog
 public class NoteBeanAndroidViewModel extends AndroidViewModel {
     private LiveData<PagedList<NoteBean>> noteBeanPageListLiveData;
 
