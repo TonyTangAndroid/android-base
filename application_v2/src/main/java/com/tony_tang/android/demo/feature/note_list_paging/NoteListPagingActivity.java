@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.Toast;
 
 import com.jordifierro.androidbase.data.repository.NoteBean;
 import com.tony_tang.android.demo.R;
@@ -72,6 +73,7 @@ public class NoteListPagingActivity extends AppCompatActivity implements SwipeRe
 
     private void onDataReady(PagedList<NoteBean> noteBeans) {
         System.out.println("new page size :" + noteBeans.size());
+        Toast.makeText(NoteListPagingActivity.this, "total size:" + noteBeans.size(), Toast.LENGTH_SHORT).show();
         adapter.submitList(noteBeans);
     }
 
