@@ -2,10 +2,10 @@ package com.tony_tang.android.demo.common;
 
 import android.app.Activity;
 import android.app.Fragment;
-import androidx.multidex.MultiDexApplication;
 
 import javax.inject.Inject;
 
+import androidx.multidex.MultiDexApplication;
 import dagger.android.AndroidInjector;
 import dagger.android.DispatchingAndroidInjector;
 import dagger.android.HasActivityInjector;
@@ -19,13 +19,20 @@ public class DemoApplication extends MultiDexApplication implements HasActivityI
     @Inject
     DispatchingAndroidInjector<Fragment> fragmentDispatchingAndroidInjector;
 
+    public DemoApplicationComponent applicationComponent() {
+        return demoApplicationComponent;
+    }
+
+    private DemoApplicationComponent demoApplicationComponent;
+
     @Override
     public void onCreate() {
         super.onCreate();
-        DaggerDemoApplicationComponent
+        demoApplicationComponent = DaggerDemoApplicationComponent
                 .builder()
                 .application(this)
-                .build()
+                .build();
+        demoApplicationComponent
                 .inject(this);
 
     }

@@ -2,6 +2,7 @@ package com.tony_tang.android.demo.common;
 
 import android.app.Application;
 
+import com.jordifierro.androidbase.data.repository.NoteRoomDatabase;
 import com.tony_tang.android.demo.common.module.CacheModule;
 import com.tony_tang.android.demo.common.module.DataModule;
 import com.tony_tang.android.demo.common.module.GsonModule;
@@ -30,6 +31,8 @@ import dagger.android.AndroidInjectionModule;
 public interface DemoApplicationComponent {
 
     void inject(DemoApplication app);
+
+    NoteRoomDatabase database();
 
     @Component.Builder
     interface Builder {

@@ -1,25 +1,28 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              xmlns:tools="http://schemas.android.com/tools"
               android:id="@+id/ll_note_item"
               android:layout_width="match_parent"
               android:layout_height="wrap_content"
               android:orientation="vertical"
-              android:paddingBottom="@dimen/activity_horizontal_margin_half"
               android:paddingLeft="@dimen/activity_horizontal_margin"
+              android:paddingTop="@dimen/activity_horizontal_margin_half"
               android:paddingRight="@dimen/activity_horizontal_margin"
-              android:paddingTop="@dimen/activity_horizontal_margin_half">
+              android:paddingBottom="@dimen/activity_horizontal_margin_half">
 
     <TextView
         android:id="@+id/tv_title"
         style="@style/Base.TextAppearance.AppCompat.Title"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"/>
+        android:layout_height="wrap_content"
+        tools:text="Title"/>
 
     <TextView
         android:id="@+id/tv_content"
         style="@style/Base.TextAppearance.AppCompat.Caption"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"/>
+        android:layout_height="wrap_content"
+        tools:text="Content"/>
 </LinearLayout>
 
 

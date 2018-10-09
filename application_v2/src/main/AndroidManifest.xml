@@ -33,7 +33,7 @@
             android:name="com.tony_tang.android.demo.feature.note_creation.NoteCreateActivity"
             android:label="@string/note_create"/>
         <activity
-            android:name=".feature.note_list.NoteListPagingActivity"
+            android:name=".feature.note_list_paging.NoteListPagingActivity"
             android:label="@string/note_list_paging"/>
     </application>
 

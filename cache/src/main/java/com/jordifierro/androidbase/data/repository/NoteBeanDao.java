@@ -1,13 +1,14 @@
 package com.jordifierro.androidbase.data.repository;
 
+import java.util.List;
+
+import javax.annotation.Nullable;
+
+import androidx.paging.DataSource;
 import androidx.room.Dao;
 import androidx.room.Insert;
 import androidx.room.OnConflictStrategy;
 import androidx.room.Query;
-
-import java.util.List;
-
-import javax.annotation.Nullable;
 
 import static com.jordifierro.androidbase.data.repository.NoteBean.OBJECT_ID;
 import static com.jordifierro.androidbase.data.repository.NoteBean.TABLE_NAME_NOTE_CACHE;
@@ -31,4 +32,14 @@ public interface NoteBeanDao {
 
     @Query(value = "DELETE FROM " + TABLE_NAME_NOTE_CACHE)
     void clear();
+
+
+    /**
+     * Room knows how to return a LivePagedListProvider, from which we can get a LiveData and serve
+     * it back to UI via ViewModel.
+     */
+    @Query("SELECT * FROM note ORDER BY createAt COLLATE NOCASE DESC")
+    DataSource.Factory<Integer, NoteBean> allNoteBean();
+
+
 }
