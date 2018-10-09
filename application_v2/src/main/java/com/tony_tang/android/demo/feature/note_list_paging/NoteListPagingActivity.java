@@ -13,12 +13,10 @@ import com.tony_tang.android.demo.feature.note_creation.NoteCreateActivity;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
-import androidx.lifecycle.Observer;
 import androidx.paging.PagedList;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
-import hugo.weaving.DebugLog;
 
 public class NoteListPagingActivity extends AppCompatActivity implements SwipeRefreshLayout.OnRefreshListener {
 
@@ -69,15 +67,12 @@ public class NoteListPagingActivity extends AppCompatActivity implements SwipeRe
         rv_entity_list.setLayoutManager(new LinearLayoutManager(this));
         adapter = new NoteBeanPagedListAdapter(new NoteBeanDiffUtilItemCallback());
         rv_entity_list.setAdapter(adapter);
-        new NoteBeanAndroidViewModel(getApplication()).get().observe(this, new Observer<PagedList<NoteBean>>() {
+        new NoteBeanAndroidViewModel(getApplication()).get().observe(this, this::onDataReady);
+    }
 
-            @DebugLog
-            @Override
-            public void onChanged(PagedList<NoteBean> noteBeans) {
-                System.out.println("new page size :" + noteBeans.size());
-                adapter.submitList(noteBeans);
-            }
-        });
+    private void onDataReady(PagedList<NoteBean> noteBeans) {
+        System.out.println("new page size :" + noteBeans.size());
+        adapter.submitList(noteBeans);
     }
 
 
