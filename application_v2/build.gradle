@@ -99,9 +99,9 @@ dependencies {
     androidTestCompile applicationTestDependencies.dexmakerDx
     androidTestCompile applicationTestDependencies.dexmakerParent
     androidTestCompile applicationTestDependencies.dexmakerMockito
-    androidTestCompile 'androidx.test.espresso:espresso-core:3.1.0-beta01'
-    androidTestCompile 'androidx.test.espresso:espresso-intents:3.1.0-beta01'
-    androidTestCompile 'androidx.test.espresso:espresso-web:3.1.0-beta01'
+    androidTestCompile 'androidx.test.espresso:espresso-core:3.1.0'
+    androidTestCompile 'androidx.test.espresso:espresso-intents:3.1.0'
+    androidTestCompile 'androidx.test.espresso:espresso-web:3.1.0'
     androidTestCompile applicationTestDependencies.findbugsJsr305
 
 }

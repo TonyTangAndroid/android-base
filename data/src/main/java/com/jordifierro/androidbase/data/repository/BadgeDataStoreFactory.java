@@ -43,5 +43,9 @@ public class BadgeDataStoreFactory {
         return cloudBadgeDataStore;
     }
 
+    NoteDiskDataStore noteDiskDataStore() {
+        return badgeCacheInDisk;
+    }
+
 
 }

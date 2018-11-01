@@ -31,4 +31,8 @@ public class NoteDiskDataStore implements BadgeDataStore {
             return noteEntity;
         }
     }
+
+    public void delete(String noteObjectId) {
+        noteDiskCache.delete(noteObjectId);
+    }
 }

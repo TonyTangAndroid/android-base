@@ -9,7 +9,12 @@ import android.widget.Toast;
 
 import com.jordifierro.androidbase.data.repository.NoteBean;
 import com.tony_tang.android.demo.R;
+import com.tony_tang.android.demo.common.DemoApplication;
+import com.tony_tang.android.demo.common.DemoApplicationComponent;
+import com.tony_tang.android.demo.common.scope.ActivityScope;
 import com.tony_tang.android.demo.feature.note_creation.NoteCreateActivity;
+
+import javax.inject.Inject;
 
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
@@ -18,13 +23,20 @@ import androidx.paging.PagedList;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
+import dagger.Provides;
 
-public class NoteListPagingActivity extends AppCompatActivity implements SwipeRefreshLayout.OnRefreshListener, NoteBeanViewHolder.Listener {
+public class NoteListPagingActivity extends AppCompatActivity
+        implements SwipeRefreshLayout.OnRefreshListener,
+        NoteBeanViewHolder.Listener,
+        NotePagingListPresenter.NotePagingUI {
 
-    Toolbar toolbar;
-    RecyclerView rv_entity_list;
-    SwipeRefreshLayout swipe_refresh_layout;
+    private Toolbar toolbar;
+    private RecyclerView rv_entity_list;
+    private SwipeRefreshLayout swipe_refresh_layout;
     private NoteBeanPagedListAdapter adapter;
+
+    @Inject
+    NotePagingListPresenter notePagingListPresenter;
 
     public static Intent constructIntent(Activity activity) {
         return new Intent(activity, NoteListPagingActivity.class);
@@ -59,9 +71,17 @@ public class NoteListPagingActivity extends AppCompatActivity implements SwipeRe
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        inject();
         setContentView(R.layout.activity_entity_list);
         bindView();
         bindData();
+    }
+
+    private void inject() {
+        DaggerNoteListPagingActivity_Component.builder()
+                .activityModule(new ActivityModule(this))
+                .demoApplicationComponent(((DemoApplication) getApplication()).applicationComponent())
+                .build().inject(this);
     }
 
     private void bindData() {
@@ -73,7 +93,7 @@ public class NoteListPagingActivity extends AppCompatActivity implements SwipeRe
 
     private void onDataReady(PagedList<NoteBean> noteBeans) {
         System.out.println("new page size :" + noteBeans.size());
-        Toast.makeText(NoteListPagingActivity.this, "total size:" + noteBeans.size(), Toast.LENGTH_SHORT).show();
+        Toast.makeText(NoteListPagingActivity.this, "total:" + noteBeans.size(), Toast.LENGTH_SHORT).show();
         adapter.submitList(noteBeans);
     }
 
@@ -97,7 +117,7 @@ public class NoteListPagingActivity extends AppCompatActivity implements SwipeRe
 
     @Override
     public void delete(NoteBean notebean) {
-
+        notePagingListPresenter.delete(notebean.objectId);
     }
 
     @Override
@@ -109,4 +129,34 @@ public class NoteListPagingActivity extends AppCompatActivity implements SwipeRe
     public void toggleOrder(NoteBean notebean) {
 
     }
+
+    @Override
+    public void handleError(Throwable e) {
+
+    }
+
+    @ActivityScope
+    @dagger.Component(modules = NoteListPagingActivity.ActivityModule.class,
+            dependencies = DemoApplicationComponent.class)
+    interface Component {
+        void inject(NoteListPagingActivity activity);
+    }
+
+    @dagger.Module
+    static class ActivityModule {
+
+        private final NoteListPagingActivity activity;
+
+        ActivityModule(NoteListPagingActivity activity) {
+            this.activity = activity;
+        }
+
+        @Provides
+        @ActivityScope
+        NotePagingListPresenter.NotePagingUI ui() {
+            return activity;
+        }
+    }
+
+
 }

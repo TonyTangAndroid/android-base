@@ -64,7 +64,12 @@ public class NoteDataRepository extends RestApiRepository implements NoteReposit
 
     @Override
     public Completable deleteNote(String noteObjectId) {
-        return this.restApi.deleteNote(noteObjectId).map(this::validateResponse).toCompletable();
+        return this.restApi.deleteNote(noteObjectId).map(this::validateResponse)
+                .toCompletable().doOnComplete(() -> clearCache(noteObjectId));
+    }
+
+    private void clearCache(String noteObjectId) {
+        badgeDataStoreFactory.noteDiskDataStore().delete(noteObjectId);
     }
 
     private VoidEntity validateResponse(Response<VoidEntity> response) {
