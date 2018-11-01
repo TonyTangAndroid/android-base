@@ -19,7 +19,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
-public class NoteListPagingActivity extends AppCompatActivity implements SwipeRefreshLayout.OnRefreshListener {
+public class NoteListPagingActivity extends AppCompatActivity implements SwipeRefreshLayout.OnRefreshListener, NoteBeanViewHolder.Listener {
 
     Toolbar toolbar;
     RecyclerView rv_entity_list;
@@ -66,7 +66,7 @@ public class NoteListPagingActivity extends AppCompatActivity implements SwipeRe
 
     private void bindData() {
         rv_entity_list.setLayoutManager(new LinearLayoutManager(this));
-        adapter = new NoteBeanPagedListAdapter(new NoteBeanDiffUtilItemCallback());
+        adapter = new NoteBeanPagedListAdapter(new NoteBeanDiffUtilItemCallback(), this);
         rv_entity_list.setAdapter(adapter);
         new NoteBeanAndroidViewModel(getApplication()).get().observe(this, this::onDataReady);
     }
@@ -92,6 +92,21 @@ public class NoteListPagingActivity extends AppCompatActivity implements SwipeRe
     }
 
     private void refresh() {
+
+    }
+
+    @Override
+    public void delete(NoteBean notebean) {
+
+    }
+
+    @Override
+    public void toggleTitle(NoteBean notebean) {
+
+    }
+
+    @Override
+    public void toggleOrder(NoteBean notebean) {
 
     }
 }

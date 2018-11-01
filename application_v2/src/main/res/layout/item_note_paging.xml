@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              xmlns:tools="http://schemas.android.com/tools"
+              android:id="@+id/ll_note_item"
+              android:layout_width="match_parent"
+              android:layout_height="wrap_content"
+              android:baselineAligned="false"
+              android:orientation="horizontal"
+              android:paddingLeft="@dimen/activity_horizontal_margin"
+              android:paddingTop="@dimen/activity_horizontal_margin_half"
+              android:paddingRight="@dimen/activity_horizontal_margin"
+              android:paddingBottom="@dimen/activity_horizontal_margin_half">
+
+
+    <LinearLayout
+        android:layout_width="144dp"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <Button
+            android:id="@+id/btn_delete"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/delete"/>
+
+
+        <Button
+            android:id="@+id/btn_toggle_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/toggle_title"/>
+
+        <Button
+            android:id="@+id/btn_toggle_order"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/toggle_order"/>
+
+
+    </LinearLayout>
+
+
+    <LinearLayout
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/tv_id"
+            style="@style/Base.TextAppearance.AppCompat.Title"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="@dimen/activity_horizontal_margin_quarter"
+            tools:text="ID"/>
+
+        <TextView
+            android:id="@+id/tv_title"
+            style="@style/Base.TextAppearance.AppCompat.Title"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="@dimen/activity_horizontal_margin_quarter"
+            tools:text="Title"/>
+
+        <TextView
+            android:id="@+id/tv_content"
+            style="@style/Base.TextAppearance.AppCompat.Caption"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="@dimen/activity_horizontal_margin_quarter"
+            tools:text="Content"/>
+
+    </LinearLayout>
+</LinearLayout>
+
+
+
+
+
+

@@ -16,22 +16,22 @@ import hugo.weaving.DebugLog;
 @DebugLog
 public class NoteBeanPagedListAdapter extends PagedListAdapter<NoteBean, RecyclerView.ViewHolder> {
 
-    NoteBeanPagedListAdapter(@NonNull DiffUtil.ItemCallback<NoteBean> diffCallback) {
+    private final NoteBeanViewHolder.Listener listener;
+
+    NoteBeanPagedListAdapter(@NonNull DiffUtil.ItemCallback<NoteBean> diffCallback, NoteBeanViewHolder.Listener listener) {
         super(diffCallback);
+        this.listener = listener;
     }
 
     @NonNull
     @Override
     public RecyclerView.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-
-        View rootView = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_note, parent, false);
-        return new NoteBeanViewHolder(rootView);
+        View rootView = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_note_paging, parent, false);
+        return new NoteBeanViewHolder(rootView, listener);
     }
 
     @Override
     public void onBindViewHolder(@NonNull RecyclerView.ViewHolder holder, int position) {
-        NoteBean show = getItem(position);
-        NoteBeanViewHolder showHolder = (NoteBeanViewHolder) holder;
-        showHolder.bindTo(show);
+        ((NoteBeanViewHolder) holder).bindTo(getItem(position));
     }
 }

@@ -17,4 +17,7 @@
     <string name="network_connection_timeout">Network Connection Timeout</string>
     <string name="paging">Paging</string>
     <string name="note_list_paging">Note Paging List</string>
+    <string name="toggle_order">Toggle Order</string>
+    <string name="toggle_title">Toggle Title</string>
+    <string name="delete">Delete</string>
 </resources>
