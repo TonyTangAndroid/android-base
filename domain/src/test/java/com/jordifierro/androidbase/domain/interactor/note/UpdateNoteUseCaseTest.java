@@ -1,7 +1,6 @@
 package com.jordifierro.androidbase.domain.interactor.note;
 
 import com.jordifierro.androidbase.domain.entity.NoteEntity;
-import com.jordifierro.androidbase.domain.entity.UpdatedWrapper;
 import com.jordifierro.androidbase.domain.executor.ThreadExecutor;
 import com.jordifierro.androidbase.domain.executor.UIThread;
 import com.jordifierro.androidbase.domain.repository.NoteRepository;
@@ -45,8 +44,6 @@ public class UpdateNoteUseCaseTest {
 
     @Test
     public void testUpdateNoteUseCaseSuccess() {
-
-        UpdatedWrapper updatedWrapper = new UpdatedWrapper(FAKE_UPDATED_TIME);
 
         NoteEntity note = new NoteEntity(FAKE_ID, FAKE_TITLE, FAKE_CONTENT);
 
