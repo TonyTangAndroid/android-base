@@ -1,11 +1,11 @@
 package com.jordifierro.androidbase.data.net.error;
 
+import com.google.common.truth.Truth;
 import com.jordifierro.androidbase.domain.exception.RestApiErrorException;
 
 import org.junit.Before;
 import org.junit.Test;
 
-import static junit.framework.Assert.Truth.assertThat;
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.core.Is.is;
 
@@ -29,20 +29,18 @@ public class RestApiErrorExceptionTest {
 
     @Test
     public void testStatusCodes() {
-        Truth.assertThat(400, RestApiErrorException.BAD_REQUEST);
-        Truth.assertThat(209, RestApiErrorException.INVALID_SESSION_TOKEN);
-        Truth.assertThat(401, RestApiErrorException.UNAUTHORIZED);
-        Truth.assertThat(404, RestApiErrorException.NOT_FOUND);
-        Truth.assertThat(422, RestApiErrorException.UNPROCESSABLE_ENTITY);
-        Truth.assertThat(426, RestApiErrorException.UPGRADE_REQUIRED);
-        Truth.assertThat(500, RestApiErrorException.INTERNAL_SERVER_ERROR);
+        Truth.assertThat(RestApiErrorException.NOT_FOUND).isEqualTo(404);
+        Truth.assertThat(RestApiErrorException.BAD_REQUEST).isEqualTo(400);
+        Truth.assertThat(RestApiErrorException.UNAUTHORIZED).isEqualTo(401);
+        Truth.assertThat(RestApiErrorException.UPGRADE_REQUIRED).isEqualTo(426);
+        Truth.assertThat(RestApiErrorException.UNPROCESSABLE_ENTITY).isEqualTo(422);
+        Truth.assertThat(RestApiErrorException.INVALID_SESSION_TOKEN).isEqualTo(209);
+        Truth.assertThat(RestApiErrorException.INTERNAL_SERVER_ERROR).isEqualTo(500);
     }
 
     @Test
     public void testRestApiErrorSetStatus() {
-
         this.restApiErrorException.setStatusCode(300);
-
         assertThat(this.restApiErrorException.getStatusCode(), is(300));
     }
 

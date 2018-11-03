@@ -1,5 +1,6 @@
 package com.jordifierro.androidbase.data.net.interceptor;
 
+import com.google.common.truth.Truth;
 import com.jordifierro.androidbase.data.net.RestApi;
 
 import org.junit.Test;
@@ -11,8 +12,6 @@ import okhttp3.Request;
 import okhttp3.mockwebserver.MockResponse;
 import okhttp3.mockwebserver.MockWebServer;
 import okhttp3.mockwebserver.RecordedRequest;
-
-import static junit.framework.Assert.Truth.assertThat;
 
 public class HttpInterceptorTest {
 
@@ -26,9 +25,9 @@ public class HttpInterceptorTest {
         okHttpClient.newCall(new Request.Builder().url(mockWebServer.url("/")).build()).execute();
 
         RecordedRequest request = mockWebServer.takeRequest();
-        Truth.assertThat(Locale.getDefault().getLanguage(), request.getHeader("Accept-Language"));
-        Truth.assertThat(RestApi.PARSE_APPLICATION_ID_VALUE, request.getHeader(HttpInterceptor.X_PARSE_APPLICATION_ID));
-        Truth.assertThat(HttpInterceptor.APPLICATION_JSON, request.getHeader(HttpInterceptor.CONTENT_TYPE));
+        Truth.assertThat(request.getHeader("Accept-Language")).isEqualTo(Locale.getDefault().getLanguage());
+        Truth.assertThat(request.getHeader(HttpInterceptor.X_PARSE_APPLICATION_ID)).isEqualTo(RestApi.PARSE_APPLICATION_ID_VALUE);
+        Truth.assertThat(request.getHeader(HttpInterceptor.CONTENT_TYPE)).isEqualTo(HttpInterceptor.APPLICATION_JSON);
 
         mockWebServer.shutdown();
     }
