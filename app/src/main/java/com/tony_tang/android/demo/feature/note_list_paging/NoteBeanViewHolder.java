@@ -9,9 +9,7 @@ import com.tony_tang.android.demo.R;
 
 import androidx.annotation.Nullable;
 import androidx.recyclerview.widget.RecyclerView;
-import hugo.weaving.DebugLog;
 
-@DebugLog
 public final class NoteBeanViewHolder extends RecyclerView.ViewHolder {
     private final TextView tv_title;
     private final TextView tv_content;

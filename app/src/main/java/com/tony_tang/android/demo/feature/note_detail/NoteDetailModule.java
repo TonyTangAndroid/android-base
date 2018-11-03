@@ -8,7 +8,6 @@ import dagger.Provides;
 @Module
 public class NoteDetailModule {
 
-    //@DebugLog
     @Provides
     NoteDetailView provideDetailFragmentView(NoteDetailFragment noteDetailFragment) {
         return noteDetailFragment;

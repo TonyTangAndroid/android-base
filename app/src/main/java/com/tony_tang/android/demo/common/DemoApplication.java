@@ -8,22 +8,20 @@ import javax.inject.Inject;
 import androidx.multidex.MultiDexApplication;
 import dagger.android.AndroidInjector;
 import dagger.android.DispatchingAndroidInjector;
-import dagger.android.HasActivityInjector;
 import dagger.android.HasFragmentInjector;
 
-public class DemoApplication extends MultiDexApplication implements HasActivityInjector, HasFragmentInjector {
+public class DemoApplication extends MultiDexApplication implements HasFragmentInjector {
 
     @Inject
     DispatchingAndroidInjector<Activity> activityDispatchingAndroidInjector;
 
     @Inject
     DispatchingAndroidInjector<Fragment> fragmentDispatchingAndroidInjector;
+    private DemoApplicationComponent demoApplicationComponent;
 
     public DemoApplicationComponent applicationComponent() {
         return demoApplicationComponent;
     }
-
-    private DemoApplicationComponent demoApplicationComponent;
 
     @Override
     public void onCreate() {
@@ -35,11 +33,6 @@ public class DemoApplication extends MultiDexApplication implements HasActivityI
         demoApplicationComponent
                 .inject(this);
 
-    }
-
-    @Override
-    public DispatchingAndroidInjector<Activity> activityInjector() {
-        return activityDispatchingAndroidInjector;
     }
 
     @Override

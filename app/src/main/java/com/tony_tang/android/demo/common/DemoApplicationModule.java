@@ -3,16 +3,17 @@ package com.tony_tang.android.demo.common;
 import android.app.Application;
 import android.content.Context;
 
+import com.tony_tang.android.demo.common.scope.ApplicationScope;
+
 import dagger.Module;
 import dagger.Provides;
 
-@Module//申明你的module
+@Module
 public class DemoApplicationModule {
 
-    //1, 申明你的module，你可以提供什么东西。
-    @Provides//你可以提供什么东西。
+    @ApplicationScope
+    @Provides
     Context provideContext(Application application) {
-        //4101
         return application;
     }
 

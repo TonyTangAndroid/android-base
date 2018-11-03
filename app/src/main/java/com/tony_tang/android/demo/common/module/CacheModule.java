@@ -8,9 +8,7 @@ import com.tony_tang.android.demo.common.scope.ApplicationScope;
 
 import dagger.Module;
 import dagger.Provides;
-import hugo.weaving.DebugLog;
 
-@DebugLog
 @Module
 public class CacheModule {
 

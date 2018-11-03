@@ -16,9 +16,6 @@ import dagger.BindsInstance;
 import dagger.Component;
 import dagger.android.AndroidInjectionModule;
 
-/**
-
- */
 @ApplicationScope
 @Component(modules = {
         AndroidInjectionModule.class,
@@ -28,7 +25,6 @@ import dagger.android.AndroidInjectionModule;
         GsonModule.class,
         DataModule.class,
         CacheModule.class,
-        DemoActivityInjector.class,
         DemoFragmentInjector.class})
 public interface DemoApplicationComponent {
 

@@ -13,7 +13,7 @@
         android:theme="@style/AppThemeNoTitleBar"
         tools:ignore="AllowBackup,GoogleAppIndexingWarning">
         <activity
-            android:name="com.tony_tang.android.demo.feature.note_list.NoteListActivity"
+            android:name=".feature.note_list_paging.NoteListPagingActivity"
             android:label="@string/note_list">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN"/>
@@ -22,19 +22,11 @@
         </activity>
 
         <activity
-            android:name="com.tony_tang.android.demo.feature.note_list.fragment.NoteListFragmentActivity"
-            android:label="@string/note_list">
-
-        </activity>
-        <activity
             android:name="com.tony_tang.android.demo.feature.note_detail.NoteDetailActivity"
             android:label="@string/note_detail"/>
         <activity
             android:name="com.tony_tang.android.demo.feature.note_creation.NoteCreateActivity"
             android:label="@string/note_create"/>
-        <activity
-            android:name=".feature.note_list_paging.NoteListPagingActivity"
-            android:label="@string/note_list_paging"/>
     </application>
 
 </manifest>

@@ -6,7 +6,7 @@ import javax.inject.Inject;
 
 import io.reactivex.observers.DisposableCompletableObserver;
 
-public class NotePagingListPresenter {
+class NotePagingListPresenter {
 
     private final NotePagingUI notePagingUI;
     private final DeleteNoteUseCase deleteNoteUseCase;

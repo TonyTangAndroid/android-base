@@ -11,7 +11,6 @@ import com.jordifierro.androidbase.data.repository.NoteBean;
 import com.tony_tang.android.demo.R;
 import com.tony_tang.android.demo.common.DemoApplication;
 import com.tony_tang.android.demo.common.DemoApplicationComponent;
-import com.tony_tang.android.demo.common.scope.ActivityScope;
 import com.tony_tang.android.demo.feature.note_creation.NoteCreateActivity;
 
 import javax.inject.Inject;
@@ -30,13 +29,12 @@ public class NoteListPagingActivity extends AppCompatActivity
         NoteBeanViewHolder.Listener,
         NotePagingListPresenter.NotePagingUI {
 
+    @Inject
+    NotePagingListPresenter notePagingListPresenter;
     private Toolbar toolbar;
     private RecyclerView rv_entity_list;
     private SwipeRefreshLayout swipe_refresh_layout;
     private NoteBeanPagedListAdapter adapter;
-
-    @Inject
-    NotePagingListPresenter notePagingListPresenter;
 
     public static Intent constructIntent(Activity activity) {
         return new Intent(activity, NoteListPagingActivity.class);
@@ -75,6 +73,12 @@ public class NoteListPagingActivity extends AppCompatActivity
         setContentView(R.layout.activity_entity_list);
         bindView();
         bindData();
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        notePagingListPresenter.destroy();
     }
 
     private void inject() {
@@ -151,8 +155,8 @@ public class NoteListPagingActivity extends AppCompatActivity
             this.activity = activity;
         }
 
-        @Provides
         @ActivityScope
+        @Provides
         NotePagingListPresenter.NotePagingUI ui() {
             return activity;
         }

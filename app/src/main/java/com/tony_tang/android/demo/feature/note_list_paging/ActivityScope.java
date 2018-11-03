@@ -1,4 +1,4 @@
-package com.tony_tang.android.demo.common.scope;
+package com.tony_tang.android.demo.feature.note_list_paging;
 
 import java.lang.annotation.Retention;
 

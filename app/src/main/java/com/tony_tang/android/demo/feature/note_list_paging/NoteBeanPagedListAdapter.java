@@ -11,9 +11,7 @@ import androidx.annotation.NonNull;
 import androidx.paging.PagedListAdapter;
 import androidx.recyclerview.widget.DiffUtil;
 import androidx.recyclerview.widget.RecyclerView;
-import hugo.weaving.DebugLog;
 
-@DebugLog
 public class NoteBeanPagedListAdapter extends PagedListAdapter<NoteBean, RecyclerView.ViewHolder> {
 
     private final NoteBeanViewHolder.Listener listener;
