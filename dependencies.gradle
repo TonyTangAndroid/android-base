@@ -25,6 +25,7 @@ ext {
     chuckVersion = '1.1.0'
     //Libraries
     everNoteAndroidStateVersion = '1.4.1'
+    //XXX why 2.19 not good
     daggerVersion = '2.11'
     findbugsJsr305Version = '3.0.1'
     okhttp3Version = '3.11.0'

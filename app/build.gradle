@@ -54,7 +54,7 @@ dependencies {
     compile project(':cache')
     compile project(':domain')
     compile project(':data')
-    compile project(':presentation_v2')
+    compile project(':presentation')
 
     compile 'androidx.multidex:multidex:2.0.0'
     compile ext_dependencies.proguardSnippets
