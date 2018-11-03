@@ -48,8 +48,8 @@ android {
 
 
 dependencies {
-    def applicationDependencies = rootProject.ext.applicationDependencies
-    def applicationTestDependencies = rootProject.ext.applicationTestDependencies
+    def ext_dependencies = rootProject.ext.ext_dependencies
+    def test_dependencies = rootProject.ext.test_dependencies
 
     compile project(':cache')
     compile project(':domain')
@@ -57,51 +57,50 @@ dependencies {
     compile project(':presentation_v2')
 
     compile 'androidx.multidex:multidex:2.0.0'
-    compile applicationDependencies.proguardSnippets
-    compile applicationDependencies.epoxy
+    compile ext_dependencies.proguardSnippets
+    compile ext_dependencies.epoxy
     compile 'com.google.android.material:material:1.0.0'
     compile 'androidx.legacy:legacy-support-v13:1.0.0'
     compile 'androidx.appcompat:appcompat:1.0.0'
-    compile applicationDependencies.daggerAndroid
-    compile applicationDependencies.dagger
-    compile applicationDependencies.javaxAnnotation
-    compile applicationDependencies.rxJava
-    compile applicationDependencies.rxAndroid
+    compile ext_dependencies.daggerAndroid
+    compile ext_dependencies.dagger
+    compile ext_dependencies.javaxAnnotation
+    compile ext_dependencies.rxJava
+    compile ext_dependencies.rxAndroid
     compile 'androidx.cardview:cardview:1.0.0'
     compile 'androidx.recyclerview:recyclerview:1.0.0'
-    compile applicationDependencies.everNoteAndroidState
-    annotationProcessor applicationDependencies.everNoteAndroidStateProcessor
+    compile ext_dependencies.everNoteAndroidState
+    annotationProcessor ext_dependencies.everNoteAndroidStateProcessor
 
-    debugCompile applicationDependencies.chuck
-    releaseCompile applicationDependencies.chuckNoOp
-
-
-    annotationProcessor applicationDependencies.epoxyProcessor
-    annotationProcessor applicationDependencies.daggerCompiler
-    annotationProcessor applicationDependencies.daggerProcessor
-
-    errorprone applicationDependencies.errorProneCore
+    debugCompile ext_dependencies.chuck
+    releaseCompile ext_dependencies.chuckNoOp
 
 
-    compile applicationDependencies.autoValue
-    provided applicationDependencies.autoValue
-    annotationProcessor applicationDependencies.autoValue
-    provided applicationDependencies.autoValueGson
-    annotationProcessor applicationDependencies.autoValueGson
-    annotationProcessor applicationDependencies.autoValueWith
+    annotationProcessor ext_dependencies.epoxyProcessor
+    annotationProcessor ext_dependencies.daggerCompiler
+    annotationProcessor ext_dependencies.daggerProcessor
 
 
-    androidTestAnnotationProcessor applicationTestDependencies.daggerCompiler
+
+    compile ext_dependencies.autoValue
+    provided ext_dependencies.autoValue
+    annotationProcessor ext_dependencies.autoValue
+    provided ext_dependencies.autoValueGson
+    annotationProcessor ext_dependencies.autoValueGson
+    annotationProcessor ext_dependencies.autoValueWith
+
+
+    androidTestAnnotationProcessor test_dependencies.daggerCompiler
 
     androidTestCompile 'androidx.annotation:annotation:1.0.0'
-    androidTestCompile applicationTestDependencies.mockito
-    androidTestCompile applicationTestDependencies.dexmaker
-    androidTestCompile applicationTestDependencies.dexmakerDx
-    androidTestCompile applicationTestDependencies.dexmakerParent
-    androidTestCompile applicationTestDependencies.dexmakerMockito
+    androidTestCompile test_dependencies.mockito
+    androidTestCompile test_dependencies.dexmaker
+    androidTestCompile test_dependencies.dexmakerDx
+    androidTestCompile test_dependencies.dexmakerParent
+    androidTestCompile test_dependencies.dexmakerMockito
     androidTestCompile 'androidx.test.espresso:espresso-core:3.1.0'
     androidTestCompile 'androidx.test.espresso:espresso-intents:3.1.0'
     androidTestCompile 'androidx.test.espresso:espresso-web:3.1.0'
-    androidTestCompile applicationTestDependencies.findbugsJsr305
+    androidTestCompile test_dependencies.findbugsJsr305
 
 }

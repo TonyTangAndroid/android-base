@@ -21,13 +21,11 @@ dependencies {
 
     compile project(':domain')
 
-    def presentationDependencies = rootProject.ext.presentationDependencies
-    def presentationTestDependencies = rootProject.ext.presentationTestDependencies
+    def ext_dependencies = rootProject.ext.ext_dependencies
+    def test_dependencies = rootProject.ext.test_dependencies
 
-    errorprone presentationDependencies.errorProneCore
-
-    testCompile presentationTestDependencies.junit
-    testCompile presentationTestDependencies.mockito
+    testCompile test_dependencies.junit
+    testCompile test_dependencies.mockito
 
 }
 

@@ -17,19 +17,17 @@ apply plugin: 'net.ltgt.apt'
 dependencies {
 
     compile project(':entity')
-    def domainDependencies = rootProject.ext.domainDependencies
-    def domainTestDependencies = rootProject.ext.domainTestDependencies
+    def ext_dependencies = rootProject.ext.ext_dependencies
+    def test_dependencies = rootProject.ext.test_dependencies
 
-    compile domainDependencies.javaxInject
-    compile domainDependencies.gson
-    compile domainDependencies.rxJava
-    compileOnly domainDependencies.autoValue
-    compile domainDependencies.errorProneAnnotation
-    errorprone dataDependencies.errorProneCore
-    apt domainDependencies.autoValue
-    testCompile domainTestDependencies.junit
-    testCompile domainTestDependencies.mockito
-    testCompile domainTestDependencies.jetAnnotations
+    compile ext_dependencies.javaxInject
+    compile ext_dependencies.gson
+    compile ext_dependencies.rxJava
+    compileOnly ext_dependencies.autoValue
+    apt ext_dependencies.autoValue
+    testCompile test_dependencies.junit
+    testCompile test_dependencies.mockito
+    testCompile test_dependencies.jetAnnotations
 
 
 }

@@ -14,110 +14,68 @@ ext {
     androidTargetSdkVersion = 28
     androidCompileSdkVersion = 28
     androidSupportVersion = '28.0.0'
-    multidexVersion = '1.0.2'
-    epoxyVersion = '2.2.0'
+    multidexVersion = '1.0.3'
+    epoxyVersion = '2.19.0'
 
-    autoValueVersion = '1.4.1'
-    autoValueGsonVersion = '0.4.6'
+    autoValueVersion = '1.6.2'
+    autoValueGsonVersion = '0.8.0'
     autoValueWithVersion = '1.0.0'
-    autoCommonVersion = '0.8'
-    gsonVersion = '2.8.0'
+    gsonVersion = '2.8.4'
     proguardSnippetsVersion = '1.0.0'
-    chuckVersion = '1.0.4'
+    chuckVersion = '1.1.0'
     //Libraries
     everNoteAndroidStateVersion = '1.4.1'
     daggerVersion = '2.11'
     findbugsJsr305Version = '3.0.1'
-    okhttp3Version = '3.7.0'
-    rxJavaVersion = '2.1.0'
-    rxAndroidVersion = '2.0.1'
+    okhttp3Version = '3.11.0'
+    rxJavaVersion = '2.2.3'
+    rxAndroidVersion = '2.1.0'
     javaxAnnotationVersion = '1.0'
     javaxInjectVersion = '1'
-    retrofitVersion = '2.2.0'
+    retrofitVersion = '2.4.0'
 
-    archVersion = '1.1.1'
-    roomVersion = '1.1.1'
-    pagingVersion = '1.0.0'
-
+    roomVersion = '2.1.0-alpha02'
+    pagingVersion = '2.1.0-beta01'
+    lifecycleVersion = '2.0.0'
 
     //Testing
     jUnitVersion = '4.12'
-    mockitoVersion = '1.9.5'//'2.0.43-beta', wait for dexmaker
+    mockitoVersion = '2.23.0'
     dexmakerVersion = '1.4'
-    mockWebServerVersion = '3.2.0'
-    commonsIOVersion = '2.4'
-    jetAnnotationVersion = '15.0'
-    espressoVersion = '2.2.2'
-    errorProneCoreVersion = '2.1.2'
-    errorProneAnnotationVersion = '2.1.2'
-    domainDependencies = [
-            retrofit            : "com.squareup.retrofit2:retrofit:${retrofitVersion}",
-            retrofitGson        : "com.squareup.retrofit2:converter-gson:${retrofitVersion}",
-            gson                : "com.google.code.gson:gson:${gsonVersion}",
-            retrofitRxJava      : "com.squareup.retrofit2:adapter-rxjava2:${retrofitVersion}",
-            javaxInject         : "javax.inject:javax.inject:${javaxInjectVersion}",
-            autoValue           : "com.google.auto.value:auto-value:${autoValueVersion}",
-            rxJava              : "io.reactivex.rxjava2:rxjava:${rxJavaVersion}",
-            errorProneCore      : "com.google.errorprone:error_prone_core:${errorProneCoreVersion}",
-            errorProneAnnotation: "com.google.errorprone:error_prone_annotations:${errorProneAnnotationVersion}",
-    ]
+    commonsIOVersion = '2.6'
+    jetAnnotationVersion = '16.0.3'
+    //'androidx.test.espresso:espresso-core:3.1.0'
+//    androidTestImplementation 'androidx.test:runner:1.1.0'
+//    androidTestImplementation 'androidx.test:rules:1.1.0'
+    espressoVersion = '3.1.0'
 
-    domainTestDependencies = [
-            junit         : "junit:junit:${jUnitVersion}",
-            mockito       : "org.mockito:mockito-core:${mockitoVersion}",
-            jetAnnotations: "org.jetbrains:annotations-java5:${jetAnnotationVersion}"
-    ]
 
-    dataDependencies = [
-            retrofit             : "com.squareup.retrofit2:retrofit:${retrofitVersion}",
-            findbugsJsr305    : "com.google.code.findbugs:jsr305:${findbugsJsr305Version}",
-            retrofitRxJava2      : "com.squareup.retrofit2:adapter-rxjava2:${retrofitVersion}",
-            retrofitGson         : "com.squareup.retrofit2:converter-gson:${retrofitVersion}",
-            okhttp3_log          : "com.squareup.okhttp3:logging-interceptor:${okhttp3Version}",
+    ext_dependencies = [
+            retrofit                     : "com.squareup.retrofit2:retrofit:${retrofitVersion}",
+            retrofitGson                 : "com.squareup.retrofit2:converter-gson:${retrofitVersion}",
+            gson                         : "com.google.code.gson:gson:${gsonVersion}",
+            retrofitRxJava               : "com.squareup.retrofit2:adapter-rxjava2:${retrofitVersion}",
+            javaxInject                  : "javax.inject:javax.inject:${javaxInjectVersion}",
+            autoValue                    : "com.google.auto.value:auto-value:${autoValueVersion}",
+            rxJava                       : "io.reactivex.rxjava2:rxjava:${rxJavaVersion}",
+            findbugsJsr305               : "com.google.code.findbugs:jsr305:${findbugsJsr305Version}",
+            retrofitRxJava2              : "com.squareup.retrofit2:adapter-rxjava2:${retrofitVersion}",
+            okhttp3_log                  : "com.squareup.okhttp3:logging-interceptor:${okhttp3Version}",
 
-            autoValue            : "com.google.auto.value:auto-value:${autoValueVersion}",
-            autoValueGson        : "com.ryanharter.auto.value:auto-value-gson:${autoValueGsonVersion}",
+            autoValueGson                : "com.ryanharter.auto.value:auto-value-gson:${autoValueGsonVersion}",
+            lifecycle                    : "android.arch.lifecycle:runtime:${lifecycleVersion}",
+            archExtensions               : "android.arch.lifecycle:extensions:${lifecycleVersion}",
+            archCompiler                 : "android.arch.lifecycle:common-java8:${lifecycleVersion}",
+            roomRuntime                  : "android.arch.persistence.room:runtime:${roomVersion}",
+            roomCompiler                 : "android.arch.persistence.room:compiler:${roomVersion}",
+            roomRxjava2                  : "android.arch.persistence.room:rxjava2:${roomVersion}",
+            paging                       : "android.arch.paging:runtime:${pagingVersion}",
 
 
 
-            lifecycle        : "android.arch.lifecycle:runtime:${archVersion}",
-            archExtensions   : "android.arch.lifecycle:extensions:${archVersion}",
-            archCompiler     : "android.arch.lifecycle:common-java8:${archVersion}",
-            roomRuntime      : "android.arch.persistence.room:runtime:${roomVersion}",
-            roomCompiler     : "android.arch.persistence.room:compiler:${roomVersion}",
-            roomRxjava2      : "android.arch.persistence.room:rxjava2:${roomVersion}",
-            paging           : "android.arch.paging:runtime:${pagingVersion}",
-
-
-
-            okhttp3              : "com.squareup.okhttp3:okhttp:${okhttp3Version}",
-            okhttp3_mockwebserver: "com.squareup.okhttp3:mockwebserver:${okhttp3Version}",
-            retrofitRxJava       : "com.squareup.retrofit2:adapter-rxjava2:${retrofitVersion}",
-            javaxAnnotation      : "javax.annotation:jsr250-api:${javaxAnnotationVersion}",
-            rxJava               : "io.reactivex.rxjava2:rxjava:${rxJavaVersion}",
-            errorProneCore       : "com.google.errorprone:error_prone_core:${errorProneCoreVersion}",
-
-    ]
-
-    dataTestDependencies = [
-            junit        : "junit:junit:${jUnitVersion}",
-            mockito      : "org.mockito:mockito-core:${mockitoVersion}",
-            mockWebServer: "com.squareup.okhttp3:mockwebserver:${mockWebServerVersion}",
-            commonsIO    : "commons-io:commons-io:${commonsIOVersion}"
-    ]
-
-
-
-    presentationTestDependencies = [
-            junit  : "junit:junit:${jUnitVersion}",
-            mockito: "org.mockito:mockito-core:${mockitoVersion}",
-    ]
-
-    presentationDependencies = [
-            errorProneCore: "com.google.errorprone:error_prone_core:${errorProneCoreVersion}",
-    ]
-
-    applicationDependencies = [
+            okhttp3                      : "com.squareup.okhttp3:okhttp:${okhttp3Version}",
+            okhttp3_mockwebserver        : "com.squareup.okhttp3:mockwebserver:${okhttp3Version}",
+            javaxAnnotation              : "javax.annotation:jsr250-api:${javaxAnnotationVersion}",
             everNoteAndroidState         : "com.evernote:android-state:${everNoteAndroidStateVersion}",
             everNoteAndroidStateProcessor: "com.evernote:android-state-processor:${everNoteAndroidStateVersion}",
 
@@ -130,40 +88,34 @@ ext {
             dagger                       : "com.google.dagger:dagger:${daggerVersion}",
             daggerAndroid                : "com.google.dagger:dagger-android-support:${daggerVersion}",
             proguardSnippets             : "com.infstory:proguard-snippets:${proguardSnippetsVersion}",
-            rxJava                       : "io.reactivex.rxjava2:rxjava:${rxJavaVersion}",
             rxAndroid                    : "io.reactivex.rxjava2:rxandroid:${rxAndroidVersion}",
-            autoValue                    : "com.google.auto.value:auto-value:${autoValueVersion}",
-            autoValueGson                : "com.ryanharter.auto.value:auto-value-gson:${autoValueGsonVersion}",
             cardview                     : "com.android.support:cardview-v7:${androidSupportVersion}",
             recyclerview                 : "com.android.support:recyclerview-v7:${androidSupportVersion}",
-            autoCommon                   : "com.google.auto:auto-common:${autoCommonVersion}",
             autoValueWith                : "com.gabrielittner.auto.value:auto-value-with:${autoValueWithVersion}",
-            gson                         : "com.google.code.gson:gson:${gsonVersion}",
-            javaxAnnotation              : "javax.annotation:jsr250-api:${javaxAnnotationVersion}",
             androidCompatv7              : "com.android.support:appcompat-v7:${androidSupportVersion}",
             androidSupportv13            : "com.android.support:support-v13:${androidSupportVersion}",
             androidDesign                : "com.android.support:design:${androidSupportVersion}",
             multidex                     : "com.android.support:multidex:${multidexVersion}",
-            errorProneCore               : "com.google.errorprone:error_prone_core:${errorProneCoreVersion}",
 
 
     ]
 
-    applicationTestDependencies = [
+    test_dependencies = [
             junit             : "junit:junit:${jUnitVersion}",
+            commonsIO         : "commons-io:commons-io:${commonsIOVersion}",
             mockito           : "org.mockito:mockito-core:${mockitoVersion}",
+            jetAnnotations    : "org.jetbrains:annotations-java5:${jetAnnotationVersion}",
+            mockWebServer     : "com.squareup.okhttp3:mockwebserver:${okhttp3Version}",
+            daggerCompiler    : "com.google.dagger:dagger-compiler:${daggerVersion}",
+            autoValue         : "com.google.auto.value:auto-value:${autoValueVersion}",
             dexmaker          : "com.crittercism.dexmaker:dexmaker:${dexmakerVersion}",
             dexmakerDx        : "com.crittercism.dexmaker:dexmaker-dx:${dexmakerVersion}",
+            findbugsJsr305    : "com.google.code.findbugs:jsr305:${findbugsJsr305Version}",
             dexmakerParent    : "com.crittercism.dexmaker:dexmaker-parent:${dexmakerVersion}",
-            autoValue         : "com.google.auto.value:auto-value:${autoValueVersion}",
             dexmakerMockito   : "com.crittercism.dexmaker:dexmaker-mockito:${dexmakerVersion}",
             androidAnnotations: "com.android.support:support-annotations:${androidSupportVersion}",
-            espresso          : "com.android.support.test.espresso:espresso-core:${espressoVersion}",
-            espressoIntents   : "com.android.support.test.espresso:espresso-intents:${espressoVersion}",
             espressoWeb       : "com.android.support.test.espresso:espresso-web:${espressoVersion}",
-            daggerCompiler    : "com.google.dagger:dagger-compiler:${daggerVersion}",
-            findbugsJsr305    : "com.google.code.findbugs:jsr305:${findbugsJsr305Version}",
+            espressoCore          : "com.android.support.test.espresso:espresso-core:${espressoVersion}",
+            espressoIntents   : "com.android.support.test.espresso:espresso-intents:${espressoVersion}",
     ]
-
-
 }

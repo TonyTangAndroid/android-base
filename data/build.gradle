@@ -20,44 +20,35 @@ dependencies {
     compile project(':cache_interface')
 
 
-    def dataDependencies = rootProject.ext.dataDependencies
-    def dataTestDependencies = rootProject.ext.dataTestDependencies
+    def ext_dependencies = rootProject.ext.ext_dependencies
+    def test_dependencies = rootProject.ext.test_dependencies
 
-    compile dataDependencies.javaxAnnotation
+    compile ext_dependencies.javaxAnnotation
 
-    compileOnly dataDependencies.autoValue
-    apt dataDependencies.autoValue
-    compileOnly dataDependencies.autoValueGson
-    apt dataDependencies.autoValueGson
+    compileOnly ext_dependencies.autoValue
+    apt ext_dependencies.autoValue
+    compileOnly ext_dependencies.autoValueGson
+    apt ext_dependencies.autoValueGson
+    compile ext_dependencies.findbugsJsr305
+    compile ext_dependencies.rxJava
+    compile ext_dependencies.retrofit
+    compile ext_dependencies.retrofitGson
+    compile ext_dependencies.retrofitRxJava2
+    compile ext_dependencies.okhttp3_log
+    compile ext_dependencies.okhttp3
+    compile ext_dependencies.okhttp3_mockwebserver
 
-    errorprone dataDependencies.errorProneCore
+    compile ext_dependencies.javaxInject
+    compile ext_dependencies.gson
+    compile ext_dependencies.rxJava
+    compileOnly ext_dependencies.autoValue
+    apt ext_dependencies.autoValue
 
-    compile dataDependencies.findbugsJsr305
-    compile dataDependencies.rxJava
-    compile dataDependencies.retrofit
-    compile dataDependencies.retrofitGson
-    compile dataDependencies.retrofitRxJava2
-    compile dataDependencies.okhttp3_log
-    compile dataDependencies.okhttp3
-    compile dataDependencies.okhttp3_mockwebserver
-
-
-    def domainDependencies = rootProject.ext.domainDependencies
-    def domainTestDependencies = rootProject.ext.domainTestDependencies
-
-    compile domainDependencies.javaxInject
-    compile domainDependencies.gson
-    compile domainDependencies.rxJava
-    compileOnly domainDependencies.autoValue
-    compile domainDependencies.errorProneAnnotation
-    errorprone dataDependencies.errorProneCore
-    apt domainDependencies.autoValue
-
-    testCompile dataTestDependencies.junit
-    testCompile dataTestDependencies.mockito
-    testCompile dataTestDependencies.mockWebServer
-    testCompile dataTestDependencies.commonsIO
-    testCompile domainTestDependencies.jetAnnotations
+    testCompile test_dependencies.junit
+    testCompile test_dependencies.mockito
+    testCompile test_dependencies.mockWebServer
+    testCompile test_dependencies.commonsIO
+    testCompile test_dependencies.jetAnnotations
 
 
 }

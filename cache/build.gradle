@@ -46,23 +46,22 @@ preBuild.dependsOn(copyResToDebugClasses)
 preBuild.dependsOn(copyResToReleaseClasses)
 
 dependencies {
-    def dataDependencies = rootProject.ext.dataDependencies
-    def dataTestDependencies = rootProject.ext.dataTestDependencies
+    def ext_dependencies = rootProject.ext.ext_dependencies
+    def test_dependencies = rootProject.ext.test_dependencies
 
     compile project(':cache_interface')
 
-    compile dataDependencies.javaxAnnotation
+    compile ext_dependencies.javaxAnnotation
 
-    provided dataDependencies.autoValue
-    annotationProcessor dataDependencies.autoValue
-    provided dataDependencies.autoValueGson
-    annotationProcessor dataDependencies.autoValueGson
+    provided ext_dependencies.autoValue
+    annotationProcessor ext_dependencies.autoValue
+    provided ext_dependencies.autoValueGson
+    annotationProcessor ext_dependencies.autoValueGson
 
-    errorprone dataDependencies.errorProneCore
 
-    testCompile dataTestDependencies.junit
-    testCompile dataTestDependencies.mockito
-    testCompile dataTestDependencies.commonsIO
+    testCompile test_dependencies.junit
+    testCompile test_dependencies.mockito
+    testCompile test_dependencies.commonsIO
 
     compile 'androidx.room:room-rxjava2:2.0.0'
     compile 'androidx.room:room-runtime:2.0.0'
