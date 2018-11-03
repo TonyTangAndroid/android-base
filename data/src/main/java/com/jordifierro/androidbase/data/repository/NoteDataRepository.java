@@ -18,11 +18,15 @@ import retrofit2.Response;
 public class NoteDataRepository extends RestApiRepository implements NoteRepository {
 
     private final RestApi restApi;
+    private final NoteCloudDataStore noteCloudDataStore;
     private final BadgeDataStoreFactory badgeDataStoreFactory;
 
     @Inject
-    public NoteDataRepository(RestApi restApi, BadgeDataStoreFactory badgeDataStoreFactory) {
+    public NoteDataRepository(RestApi restApi,
+                              NoteCloudDataStore noteCloudDataStore,
+                              BadgeDataStoreFactory badgeDataStoreFactory) {
         this.restApi = restApi;
+        this.noteCloudDataStore = noteCloudDataStore;
         this.badgeDataStoreFactory = badgeDataStoreFactory;
     }
 
@@ -49,8 +53,7 @@ public class NoteDataRepository extends RestApiRepository implements NoteReposit
 
     @Override
     public Single<List<NoteEntity>> getNotes(Map<String, Object> queryParam) {
-        return badgeDataStoreFactory.getCloudDataStore()
-                .getNotes(queryParam);
+        return noteCloudDataStore.getNotes(queryParam);
     }
 
     @Override
@@ -59,13 +62,13 @@ public class NoteDataRepository extends RestApiRepository implements NoteReposit
                 .map(noteEntityResponse -> {
                     handleResponseError(noteEntityResponse);
                     return noteEntityResponse.body();
-                }).toCompletable();
+                }).ignoreElement();
     }
 
     @Override
     public Completable deleteNote(String noteObjectId) {
         return this.restApi.deleteNote(noteObjectId).map(this::validateResponse)
-                .toCompletable().doOnComplete(() -> clearCache(noteObjectId));
+                .ignoreElement().doOnComplete(() -> clearCache(noteObjectId));
     }
 
     private void clearCache(String noteObjectId) {

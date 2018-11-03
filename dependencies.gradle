@@ -45,6 +45,8 @@ ext {
     dexmakerVersion = '1.4'
     commonsIOVersion = '2.6'
     jetAnnotationVersion = '16.0.3'
+    truthVersion = '0.42'
+
     //'androidx.test.espresso:espresso-core:3.1.0'
 //    androidTestImplementation 'androidx.test:runner:1.1.0'
 //    androidTestImplementation 'androidx.test:rules:1.1.0'
@@ -105,6 +107,7 @@ ext {
             junit             : "junit:junit:${jUnitVersion}",
             commonsIO         : "commons-io:commons-io:${commonsIOVersion}",
             mockito           : "org.mockito:mockito-core:${mockitoVersion}",
+            truth             : "com.google.truth:truth:${truthVersion}",
             jetAnnotations    : "org.jetbrains:annotations-java5:${jetAnnotationVersion}",
             mockWebServer     : "com.squareup.okhttp3:mockwebserver:${okhttp3Version}",
             daggerCompiler    : "com.google.dagger:dagger-compiler:${daggerVersion}",
@@ -116,7 +119,7 @@ ext {
             dexmakerMockito   : "com.crittercism.dexmaker:dexmaker-mockito:${dexmakerVersion}",
             androidAnnotations: "com.android.support:support-annotations:${androidSupportVersion}",
             espressoWeb       : "com.android.support.test.espresso:espresso-web:${espressoVersion}",
-            espressoCore          : "com.android.support.test.espresso:espresso-core:${espressoVersion}",
+            espressoCore      : "com.android.support.test.espresso:espresso-core:${espressoVersion}",
             espressoIntents   : "com.android.support.test.espresso:espresso-intents:${espressoVersion}",
     ]
 }

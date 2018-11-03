@@ -77,6 +77,10 @@ public class UseCaseTest {
             command.run();
         }
 
+        @Override
+        public Exception map(Throwable throwable) {
+            return null;
+        }
     }
 
 

@@ -2,9 +2,8 @@ package com.jordifierro.androidbase.domain.interactor.note;
 
 import com.jordifierro.androidbase.domain.entity.NoteEntity;
 import com.jordifierro.androidbase.domain.entity.UpdatedWrapper;
-import com.jordifierro.androidbase.domain.entity.UserEntity;
-import com.jordifierro.androidbase.domain.executor.UIThread;
 import com.jordifierro.androidbase.domain.executor.ThreadExecutor;
+import com.jordifierro.androidbase.domain.executor.UIThread;
 import com.jordifierro.androidbase.domain.repository.NoteRepository;
 import com.jordifierro.androidbase.domain.repository.SessionRepository;
 
@@ -13,13 +12,13 @@ import org.junit.Test;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 
-import io.reactivex.Observable;
+import io.reactivex.Completable;
+import io.reactivex.Single;
 import io.reactivex.observers.TestObserver;
 
 import static org.junit.Assert.assertEquals;
 import static org.mockito.BDDMockito.given;
 import static org.mockito.Matchers.any;
-import static org.mockito.Matchers.eq;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.verifyNoMoreInteractions;
 import static org.mockito.Mockito.verifyZeroInteractions;
@@ -59,10 +58,8 @@ public class UpdateNoteUseCaseTest {
         updatedNote.setUpdatedAt(FAKE_UPDATED_TIME);
 
 
-        given(mockNoteRepository.updateNote(any(UserEntity.class), eq(note)))
-                .willReturn(Observable.just(updatedWrapper));
-        given(mockNoteRepository.getNote(any(UserEntity.class), eq(note.getObjectId())))
-                .willReturn(Observable.just(updatedNote));
+        given(mockNoteRepository.updateNote(any(NoteEntity.class))).willReturn(Completable.complete());
+        given(mockNoteRepository.getNote(note.getObjectId())).willReturn(Single.just(updatedNote));
 
 
         UpdateNoteUseCase updateNoteUseCase = new UpdateNoteUseCase(mockThreadExecutor,
@@ -81,8 +78,8 @@ public class UpdateNoteUseCaseTest {
 
         verify(mockSessionRepository).getCurrentUser();
         verifyNoMoreInteractions(mockSessionRepository);
-        verify(mockNoteRepository).updateNote(null, note);
-        verify(mockNoteRepository).getNote(null, note.getObjectId());
+        verify(mockNoteRepository).updateNote(note);
+        verify(mockNoteRepository).getNote(note.getObjectId());
         verifyNoMoreInteractions(mockNoteRepository);
         verifyZeroInteractions(mockThreadExecutor);
         verifyZeroInteractions(mockUIThread);

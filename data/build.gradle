@@ -44,6 +44,7 @@ dependencies {
     compileOnly ext_dependencies.autoValue
     apt ext_dependencies.autoValue
 
+    testCompile test_dependencies.truth
     testCompile test_dependencies.junit
     testCompile test_dependencies.mockito
     testCompile test_dependencies.mockWebServer

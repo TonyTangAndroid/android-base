@@ -12,6 +12,7 @@ import com.jordifierro.androidbase.domain.exception.RestApiErrorException;
 
 import org.junit.After;
 import org.junit.Before;
+import org.junit.Ignore;
 import org.junit.Test;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
@@ -32,29 +33,27 @@ import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory;
 import retrofit2.converter.gson.GsonConverterFactory;
 
 import static com.google.common.truth.Truth.assertThat;
+import static com.jordifierro.androidbase.data.net.RestApi.PARSE_SESSION_KEY;
 import static com.jordifierro.androidbase.data.utils.TestUtils.getFileFromPath;
 import static junit.framework.Assert.assertEquals;
+import static junit.framework.Assert.assertTrue;
 import static org.apache.commons.io.FileUtils.readFileToString;
 import static org.mockito.BDDMockito.given;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.verifyNoMoreInteractions;
 
-public class NoteDataRepositoryTest extends BaseDataRepositoryTest {
+public class CloudNoteDataRepositoryTest extends BaseDataRepositoryTest {
 
     private MockWebServer mockWebServer;
-
-    @Mock
-    private NoteCloudDataStore noteCloudDataStore;
-
     @Mock
     private BadgeDataStoreFactory badgeDataStoreFactory;
-
+    @Mock
+    private NoteCloudDataStore noteCloudDataStore;
+    private NoteDataRepository noteDataRepository;
 
     private NoteEntity fakeNote;
     private Map<String, Object> fakeQueryParam;
-    private NoteDataRepository noteDataRepository;
-
 
     @Before
     public void setUp() throws IOException {
@@ -108,22 +107,20 @@ public class NoteDataRepositoryTest extends BaseDataRepositoryTest {
         }
     }
 
+    @Ignore
     @Test
-    public void testGetNoteRequest() {
-
-        BadgeDataStore mockStore = mock(BadgeDataStore.class);
-        given(mockStore.getNoteEntity(MOCK_NOTE_OBJECT_ID)).willReturn(Single.just(fakeNote));
-        given(badgeDataStoreFactory.getDataStore(MOCK_NOTE_OBJECT_ID)).willReturn(mockStore);
+    public void testGetNoteRequest() throws InterruptedException {
         TestObserver<NoteEntity> testObserver = new TestObserver<>();
+        this.mockWebServer.enqueue(new MockResponse());
         this.noteDataRepository.getNote(this.fakeNote.getObjectId()).subscribe(testObserver);
 
-        Truth.assertThat(testObserver.values()).isEqualTo(Collections.singletonList(fakeNote));
-        testObserver.assertComplete();
-
-        verify(badgeDataStoreFactory).getDataStore(MOCK_NOTE_OBJECT_ID);
-        verifyNoMoreInteractions(badgeDataStoreFactory);
-        verify(mockStore).getNoteEntity(MOCK_NOTE_OBJECT_ID);
-        verifyNoMoreInteractions(mockStore);
+        RecordedRequest request = this.mockWebServer.takeRequest();
+        assertEquals(getFormattedUrl(this.fakeNote.getObjectId(), RestApi.URL_PATH_CLASSES_NOTE_OBJECT_ID), request.getPath());
+        assertEquals("GET", request.getMethod());
+        assertEquals(MOCK_AUTH_TOKEN, request.getHeader(PARSE_SESSION_KEY));
+        final String actual = request.getBody().readUtf8();
+        // the request body is the one that you pass into the server
+        assertEquals("", actual);
     }
 
 
@@ -151,6 +148,21 @@ public class NoteDataRepositoryTest extends BaseDataRepositoryTest {
         Truth.assertThat(testObserver.getEvents().get(0).get(0)).isEqualTo(new Gson().fromJson(json, CreatedWrapper.class).getObjectId());
     }
 
+    @Ignore
+    @Test
+    public void testGetNoteSuccessResponseRestAPI() throws IOException {
+        TestObserver<NoteEntity> testObserver = new TestObserver<>();
+        String json = readFileToString(
+                getFileFromPath(this, "note_get_ok.json"), "UTF-8");
+        this.mockWebServer.enqueue(new MockResponse().setResponseCode(200).setBody(
+                json));
+        this.noteDataRepository.getNote(MOCK_NOTE_OBJECT_ID).subscribe(testObserver);
+        testObserver.awaitTerminalEvent();
+
+        NoteEntity actual = (NoteEntity) testObserver.getEvents().get(0).get(0);
+        Truth.assertThat(actual).isEqualTo(gson().fromJson(json, NoteEntity.class));
+    }
+
     @Test
     public void testCreateNoteErrorResponse() throws IOException {
         TestObserver<String> testObserver = new TestObserver<>();
@@ -165,6 +177,60 @@ public class NoteDataRepositoryTest extends BaseDataRepositoryTest {
         RestApiErrorException actual = (RestApiErrorException) testObserver.errors().get(0);
         Truth.assertThat(actual.getStatusCode()).isEqualTo(102);
         Truth.assertThat(actual.getMessage()).isEqualTo("Note Created error");
+    }
+
+
+    @Ignore
+    @Test
+    public void testGetNoteErrorResponseRestApi() throws IOException {
+        TestObserver<NoteEntity> testObserver = new TestObserver<>();
+
+        String json = readFileToString(getFileFromPath(this, "note_get_error.json"), "UTF-8");
+        this.mockWebServer.enqueue(new MockResponse().setResponseCode(404).setBody(json));
+
+        this.noteDataRepository.getNote(MOCK_NOTE_OBJECT_ID).subscribe(testObserver);
+        testObserver.awaitTerminalEvent();
+
+        testObserver.assertValueCount(0);
+        RestApiErrorException actual = (RestApiErrorException) testObserver.errors().get(0);
+        Truth.assertThat(actual.getStatusCode()).isEqualTo(101);
+        Truth.assertThat(actual.getMessage()).isEqualTo("object not found for get");
+    }
+
+    @Ignore
+    @Test
+    public void testGetNotesSuccessResponse() throws IOException {
+
+        TestObserver<List<NoteEntity>> testObserver = new TestObserver<>();
+
+        this.mockWebServer.enqueue(new MockResponse().setResponseCode(200).setBody(
+                readFileToString(
+                        getFileFromPath(this, "note_getall_ok.json"), "UTF-8")));
+
+        this.noteDataRepository.getNotes(fakeQueryParam).subscribe(testObserver);
+        testObserver.awaitTerminalEvent();
+
+        List<NoteEntity> responseNotes = (List<NoteEntity>) testObserver.getEvents().get(0).get(0);
+        assertTrue(responseNotes.size() > 0);
+        assertTrue(responseNotes.get(0).getTitle().length() > 0);
+        assertTrue(responseNotes.get(0).getContent().length() > 0);
+    }
+
+    @Ignore
+    @Test
+    public void testGetNotesErrorResponse() {
+
+        TestObserver<List<NoteEntity>> testObserver = new TestObserver<>();
+
+        this.mockWebServer.enqueue(new MockResponse().setResponseCode(401));
+        this.noteDataRepository.getNotes(fakeQueryParam).subscribe(testObserver);
+        testObserver.awaitTerminalEvent();
+
+        testObserver.assertValueCount(0);
+        RestApiErrorException error = (RestApiErrorException)
+                testObserver.errors().get(0);
+        assertEquals(401, error.getStatusCode());
+        assertTrue(error.getMessage().length() > 0);
     }
 
     @Test
