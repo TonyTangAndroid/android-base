@@ -9,7 +9,6 @@ import com.jordifierro.androidbase.domain.entity.VoidEntity;
 
 import java.util.Map;
 
-import io.reactivex.Observable;
 import io.reactivex.Single;
 import retrofit2.Response;
 import retrofit2.http.Body;
@@ -42,19 +41,19 @@ public interface RestApi {
     String FIELD_PASSWORD = "password";
 
     @POST(URL_PATH_USERS)
-    Observable<Response<CreatedWrapper>> createUser(@Body UserEntity userEntity);
+    Single<Response<CreatedWrapper>> createUser(@Body UserEntity userEntity);
 
     @DELETE(URL_PATH_USERS_OBJECT_ID)
-    Observable<Response<VoidEntity>> deleteUser(@Path("objectId") String objectId);
+    Single<Response<VoidEntity>> deleteUser(@Path("objectId") String objectId);
 
     @POST(URL_PATH_REQUEST_PASSWORD_RESET)
-    Observable<Response<VoidEntity>> resetPassword(@Body Map<String, Object> params);
+    Single<Response<VoidEntity>> resetPassword(@Body Map<String, Object> params);
 
     @GET(URL_PATH_LOGIN)
-    Observable<Response<UserEntity>> doLogin(@Query(FIELD_USERNAME) String username, @Query(FIELD_PASSWORD) String password);
+    Single<Response<UserEntity>> doLogin(@Query(FIELD_USERNAME) String username, @Query(FIELD_PASSWORD) String password);
 
     @POST(URL_PATH_LOGOUT)
-    Observable<Response<VoidEntity>> doLogout(@Header(PARSE_SESSION_KEY) String token);
+    Single<Response<VoidEntity>> doLogout(@Header(PARSE_SESSION_KEY) String token);
 
     @POST(URL_PATH_CLASSES_NOTE)
     Single<Response<CreatedWrapper>> createNote(@Body NoteEntity note);
@@ -64,7 +63,7 @@ public interface RestApi {
             @Path("objectId") String objectId);
 
     @GET(URL_PATH_USERS_ME)
-    Observable<Response<UserEntity>> getUserBySessionToken(@Header(PARSE_SESSION_KEY) String token);
+    Single<Response<UserEntity>> getUserBySessionToken(@Header(PARSE_SESSION_KEY) String token);
 
     @GET(URL_PATH_CLASSES_NOTE)
     Single<Response<NoteEntitiesWrapper>> getNotes(@Header(PARSE_SESSION_KEY) String token, @QueryMap Map<String, Object> queryParams);

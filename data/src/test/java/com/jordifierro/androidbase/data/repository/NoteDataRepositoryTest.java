@@ -4,6 +4,7 @@ import com.google.common.truth.Truth;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.jordifierro.androidbase.data.net.RestApi;
+import com.jordifierro.androidbase.data.utils.TestUtils;
 import com.jordifierro.androidbase.domain.entity.CreatedWrapper;
 import com.jordifierro.androidbase.domain.entity.NoteEntity;
 import com.jordifierro.androidbase.domain.entity.ParseACLJsonAdapter;
@@ -32,9 +33,7 @@ import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory;
 import retrofit2.converter.gson.GsonConverterFactory;
 
 import static com.google.common.truth.Truth.assertThat;
-import static com.jordifierro.androidbase.data.utils.TestUtils.getFileFromPath;
 import static junit.framework.Assert.assertEquals;
-import static org.apache.commons.io.FileUtils.readFileToString;
 import static org.mockito.BDDMockito.given;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.verify;
@@ -144,7 +143,7 @@ public class NoteDataRepositoryTest extends BaseDataRepositoryTest {
     @Test
     public void testCreateNoteSuccessResponse() throws IOException {
         TestObserver<String> testObserver = new TestObserver<>();
-        String json = readFileToString(getFileFromPath(this, "note_create_ok.json"), "UTF-8");
+        String json = TestUtils.json("note_create_ok.json", this);
         this.mockWebServer.enqueue(new MockResponse().setResponseCode(201).setBody(json));
         this.noteDataRepository.createNote(this.fakeNote).subscribe(testObserver);
         testObserver.awaitTerminalEvent();
@@ -155,7 +154,7 @@ public class NoteDataRepositoryTest extends BaseDataRepositoryTest {
     public void testCreateNoteErrorResponse() throws IOException {
         TestObserver<String> testObserver = new TestObserver<>();
 
-        String json = readFileToString(getFileFromPath(this, "note_create_error.json"), "UTF-8");
+        String json = TestUtils.json("note_create_error.json", this);
         this.mockWebServer.enqueue(new MockResponse().setResponseCode(422).setBody(json));
 
         this.noteDataRepository.createNote(this.fakeNote).subscribe(testObserver);
@@ -182,7 +181,7 @@ public class NoteDataRepositoryTest extends BaseDataRepositoryTest {
     @Test
     public void testUpdateNoteSuccessResponse() throws IOException {
         TestObserver testObserver = new TestObserver<>();
-        String json = readFileToString(getFileFromPath(this, "note_update_ok.json"), "UTF-8");
+        String json = TestUtils.json("note_update_ok.json", this);
         this.mockWebServer.enqueue(new MockResponse().setResponseCode(200).setBody(json));
 
         this.noteDataRepository.updateNote(this.fakeNote).subscribe(testObserver);
@@ -197,7 +196,7 @@ public class NoteDataRepositoryTest extends BaseDataRepositoryTest {
     public void testUpdateNoteErrorResponse() throws IOException {
 
         TestObserver testObserver = new TestObserver<>();
-        String json = readFileToString(getFileFromPath(this, "note_update_error.json"), "UTF-8");
+        String json = TestUtils.json("note_update_error.json", this);
         this.mockWebServer.enqueue(new MockResponse().setResponseCode(404).setBody(json));
 
         this.noteDataRepository.updateNote(this.fakeNote).subscribe(testObserver);

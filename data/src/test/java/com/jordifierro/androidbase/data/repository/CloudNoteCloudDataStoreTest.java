@@ -4,6 +4,7 @@ import com.google.common.truth.Truth;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.jordifierro.androidbase.data.net.RestApi;
+import com.jordifierro.androidbase.data.utils.TestUtils;
 import com.jordifierro.androidbase.domain.entity.NoteEntitiesWrapper;
 import com.jordifierro.androidbase.domain.entity.NoteEntity;
 import com.jordifierro.androidbase.domain.entity.ParseACLJsonAdapter;
@@ -29,8 +30,6 @@ import retrofit2.Retrofit;
 import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory;
 import retrofit2.converter.gson.GsonConverterFactory;
 
-import static com.jordifierro.androidbase.data.utils.TestUtils.getFileFromPath;
-import static org.apache.commons.io.FileUtils.readFileToString;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.verifyNoMoreInteractions;
 
@@ -79,7 +78,6 @@ public class CloudNoteCloudDataStoreTest extends BaseDataRepositoryTest {
         this.mockWebServer.shutdown();
     }
 
-
     @Test
     public void getNoteEntityRequestWithCorrectConfigure() throws InterruptedException {
         TestObserver<NoteEntity> testObserver = new TestObserver<>();
@@ -96,7 +94,7 @@ public class CloudNoteCloudDataStoreTest extends BaseDataRepositoryTest {
     @Test
     public void testGetNoteSuccessResponseRestAPI() throws IOException {
         TestObserver<NoteEntity> testObserver = new TestObserver<>();
-        String json = readFileToString(getFileFromPath(this, "note_get_ok.json"), "UTF-8");
+        String json = TestUtils.json("note_get_ok.json", this);
         this.mockWebServer.enqueue(new MockResponse().setResponseCode(200).setBody(json));
         this.noteCloudDataStore.getNoteEntity(MOCK_NOTE_OBJECT_ID).subscribe(testObserver);
         testObserver.awaitTerminalEvent();
@@ -109,7 +107,7 @@ public class CloudNoteCloudDataStoreTest extends BaseDataRepositoryTest {
     @Test
     public void testGetNoteSuccessResponseCached() throws IOException {
         TestObserver<NoteEntity> testObserver = new TestObserver<>();
-        String json = readFileToString(getFileFromPath(this, "note_get_ok.json"), "UTF-8");
+        String json = TestUtils.json("note_get_ok.json", this);
         this.mockWebServer.enqueue(new MockResponse().setResponseCode(200).setBody(json));
         this.noteCloudDataStore.getNoteEntity(MOCK_NOTE_OBJECT_ID).subscribe(testObserver);
         testObserver.awaitTerminalEvent();
@@ -125,7 +123,7 @@ public class CloudNoteCloudDataStoreTest extends BaseDataRepositoryTest {
     public void testGetNoteErrorResponseRestApi() throws IOException {
         TestObserver<NoteEntity> testObserver = new TestObserver<>();
 
-        String json = readFileToString(getFileFromPath(this, "note_get_error.json"), "UTF-8");
+        String json = TestUtils.json("note_get_error.json", this);
         this.mockWebServer.enqueue(new MockResponse().setResponseCode(404).setBody(json));
 
         this.noteCloudDataStore.getNoteEntity(MOCK_NOTE_OBJECT_ID).subscribe(testObserver);
@@ -142,7 +140,7 @@ public class CloudNoteCloudDataStoreTest extends BaseDataRepositoryTest {
 
         TestObserver<List<NoteEntity>> testObserver = new TestObserver<>();
 
-        String json = readFileToString(getFileFromPath(this, "note_getall_ok.json"), "UTF-8");
+        String json = TestUtils.json("note_getall_ok.json", this);
         MockResponse response = new MockResponse().setResponseCode(200).setBody(json);
         this.mockWebServer.enqueue(response);
 
@@ -158,7 +156,7 @@ public class CloudNoteCloudDataStoreTest extends BaseDataRepositoryTest {
 
         TestObserver<List<NoteEntity>> testObserver = new TestObserver<>();
 
-        String json = readFileToString(getFileFromPath(this, "note_getall_ok.json"), "UTF-8");
+        String json = TestUtils.json("note_getall_ok.json", this);
         MockResponse response = new MockResponse().setResponseCode(200).setBody(json);
         this.mockWebServer.enqueue(response);
 

@@ -2,22 +2,22 @@ package com.jordifierro.androidbase.domain.repository;
 
 import com.jordifierro.androidbase.domain.entity.CreatedWrapper;
 import com.jordifierro.androidbase.domain.entity.UserEntity;
-import com.jordifierro.androidbase.domain.entity.VoidEntity;
 
-import io.reactivex.Observable;
+import io.reactivex.Completable;
+import io.reactivex.Single;
 
 
 public interface UserRepository {
-    Observable<CreatedWrapper> createUser(UserEntity user);
+    Single<CreatedWrapper> createUser(UserEntity user);
 
-    Observable<VoidEntity> deleteUser(UserEntity user);
+    Completable deleteUser(UserEntity user);
 
-    Observable<VoidEntity> resetPassword(UserEntity user);
+    Completable resetPassword(UserEntity user);
 
-    Observable<UserEntity> loginUser(UserEntity user);
+    Single<UserEntity> loginUser(UserEntity user);
 
-    Observable<VoidEntity> logoutUser(UserEntity user);
+    Completable logoutUser(UserEntity user);
 
-    Observable<UserEntity> getUserBySessionToken(String token);
+    Single<UserEntity> getUserBySessionToken(String token);
 
 }
