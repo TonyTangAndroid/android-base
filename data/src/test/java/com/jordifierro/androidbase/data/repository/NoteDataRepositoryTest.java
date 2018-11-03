@@ -33,7 +33,7 @@ import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory;
 import retrofit2.converter.gson.GsonConverterFactory;
 
 import static com.google.common.truth.Truth.assertThat;
-import static junit.framework.Assert.assertEquals;
+import static junit.framework.Assert.Truth.assertThat;
 import static org.mockito.BDDMockito.given;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.verify;
@@ -173,8 +173,8 @@ public class NoteDataRepositoryTest extends BaseDataRepositoryTest {
         this.noteDataRepository.updateNote(this.fakeNote).subscribe(testObserver);
         RecordedRequest request = this.mockWebServer.takeRequest();
         Truth.assertThat(request.getPath()).isEqualTo(getFormattedUrl(this.fakeNote.getObjectId(), RestApi.URL_PATH_CLASSES_NOTE_OBJECT_ID));
-        assertEquals("PUT", request.getMethod());
-        assertEquals(new Gson().toJson(this.fakeNote), request.getBody().readUtf8());
+        Truth.assertThat("PUT", request.getMethod());
+        Truth.assertThat(new Gson().toJson(this.fakeNote), request.getBody().readUtf8());
     }
 
 

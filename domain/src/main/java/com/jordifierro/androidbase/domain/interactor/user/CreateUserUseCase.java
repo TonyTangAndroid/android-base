@@ -2,20 +2,17 @@ package com.jordifierro.androidbase.domain.interactor.user;
 
 import com.jordifierro.androidbase.domain.entity.CreatedWrapper;
 import com.jordifierro.androidbase.domain.entity.UserEntity;
-import com.jordifierro.androidbase.domain.executor.UIThread;
 import com.jordifierro.androidbase.domain.executor.ThreadExecutor;
-import com.jordifierro.androidbase.domain.interactor.UseCase;
+import com.jordifierro.androidbase.domain.executor.UIThread;
+import com.jordifierro.androidbase.domain.interactor.SingleUseCase;
 import com.jordifierro.androidbase.domain.repository.SessionRepository;
 import com.jordifierro.androidbase.domain.repository.UserRepository;
 
 import javax.inject.Inject;
 
-import io.reactivex.Observable;
-import io.reactivex.ObservableSource;
-import io.reactivex.functions.Consumer;
-import io.reactivex.functions.Function;
+import io.reactivex.Single;
 
-public class CreateUserUseCase extends UseCase<UserEntity> {
+public class CreateUserUseCase extends SingleUseCase<UserEntity> {
 
     private UserRepository userRepository;
     private SessionRepository sessionRepository;
@@ -35,17 +32,12 @@ public class CreateUserUseCase extends UseCase<UserEntity> {
     }
 
     @Override
-    protected Observable<UserEntity> build() {
-        return this.userRepository.createUser(this.user).flatMap(new Function<CreatedWrapper, ObservableSource<UserEntity>>() {
-            @Override
-            public ObservableSource<UserEntity> apply(CreatedWrapper createdWrapper) throws Exception {
-                return userRepository.getUserBySessionToken(createdWrapper.getSessionToken());
-            }
-        }).doOnNext(new Consumer<UserEntity>() {
-            @Override
-            public void accept(UserEntity userEntity) throws Exception {
-                sessionRepository.setCurrentUser(userEntity);
-            }
-        });
+    protected Single<UserEntity> build() {
+        return this.userRepository.createUser(this.user).flatMap(this::getUserBySessionToken)
+                .doOnSuccess(userEntity -> sessionRepository.setCurrentUser(userEntity));
+    }
+
+    private Single<UserEntity> getUserBySessionToken(CreatedWrapper createdWrapper) {
+        return userRepository.getUserBySessionToken(createdWrapper.getSessionToken());
     }
 }

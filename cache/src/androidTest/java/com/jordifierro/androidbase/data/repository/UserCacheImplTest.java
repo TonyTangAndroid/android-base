@@ -32,7 +32,7 @@ public class UserCacheImplTest extends InstrumentationTestCase {
         this.sessionDataRepository.save(FAKE_JSON);
         String actual = this.sessionDataRepository.get();
 
-        assertEquals(actual, FAKE_JSON);
+        Truth.assertThat(actual, FAKE_JSON);
     }
 
     public void testSetInvalidateAndGetNullUser() {

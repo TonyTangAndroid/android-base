@@ -1,12 +1,12 @@
 package com.jordifierro.androidbase.domain.interactor.note;
 
+import com.google.common.truth.Truth;
 import com.jordifierro.androidbase.domain.entity.CreatedWrapper;
 import com.jordifierro.androidbase.domain.entity.NoteEntity;
 import com.jordifierro.androidbase.domain.executor.ThreadExecutor;
 import com.jordifierro.androidbase.domain.executor.UIThread;
 import com.jordifierro.androidbase.domain.repository.NoteRepository;
 
-import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 import org.mockito.Mock;
@@ -58,13 +58,8 @@ public class CreateNoteUseCaseTest {
                 mockUIThread, mockNoteRepository);
 
         createNoteUseCase.setParams(note);
-        @SuppressWarnings("unused") TestObserver<NoteEntity> noteEntityTestObserver = createNoteUseCase.build().subscribeWith(testObserver);
-
-        Assert.assertEquals(FAKE_TITLE,
-                ((NoteEntity) (testObserver.getEvents().get(0)).get(0)).getTitle());
-        Assert.assertEquals(FAKE_CONTENT,
-                ((NoteEntity) (testObserver.getEvents().get(0)).get(0)).getContent());
-
+        testObserver = createNoteUseCase.build().subscribeWith(testObserver);
+        Truth.assertThat(testObserver.getEvents().get(0).get(0)).isEqualTo(note);
         verify(mockNoteRepository).createNote(note);
         verify(mockNoteRepository).getNote(createdWrapper.getObjectId());
 

@@ -5,7 +5,7 @@ import com.jordifierro.androidbase.domain.exception.RestApiErrorException;
 import org.junit.Before;
 import org.junit.Test;
 
-import static junit.framework.Assert.assertEquals;
+import static junit.framework.Assert.Truth.assertThat;
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.core.Is.is;
 
@@ -29,13 +29,13 @@ public class RestApiErrorExceptionTest {
 
     @Test
     public void testStatusCodes() {
-        assertEquals(400, RestApiErrorException.BAD_REQUEST);
-        assertEquals(209, RestApiErrorException.INVALID_SESSION_TOKEN);
-        assertEquals(401, RestApiErrorException.UNAUTHORIZED);
-        assertEquals(404, RestApiErrorException.NOT_FOUND);
-        assertEquals(422, RestApiErrorException.UNPROCESSABLE_ENTITY);
-        assertEquals(426, RestApiErrorException.UPGRADE_REQUIRED);
-        assertEquals(500, RestApiErrorException.INTERNAL_SERVER_ERROR);
+        Truth.assertThat(400, RestApiErrorException.BAD_REQUEST);
+        Truth.assertThat(209, RestApiErrorException.INVALID_SESSION_TOKEN);
+        Truth.assertThat(401, RestApiErrorException.UNAUTHORIZED);
+        Truth.assertThat(404, RestApiErrorException.NOT_FOUND);
+        Truth.assertThat(422, RestApiErrorException.UNPROCESSABLE_ENTITY);
+        Truth.assertThat(426, RestApiErrorException.UPGRADE_REQUIRED);
+        Truth.assertThat(500, RestApiErrorException.INTERNAL_SERVER_ERROR);
     }
 
     @Test

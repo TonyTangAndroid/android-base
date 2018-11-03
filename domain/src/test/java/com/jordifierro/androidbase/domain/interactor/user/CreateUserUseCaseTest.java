@@ -1,9 +1,10 @@
 package com.jordifierro.androidbase.domain.interactor.user;
 
+import com.google.common.truth.Truth;
 import com.jordifierro.androidbase.domain.entity.CreatedWrapper;
 import com.jordifierro.androidbase.domain.entity.UserEntity;
-import com.jordifierro.androidbase.domain.executor.UIThread;
 import com.jordifierro.androidbase.domain.executor.ThreadExecutor;
+import com.jordifierro.androidbase.domain.executor.UIThread;
 import com.jordifierro.androidbase.domain.repository.SessionRepository;
 import com.jordifierro.androidbase.domain.repository.UserRepository;
 
@@ -12,10 +13,9 @@ import org.junit.Test;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 
-import io.reactivex.Observable;
+import io.reactivex.Single;
 import io.reactivex.observers.TestObserver;
 
-import static org.junit.Assert.assertEquals;
 import static org.mockito.BDDMockito.given;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.verifyNoMoreInteractions;
@@ -54,15 +54,16 @@ public class CreateUserUseCaseTest {
         CreateUserUseCase createUserUseCase = new CreateUserUseCase(mockThreadExecutor,
                 mockUIThread, mockUserRepository, mockSessionRepository);
         TestObserver<UserEntity> testObserver = new TestObserver<>();
-        given(mockUserRepository.createUser(mockUser)).willReturn(Observable.just(createdWrapper));
-        given(mockUserRepository.getUserBySessionToken(FAKE_SESSION_TOKEN)).willReturn(Observable.just(mockUser));
+        given(mockUserRepository.createUser(mockUser)).willReturn(Single.just(createdWrapper));
+        given(mockUserRepository.getUserBySessionToken(FAKE_SESSION_TOKEN)).willReturn(Single.just(mockUser));
 
         createUserUseCase.setParams(mockUser);
-       @SuppressWarnings("unused") TestObserver<UserEntity> userEntityTestObserver = createUserUseCase.build().subscribeWith(testObserver);
+        @SuppressWarnings("unused") TestObserver<UserEntity> userEntityTestObserver = createUserUseCase.build().subscribeWith(testObserver);
 
         verify(mockUserRepository).createUser(mockUser);
         verify(mockUserRepository).getUserBySessionToken(FAKE_SESSION_TOKEN);
-        assertEquals(mockUser, (testObserver.getEvents().get(0)).get(0));
+
+        Truth.assertThat(testObserver.getEvents().get(0).get(0)).isEqualTo(mockUser);
         verifyNoMoreInteractions(mockUserRepository);
         verify(mockSessionRepository).setCurrentUser(mockUser);
         verifyNoMoreInteractions(mockSessionRepository);

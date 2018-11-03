@@ -40,7 +40,7 @@ public class GetNoteUseCaseTest {
 //        getNoteUseCase.setParams(FAKE_ID);
 //        getNoteUseCase.buildUseCaseObservable().subscribe(testObserver);
 //
-//        Assert.assertEquals(note.getTitle(),
+//        Assert.Truth.assertThat(note.getTitle(),
 //                ((NoteEntity) (testObserver.getEvents().get(0)).get(0)).getTitle());
 //        verify(mockSessionRepository).getCurrentUser();
 //        verifyNoMoreInteractions(mockSessionRepository);

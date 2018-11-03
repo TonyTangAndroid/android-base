@@ -12,7 +12,7 @@ import okhttp3.mockwebserver.MockResponse;
 import okhttp3.mockwebserver.MockWebServer;
 import okhttp3.mockwebserver.RecordedRequest;
 
-import static junit.framework.Assert.assertEquals;
+import static junit.framework.Assert.Truth.assertThat;
 
 public class HttpInterceptorTest {
 
@@ -26,9 +26,9 @@ public class HttpInterceptorTest {
         okHttpClient.newCall(new Request.Builder().url(mockWebServer.url("/")).build()).execute();
 
         RecordedRequest request = mockWebServer.takeRequest();
-        assertEquals(Locale.getDefault().getLanguage(), request.getHeader("Accept-Language"));
-        assertEquals(RestApi.PARSE_APPLICATION_ID_VALUE, request.getHeader(HttpInterceptor.X_PARSE_APPLICATION_ID));
-        assertEquals(HttpInterceptor.APPLICATION_JSON, request.getHeader(HttpInterceptor.CONTENT_TYPE));
+        Truth.assertThat(Locale.getDefault().getLanguage(), request.getHeader("Accept-Language"));
+        Truth.assertThat(RestApi.PARSE_APPLICATION_ID_VALUE, request.getHeader(HttpInterceptor.X_PARSE_APPLICATION_ID));
+        Truth.assertThat(HttpInterceptor.APPLICATION_JSON, request.getHeader(HttpInterceptor.CONTENT_TYPE));
 
         mockWebServer.shutdown();
     }
