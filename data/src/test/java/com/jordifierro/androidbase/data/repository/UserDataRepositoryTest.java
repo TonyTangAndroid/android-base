@@ -340,7 +340,7 @@ public class UserDataRepositoryTest extends BaseDataRepositoryTest {
     }
 
     @Test
-    public void testLogoutUserError() throws Exception {
+    public void testLogoutUserError() {
         this.mockWebServer.enqueue(new MockResponse().setResponseCode(400).setBody("{\n" +
                 "  \"code\": 209,\n" +
                 "  \"error\": \"invalid session token\"\n" +
