@@ -4,6 +4,8 @@ import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.google.gson.annotations.Expose;
 
+import java.util.Objects;
+
 public class NoteEntity {
 
 
@@ -91,4 +93,22 @@ public class NoteEntity {
     }
 
 
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        NoteEntity that = (NoteEntity) o;
+        return Objects.equals(objectId, that.objectId) &&
+                Objects.equals(title, that.title) &&
+                Objects.equals(content, that.content) &&
+                Objects.equals(createdAt, that.createdAt) &&
+                Objects.equals(updatedAt, that.updatedAt) &&
+                Objects.equals(ACL, that.ACL);
+    }
+
+    @Override
+    public int hashCode() {
+
+        return Objects.hash(objectId, title, content, createdAt, updatedAt, ACL);
+    }
 }

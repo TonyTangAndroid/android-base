@@ -1,6 +1,7 @@
 package com.jordifierro.androidbase.domain.entity;
 
 import java.util.ArrayList;
+import java.util.Objects;
 
 public class ParsePermissionWrapper {
 
@@ -15,4 +16,17 @@ public class ParsePermissionWrapper {
     }
 
 
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        ParsePermissionWrapper that = (ParsePermissionWrapper) o;
+        return Objects.equals(permissionArrayList, that.permissionArrayList);
+    }
+
+    @Override
+    public int hashCode() {
+
+        return Objects.hash(permissionArrayList);
+    }
 }

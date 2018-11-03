@@ -1,5 +1,7 @@
 package com.jordifierro.androidbase.domain.entity;
 
+import java.util.Objects;
+
 public class ParsePermission {
 
     private boolean read;
@@ -31,4 +33,19 @@ public class ParsePermission {
         this.objectId = objectId;
     }
 
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        ParsePermission that = (ParsePermission) o;
+        return read == that.read &&
+                write == that.write &&
+                Objects.equals(objectId, that.objectId);
+    }
+
+    @Override
+    public int hashCode() {
+
+        return Objects.hash(read, write, objectId);
+    }
 }
