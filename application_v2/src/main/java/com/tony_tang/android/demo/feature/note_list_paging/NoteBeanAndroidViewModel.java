@@ -10,14 +10,15 @@ import com.tony_tang.android.demo.common.DemoApplication;
 import javax.inject.Inject;
 
 import androidx.lifecycle.AndroidViewModel;
-import androidx.lifecycle.LiveData;
-import androidx.paging.LivePagedListBuilder;
 import androidx.paging.PagedList;
+import androidx.paging.RxPagedListBuilder;
 import hugo.weaving.DebugLog;
+import io.reactivex.BackpressureStrategy;
+import io.reactivex.Flowable;
 
 @DebugLog
 public class NoteBeanAndroidViewModel extends AndroidViewModel {
-    private LiveData<PagedList<NoteBean>> noteBeanPageListLiveData;
+    private Flowable<PagedList<NoteBean>> noteBeanPageListLiveData;
 
     @Inject
     public NoteBeanAndroidViewModel(Application application) {
@@ -30,11 +31,12 @@ public class NoteBeanAndroidViewModel extends AndroidViewModel {
                 .setPageSize(10)
                 .setEnablePlaceholders(true)
                 .build();
-        noteBeanPageListLiveData = new LivePagedListBuilder<>(dao.allNoteBean(), config).build();
+        noteBeanPageListLiveData = new RxPagedListBuilder<>(dao.allNoteBean(), config)
+                .buildFlowable(BackpressureStrategy.LATEST);
 
     }
 
-    public LiveData<PagedList<NoteBean>> get() {
+    public Flowable<PagedList<NoteBean>> get() {
         return noteBeanPageListLiveData;
     }
 

@@ -24,19 +24,21 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 import dagger.Provides;
+import io.reactivex.disposables.CompositeDisposable;
+import io.reactivex.subscribers.DisposableSubscriber;
 
 public class NoteListPagingActivity extends AppCompatActivity
         implements SwipeRefreshLayout.OnRefreshListener,
         NoteBeanViewHolder.Listener,
         NotePagingListPresenter.NotePagingUI {
 
+    @Inject
+    NotePagingListPresenter notePagingListPresenter;
+    private CompositeDisposable compositeDisposable = new CompositeDisposable();
     private Toolbar toolbar;
     private RecyclerView rv_entity_list;
     private SwipeRefreshLayout swipe_refresh_layout;
     private NoteBeanPagedListAdapter adapter;
-
-    @Inject
-    NotePagingListPresenter notePagingListPresenter;
 
     public static Intent constructIntent(Activity activity) {
         return new Intent(activity, NoteListPagingActivity.class);
@@ -47,6 +49,13 @@ public class NoteListPagingActivity extends AppCompatActivity
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.menu_note_create, menu);
         return super.onCreateOptionsMenu(menu);
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        notePagingListPresenter.destroy();
+        compositeDisposable.dispose();
     }
 
     @Override
@@ -88,7 +97,22 @@ public class NoteListPagingActivity extends AppCompatActivity
         rv_entity_list.setLayoutManager(new LinearLayoutManager(this));
         adapter = new NoteBeanPagedListAdapter(new NoteBeanDiffUtilItemCallback(), this);
         rv_entity_list.setAdapter(adapter);
-        new NoteBeanAndroidViewModel(getApplication()).get().observe(this, this::onDataReady);
+        compositeDisposable.add(new NoteBeanAndroidViewModel(getApplication()).get().subscribeWith(new DisposableSubscriber<PagedList<NoteBean>>() {
+            @Override
+            public void onNext(PagedList<NoteBean> noteBeans) {
+                onDataReady(noteBeans);
+            }
+
+            @Override
+            public void onError(Throwable t) {
+                handleError(t);
+            }
+
+            @Override
+            public void onComplete() {
+
+            }
+        }));
     }
 
     private void onDataReady(PagedList<NoteBean> noteBeans) {
@@ -122,17 +146,17 @@ public class NoteListPagingActivity extends AppCompatActivity
 
     @Override
     public void toggleTitle(NoteBean notebean) {
-
+        Toast.makeText(this, "todo", Toast.LENGTH_SHORT).show();
     }
 
     @Override
     public void toggleOrder(NoteBean notebean) {
-
+        Toast.makeText(this, "todo", Toast.LENGTH_SHORT).show();
     }
 
     @Override
     public void handleError(Throwable e) {
-
+        Toast.makeText(NoteListPagingActivity.this, e.getMessage(), Toast.LENGTH_SHORT).show();
     }
 
     @ActivityScope
