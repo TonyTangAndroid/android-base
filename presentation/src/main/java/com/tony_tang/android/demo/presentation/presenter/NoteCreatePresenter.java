@@ -33,8 +33,7 @@ public class NoteCreatePresenter extends BasePresenter implements Presenter {
 
         @Override
         public void onSuccess(NoteEntity note) {
-            NoteCreatePresenter.this.hideLoader();
-            NoteCreatePresenter.this.noteCreateView.close();
+            NoteCreatePresenter.this.noteCreateView.hideLoader();
         }
     }
 

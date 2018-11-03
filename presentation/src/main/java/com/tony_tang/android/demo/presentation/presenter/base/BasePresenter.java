@@ -39,39 +39,21 @@ public abstract class BasePresenter implements Presenter {
         cleanView = null;
     }
 
-    public void showLoader() {
-        cleanView.showLoader();
-    }
-
-    public void hideLoader() {
-        cleanView.hideLoader();
-    }
-
     public void handleError(Throwable error) {
         cleanView.handleError(error);
     }
 
-    public void showMessage(String message) {
-        cleanView.showMessage(message);
-    }
 
     public CleanView getCleanView() {
         return cleanView;
     }
 
 
-    protected class BaseSubscriber<T> extends DisposableSingleObserver<T> {
-
+    protected abstract class BaseSubscriber<T> extends DisposableSingleObserver<T> {
 
         @Override
         public void onError(Throwable e) {
-            BasePresenter.this.hideLoader();
             BasePresenter.this.handleError(e);
-        }
-
-        @Override
-        public void onSuccess(T t) {
-            BasePresenter.this.hideLoader();
         }
     }
 }

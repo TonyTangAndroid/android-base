@@ -22,7 +22,6 @@ import static org.mockito.Mockito.verifyZeroInteractions;
 
 public class DoLoginUseCaseTest {
 
-    private static final String FAKE_PASS = "1234";
 
     @Mock
     private ThreadExecutor mockThreadExecutor;
@@ -48,7 +47,7 @@ public class DoLoginUseCaseTest {
         given(mockUserRepository.loginUser(mockUser)).willReturn(Single.just(mockUser));
 
         doLoginUseCase.setParams(mockUser);
-        @SuppressWarnings("unused") TestObserver<UserEntity> noteEntityTestObserver = doLoginUseCase.build().subscribeWith(testObserver);
+        testObserver = doLoginUseCase.build().subscribeWith(testObserver);
 
         verify(mockUserRepository).loginUser(mockUser);
         Truth.assertThat(testObserver.getEvents().get(0).get(0)).isEqualTo(mockUser);

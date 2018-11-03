@@ -9,4 +9,7 @@ public interface NoteDetailView extends CleanView {
 
     String getNoteObjectId();
 
+    void hideLoader();
+
+    void showLoader();
 }

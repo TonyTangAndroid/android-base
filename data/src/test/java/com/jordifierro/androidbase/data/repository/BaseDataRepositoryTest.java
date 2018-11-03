@@ -1,6 +1,5 @@
 package com.jordifierro.androidbase.data.repository;
 
-@SuppressWarnings("unchecked")
 public class BaseDataRepositoryTest {
 
 
@@ -14,7 +13,7 @@ public class BaseDataRepositoryTest {
     static final String MOCK_PASS = "1234";
 
     String getFormattedUrl(String objectId, String urlPath) {
-        return MOCK_SERVER + urlPath.replaceAll("\\{objectId\\}", objectId);
+        return MOCK_SERVER + urlPath.replaceAll("\\{objectId}", objectId);
     }
 
     String constructUrl(String path) {

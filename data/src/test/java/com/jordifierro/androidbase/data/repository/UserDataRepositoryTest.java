@@ -17,7 +17,6 @@ import org.junit.Test;
 
 import java.io.IOException;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
 import io.reactivex.observers.TestObserver;
@@ -31,17 +30,18 @@ import retrofit2.converter.gson.GsonConverterFactory;
 import static com.jordifierro.androidbase.data.net.RestApi.PARSE_SESSION_KEY;
 import static junit.framework.Assert.assertTrue;
 
-@SuppressWarnings("unchecked")
 public class UserDataRepositoryTest extends BaseDataRepositoryTest {
 
     private UserDataRepositoryV2 userDataRepository;
-    private TestObserver testObserver;
     private MockWebServer mockWebServer;
     private UserEntity fakeUser;
     private Gson gson;
+    private TestObserver<UserEntity> testObserver;
 
     @Before
     public void setUp() throws IOException {
+        this.testObserver = new TestObserver<>();
+
         this.gson = new GsonBuilder()
                 .registerTypeAdapter(ParsePermissionWrapper.class, new ParseACLJsonAdapter())
                 .create();
@@ -58,8 +58,6 @@ public class UserDataRepositoryTest extends BaseDataRepositoryTest {
                         .create(RestApi.class)
         );
 
-        this.testObserver = new TestObserver();
-
         this.fakeUser = new UserEntity(MOCK_EMAIL);
         this.fakeUser.setObjectId(MOCK_USER_OBJECT_ID);
         this.fakeUser.setPassword(MOCK_PASS);
@@ -75,7 +73,8 @@ public class UserDataRepositoryTest extends BaseDataRepositoryTest {
     public void testGetUserBySessionTokenRequest() throws Exception {
         this.mockWebServer.enqueue(new MockResponse());
 
-        this.userDataRepository.getUserBySessionToken(MOCK_AUTH_TOKEN).subscribe(this.testObserver);
+
+        this.userDataRepository.getUserBySessionToken(MOCK_AUTH_TOKEN).subscribe(testObserver);
 
         RecordedRequest request = this.mockWebServer.takeRequest();
 
@@ -90,12 +89,13 @@ public class UserDataRepositoryTest extends BaseDataRepositoryTest {
         this.mockWebServer.enqueue(new MockResponse().setResponseCode(400).setBody(
                 json));
 
-        this.userDataRepository.getUserBySessionToken(MOCK_AUTH_TOKEN).subscribe(this.testObserver);
-        this.testObserver.awaitTerminalEvent();
 
-        this.testObserver.assertValueCount(0);
+        this.userDataRepository.getUserBySessionToken(MOCK_AUTH_TOKEN).subscribe(testObserver);
+        testObserver.awaitTerminalEvent();
+
+        testObserver.assertValueCount(0);
         RestApiErrorException error = (RestApiErrorException)
-                this.testObserver.errors().get(0);
+                testObserver.errors().get(0);
         Truth.assertThat(error.getStatusCode()).isEqualTo(209);
         Truth.assertThat(error.getMessage()).isEqualTo("invalid session token");
     }
@@ -103,13 +103,14 @@ public class UserDataRepositoryTest extends BaseDataRepositoryTest {
     @Test
     public void testGetUserBySessionTokenSuccess() throws Exception {
 
+
         String json = TestUtils.json("user_me_ok.json", this);
         this.mockWebServer.enqueue(new MockResponse().setResponseCode(200).setBody(json));
 
-        this.userDataRepository.getUserBySessionToken(MOCK_AUTH_TOKEN).subscribe(this.testObserver);
-        this.testObserver.awaitTerminalEvent();
+        this.userDataRepository.getUserBySessionToken(MOCK_AUTH_TOKEN).subscribe(testObserver);
+        testObserver.awaitTerminalEvent();
 
-        UserEntity responseUser = (UserEntity) ((List<Object>) this.testObserver.getEvents().get(0)).get(0);
+        UserEntity responseUser = (UserEntity) testObserver.getEvents().get(0).get(0);
         assertTrue(responseUser.getSessionToken().length() > 0);
         assertTrue(responseUser.getObjectId().length() > 0);
         assertTrue(responseUser.getUsername().length() > 0);
@@ -121,7 +122,9 @@ public class UserDataRepositoryTest extends BaseDataRepositoryTest {
     @Test
     public void testCreateUserRequest() throws Exception {
         this.mockWebServer.enqueue(new MockResponse());
-        this.userDataRepository.createUser(this.fakeUser).subscribe(this.testObserver);
+
+        TestObserver<CreatedWrapper> testObserver = new TestObserver<>();
+        this.userDataRepository.createUser(this.fakeUser).subscribe(testObserver);
         RecordedRequest request = this.mockWebServer.takeRequest();
         Truth.assertThat(request.getPath()).isEqualTo(constructUrl(RestApi.URL_PATH_USERS));
         Truth.assertThat(request.getMethod()).isEqualTo("POST");
@@ -133,13 +136,15 @@ public class UserDataRepositoryTest extends BaseDataRepositoryTest {
     public void testCreateUserError() throws Exception {
         String json = TestUtils.json("user_create_error.json", this);
         this.mockWebServer.enqueue(new MockResponse().setResponseCode(400).setBody(json));
+        TestObserver<CreatedWrapper> testObserver = new TestObserver<>();
 
-        this.userDataRepository.createUser(this.fakeUser).subscribe(this.testObserver);
-        this.testObserver.awaitTerminalEvent();
 
-        this.testObserver.assertValueCount(0);
+        this.userDataRepository.createUser(this.fakeUser).subscribe(testObserver);
+        testObserver.awaitTerminalEvent();
+
+        testObserver.assertValueCount(0);
         RestApiErrorException error = (RestApiErrorException)
-                this.testObserver.errors().get(0);
+                testObserver.errors().get(0);
         Truth.assertThat(error.getStatusCode()).isEqualTo(203);
         Truth.assertThat(error.getMessage()).isEqualTo("the email address ztangmstr@gmail.com has already been taken");
     }
@@ -150,12 +155,13 @@ public class UserDataRepositoryTest extends BaseDataRepositoryTest {
 
         String json = TestUtils.json("user_create_raw_ok.json", this);
         this.mockWebServer.enqueue(new MockResponse().setResponseCode(201).setBody(json));
+        TestObserver<CreatedWrapper> testObserver = new TestObserver<>();
 
 
-        this.userDataRepository.createUser(this.fakeUser).subscribe(this.testObserver);
-        this.testObserver.awaitTerminalEvent();
+        this.userDataRepository.createUser(this.fakeUser).subscribe(testObserver);
+        testObserver.awaitTerminalEvent();
 
-        CreatedWrapper responseUser = (CreatedWrapper) ((List<Object>) this.testObserver.getEvents().get(0)).get(0);
+        CreatedWrapper responseUser = (CreatedWrapper) testObserver.getEvents().get(0).get(0);
         assertTrue(responseUser.getSessionToken().length() > 0);
         assertTrue(responseUser.getObjectId().length() > 0);
         assertTrue(responseUser.getCreatedAt().length() > 0);
@@ -166,10 +172,11 @@ public class UserDataRepositoryTest extends BaseDataRepositoryTest {
     public void testDeleteUserSuccess() {
         this.mockWebServer.enqueue(new MockResponse().setResponseCode(200).setBody("{}"));
 
-        this.userDataRepository.deleteUser(this.fakeUser).subscribe(this.testObserver);
-        this.testObserver.awaitTerminalEvent();
-        this.testObserver.assertNoErrors();
-        this.testObserver.assertComplete();
+
+        this.userDataRepository.deleteUser(this.fakeUser).subscribe(testObserver);
+        testObserver.awaitTerminalEvent();
+        testObserver.assertNoErrors();
+        testObserver.assertComplete();
     }
 
 
@@ -177,7 +184,8 @@ public class UserDataRepositoryTest extends BaseDataRepositoryTest {
     public void testDeleteUserRequest() throws Exception {
         this.mockWebServer.enqueue(new MockResponse());
 
-        this.userDataRepository.deleteUser(this.fakeUser).subscribe(this.testObserver);
+
+        this.userDataRepository.deleteUser(this.fakeUser).subscribe(testObserver);
         RecordedRequest request = this.mockWebServer.takeRequest();
         Truth.assertThat(request.getPath()).isEqualTo(getFormattedUrl(fakeUser.getObjectId(), RestApi.URL_PATH_USERS_OBJECT_ID));
         Truth.assertThat(request.getMethod()).isEqualTo("DELETE");
@@ -189,12 +197,13 @@ public class UserDataRepositoryTest extends BaseDataRepositoryTest {
     public void testDeleteUserError() throws Exception {
         this.mockWebServer.enqueue(new MockResponse().setResponseCode(400).setBody(TestUtils.json("user_delete_error.json", this)));
 
-        this.userDataRepository.deleteUser(this.fakeUser).subscribe(this.testObserver);
-        this.testObserver.awaitTerminalEvent();
 
-        this.testObserver.assertValueCount(0);
+        this.userDataRepository.deleteUser(this.fakeUser).subscribe(testObserver);
+        testObserver.awaitTerminalEvent();
+
+        testObserver.assertValueCount(0);
         RestApiErrorException error = (RestApiErrorException)
-                this.testObserver.errors().get(0);
+                testObserver.errors().get(0);
         Truth.assertThat(error.getStatusCode()).isEqualTo(209);
         Truth.assertThat(error.getMessage()).isEqualTo("invalid session token");
     }
@@ -204,7 +213,8 @@ public class UserDataRepositoryTest extends BaseDataRepositoryTest {
         this.fakeUser.setEmail(MOCK_EMAIL);
         this.mockWebServer.enqueue(new MockResponse());
 
-        this.userDataRepository.resetPassword(this.fakeUser).subscribe(this.testObserver);
+
+        this.userDataRepository.resetPassword(this.fakeUser).subscribe(testObserver);
 
         RecordedRequest request = this.mockWebServer.takeRequest();
         Truth.assertThat(request.getPath()).isEqualTo(constructUrl(RestApi.URL_PATH_REQUEST_PASSWORD_RESET));
@@ -219,11 +229,12 @@ public class UserDataRepositoryTest extends BaseDataRepositoryTest {
     public void testResetPasswordSuccess() {
         this.mockWebServer.enqueue(new MockResponse().setResponseCode(200).setBody("{}"));
 
-        this.userDataRepository.resetPassword(this.fakeUser).subscribe(this.testObserver);
-        this.testObserver.awaitTerminalEvent();
 
-        this.testObserver.assertNoErrors();
-        this.testObserver.assertComplete();
+        this.userDataRepository.resetPassword(this.fakeUser).subscribe(testObserver);
+        testObserver.awaitTerminalEvent();
+
+        testObserver.assertNoErrors();
+        testObserver.assertComplete();
     }
 
     @Test
@@ -231,20 +242,23 @@ public class UserDataRepositoryTest extends BaseDataRepositoryTest {
         this.mockWebServer.enqueue(new MockResponse().setResponseCode(400).setBody(
                 TestUtils.json("reset_password_error.json", this)));
 
-        this.userDataRepository.resetPassword(this.fakeUser).subscribe(this.testObserver);
-        this.testObserver.awaitTerminalEvent();
 
-        this.testObserver.assertValueCount(0);
+        this.userDataRepository.resetPassword(this.fakeUser).subscribe(testObserver);
+        testObserver.awaitTerminalEvent();
+
+        testObserver.assertValueCount(0);
         RestApiErrorException error = (RestApiErrorException)
-                this.testObserver.errors().get(0);
+                testObserver.errors().get(0);
         Truth.assertThat(error.getStatusCode()).isEqualTo(205);
         Truth.assertThat(error.getMessage()).isEqualTo("no user found with email ztangmstrx1@gmail.com");
     }
 
     @Test
     public void testLoginUserRequest() throws Exception {
+
+
         this.mockWebServer.enqueue(new MockResponse());
-        this.userDataRepository.loginUser(this.fakeUser).subscribe(this.testObserver);
+        this.userDataRepository.loginUser(this.fakeUser).subscribe(testObserver);
         RecordedRequest request = this.mockWebServer.takeRequest();
         Truth.assertThat(request.getMethod()).isEqualTo("GET");
         final String path = request.getPath();
@@ -258,35 +272,39 @@ public class UserDataRepositoryTest extends BaseDataRepositoryTest {
                 TestUtils.json("session_login_ok.json", this)));
 
 
-        this.userDataRepository.loginUser(this.fakeUser).subscribe(this.testObserver);
-        this.testObserver.awaitTerminalEvent();
-        this.testObserver.assertValueCount(1);
+        this.userDataRepository.loginUser(this.fakeUser).subscribe(testObserver);
+        testObserver.awaitTerminalEvent();
+        testObserver.assertValueCount(1);
 
-        UserEntity responseUser = (UserEntity) ((List<Object>) this.testObserver.getEvents().get(0)).get(0);
+        UserEntity responseUser = (UserEntity) testObserver.getEvents().get(0).get(0);
         assertTrue(responseUser.getUsername().length() > 0);
         assertTrue(responseUser.getSessionToken().length() > 0);
     }
 
     @Test
     public void testLogoutUserSuccess() {
+
+
         this.mockWebServer.enqueue(new MockResponse().setResponseCode(200).setBody("{}"));
-        this.userDataRepository.logoutUser(this.fakeUser).subscribe(this.testObserver);
-        this.testObserver.awaitTerminalEvent();
-        this.testObserver.assertComplete();
+        this.userDataRepository.logoutUser(this.fakeUser).subscribe(testObserver);
+        testObserver.awaitTerminalEvent();
+        testObserver.assertComplete();
     }
 
     @Test
     public void testLoginUserError() throws Exception {
+
+
         this.mockWebServer.enqueue(new MockResponse().setResponseCode(422).setBody(
                 TestUtils.json("session_login_error.json", this)));
 
 
-        this.userDataRepository.loginUser(this.fakeUser).subscribe(this.testObserver);
-        this.testObserver.awaitTerminalEvent();
+        this.userDataRepository.loginUser(this.fakeUser).subscribe(testObserver);
+        testObserver.awaitTerminalEvent();
 
-        this.testObserver.assertValueCount(0);
+        testObserver.assertValueCount(0);
         RestApiErrorException error = (RestApiErrorException)
-                this.testObserver.errors().get(0);
+                testObserver.errors().get(0);
         Truth.assertThat(error.getStatusCode()).isEqualTo(101);
         Truth.assertThat(error.getMessage()).isEqualTo("invalid login parameters");
     }
@@ -295,7 +313,8 @@ public class UserDataRepositoryTest extends BaseDataRepositoryTest {
     public void testLogoutUserRequest() throws Exception {
         this.mockWebServer.enqueue(new MockResponse());
 
-        this.userDataRepository.logoutUser(this.fakeUser).subscribe(this.testObserver);
+
+        this.userDataRepository.logoutUser(this.fakeUser).subscribe(testObserver);
 
         RecordedRequest request = this.mockWebServer.takeRequest();
         Truth.assertThat(request.getPath()).isEqualTo(constructUrl(RestApi.URL_PATH_LOGOUT));
@@ -311,12 +330,12 @@ public class UserDataRepositoryTest extends BaseDataRepositoryTest {
                 "  \"error\": \"invalid session token\"\n" +
                 "}"));
 
-        this.userDataRepository.logoutUser(this.fakeUser).subscribe(this.testObserver);
-        this.testObserver.awaitTerminalEvent();
+        this.userDataRepository.logoutUser(this.fakeUser).subscribe(testObserver);
+        testObserver.awaitTerminalEvent();
 
-        this.testObserver.assertValueCount(0);
+        testObserver.assertValueCount(0);
         RestApiErrorException error = (RestApiErrorException)
-                this.testObserver.errors().get(0);
+                testObserver.errors().get(0);
         Truth.assertThat(error.getStatusCode()).isEqualTo(209);
         Truth.assertThat(error.getMessage()).isEqualTo("invalid session token");
     }
