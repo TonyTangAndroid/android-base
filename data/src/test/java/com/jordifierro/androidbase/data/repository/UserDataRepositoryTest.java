@@ -79,7 +79,7 @@ public class UserDataRepositoryTest extends BaseDataRepositoryTest {
         RecordedRequest request = this.mockWebServer.takeRequest();
 
         Truth.assertThat(request.getPath()).isEqualTo(constructUrl(RestApi.URL_PATH_USERS_ME));
-        Truth.assertThat(request.getMethod()).isEqualTo("GET");
+        Truth.assertThat(request.getMethod()).isEqualTo(HttpMethod.GET);
         Truth.assertThat(request.getHeader(PARSE_SESSION_KEY)).isEqualTo(MOCK_AUTH_TOKEN);
     }
 
@@ -127,7 +127,7 @@ public class UserDataRepositoryTest extends BaseDataRepositoryTest {
         this.userDataRepository.createUser(this.fakeUser).subscribe(testObserver);
         RecordedRequest request = this.mockWebServer.takeRequest();
         Truth.assertThat(request.getPath()).isEqualTo(constructUrl(RestApi.URL_PATH_USERS));
-        Truth.assertThat(request.getMethod()).isEqualTo("POST");
+        Truth.assertThat(request.getMethod()).isEqualTo(HttpMethod.POST);
         Truth.assertThat(request.getBody().readUtf8()).isEqualTo(this.gson.toJson(this.fakeUser));
     }
 
@@ -188,7 +188,7 @@ public class UserDataRepositoryTest extends BaseDataRepositoryTest {
         this.userDataRepository.deleteUser(this.fakeUser).subscribe(testObserver);
         RecordedRequest request = this.mockWebServer.takeRequest();
         Truth.assertThat(request.getPath()).isEqualTo(getFormattedUrl(fakeUser.getObjectId(), RestApi.URL_PATH_USERS_OBJECT_ID));
-        Truth.assertThat(request.getMethod()).isEqualTo("DELETE");
+        Truth.assertThat(request.getMethod()).isEqualTo(HttpMethod.DELETE);
         Truth.assertThat(request.getBody().readUtf8()).isEmpty();
     }
 
@@ -218,7 +218,7 @@ public class UserDataRepositoryTest extends BaseDataRepositoryTest {
 
         RecordedRequest request = this.mockWebServer.takeRequest();
         Truth.assertThat(request.getPath()).isEqualTo(constructUrl(RestApi.URL_PATH_REQUEST_PASSWORD_RESET));
-        Truth.assertThat(request.getMethod()).isEqualTo("POST");
+        Truth.assertThat(request.getMethod()).isEqualTo(HttpMethod.POST);
 
         Map<String, Object> params = new HashMap<>();
         params.put(RestApi.FIELD_EMAIL, this.fakeUser.getEmail());
@@ -260,7 +260,7 @@ public class UserDataRepositoryTest extends BaseDataRepositoryTest {
         this.mockWebServer.enqueue(new MockResponse());
         this.userDataRepository.loginUser(this.fakeUser).subscribe(testObserver);
         RecordedRequest request = this.mockWebServer.takeRequest();
-        Truth.assertThat(request.getMethod()).isEqualTo("GET");
+        Truth.assertThat(request.getMethod()).isEqualTo(HttpMethod.GET);
         final String path = request.getPath();
         Truth.assertThat(path).endsWith("username=tangzhilu%40mail.com&password=1234");
         Truth.assertThat(request.getBody().readUtf8()).isEmpty();
@@ -318,7 +318,7 @@ public class UserDataRepositoryTest extends BaseDataRepositoryTest {
 
         RecordedRequest request = this.mockWebServer.takeRequest();
         Truth.assertThat(request.getPath()).isEqualTo(constructUrl(RestApi.URL_PATH_LOGOUT));
-        Truth.assertThat(request.getMethod()).isEqualTo("POST");
+        Truth.assertThat(request.getMethod()).isEqualTo(HttpMethod.POST);
         Truth.assertThat(request.getHeader(PARSE_SESSION_KEY)).isEqualTo(MOCK_AUTH_TOKEN);
         Truth.assertThat(request.getBody().readUtf8()).isEmpty();
     }

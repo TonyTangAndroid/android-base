@@ -86,7 +86,7 @@ public class CloudNoteCloudDataStoreTest extends BaseDataRepositoryTest {
 
         RecordedRequest request = this.mockWebServer.takeRequest();
         Truth.assertThat(request.getPath()).isEqualTo(getFormattedUrl(this.fakeNote.getObjectId(), RestApi.URL_PATH_CLASSES_NOTE_OBJECT_ID));
-        Truth.assertThat(request.getMethod()).isEqualTo("GET");
+        Truth.assertThat(request.getMethod()).isEqualTo(HttpMethod.GET);
         Truth.assertThat(request.getBody().readUtf8()).isEmpty();
 
     }
