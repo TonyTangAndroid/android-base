@@ -40,6 +40,7 @@ ext {
     appcompatVersion = '1.0.0'
     cardviewVersion = '1.0.0'
     recyclerviewVersion = '1.0.0'
+    annotationVersion = '1.0.0'
 
     roomVersion = '2.1.0-alpha02'
     pagingVersion = '2.1.0-beta01'
@@ -52,11 +53,9 @@ ext {
     commonsIOVersion = '2.6'
     jetAnnotationVersion = '16.0.3'
     truthVersion = '0.42'
-
-    //'androidx.test.espresso:espresso-core:3.1.0'
-//    androidTestImplementation 'androidx.test:runner:1.1.0'
-//    androidTestImplementation 'androidx.test:rules:1.1.0'
-    espressoVersion = '3.1.0'
+    espressoCoreVersion = '3.1.0'
+    testRunnerVersion = '1.1.0'
+    testRulesVersion = '1.1.0'
 
 
     ext_dependencies = [
@@ -83,7 +82,6 @@ ext {
 
 
             okhttp3                      : "com.squareup.okhttp3:okhttp:${okhttp3Version}",
-            okhttp3_mockwebserver        : "com.squareup.okhttp3:mockwebserver:${okhttp3Version}",
             javaxAnnotation              : "javax.annotation:jsr250-api:${javaxAnnotationVersion}",
             everNoteAndroidState         : "com.evernote:android-state:${everNoteAndroidStateVersion}",
             everNoteAndroidStateProcessor: "com.evernote:android-state-processor:${everNoteAndroidStateVersion}",
@@ -100,6 +98,7 @@ ext {
             rxAndroid                    : "io.reactivex.rxjava2:rxandroid:${rxAndroidVersion}",
             autoValueWith                : "com.gabrielittner.auto.value:auto-value-with:${autoValueWithVersion}",
             appcompat                    : "androidx.appcompat:appcompat:${appcompatVersion}",
+            annotation                   : "androidx.annotation:annotation:${annotationVersion}",
             cardview                     : "androidx.cardview:cardview:${cardviewVersion}",
             recyclerview                 : "androidx.recyclerview:recyclerview:${recyclerviewVersion}",
             multidex                     : "androidx.multidex:multidex:${multidexVersion}",
@@ -110,21 +109,23 @@ ext {
     ]
 
     test_dependencies = [
-            junit             : "junit:junit:${jUnitVersion}",
-            commonsIO         : "commons-io:commons-io:${commonsIOVersion}",
-            mockito           : "org.mockito:mockito-core:${mockitoVersion}",
-            truth             : "com.google.truth:truth:${truthVersion}",
-            jetAnnotations    : "org.jetbrains:annotations-java5:${jetAnnotationVersion}",
-            mockWebServer     : "com.squareup.okhttp3:mockwebserver:${okhttp3Version}",
-            daggerCompiler    : "com.google.dagger:dagger-compiler:${daggerVersion}",
-            autoValue         : "com.google.auto.value:auto-value:${autoValueVersion}",
-            dexmaker          : "com.crittercism.dexmaker:dexmaker:${dexmakerVersion}",
-            dexmakerDx        : "com.crittercism.dexmaker:dexmaker-dx:${dexmakerVersion}",
-            findbugsJsr305    : "com.google.code.findbugs:jsr305:${findbugsJsr305Version}",
-            dexmakerParent    : "com.crittercism.dexmaker:dexmaker-parent:${dexmakerVersion}",
-            dexmakerMockito   : "com.crittercism.dexmaker:dexmaker-mockito:${dexmakerVersion}",
-            espressoWeb       : "com.android.support.test.espresso:espresso-web:${espressoVersion}",
-            espressoCore      : "com.android.support.test.espresso:espresso-core:${espressoVersion}",
-            espressoIntents   : "com.android.support.test.espresso:espresso-intents:${espressoVersion}",
+            junit          : "junit:junit:${jUnitVersion}",
+            truth          : "com.google.truth:truth:${truthVersion}",
+            commonsIO      : "commons-io:commons-io:${commonsIOVersion}",
+            mockito        : "org.mockito:mockito-core:${mockitoVersion}",
+            daggerCompiler : "com.google.dagger:dagger-compiler:${daggerVersion}",
+            mockWebServer  : "com.squareup.okhttp3:mockwebserver:${okhttp3Version}",
+            jetAnnotations : "org.jetbrains:annotations-java5:${jetAnnotationVersion}",
+            findbugsJsr305 : "com.google.code.findbugs:jsr305:${findbugsJsr305Version}",
+
+
+            dexmaker       : "com.crittercism.dexmaker:dexmaker:${dexmakerVersion}",
+            dexmakerDx     : "com.crittercism.dexmaker:dexmaker-dx:${dexmakerVersion}",
+            dexmakerParent : "com.crittercism.dexmaker:dexmaker-parent:${dexmakerVersion}",
+            dexmakerMockito: "com.crittercism.dexmaker:dexmaker-mockito:${dexmakerVersion}",
+
+            testRules      : "androidx.test:runner:${testRulesVersion}",
+            testRunner     : "androidx.test:runner:${testRunnerVersion}",
+            espressoCore   : "androidx.test.espresso:espresso-core:${espressoCoreVersion}",
     ]
 }

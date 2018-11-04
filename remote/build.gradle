@@ -26,7 +26,6 @@ dependencies {
     compile ext_dependencies.retrofitRxJava2
     compile ext_dependencies.okhttp3_log
     compile ext_dependencies.okhttp3
-    compile ext_dependencies.okhttp3_mockwebserver
 
     compile ext_dependencies.javaxInject
     compile ext_dependencies.gson
