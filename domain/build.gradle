@@ -19,6 +19,7 @@ dependencies {
     compile ext_dependencies.gson
     compile ext_dependencies.rxJava
     compile ext_dependencies.javaxInject
+    compile ext_dependencies.findbugsJsr305
 
     testCompile test_dependencies.truth
     testCompile test_dependencies.junit

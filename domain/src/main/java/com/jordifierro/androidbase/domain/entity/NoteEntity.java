@@ -6,7 +6,7 @@ import com.google.gson.Gson;
 import com.google.gson.TypeAdapter;
 import com.google.gson.annotations.SerializedName;
 
-import io.reactivex.annotations.Nullable;
+import javax.annotation.Nullable;
 
 @AutoValue
 public abstract class NoteEntity {
