@@ -60,6 +60,7 @@ dependencies {
     compile 'androidx.multidex:multidex:2.0.0'
     compile ext_dependencies.proguardSnippets
     compile ext_dependencies.timber
+    compile ext_dependencies.rxjava2Debug
     compile 'com.google.android.material:material:1.0.0'
     compile 'androidx.legacy:legacy-support-v13:1.0.0'
     compile 'androidx.appcompat:appcompat:1.0.0'

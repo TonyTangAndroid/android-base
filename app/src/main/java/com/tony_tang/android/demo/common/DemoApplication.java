@@ -3,6 +3,8 @@ package com.tony_tang.android.demo.common;
 import android.app.Activity;
 import android.app.Fragment;
 
+import com.akaita.java.rxjava2debug.RxJava2Debug;
+
 import javax.inject.Inject;
 
 import androidx.multidex.MultiDexApplication;
@@ -32,6 +34,8 @@ public class DemoApplication extends MultiDexApplication implements HasFragmentI
                 .build();
         demoApplicationComponent
                 .inject(this);
+        RxJava2Debug.enableRxJava2AssemblyTracking();
+
 
     }
 

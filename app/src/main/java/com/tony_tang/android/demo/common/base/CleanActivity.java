@@ -2,11 +2,10 @@ package com.tony_tang.android.demo.common.base;
 
 import android.content.Intent;
 import android.net.Uri;
-import android.util.Log;
 import android.widget.Toast;
 
+import com.akaita.java.rxjava2debug.RxJava2Debug;
 import com.jordifierro.androidbase.domain.exception.RestApiErrorException;
-import com.tony_tang.android.demo.R;
 import com.tony_tang.android.demo.presentation.view.base.CleanView;
 
 public abstract class CleanActivity extends BaseActivity implements CleanView {
@@ -24,15 +23,13 @@ public abstract class CleanActivity extends BaseActivity implements CleanView {
                     onUnknownError(throwable);
             }
         } else {
-            Log.e("error", "unexpected error:", throwable);
-            Toast.makeText(context(), getResources().getString(R.string.message_error),
-                    Toast.LENGTH_LONG).show();
+            onUnknownError(throwable);
         }
     }
 
     private void onUnknownError(Throwable throwable) {
         Toast.makeText(this, throwable.getMessage(), Toast.LENGTH_SHORT).show();
-
+        RxJava2Debug.getEnhancedStackTrace(throwable);
     }
 
 

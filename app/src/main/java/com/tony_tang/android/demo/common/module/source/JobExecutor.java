@@ -1,7 +1,5 @@
 package com.tony_tang.android.demo.common.module.source;
 
-import androidx.annotation.NonNull;
-
 import com.jordifierro.androidbase.domain.executor.ThreadExecutor;
 
 import java.util.concurrent.BlockingQueue;
@@ -11,6 +9,8 @@ import java.util.concurrent.ThreadPoolExecutor;
 import java.util.concurrent.TimeUnit;
 
 import javax.inject.Inject;
+
+import androidx.annotation.NonNull;
 
 
 public class JobExecutor implements ThreadExecutor {
@@ -33,11 +33,6 @@ public class JobExecutor implements ThreadExecutor {
     @Override
     public void execute(@NonNull Runnable runnable) {
         this.threadPoolExecutor.execute(runnable);
-    }
-
-    @Override
-    public Exception map(Throwable throwable) {
-        return new RuntimeException(throwable);
     }
 
     static class JobThreadFactory implements ThreadFactory {

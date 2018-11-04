@@ -26,14 +26,9 @@ public abstract class CompletableUseCase {
 
     public <S extends CompletableObserver & Disposable> void execute(S useCaseDisposable) {
         this.disposable = this.build()
-                .onErrorResumeNext(this::transformError)
                 .subscribeOn(Schedulers.from(threadExecutor))
                 .observeOn(UIThread.getScheduler())
                 .subscribeWith(useCaseDisposable);
-    }
-
-    private Completable transformError(Throwable throwable) {
-        return Completable.error(threadExecutor.map(throwable));
     }
 
     public void unsubscribe() {

@@ -1,7 +1,7 @@
 package com.jordifierro.androidbase.domain.interactor;
 
-import com.jordifierro.androidbase.domain.executor.UIThread;
 import com.jordifierro.androidbase.domain.executor.ThreadExecutor;
+import com.jordifierro.androidbase.domain.executor.UIThread;
 
 import org.jetbrains.annotations.NotNull;
 import org.junit.Before;
@@ -75,11 +75,6 @@ public class UseCaseTest {
         @Override
         public void execute(@NotNull Runnable command) {
             command.run();
-        }
-
-        @Override
-        public Exception map(Throwable throwable) {
-            return null;
         }
     }
 
