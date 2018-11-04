@@ -57,20 +57,20 @@ dependencies {
     compile project(':data')
     compile project(':presentation')
 
-    compile 'androidx.multidex:multidex:2.0.0'
+    compile ext_dependencies.multidex
     compile ext_dependencies.proguardSnippets
     compile ext_dependencies.timber
     compile ext_dependencies.rxjava2Debug
-    compile 'com.google.android.material:material:1.0.0'
-    compile 'androidx.legacy:legacy-support-v13:1.0.0'
-    compile 'androidx.appcompat:appcompat:1.0.0'
+    compile ext_dependencies.material
+    compile ext_dependencies.legacyV13
+
     compile ext_dependencies.daggerAndroid
     compile ext_dependencies.dagger
     compile ext_dependencies.javaxAnnotation
     compile ext_dependencies.rxJava
     compile ext_dependencies.rxAndroid
-    compile 'androidx.cardview:cardview:1.0.0'
-    compile 'androidx.recyclerview:recyclerview:1.0.0'
+    compile ext_dependencies.appcompat
+    compile ext_dependencies.cardview
     compile ext_dependencies.everNoteAndroidState
     annotationProcessor ext_dependencies.everNoteAndroidStateProcessor
 
