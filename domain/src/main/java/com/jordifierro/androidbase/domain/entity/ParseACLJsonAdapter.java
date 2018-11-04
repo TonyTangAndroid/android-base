@@ -13,10 +13,10 @@ import java.util.ArrayList;
 import java.util.Map.Entry;
 import java.util.Set;
 
-public class ParseACLJsonAdapter implements JsonDeserializer<ParsePermissionWrapper>, JsonSerializer<ParsePermissionWrapper> {
+public class ParseACLJsonAdapter implements JsonDeserializer<PermissionItemList>, JsonSerializer<PermissionItemList> {
 
     @Override
-    public ParsePermissionWrapper deserialize(JsonElement json, Type typeOfT, JsonDeserializationContext ctx) throws JsonParseException {
+    public PermissionItemList deserialize(JsonElement json, Type typeOfT, JsonDeserializationContext ctx) throws JsonParseException {
 
         JsonObject obj = json.getAsJsonObject();
         final Set<Entry<String, JsonElement>> objectIdSet = obj.entrySet();
@@ -24,11 +24,11 @@ public class ParseACLJsonAdapter implements JsonDeserializer<ParsePermissionWrap
             return null;
         }
 
-        ArrayList<ParsePermission> permissionArrayList = new ArrayList<>(objectIdSet.size());
+        ArrayList<PermissionItem> permissionArrayList = new ArrayList<>(objectIdSet.size());
 
 
         for (Entry<String, JsonElement> objectIdJsonElementEntry : objectIdSet) {
-            ParsePermission.Builder builder = ParsePermission.builder();
+            PermissionItem.Builder builder = PermissionItem.builder();
             builder.objectId(objectIdJsonElementEntry.getKey());
             final JsonElement value = objectIdJsonElementEntry.getValue();
             final JsonObject readWriteJsonObject = value.getAsJsonObject();
@@ -40,16 +40,16 @@ public class ParseACLJsonAdapter implements JsonDeserializer<ParsePermissionWrap
 
         }
 
-        return ParsePermissionWrapper.builder().permissionArrayList(permissionArrayList).build();
+        return PermissionItemList.builder().permissionItemList(permissionArrayList).build();
     }
 
     @Override
-    public JsonElement serialize(ParsePermissionWrapper src, Type typeOfSrc, JsonSerializationContext context) {
+    public JsonElement serialize(PermissionItemList src, Type typeOfSrc, JsonSerializationContext context) {
 
         final JsonObject jsonObject = new JsonObject();
 
 
-        for (ParsePermission permission : src.permissionArrayList()) {
+        for (PermissionItem permission : src.permissionItemList()) {
 
             final JsonObject jsonObjectPermission = new JsonObject();
             jsonObjectPermission.addProperty("read", permission.read());

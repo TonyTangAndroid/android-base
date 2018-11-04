@@ -8,15 +8,15 @@ import com.google.gson.annotations.SerializedName;
 import javax.annotation.Nullable;
 
 @AutoValue
-public abstract class ParsePermission {
+public abstract class PermissionItem {
 
 
-    public static TypeAdapter<ParsePermission> typeAdapter(Gson gson) {
-        return new AutoValue_ParsePermission.GsonTypeAdapter(gson);
+    public static TypeAdapter<PermissionItem> typeAdapter(Gson gson) {
+        return new AutoValue_PermissionItem.GsonTypeAdapter(gson);
     }
 
     public static Builder builder() {
-        return new AutoValue_ParsePermission.Builder();
+        return new AutoValue_PermissionItem.Builder();
     }
 
     @SerializedName("read")
@@ -37,6 +37,6 @@ public abstract class ParsePermission {
 
         public abstract Builder objectId(String objectId);
 
-        public abstract ParsePermission build();
+        public abstract PermissionItem build();
     }
 }

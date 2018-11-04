@@ -4,7 +4,7 @@ import com.google.common.truth.Truth;
 import com.google.gson.Gson;
 import com.jordifierro.androidbase.data.net.RestApi;
 import com.jordifierro.androidbase.data.utils.TestUtils;
-import com.jordifierro.androidbase.domain.entity.GsonHelper;
+import com.jordifierro.androidbase.domain.entity.WrapperGsonHelper;
 import com.jordifierro.androidbase.domain.entity.UserEntity;
 import com.jordifierro.androidbase.domain.exception.RestApiErrorException;
 
@@ -37,7 +37,7 @@ public class UserRemoteRepositoryTest extends BaseDataRepositoryTest {
     public void setUp() throws IOException {
         this.testObserver = new TestObserver<>();
 
-        this.gson = GsonHelper.build();
+        this.gson = WrapperGsonHelper.build();
 
         this.mockWebServer = new MockWebServer();
         this.mockWebServer.start();

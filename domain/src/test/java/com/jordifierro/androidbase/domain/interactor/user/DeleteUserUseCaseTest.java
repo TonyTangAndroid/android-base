@@ -1,7 +1,6 @@
 package com.jordifierro.androidbase.domain.interactor.user;
 
 import com.jordifierro.androidbase.domain.entity.UserEntity;
-import com.jordifierro.androidbase.domain.entity.VoidEntity;
 import com.jordifierro.androidbase.domain.executor.ThreadExecutor;
 import com.jordifierro.androidbase.domain.executor.UIThread;
 import com.jordifierro.androidbase.domain.repository.TokenRepository;
@@ -53,7 +52,7 @@ public class DeleteUserUseCaseTest {
         given(mockSessionRepository.sessionToken()).willReturn(MOCK_OBJECT_ID);
         given(mockUserRepository.deleteUser(MOCK_OBJECT_ID)).willReturn(Completable.complete());
         TestScheduler testScheduler = new TestScheduler();
-        TestObserver<VoidEntity> testObserver = new TestObserver<>();
+        TestObserver testObserver = new TestObserver<>();
         deleteUserUseCase.build().observeOn(testScheduler).subscribe(testObserver);
         testScheduler.triggerActions();
 

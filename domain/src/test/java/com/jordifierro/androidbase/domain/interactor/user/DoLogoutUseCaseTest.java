@@ -1,7 +1,5 @@
 package com.jordifierro.androidbase.domain.interactor.user;
 
-import com.jordifierro.androidbase.domain.entity.UserEntity;
-import com.jordifierro.androidbase.domain.entity.VoidEntity;
 import com.jordifierro.androidbase.domain.executor.ThreadExecutor;
 import com.jordifierro.androidbase.domain.executor.UIThread;
 import com.jordifierro.androidbase.domain.repository.TokenRepository;
@@ -32,12 +30,6 @@ public class DoLogoutUseCaseTest {
     @Mock
     private TokenRepository mockSessionRepository;
 
-    @Mock
-    private UserEntity mockUser;
-    @Mock
-    private VoidEntity voidEntity;
-
-
     @Before
     public void setup() {
         MockitoAnnotations.initMocks(this);
@@ -49,7 +41,7 @@ public class DoLogoutUseCaseTest {
 
         given(mockUserRepository.logoutUser()).willReturn(Completable.complete());
 
-        TestObserver<VoidEntity> testObserver = new TestObserver<>();
+        TestObserver testObserver = new TestObserver<>();
         TestScheduler testScheduler = new TestScheduler();
         final Completable completable = doLogoutUseCase.build();
         completable.observeOn(testScheduler).subscribe(testObserver);

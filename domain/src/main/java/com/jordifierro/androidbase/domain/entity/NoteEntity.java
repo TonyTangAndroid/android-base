@@ -41,7 +41,7 @@ public abstract class NoteEntity {
 
     @Nullable
     @SerializedName("ACL")
-    public abstract ParsePermissionWrapper ACL();
+    public abstract PermissionItemList ACL();
 
     @AutoValue.Builder
     public abstract static class Builder {
@@ -55,7 +55,7 @@ public abstract class NoteEntity {
 
         public abstract Builder updatedAt(String updatedAt);
 
-        public abstract Builder ACL(ParsePermissionWrapper ACL);
+        public abstract Builder ACL(PermissionItemList ACL);
 
         public abstract NoteEntity build();
     }

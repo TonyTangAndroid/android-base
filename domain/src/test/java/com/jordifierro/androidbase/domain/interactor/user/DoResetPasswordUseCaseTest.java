@@ -1,7 +1,6 @@
 package com.jordifierro.androidbase.domain.interactor.user;
 
 import com.jordifierro.androidbase.domain.entity.UserEntity;
-import com.jordifierro.androidbase.domain.entity.VoidEntity;
 import com.jordifierro.androidbase.domain.executor.ThreadExecutor;
 import com.jordifierro.androidbase.domain.executor.UIThread;
 import com.jordifierro.androidbase.domain.repository.UserRepository;
@@ -30,8 +29,6 @@ public class DoResetPasswordUseCaseTest {
     private UserRepository mockUserRepository;
     @Mock
     private UserEntity mockUser;
-    @Mock
-    private VoidEntity voidEntity;
 
     @Before
     public void setup() {
@@ -48,7 +45,7 @@ public class DoResetPasswordUseCaseTest {
         given(mockUserRepository.resetPassword(mockUser.email()))
                 .willReturn(Completable.complete());
 
-        TestObserver<VoidEntity> testObserver = new TestObserver<>();
+        TestObserver testObserver = new TestObserver<>();
         TestScheduler testScheduler = new TestScheduler();
         resetPasswordUseCase.build().observeOn(testScheduler).subscribe(testObserver);
         testScheduler.triggerActions();

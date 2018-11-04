@@ -5,7 +5,7 @@ import com.google.gson.Gson;
 import com.jordifierro.androidbase.data.net.RestApi;
 import com.jordifierro.androidbase.data.utils.TestUtils;
 import com.jordifierro.androidbase.domain.entity.CreatedWrapper;
-import com.jordifierro.androidbase.domain.entity.GsonHelper;
+import com.jordifierro.androidbase.domain.entity.WrapperGsonHelper;
 import com.jordifierro.androidbase.domain.entity.NoteEntitiesWrapper;
 import com.jordifierro.androidbase.domain.entity.NoteEntity;
 import com.jordifierro.androidbase.domain.exception.RestApiErrorException;
@@ -53,7 +53,7 @@ public class NoteRemoteImplTest extends BaseDataRepositoryTest {
     }
 
     private RestApi restApi() {
-        Gson gson = GsonHelper.build();
+        Gson gson = WrapperGsonHelper.build();
         Retrofit retrofit = retrofit(gson);
         return retrofit.create(RestApi.class);
     }
@@ -93,7 +93,7 @@ public class NoteRemoteImplTest extends BaseDataRepositoryTest {
         this.noteRemoteImpl.getNote(OBJECT_ID).subscribe(testObserver);
         testObserver.awaitTerminalEvent();
         Truth.assertThat(testObserver.values().size()).isEqualTo(1);
-        Truth.assertThat(testObserver.values().get(0)).isEqualTo(GsonHelper.build().fromJson(json, NoteEntity.class));
+        Truth.assertThat(testObserver.values().get(0)).isEqualTo(WrapperGsonHelper.build().fromJson(json, NoteEntity.class));
     }
 
     @Test
@@ -108,7 +108,7 @@ public class NoteRemoteImplTest extends BaseDataRepositoryTest {
         testObserver.awaitTerminalEvent();
 
         Truth.assertThat(testObserver.values().size()).isEqualTo(1);
-        Truth.assertThat(testObserver.values().get(0)).isEqualTo(GsonHelper.build().fromJson(json, NoteEntitiesWrapper.class).results());
+        Truth.assertThat(testObserver.values().get(0)).isEqualTo(WrapperGsonHelper.build().fromJson(json, NoteEntitiesWrapper.class).results());
 
     }
 
