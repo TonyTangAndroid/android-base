@@ -1,14 +1,3 @@
-buildscript {
-    repositories {
-        maven {
-            url "https://plugins.gradle.org/m2/"
-        }
-    }
-    dependencies {
-        classpath "net.ltgt.gradle:gradle-apt-plugin:0.13"
-    }
-}
-
 apply plugin: 'java'
 apply plugin: 'net.ltgt.apt-idea'
 apply plugin: 'idea'
@@ -19,15 +8,24 @@ dependencies {
     def ext_dependencies = rootProject.ext.ext_dependencies
     def test_dependencies = rootProject.ext.test_dependencies
 
-    compile ext_dependencies.javaxInject
+
+    compileOnly ext_dependencies.autoValue
+    compileOnly ext_dependencies.autoValueGson
+
+    apt ext_dependencies.autoValue
+    apt ext_dependencies.autoValueGson
+    apt ext_dependencies.autoValueWith
+
     compile ext_dependencies.gson
     compile ext_dependencies.rxJava
-    compileOnly ext_dependencies.autoValue
-    apt ext_dependencies.autoValue
+    compile ext_dependencies.javaxInject
+
     testCompile test_dependencies.truth
     testCompile test_dependencies.junit
     testCompile test_dependencies.mockito
     testCompile test_dependencies.jetAnnotations
+
+
 
 
 }
