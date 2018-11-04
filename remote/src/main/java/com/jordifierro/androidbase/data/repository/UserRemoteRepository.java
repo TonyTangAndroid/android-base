@@ -3,7 +3,7 @@ package com.jordifierro.androidbase.data.repository;
 import com.jordifierro.androidbase.data.net.RestApi;
 import com.jordifierro.androidbase.domain.entity.CreatedWrapper;
 import com.jordifierro.androidbase.domain.entity.UserEntity;
-import com.jordifierro.androidbase.domain.repository.UserRemote;
+import com.jordifierro.androidbase.domain.repository.UserRepository;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -13,18 +13,18 @@ import javax.inject.Inject;
 import io.reactivex.Completable;
 import io.reactivex.Single;
 
-public class UserRemoteImpl implements UserRemote {
+public class UserRemoteRepository implements UserRepository {
 
     private final RestApi restApi;
 
     @Inject
-    public UserRemoteImpl(RestApi restApi) {
+    public UserRemoteRepository(RestApi restApi) {
         this.restApi = restApi;
     }
 
     @Override
-    public Single<CreatedWrapper> createUser(UserEntity user) {
-        return this.restApi.createUser(user).flatMap(Validator::validate);
+    public Single<String> createUser(UserEntity user) {
+        return this.restApi.createUser(user).flatMap(Validator::validate).map(CreatedWrapper::getSessionToken);
     }
 
 

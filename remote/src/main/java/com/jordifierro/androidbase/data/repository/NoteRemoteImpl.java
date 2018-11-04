@@ -36,7 +36,7 @@ public class NoteRemoteImpl implements NoteListRemote, NoteRemote {
 
     @Override
     public Single<List<NoteEntity>> getNotes(Map<String, Object> queryParam) {
-        return restApi.getNotes(queryParam).flatMap(Validator::validate).map(NoteEntitiesWrapper::getResults);
+        return restApi.getNotes(queryParam).flatMap(Validator::validate).map(NoteEntitiesWrapper::results);
     }
 
     @Override

@@ -1,12 +1,11 @@
 package com.jordifierro.androidbase.domain.interactor.user;
 
 import com.google.common.truth.Truth;
-import com.jordifierro.androidbase.domain.entity.CreatedWrapper;
 import com.jordifierro.androidbase.domain.entity.UserEntity;
 import com.jordifierro.androidbase.domain.executor.ThreadExecutor;
 import com.jordifierro.androidbase.domain.executor.UIThread;
 import com.jordifierro.androidbase.domain.repository.SessionRepository;
-import com.jordifierro.androidbase.domain.repository.UserRemote;
+import com.jordifierro.androidbase.domain.repository.UserRepository;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -23,7 +22,6 @@ import static org.mockito.Mockito.verifyZeroInteractions;
 
 public class CreateUserUseCaseTest {
 
-    private static final String FAKE_PASS = "1234";
     private static final String FAKE_SESSION_TOKEN = "fake_auth_token";
 
     @Mock
@@ -31,13 +29,11 @@ public class CreateUserUseCaseTest {
     @Mock
     private UIThread mockUIThread;
     @Mock
-    private UserRemote mockUserRepository;
+    private UserRepository mockUserRepository;
     @Mock
     private SessionRepository mockSessionRepository;
     @Mock
     private UserEntity mockUser;
-    @Mock
-    private CreatedWrapper createdWrapper;
 
     @Before
     public void setup() {
@@ -48,13 +44,12 @@ public class CreateUserUseCaseTest {
     @Test
     public void testCreateUserUseCaseSuccess() {
 
-        given(createdWrapper.getSessionToken()).willReturn(FAKE_SESSION_TOKEN);
 
 
         CreateUserUseCase createUserUseCase = new CreateUserUseCase(mockThreadExecutor,
                 mockUIThread, mockUserRepository, mockSessionRepository);
         TestObserver<UserEntity> testObserver = new TestObserver<>();
-        given(mockUserRepository.createUser(mockUser)).willReturn(Single.just(createdWrapper));
+        given(mockUserRepository.createUser(mockUser)).willReturn(Single.just(FAKE_SESSION_TOKEN));
         given(mockUserRepository.getUserBySessionToken(FAKE_SESSION_TOKEN)).willReturn(Single.just(mockUser));
 
         createUserUseCase.setParams(mockUser);

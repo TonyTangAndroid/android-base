@@ -1,17 +1,21 @@
 package com.jordifierro.androidbase.domain.entity;
 
+import com.google.auto.value.AutoValue;
+import com.google.gson.Gson;
+import com.google.gson.TypeAdapter;
+import com.google.gson.annotations.SerializedName;
+
 import java.util.List;
 
-public class NoteEntitiesWrapper {
+@AutoValue
+public abstract class NoteEntitiesWrapper {
 
 
-    private List<NoteEntity> results;
-
-    public List<NoteEntity> getResults() {
-        return results;
+    public static TypeAdapter<NoteEntitiesWrapper> typeAdapter(Gson gson) {
+        return new AutoValue_NoteEntitiesWrapper.GsonTypeAdapter(gson);
     }
 
-    public void setResults(List<NoteEntity> results) {
-        this.results = results;
-    }
+
+    @SerializedName("results")
+    public abstract List<NoteEntity> results();
 }

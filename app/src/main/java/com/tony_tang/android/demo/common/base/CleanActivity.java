@@ -42,7 +42,7 @@ public abstract class CleanActivity extends BaseActivity implements CleanView {
 //                    public void onClick(DialogInterface dialog, int which) {
 //                        navigateToUpgrater();
 //                    }
-//                }).create().show();
+//                }).build().show();
     }
 
     private void navigateToUpgrater() {

@@ -1,14 +1,13 @@
 package com.jordifierro.androidbase.domain.repository;
 
-import com.jordifierro.androidbase.domain.entity.CreatedWrapper;
 import com.jordifierro.androidbase.domain.entity.UserEntity;
 
 import io.reactivex.Completable;
 import io.reactivex.Single;
 
 
-public interface UserRemote {
-    Single<CreatedWrapper> createUser(UserEntity user);
+public interface UserRepository {
+    Single<String> createUser(UserEntity user);
 
     Completable deleteUser(UserEntity user);
 

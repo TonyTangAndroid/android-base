@@ -5,7 +5,7 @@ import com.jordifierro.androidbase.domain.executor.ThreadExecutor;
 import com.jordifierro.androidbase.domain.executor.UIThread;
 import com.jordifierro.androidbase.domain.interactor.CompletableUseCase;
 import com.jordifierro.androidbase.domain.repository.SessionRepository;
-import com.jordifierro.androidbase.domain.repository.UserRemote;
+import com.jordifierro.androidbase.domain.repository.UserRepository;
 
 import javax.inject.Inject;
 
@@ -13,12 +13,12 @@ import io.reactivex.Completable;
 
 public class DoLogoutUseCase extends CompletableUseCase {
 
-    private UserRemote userRepository;
+    private UserRepository userRepository;
     private SessionRepository sessionRepository;
 
     @Inject
     public DoLogoutUseCase(ThreadExecutor threadExecutor, UIThread UIThread,
-                           UserRemote userRepository, SessionRepository sessionRepository) {
+                           UserRepository userRepository, SessionRepository sessionRepository) {
         super(threadExecutor, UIThread);
         this.userRepository = userRepository;
         this.sessionRepository = sessionRepository;

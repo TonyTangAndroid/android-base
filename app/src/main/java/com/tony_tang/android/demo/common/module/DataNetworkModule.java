@@ -5,9 +5,9 @@ import com.jordifierro.androidbase.data.repository.NoteDataRepository;
 import com.jordifierro.androidbase.data.repository.NoteListRemote;
 import com.jordifierro.androidbase.data.repository.NoteRemote;
 import com.jordifierro.androidbase.data.repository.NoteRemoteImpl;
-import com.jordifierro.androidbase.data.repository.UserRemoteImpl;
+import com.jordifierro.androidbase.data.repository.UserRemoteRepository;
 import com.jordifierro.androidbase.domain.repository.NoteRepository;
-import com.jordifierro.androidbase.domain.repository.UserRemote;
+import com.jordifierro.androidbase.domain.repository.UserRepository;
 import com.tony_tang.android.demo.common.scope.ApplicationScope;
 
 import dagger.Binds;
@@ -25,7 +25,7 @@ public abstract class DataNetworkModule {
 
     @Binds
     @ApplicationScope
-    abstract UserRemote provideUserRepository(UserRemoteImpl userDataRepository);
+    abstract UserRepository provideUserRepository(UserRemoteRepository userDataRepository);
 
     @Binds
     @ApplicationScope

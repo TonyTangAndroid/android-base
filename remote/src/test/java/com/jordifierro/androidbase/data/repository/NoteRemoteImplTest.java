@@ -2,14 +2,12 @@ package com.jordifierro.androidbase.data.repository;
 
 import com.google.common.truth.Truth;
 import com.google.gson.Gson;
-import com.google.gson.GsonBuilder;
 import com.jordifierro.androidbase.data.net.RestApi;
 import com.jordifierro.androidbase.data.utils.TestUtils;
 import com.jordifierro.androidbase.domain.entity.CreatedWrapper;
+import com.jordifierro.androidbase.domain.entity.GsonHelper;
 import com.jordifierro.androidbase.domain.entity.NoteEntitiesWrapper;
 import com.jordifierro.androidbase.domain.entity.NoteEntity;
-import com.jordifierro.androidbase.domain.entity.ParseACLJsonAdapter;
-import com.jordifierro.androidbase.domain.entity.ParsePermissionWrapper;
 import com.jordifierro.androidbase.domain.exception.RestApiErrorException;
 
 import org.junit.After;
@@ -32,7 +30,7 @@ import retrofit2.converter.gson.GsonConverterFactory;
 
 import static com.google.common.truth.Truth.assertThat;
 
-public class NoteDataRepositoryTest extends BaseDataRepositoryTest {
+public class NoteRemoteImplTest extends BaseDataRepositoryTest {
 
     private NoteEntity fakeNote;
     private MockWebServer mockWebServer;
@@ -50,12 +48,12 @@ public class NoteDataRepositoryTest extends BaseDataRepositoryTest {
         this.mockWebServer.start();
 
         this.noteRemoteImpl = new NoteRemoteImpl(restApi());
-        this.fakeNote = new NoteEntity(MOCK_NOTE_OBJECT_ID, MOCK_NOTE_TITLE, MOCK_NOTE_CONTENT);
+        this.fakeNote = NoteEntity.builder().objectId(OBJECT_ID).title(MOCK_NOTE_TITLE).content(MOCK_NOTE_CONTENT).build();
         fakeQueryParam = new HashMap<>();
     }
 
     private RestApi restApi() {
-        Gson gson = gson();
+        Gson gson = GsonHelper.build();
         Retrofit retrofit = retrofit(gson);
         return retrofit.create(RestApi.class);
     }
@@ -68,11 +66,7 @@ public class NoteDataRepositoryTest extends BaseDataRepositoryTest {
                 .build();
     }
 
-    private Gson gson() {
-        GsonBuilder gsonBuilder = new GsonBuilder();
-        gsonBuilder.registerTypeAdapter(ParsePermissionWrapper.class, new ParseACLJsonAdapter());
-        return gsonBuilder.create();
-    }
+
 
     @After
     public void tearDown() throws IOException {
@@ -97,10 +91,10 @@ public class NoteDataRepositoryTest extends BaseDataRepositoryTest {
         TestObserver<NoteEntity> testObserver = new TestObserver<>();
         String json = TestUtils.json("note_get_ok.json", this);
         this.mockWebServer.enqueue(new MockResponse().setResponseCode(200).setBody(json));
-        this.noteRemoteImpl.getNote(MOCK_NOTE_OBJECT_ID).subscribe(testObserver);
+        this.noteRemoteImpl.getNote(OBJECT_ID).subscribe(testObserver);
         testObserver.awaitTerminalEvent();
         Truth.assertThat(testObserver.values().size()).isEqualTo(1);
-        Truth.assertThat(testObserver.values().get(0)).isEqualTo(gson().fromJson(json, NoteEntity.class));
+        Truth.assertThat(testObserver.values().get(0)).isEqualTo(GsonHelper.build().fromJson(json, NoteEntity.class));
     }
 
     @Test
@@ -115,7 +109,7 @@ public class NoteDataRepositoryTest extends BaseDataRepositoryTest {
         testObserver.awaitTerminalEvent();
 
         Truth.assertThat(testObserver.values().size()).isEqualTo(1);
-        Truth.assertThat(testObserver.values().get(0)).isEqualTo(gson().fromJson(json, NoteEntitiesWrapper.class).getResults());
+        Truth.assertThat(testObserver.values().get(0)).isEqualTo(GsonHelper.build().fromJson(json, NoteEntitiesWrapper.class).results());
 
     }
 
@@ -150,6 +144,7 @@ public class NoteDataRepositoryTest extends BaseDataRepositoryTest {
         TestObserver testObserver = new TestObserver<>();
         this.mockWebServer.enqueue(new MockResponse());
         this.noteRemoteImpl.updateNote(this.fakeNote).subscribe(testObserver);
+        testObserver.awaitTerminalEvent();
         RecordedRequest request = this.mockWebServer.takeRequest();
         Truth.assertThat(request.getPath()).isEqualTo(getFormattedUrl(this.fakeNote.objectId(), RestApi.URL_PATH_CLASSES_NOTE_OBJECT_ID));
         Truth.assertThat(request.getMethod()).isEqualTo(HttpMethod.PUT);
@@ -206,7 +201,7 @@ public class NoteDataRepositoryTest extends BaseDataRepositoryTest {
     public void testDeleteNoteSuccessResponse() {
         TestObserver testObserver = new TestObserver<>();
         this.mockWebServer.enqueue(new MockResponse().setResponseCode(200).setBody("{}"));
-        this.noteRemoteImpl.deleteNote(MOCK_NOTE_OBJECT_ID).subscribe(testObserver);
+        this.noteRemoteImpl.deleteNote(OBJECT_ID).subscribe(testObserver);
         testObserver.awaitTerminalEvent();
         testObserver.assertNoErrors();
         testObserver.assertComplete();
@@ -217,7 +212,7 @@ public class NoteDataRepositoryTest extends BaseDataRepositoryTest {
         TestObserver testObserver = new TestObserver<>();
 
         this.mockWebServer.enqueue(new MockResponse().setResponseCode(401));
-        this.noteRemoteImpl.deleteNote(MOCK_NOTE_OBJECT_ID).subscribe(testObserver);
+        this.noteRemoteImpl.deleteNote(OBJECT_ID).subscribe(testObserver);
         testObserver.awaitTerminalEvent();
 
         testObserver.assertValueCount(0);

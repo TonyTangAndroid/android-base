@@ -30,16 +30,15 @@ public class NoteDataRepositoryTest extends BaseDataRepositoryTest {
     private NoteDataStoreFactory badgeDataStoreFactory;
 
 
+    @Mock
     private NoteEntity fakeNote;
     private NoteDataRepository noteDataRepository;
 
 
     @Before
     public void setUp() {
-
         MockitoAnnotations.initMocks(this);
         this.noteDataRepository = new NoteDataRepository(noteRemote, noteDiskDataStore, badgeDataStoreFactory);
-        this.fakeNote = new NoteEntity(MOCK_NOTE_OBJECT_ID, MOCK_NOTE_TITLE, MOCK_NOTE_CONTENT);
     }
 
 
@@ -47,17 +46,17 @@ public class NoteDataRepositoryTest extends BaseDataRepositoryTest {
     public void testGetNoteRequest() {
 
         NoteDataStore mockStore = mock(NoteDataStore.class);
-        given(mockStore.getNoteEntity(MOCK_NOTE_OBJECT_ID)).willReturn(Single.just(fakeNote));
-        given(badgeDataStoreFactory.getDataStore(MOCK_NOTE_OBJECT_ID)).willReturn(mockStore);
+        given(mockStore.getNoteEntity(OBJECT_ID)).willReturn(Single.just(fakeNote));
+        given(badgeDataStoreFactory.getDataStore(OBJECT_ID)).willReturn(mockStore);
         TestObserver<NoteEntity> testObserver = new TestObserver<>();
-        this.noteDataRepository.getNote(this.fakeNote.objectId()).subscribe(testObserver);
+        this.noteDataRepository.getNote(OBJECT_ID).subscribe(testObserver);
 
         Truth.assertThat(testObserver.values()).isEqualTo(Collections.singletonList(fakeNote));
         testObserver.assertComplete();
 
-        verify(badgeDataStoreFactory).getDataStore(MOCK_NOTE_OBJECT_ID);
+        verify(badgeDataStoreFactory).getDataStore(OBJECT_ID);
         verifyNoMoreInteractions(badgeDataStoreFactory);
-        verify(mockStore).getNoteEntity(MOCK_NOTE_OBJECT_ID);
+        verify(mockStore).getNoteEntity(OBJECT_ID);
         verifyNoMoreInteractions(mockStore);
     }
 
@@ -67,12 +66,12 @@ public class NoteDataRepositoryTest extends BaseDataRepositoryTest {
 
         TestObserver<String> testObserver = new TestObserver<>();
 
-        given(noteRemote.createNote(fakeNote)).willReturn(Single.just(MOCK_NOTE_OBJECT_ID));
+        given(noteRemote.createNote(fakeNote)).willReturn(Single.just(OBJECT_ID));
 
         this.noteDataRepository.createNote(this.fakeNote).subscribe(testObserver);
         testObserver.awaitTerminalEvent();
 
-        Truth.assertThat(testObserver.values().get(0)).isEqualTo(MOCK_NOTE_OBJECT_ID);
+        Truth.assertThat(testObserver.values().get(0)).isEqualTo(OBJECT_ID);
 
         verify(noteRemote).createNote(fakeNote);
         verifyNoMoreInteractions(noteRemote);
@@ -101,9 +100,9 @@ public class NoteDataRepositoryTest extends BaseDataRepositoryTest {
 
         TestObserver<String> testObserver = new TestObserver<>();
 
-        given(noteRemote.deleteNote(MOCK_NOTE_OBJECT_ID)).willReturn(Completable.complete());
+        given(noteRemote.deleteNote(OBJECT_ID)).willReturn(Completable.complete());
 
-        this.noteDataRepository.deleteNote(MOCK_NOTE_OBJECT_ID).subscribe(testObserver);
+        this.noteDataRepository.deleteNote(OBJECT_ID).subscribe(testObserver);
         testObserver.awaitTerminalEvent();
 
 
@@ -111,9 +110,7 @@ public class NoteDataRepositoryTest extends BaseDataRepositoryTest {
         testObserver.assertNoValues();
 
 
-        verify(noteRemote).deleteNote(MOCK_NOTE_OBJECT_ID);
+        verify(noteRemote).deleteNote(OBJECT_ID);
         verifyNoMoreInteractions(noteRemote);
     }
-
-
 }

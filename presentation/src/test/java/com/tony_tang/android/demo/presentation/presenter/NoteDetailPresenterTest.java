@@ -66,7 +66,7 @@ public class NoteDetailPresenterTest {
     @Test
     public void testSubscriberOnNext() {
 
-        this.noteDetailSubscriber.onSuccess(new NoteEntity("3WQrZ0dyrt", "", ""));
+        this.noteDetailSubscriber.onSuccess(NoteEntity.builder().objectId("3WQrZ0dyrt").content("").title("").build());
 
         verify(this.mockNoteDetailView).hideLoader();
         verify(this.mockNoteDetailView).showNote(any(NoteEntity.class));

@@ -38,8 +38,8 @@ public class CloudNoteCloudDataStoreTest extends BaseDataRepositoryTest {
     public void testGetNoteSuccessResponseCached() {
         TestObserver<NoteEntity> testObserver = new TestObserver<>();
         NoteEntity mock = Mockito.mock(NoteEntity.class);
-        given(noteRemote.getNote(MOCK_NOTE_OBJECT_ID)).willReturn(Single.just(mock));
-        this.noteCloudDataStore.getNoteEntity(MOCK_NOTE_OBJECT_ID).subscribe(testObserver);
+        given(noteRemote.getNote(OBJECT_ID)).willReturn(Single.just(mock));
+        this.noteCloudDataStore.getNoteEntity(OBJECT_ID).subscribe(testObserver);
         testObserver.awaitTerminalEvent();
         Truth.assertThat(testObserver.values()).isEqualTo(Collections.singletonList(mock));
 

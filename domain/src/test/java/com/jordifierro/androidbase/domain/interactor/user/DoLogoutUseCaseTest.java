@@ -5,7 +5,7 @@ import com.jordifierro.androidbase.domain.entity.VoidEntity;
 import com.jordifierro.androidbase.domain.executor.ThreadExecutor;
 import com.jordifierro.androidbase.domain.executor.UIThread;
 import com.jordifierro.androidbase.domain.repository.SessionRepository;
-import com.jordifierro.androidbase.domain.repository.UserRemote;
+import com.jordifierro.androidbase.domain.repository.UserRepository;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -28,7 +28,7 @@ public class DoLogoutUseCaseTest {
     @Mock
     private UIThread mockUIThread;
     @Mock
-    private UserRemote mockUserRepository;
+    private UserRepository mockUserRepository;
     @Mock
     private SessionRepository mockSessionRepository;
 

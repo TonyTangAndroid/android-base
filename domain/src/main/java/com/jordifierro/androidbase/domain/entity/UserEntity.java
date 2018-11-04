@@ -2,6 +2,8 @@ package com.jordifierro.androidbase.domain.entity;
 
 import com.google.gson.annotations.Expose;
 
+import java.util.Objects;
+
 public class UserEntity {
 
 
@@ -83,4 +85,24 @@ public class UserEntity {
         this.password = password;
     }
 
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        UserEntity that = (UserEntity) o;
+        return Objects.equals(email, that.email) &&
+                Objects.equals(username, that.username) &&
+                Objects.equals(password, that.password) &&
+                Objects.equals(objectId, that.objectId) &&
+                Objects.equals(createdAt, that.createdAt) &&
+                Objects.equals(updatedAt, that.updatedAt) &&
+                Objects.equals(sessionToken, that.sessionToken);
+    }
+
+    @Override
+    public int hashCode() {
+
+        return Objects.hash(email, username, password, objectId, createdAt, updatedAt, sessionToken);
+    }
 }

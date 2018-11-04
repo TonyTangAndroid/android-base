@@ -5,7 +5,6 @@ import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.jordifierro.androidbase.data.net.RestApi;
 import com.jordifierro.androidbase.data.utils.TestUtils;
-import com.jordifierro.androidbase.domain.entity.CreatedWrapper;
 import com.jordifierro.androidbase.domain.entity.ParseACLJsonAdapter;
 import com.jordifierro.androidbase.domain.entity.ParsePermissionWrapper;
 import com.jordifierro.androidbase.domain.entity.UserEntity;
@@ -16,6 +15,7 @@ import org.junit.Before;
 import org.junit.Test;
 
 import java.io.IOException;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -28,11 +28,10 @@ import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory;
 import retrofit2.converter.gson.GsonConverterFactory;
 
 import static com.jordifierro.androidbase.data.net.RestApi.PARSE_SESSION_KEY;
-import static junit.framework.Assert.assertTrue;
 
-public class UserDataRepositoryTest extends BaseDataRepositoryTest {
+public class UserRemoteRepositoryTest extends BaseDataRepositoryTest {
 
-    private UserRemoteImpl userRemote;
+    private UserRemoteRepository userRemote;
     private MockWebServer mockWebServer;
     private UserEntity fakeUser;
     private Gson gson;
@@ -49,7 +48,7 @@ public class UserDataRepositoryTest extends BaseDataRepositoryTest {
         this.mockWebServer = new MockWebServer();
         this.mockWebServer.start();
 
-        this.userRemote = new UserRemoteImpl(
+        this.userRemote = new UserRemoteRepository(
                 new Retrofit.Builder()
                         .baseUrl(mockWebServer.url(MOCK_SERVER))
                         .addConverterFactory(GsonConverterFactory.create(this.gson))
@@ -111,11 +110,11 @@ public class UserDataRepositoryTest extends BaseDataRepositoryTest {
         testObserver.awaitTerminalEvent();
 
         UserEntity responseUser = (UserEntity) testObserver.getEvents().get(0).get(0);
-        assertTrue(responseUser.getSessionToken().length() > 0);
-        assertTrue(responseUser.getObjectId().length() > 0);
-        assertTrue(responseUser.getUsername().length() > 0);
-        assertTrue(responseUser.getEmail().length() > 0);
-        assertTrue(responseUser.getCreatedAt().length() > 0);
+        Truth.assertThat(responseUser.getSessionToken().length() > 0);
+        Truth.assertThat(responseUser.getObjectId().length() > 0);
+        Truth.assertThat(responseUser.getUsername().length() > 0);
+        Truth.assertThat(responseUser.getEmail().length() > 0);
+        Truth.assertThat(responseUser.getCreatedAt().length() > 0);
     }
 
 
@@ -123,7 +122,7 @@ public class UserDataRepositoryTest extends BaseDataRepositoryTest {
     public void testCreateUserRequest() throws Exception {
         this.mockWebServer.enqueue(new MockResponse());
 
-        TestObserver<CreatedWrapper> testObserver = new TestObserver<>();
+        TestObserver<String> testObserver = new TestObserver<>();
         this.userRemote.createUser(this.fakeUser).subscribe(testObserver);
         RecordedRequest request = this.mockWebServer.takeRequest();
         Truth.assertThat(request.getPath()).isEqualTo(constructUrl(RestApi.URL_PATH_USERS));
@@ -136,15 +135,14 @@ public class UserDataRepositoryTest extends BaseDataRepositoryTest {
     public void testCreateUserError() throws Exception {
         String json = TestUtils.json("user_create_error.json", this);
         this.mockWebServer.enqueue(new MockResponse().setResponseCode(400).setBody(json));
-        TestObserver<CreatedWrapper> testObserver = new TestObserver<>();
+        TestObserver<String> testObserver = new TestObserver<>();
 
 
         this.userRemote.createUser(this.fakeUser).subscribe(testObserver);
         testObserver.awaitTerminalEvent();
 
         testObserver.assertValueCount(0);
-        RestApiErrorException error = (RestApiErrorException)
-                testObserver.errors().get(0);
+        RestApiErrorException error = (RestApiErrorException) testObserver.errors().get(0);
         Truth.assertThat(error.getStatusCode()).isEqualTo(203);
         Truth.assertThat(error.getMessage()).isEqualTo("the email address ztangmstr@gmail.com has already been taken");
     }
@@ -155,16 +153,10 @@ public class UserDataRepositoryTest extends BaseDataRepositoryTest {
 
         String json = TestUtils.json("user_create_raw_ok.json", this);
         this.mockWebServer.enqueue(new MockResponse().setResponseCode(201).setBody(json));
-        TestObserver<CreatedWrapper> testObserver = new TestObserver<>();
-
-
+        TestObserver<String> testObserver = new TestObserver<>();
         this.userRemote.createUser(this.fakeUser).subscribe(testObserver);
         testObserver.awaitTerminalEvent();
-
-        CreatedWrapper responseUser = (CreatedWrapper) testObserver.getEvents().get(0).get(0);
-        assertTrue(responseUser.getSessionToken().length() > 0);
-        assertTrue(responseUser.getObjectId().length() > 0);
-        assertTrue(responseUser.getCreatedAt().length() > 0);
+        Truth.assertThat(testObserver.values()).isEqualTo(Collections.singletonList("r:LhHHilHJ4tgD7762f5SG19mmd"));
     }
 
 
@@ -268,17 +260,17 @@ public class UserDataRepositoryTest extends BaseDataRepositoryTest {
 
     @Test
     public void testLoginUserSuccess() throws Exception {
+        String json = TestUtils.json("session_login_ok.json", this);
         this.mockWebServer.enqueue(new MockResponse().setResponseCode(200).setBody(
-                TestUtils.json("session_login_ok.json", this)));
+                json));
 
 
         this.userRemote.loginUser(this.fakeUser).subscribe(testObserver);
         testObserver.awaitTerminalEvent();
         testObserver.assertValueCount(1);
-
-        UserEntity responseUser = (UserEntity) testObserver.getEvents().get(0).get(0);
-        assertTrue(responseUser.getUsername().length() > 0);
-        assertTrue(responseUser.getSessionToken().length() > 0);
+        UserEntity expected = new Gson().fromJson(json, UserEntity.class);
+        UserEntity actual = testObserver.values().get(0);
+        Truth.assertThat(actual).isEqualTo(expected);
     }
 
     @Test
