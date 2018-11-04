@@ -151,7 +151,7 @@ public class NoteDataRepositoryTest extends BaseDataRepositoryTest {
         this.mockWebServer.enqueue(new MockResponse());
         this.noteRemoteImpl.updateNote(this.fakeNote).subscribe(testObserver);
         RecordedRequest request = this.mockWebServer.takeRequest();
-        Truth.assertThat(request.getPath()).isEqualTo(getFormattedUrl(this.fakeNote.getObjectId(), RestApi.URL_PATH_CLASSES_NOTE_OBJECT_ID));
+        Truth.assertThat(request.getPath()).isEqualTo(getFormattedUrl(this.fakeNote.objectId(), RestApi.URL_PATH_CLASSES_NOTE_OBJECT_ID));
         Truth.assertThat(request.getMethod()).isEqualTo(HttpMethod.PUT);
         Truth.assertThat(request.getBody().readUtf8()).isEqualTo(new Gson().toJson(this.fakeNote));
     }
@@ -193,11 +193,11 @@ public class NoteDataRepositoryTest extends BaseDataRepositoryTest {
 
         this.mockWebServer.enqueue(new MockResponse());
 
-        this.noteRemoteImpl.deleteNote(this.fakeNote.getObjectId()).subscribe(testObserver);
+        this.noteRemoteImpl.deleteNote(this.fakeNote.objectId()).subscribe(testObserver);
 
         RecordedRequest request = this.mockWebServer.takeRequest();
 
-        Truth.assertThat(request.getPath()).isEqualTo(getFormattedUrl(this.fakeNote.getObjectId(), RestApi.URL_PATH_CLASSES_NOTE_OBJECT_ID));
+        Truth.assertThat(request.getPath()).isEqualTo(getFormattedUrl(this.fakeNote.objectId(), RestApi.URL_PATH_CLASSES_NOTE_OBJECT_ID));
         Truth.assertThat(request.getMethod()).isEqualTo(HttpMethod.DELETE);
         Truth.assertThat(request.getBody().readUtf8()).isEmpty();
     }

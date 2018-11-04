@@ -49,8 +49,8 @@ public class NoteDetailFragment extends CleanFragment implements NoteDetailView 
 
     @Override
     public void showNote(NoteEntity note) {
-        titleTV.setText(note.getTitle());
-        contentTV.setText(note.getContent());
+        titleTV.setText(note.title());
+        contentTV.setText(note.content());
     }
 
     @Override

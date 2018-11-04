@@ -44,7 +44,7 @@ public class NoteEntityDaoImpl implements NoteEntityDao {
     }
 
     private NoteBean toBean(NoteEntity noteEntity) {
-        return new NoteBean(noteEntity.getObjectId(), gson.toJson(noteEntity), System.currentTimeMillis());
+        return new NoteBean(noteEntity.objectId(), gson.toJson(noteEntity), System.currentTimeMillis());
     }
 
     @Override

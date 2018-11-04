@@ -24,26 +24,23 @@ public class ParseACLJsonAdapter implements JsonDeserializer<ParsePermissionWrap
             return null;
         }
 
-        ParsePermissionWrapper permissionWrapper = new ParsePermissionWrapper();
-
         ArrayList<ParsePermission> permissionArrayList = new ArrayList<>(objectIdSet.size());
 
 
         for (Entry<String, JsonElement> objectIdJsonElementEntry : objectIdSet) {
-            ParsePermission permission = new ParsePermission();
-            permission.setObjectId(objectIdJsonElementEntry.getKey());
+            ParsePermission.Builder builder = ParsePermission.builder();
+            builder.objectId(objectIdJsonElementEntry.getKey());
             final JsonElement value = objectIdJsonElementEntry.getValue();
             final JsonObject readWriteJsonObject = value.getAsJsonObject();
             boolean readable = readWriteJsonObject.get("read").getAsBoolean();
             boolean writable = readWriteJsonObject.get("write").getAsBoolean();
-            permission.setRead(readable);
-            permission.setWrite(writable);
-            permissionArrayList.add(permission);
+            builder.read(readable);
+            builder.write(writable);
+            permissionArrayList.add(builder.build());
 
         }
 
-        permissionWrapper.setPermissionArrayList(permissionArrayList);
-        return permissionWrapper;
+        return ParsePermissionWrapper.builder().permissionArrayList(permissionArrayList).build();
     }
 
     @Override
@@ -52,13 +49,13 @@ public class ParseACLJsonAdapter implements JsonDeserializer<ParsePermissionWrap
         final JsonObject jsonObject = new JsonObject();
 
 
-        for (ParsePermission permission : src.getPermissionArrayList()) {
+        for (ParsePermission permission : src.permissionArrayList()) {
 
             final JsonObject jsonObjectPermission = new JsonObject();
-            jsonObjectPermission.addProperty("read", permission.isRead());
-            jsonObjectPermission.addProperty("write", permission.isRead());
+            jsonObjectPermission.addProperty("read", permission.read());
+            jsonObjectPermission.addProperty("write", permission.read());
 
-            jsonObject.add(permission.getObjectId(), jsonObjectPermission);
+            jsonObject.add(permission.objectId(), jsonObjectPermission);
         }
 
         return jsonObject;

@@ -1,7 +1,6 @@
 package com.jordifierro.androidbase.domain.interactor.note;
 
 import com.google.common.truth.Truth;
-import com.jordifierro.androidbase.domain.entity.CreatedWrapper;
 import com.jordifierro.androidbase.domain.entity.NoteEntity;
 import com.jordifierro.androidbase.domain.executor.ThreadExecutor;
 import com.jordifierro.androidbase.domain.executor.UIThread;
@@ -16,7 +15,7 @@ import io.reactivex.Single;
 import io.reactivex.observers.TestObserver;
 
 import static org.mockito.BDDMockito.given;
-import static org.mockito.Matchers.any;
+import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.verifyNoMoreInteractions;
 import static org.mockito.Mockito.verifyZeroInteractions;
@@ -43,11 +42,8 @@ public class CreateNoteUseCaseTest {
 
     @Test
     public void testCreateNoteUseCaseSuccess() {
-        CreatedWrapper createdWrapper = new CreatedWrapper(FAKE_CREATED, FAKE_ID, FAKE_SESSION);
-        NoteEntity note = new NoteEntity(FAKE_ID, FAKE_TITLE, FAKE_CONTENT);
-
-
-        given(mockNoteRepository.createNote(any(NoteEntity.class))).willReturn(Single.just(FAKE_ID));
+        NoteEntity note = mock(NoteEntity.class);
+        given(mockNoteRepository.createNote(note)).willReturn(Single.just(FAKE_ID));
         given(mockNoteRepository.getNote(FAKE_ID)).willReturn(Single.just(note));
 
 
@@ -61,7 +57,7 @@ public class CreateNoteUseCaseTest {
         testObserver = createNoteUseCase.build().subscribeWith(testObserver);
         Truth.assertThat(testObserver.getEvents().get(0).get(0)).isEqualTo(note);
         verify(mockNoteRepository).createNote(note);
-        verify(mockNoteRepository).getNote(createdWrapper.getObjectId());
+        verify(mockNoteRepository).getNote(FAKE_ID);
 
         verifyNoMoreInteractions(mockNoteRepository);
         verifyZeroInteractions(mockThreadExecutor);

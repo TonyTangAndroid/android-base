@@ -11,11 +11,10 @@ import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 
 import io.reactivex.Completable;
-import io.reactivex.Single;
 import io.reactivex.observers.TestObserver;
 
 import static org.mockito.BDDMockito.given;
-import static org.mockito.Matchers.any;
+import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.verifyNoMoreInteractions;
 import static org.mockito.Mockito.verifyZeroInteractions;
@@ -45,16 +44,8 @@ public class UpdateNoteUseCaseTest {
     @Test
     public void testUpdateNoteUseCaseSuccess() {
 
-        NoteEntity note = new NoteEntity(FAKE_ID, FAKE_TITLE, FAKE_CONTENT);
-
-        NoteEntity updatedNote = new NoteEntity(FAKE_ID, FAKE_NEW_TITLE, FAKE_NEW_CONTENT);
-        updatedNote.setUpdatedAt(FAKE_UPDATED_TIME);
-
-
-        given(mockNoteRepository.updateNote(any(NoteEntity.class))).willReturn(Completable.complete());
-        given(mockNoteRepository.getNote(note.getObjectId())).willReturn(Single.just(updatedNote));
-
-
+        NoteEntity note = mock(NoteEntity.class);
+        given(mockNoteRepository.updateNote(note)).willReturn(Completable.complete());
         UpdateNoteUseCase updateNoteUseCase = new UpdateNoteUseCase(mockThreadExecutor,
                 mockUIThread, mockNoteRepository);
         updateNoteUseCase.setParams(note);

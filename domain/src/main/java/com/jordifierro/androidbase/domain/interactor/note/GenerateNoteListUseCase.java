@@ -45,7 +45,7 @@ public class GenerateNoteListUseCase extends SingleUseCase<Integer> {
 
     private NoteEntity constructNote(int index) {
         Quote quote = quoteArrayList.get((index + new Random().nextInt(COUNT)) % quoteArrayList.size());
-        return new NoteEntity(index + " " + quote.title, index + " " + quote.content);
+        return NoteEntity.builder().title(index + " " + quote.title).content(index + " " + quote.content).build();
     }
 
     static class Quote {

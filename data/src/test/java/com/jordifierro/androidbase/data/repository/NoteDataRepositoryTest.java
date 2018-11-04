@@ -50,7 +50,7 @@ public class NoteDataRepositoryTest extends BaseDataRepositoryTest {
         given(mockStore.getNoteEntity(MOCK_NOTE_OBJECT_ID)).willReturn(Single.just(fakeNote));
         given(badgeDataStoreFactory.getDataStore(MOCK_NOTE_OBJECT_ID)).willReturn(mockStore);
         TestObserver<NoteEntity> testObserver = new TestObserver<>();
-        this.noteDataRepository.getNote(this.fakeNote.getObjectId()).subscribe(testObserver);
+        this.noteDataRepository.getNote(this.fakeNote.objectId()).subscribe(testObserver);
 
         Truth.assertThat(testObserver.values()).isEqualTo(Collections.singletonList(fakeNote));
         testObserver.assertComplete();

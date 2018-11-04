@@ -1,51 +1,42 @@
 package com.jordifierro.androidbase.domain.entity;
 
-import java.util.Objects;
+import com.google.auto.value.AutoValue;
+import com.google.gson.Gson;
+import com.google.gson.TypeAdapter;
+import com.google.gson.annotations.SerializedName;
 
-public class ParsePermission {
+import io.reactivex.annotations.Nullable;
 
-    private boolean read;
-    private boolean write;
-    private String objectId;
+@AutoValue
+public abstract class ParsePermission {
 
 
-    public boolean isRead() {
-        return read;
+    public static TypeAdapter<ParsePermission> typeAdapter(Gson gson) {
+        return new AutoValue_ParsePermission.GsonTypeAdapter(gson);
     }
 
-    public void setRead(boolean read) {
-        this.read = read;
+    public static Builder builder() {
+        return new AutoValue_ParsePermission.Builder();
     }
 
-    public boolean isWrite() {
-        return write;
-    }
+    @SerializedName("read")
+    public abstract boolean read();
 
-    public void setWrite(boolean write) {
-        this.write = write;
-    }
+    @SerializedName("write")
+    public abstract boolean write();
 
-    public String getObjectId() {
-        return objectId;
-    }
+    @Nullable
+    @SerializedName("objectId")
+    public abstract String objectId();
 
-    public void setObjectId(String objectId) {
-        this.objectId = objectId;
-    }
+    @AutoValue.Builder
+    public abstract static class Builder {
+        public abstract Builder read(boolean read);
 
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        ParsePermission that = (ParsePermission) o;
-        return read == that.read &&
-                write == that.write &&
-                Objects.equals(objectId, that.objectId);
-    }
+        public abstract Builder write(boolean write);
 
-    @Override
-    public int hashCode() {
+        public abstract Builder objectId(String objectId);
 
-        return Objects.hash(read, write, objectId);
+        public abstract ParsePermission build();
     }
 }

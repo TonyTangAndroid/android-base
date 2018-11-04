@@ -41,7 +41,7 @@ public class NoteRemoteImpl implements NoteListRemote, NoteRemote {
 
     @Override
     public Completable updateNote(NoteEntity note) {
-        return this.restApi.updateNote(note.getObjectId(), note)
+        return this.restApi.updateNote(note.objectId(), note)
                 .flatMap(Validator::validate).ignoreElement();
     }
 

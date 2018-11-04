@@ -21,7 +21,7 @@ public class NoteInMemoryImpl {
     }
 
     public void put(NoteEntity noteEntity) {
-        map.put(noteEntity.getObjectId(), new Pair(System.currentTimeMillis(), noteEntity));
+        map.put(noteEntity.objectId(), new Pair(System.currentTimeMillis(), noteEntity));
     }
 
     public boolean isExist(String objectId) {

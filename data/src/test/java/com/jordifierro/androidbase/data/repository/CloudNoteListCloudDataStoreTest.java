@@ -68,10 +68,10 @@
 //    public void getNoteEntityRequestWithCorrectConfigure() throws InterruptedException {
 //        TestObserver<NoteEntity> testObserver = new TestObserver<>();
 //        this.mockWebServer.enqueue(new MockResponse());
-//        this.noteCloudDataStore.getNoteEntity(this.fakeNote.getObjectId()).subscribe(testObserver);
+//        this.noteCloudDataStore.getNoteEntity(this.fakeNote.objectId()).subscribe(testObserver);
 //
 //        RecordedRequest request = this.mockWebServer.takeRequest();
-//        Truth.assertThat(request.getPath()).isEqualTo(getFormattedUrl(this.fakeNote.getObjectId(), RestApi.URL_PATH_CLASSES_NOTE_OBJECT_ID));
+//        Truth.assertThat(request.getPath()).isEqualTo(getFormattedUrl(this.fakeNote.objectId(), RestApi.URL_PATH_CLASSES_NOTE_OBJECT_ID));
 //        Truth.assertThat(request.getMethod()).isEqualTo(HttpMethod.GET);
 //        Truth.assertThat(request.getBody().readUtf8()).isEmpty();
 //

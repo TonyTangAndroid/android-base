@@ -1,32 +1,29 @@
 package com.jordifierro.androidbase.domain.entity;
 
+
+import com.google.auto.value.AutoValue;
+import com.google.gson.Gson;
+import com.google.gson.TypeAdapter;
+
 import java.util.ArrayList;
-import java.util.Objects;
 
-public class ParsePermissionWrapper {
+@AutoValue
+public abstract class ParsePermissionWrapper {
 
-    private ArrayList<ParsePermission> permissionArrayList;
-
-    public ArrayList<ParsePermission> getPermissionArrayList() {
-        return permissionArrayList;
+    public static TypeAdapter<ParsePermissionWrapper> typeAdapter(Gson gson) {
+        return new AutoValue_ParsePermissionWrapper.GsonTypeAdapter(gson);
     }
 
-    public void setPermissionArrayList(ArrayList<ParsePermission> permissionArrayList) {
-        this.permissionArrayList = permissionArrayList;
+    public static Builder builder() {
+        return new AutoValue_ParsePermissionWrapper.Builder();
     }
 
+    public abstract ArrayList<ParsePermission> permissionArrayList();
 
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        ParsePermissionWrapper that = (ParsePermissionWrapper) o;
-        return Objects.equals(permissionArrayList, that.permissionArrayList);
-    }
+    @AutoValue.Builder
+    public abstract static class Builder {
+        public abstract Builder permissionArrayList(ArrayList<ParsePermission> permissionArrayList);
 
-    @Override
-    public int hashCode() {
-
-        return Objects.hash(permissionArrayList);
+        public abstract ParsePermissionWrapper build();
     }
 }

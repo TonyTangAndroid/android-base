@@ -1,114 +1,62 @@
 package com.jordifierro.androidbase.domain.entity;
 
+
+import com.google.auto.value.AutoValue;
 import com.google.gson.Gson;
-import com.google.gson.GsonBuilder;
-import com.google.gson.annotations.Expose;
+import com.google.gson.TypeAdapter;
+import com.google.gson.annotations.SerializedName;
 
-import java.util.Objects;
+import io.reactivex.annotations.Nullable;
 
-public class NoteEntity {
+@AutoValue
+public abstract class NoteEntity {
 
-
-    @Expose(deserialize = false)
-    private String objectId;
-
-    private String title;
-    private String content;
-
-    @Expose(deserialize = false)
-    private String createdAt;
-
-
-    @Expose(deserialize = false)
-    private String updatedAt;
-
-
-    private ParsePermissionWrapper ACL;
-
-    public NoteEntity(String title, String content) {
-        this.title = title;
-        this.content = content;
+    public static TypeAdapter<NoteEntity> typeAdapter(Gson gson) {
+        return new AutoValue_NoteEntity.GsonTypeAdapter(gson);
     }
 
-    public NoteEntity(String objectId, String title, String content) {
-        this.objectId = objectId;
-        this.title = title;
-        this.content = content;
+    public static Builder builder() {
+        return new AutoValue_NoteEntity.Builder();
     }
 
-    public String getTitle() {
-        return title;
-    }
+    @Nullable
+    @SerializedName("objectId")
+    public abstract String objectId();
 
-    public void setTitle(String title) {
-        this.title = title;
-    }
+    @Nullable
+    @SerializedName("title")
+    public abstract String title();
 
-    public String getContent() {
-        return content;
-    }
+    @Nullable
+    @SerializedName("content")
+    public abstract String content();
 
-    public void setContent(String content) {
-        this.content = content;
-    }
+    @Nullable
+    @SerializedName("createdAt")
+    public abstract String createdAt();
 
-    public String getCreatedAt() {
-        return createdAt;
-    }
+    @Nullable
+    @SerializedName("updatedAt")
+    public abstract String updatedAt();
 
-    public void setCreatedAt(String createdAt) {
-        this.createdAt = createdAt;
-    }
+    @Nullable
+    @SerializedName("ACL")
+    public abstract ParsePermissionWrapper ACL();
 
-    public String getUpdatedAt() {
-        return updatedAt;
-    }
+    @AutoValue.Builder
+    public abstract static class Builder {
+        public abstract Builder objectId(String objectId);
 
-    public void setUpdatedAt(String updatedAt) {
-        this.updatedAt = updatedAt;
-    }
+        public abstract Builder title(String title);
 
-    public String getObjectId() {
-        return objectId;
-    }
+        public abstract Builder content(String content);
 
-    public void setObjectId(String objectId) {
-        this.objectId = objectId;
-    }
+        public abstract Builder createdAt(String createdAt);
 
-    public ParsePermissionWrapper getACL() {
-        return ACL;
-    }
+        public abstract Builder updatedAt(String updatedAt);
 
-    public void setACL(ParsePermissionWrapper ACL) {
-        this.ACL = ACL;
-    }
+        public abstract Builder ACL(ParsePermissionWrapper ACL);
 
-    @Override
-    public String toString() {
-        final GsonBuilder gsonBuilder = new GsonBuilder().registerTypeAdapter(ParsePermissionWrapper.class, new ParseACLJsonAdapter());
-        gsonBuilder.setPrettyPrinting();
-        Gson gson = gsonBuilder.create();
-        return gson.toJson(this);
-    }
-
-
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        NoteEntity that = (NoteEntity) o;
-        return Objects.equals(objectId, that.objectId) &&
-                Objects.equals(title, that.title) &&
-                Objects.equals(content, that.content) &&
-                Objects.equals(createdAt, that.createdAt) &&
-                Objects.equals(updatedAt, that.updatedAt) &&
-                Objects.equals(ACL, that.ACL);
-    }
-
-    @Override
-    public int hashCode() {
-
-        return Objects.hash(objectId, title, content, createdAt, updatedAt, ACL);
+        public abstract NoteEntity build();
     }
 }

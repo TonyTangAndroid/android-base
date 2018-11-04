@@ -40,8 +40,8 @@ public class GetNotesUseCaseTest {
 //
 //        Assert.Truth.assertThat(notes.size(),
 //                ((List<NoteEntity>) (testObserver.getEvents().get(0)).get(0)).size());
-//        Assert.Truth.assertThat(notes.get(1).getContent(),
-//                ((List<NoteEntity>) (testObserver.getEvents().get(0)).get(0)).get(1).getContent());
+//        Assert.Truth.assertThat(notes.get(1).content(),
+//                ((List<NoteEntity>) (testObserver.getEvents().get(0)).get(0)).get(1).content());
 //        verify(mockSessionRepository).getCurrentUser();
 //        verifyNoMoreInteractions(mockSessionRepository);
 //        verify(mockNoteRepository).getNotes(null, null);
