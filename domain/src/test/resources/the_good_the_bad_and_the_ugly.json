@@ -1,0 +1,39 @@
+[
+  {
+    "adult": false,
+    "backdrop_path": "/xGC2fY5KFmtuXnsuQwYQKFOLZFy.jpg",
+    "genre_ids": [
+      37
+    ],
+    "id": 429,
+    "original_language": "it",
+    "original_title": "Il buono, il brutto, il cattivo",
+    "overview": "While the Civil War rages between the Union and the Confederacy, three men – a quiet loner, a ruthless hit man and a Mexican bandit – comb the American Southwest in search of a strongbox containing $200,000 in stolen gold.",
+    "popularity": 14.808,
+    "poster_path": "/t2Il8inu5Wm9IBTELaZMgZqEoEW.jpg",
+    "release_date": "1966-12-23",
+    "title": "The Good, the Bad and the Ugly",
+    "video": false,
+    "vote_average": 8.3,
+    "vote_count": 3437
+  },
+  {
+    "adult": false,
+    "backdrop_path": "/wTlNGSRtFpzdmnXDemLmIZzloFt.jpg",
+    "genre_ids": [
+      99,
+      35
+    ],
+    "id": 16984,
+    "original_language": "en",
+    "original_title": "Clarkson: The Good The Bad The Ugly",
+    "overview": "This year Jezza takes the cream of Europes super-cars to the USA to pit them against America\u0027s finest, with highlights including a race up a mountain between a Cadillac Escalade, a Hummer H2 and a Range Rover, and a straight head-to-head race between a BMW Z4M and a Dodge Viper SRT 10. Along the way he also fills an old Jag and an old Buick with water, blows up a Harley-Davidson, has a Toyota Prius shot to pieces and outruns John Q. Law in an Ariel Atom...",
+    "popularity": 0.6,
+    "poster_path": "/z2kGiOoYMY9ZkheoEeSACdzSduS.jpg",
+    "release_date": "2006-01-01",
+    "title": "Clarkson: The Good The Bad The Ugly",
+    "video": false,
+    "vote_average": 3.7,
+    "vote_count": 3
+  }
+]
