@@ -20,7 +20,7 @@ ext {
     everNoteAndroidStateVersion = '1.4.1'
     //XXX why 2.19 not good
     daggerVersion = '2.11'
-    findbugsJsr305Version = '3.0.1'
+    findbugsJsr305Version = '3.0.2'
     okhttp3Version = '3.11.0'
     rxJavaVersion = '2.2.3'
     rxAndroidVersion = '2.1.0'

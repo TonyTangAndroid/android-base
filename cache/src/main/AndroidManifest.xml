@@ -1,18 +1,1 @@
-<manifest xmlns:android="http://schemas.android.com/apk/res/android"
-          package="com.tony.tang.note.cache">
-
-    <application>
-
-        <uses-library
-            android:name="android.test.runner"
-            android:required="false"/>
-        <uses-library
-            android:name="android.test.base"
-            android:required="false"/>
-        <uses-library
-            android:name="android.test.mock"
-            android:required="false"/>
-
-    </application>
-
-</manifest>
+<manifest package="com.tony.tang.note.cache"/>

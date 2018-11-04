@@ -15,33 +15,45 @@ android {
     defaultConfig {
 
         applicationId "com.tony.tang.note.app"
-        minSdkVersion rootProject.ext.androidMinSdkVersion
-        targetSdkVersion rootProject.ext.androidTargetSdkVersion
         versionCode rootProject.ext.appVersionCode
         versionName rootProject.ext.appVersionName
-        testInstrumentationRunner 'com.tony.tang.note.application.TestMockerRunner'
+        minSdkVersion rootProject.ext.androidMinSdkVersion
+        targetSdkVersion rootProject.ext.androidTargetSdkVersion
+        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
+
     buildTypes {
+
         release {
             minifyEnabled true
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
             signingConfig signingConfigs.tony_dev_sign
         }
+
         debug {
             signingConfig signingConfigs.tony_dev_sign
         }
+
     }
+
     packagingOptions {
         exclude 'META-INF/maven/com.google.guava/guava/pom.properties'
         exclude 'META-INF/maven/com.google.guava/guava/pom.xml'
     }
+
     lintOptions {
         abortOnError false
     }
+
     compileOptions {
         sourceCompatibility JavaVersion.VERSION_1_8
         targetCompatibility JavaVersion.VERSION_1_8
     }
+
+    useLibrary 'android.test.runner'
+    useLibrary 'android.test.base'
+    useLibrary 'android.test.mock'
+
 }
 
 
@@ -89,6 +101,7 @@ dependencies {
     androidTestImplementation test_dependencies.junit
     androidTestImplementation test_dependencies.truth
     androidTestImplementation test_dependencies.testCore
+    androidTestImplementation test_dependencies.findbugsJsr305
 
     androidTestImplementation test_dependencies.extJunit
     androidTestImplementation test_dependencies.commonsIO

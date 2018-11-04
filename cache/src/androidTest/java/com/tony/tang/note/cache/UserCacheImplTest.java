@@ -3,8 +3,7 @@ package com.tony.tang.note.cache;
 import android.content.Context;
 import android.content.SharedPreferences;
 
-import com.tony.tang.note.data.TokenCache;
-
+import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
@@ -19,41 +18,29 @@ public class UserCacheImplTest {
     private static final String SHARED_PACKAGE = "SharedPreferencesTest";
     private static final String FAKE_JSON = "test@email.com";
 
-    private TokenCache tokenCache;
+    private TokenCacheImpl tokenCache;
+
+
+    @Before
+    public void setup() {
+
+        Context context = ApplicationProvider.getApplicationContext();
+        SharedPreferences sharedPreferences = context.getSharedPreferences(SHARED_PACKAGE, Context.MODE_PRIVATE);
+        SharedPreferences.Editor editor = sharedPreferences.edit();
+        editor.clear();
+        editor.apply();
+        this.tokenCache = new TokenCacheImpl(sharedPreferences);
+    }
 
     @Test
-    public void testGetWithoutSetReturnsNull() {
-
-        Context targetContext = ApplicationProvider.getApplicationContext();
-        SharedPreferences sharedPreferences = targetContext
-                .getSharedPreferences(SHARED_PACKAGE, Context.MODE_PRIVATE);
-        SharedPreferences.Editor editor = sharedPreferences.edit();
-        editor.clear();
-        editor.apply();
-
-        this.tokenCache = new TokenCacheImpl(sharedPreferences);
-        assertThat(this.tokenCache.get()).isNull();
-    }
-
-    public void testSetAndGetUser() {
-
-        Context targetContext = ApplicationProvider.getApplicationContext();
-        SharedPreferences sharedPreferences = targetContext
-                .getSharedPreferences(SHARED_PACKAGE, Context.MODE_PRIVATE);
-        SharedPreferences.Editor editor = sharedPreferences.edit();
-        editor.clear();
-        editor.apply();
-
-        this.tokenCache = new TokenCacheImpl(sharedPreferences);
-        assertThat(this.tokenCache.get()).isNull();
-
+    public void save() {
         this.tokenCache.save(FAKE_JSON);
-        String actual = this.tokenCache.get();
-        assertThat(actual).isEqualTo(FAKE_JSON);
+        assertThat(this.tokenCache.get()).isEqualTo(FAKE_JSON);
     }
 
-    public void testSetInvalidateAndGetNullUser() {
-        testSetAndGetUser();
+    @Test
+    public void remove() {
+        save();
         this.tokenCache.remove();
         assertThat(this.tokenCache.get()).isNull();
     }
