@@ -1,6 +1,7 @@
 include ':domain'
 include ':remote'
 include ':data'
+include ':db'
 include ':cache'
 include ':presentation'
 include ':app'

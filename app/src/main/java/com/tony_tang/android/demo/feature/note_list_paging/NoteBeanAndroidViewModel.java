@@ -3,8 +3,8 @@ package com.tony_tang.android.demo.feature.note_list_paging;
 
 import android.app.Application;
 
-import com.jordifierro.androidbase.data.repository.NoteBean;
-import com.jordifierro.androidbase.data.repository.NoteBeanDao;
+import com.tony.tang.note.cache.NoteBean;
+import com.tony.tang.note.cache.NoteBeanDao;
 import com.tony_tang.android.demo.common.DemoApplication;
 
 import javax.inject.Inject;

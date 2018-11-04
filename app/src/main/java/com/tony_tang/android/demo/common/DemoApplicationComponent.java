@@ -2,12 +2,14 @@ package com.tony_tang.android.demo.common;
 
 import android.app.Application;
 
-import com.jordifierro.androidbase.data.repository.NoteRoomDatabase;
 import com.jordifierro.androidbase.domain.interactor.note.CreateNoteUseCase;
 import com.jordifierro.androidbase.domain.interactor.note.DeleteNoteUseCase;
-import com.tony_tang.android.demo.common.module.DataModule;
-import com.tony_tang.android.demo.common.module.GsonModule;
-import com.tony_tang.android.demo.common.module.ThreadModule;
+import com.tony.tang.note.app.module.InMemoryRepoModule;
+import com.tony.tang.note.app.module.PrefModule;
+import com.tony.tang.note.app.module.ThreadModule;
+import com.tony.tang.note.cache.NoteRoomDatabase;
+import com.tony.tang.note.data.DataRemoteModule;
+import com.tony.tang.note.remote.RemoteModule;
 import com.tony_tang.android.demo.common.scope.ApplicationScope;
 
 import dagger.BindsInstance;
@@ -18,9 +20,11 @@ import dagger.android.AndroidInjectionModule;
 @Component(modules = {
         AndroidInjectionModule.class,
         DemoApplicationModule.class,
+        PrefModule.class,
+        InMemoryRepoModule.class,
         ThreadModule.class,
-        GsonModule.class,
-        DataModule.class,
+        RemoteModule.GsonModule.class,
+        DataRemoteModule.class,
         DemoFragmentInjector.class})
 public interface DemoApplicationComponent {
 

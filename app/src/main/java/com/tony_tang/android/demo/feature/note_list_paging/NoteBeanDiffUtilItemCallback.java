@@ -1,7 +1,7 @@
 package com.tony_tang.android.demo.feature.note_list_paging;
 
 
-import com.jordifierro.androidbase.data.repository.NoteBean;
+import com.tony.tang.note.cache.NoteBean;
 
 import androidx.recyclerview.widget.DiffUtil;
 

@@ -7,7 +7,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.Toast;
 
-import com.jordifierro.androidbase.data.repository.NoteBean;
+import com.tony.tang.note.cache.NoteBean;
 import com.tony_tang.android.demo.R;
 import com.tony_tang.android.demo.common.DemoApplication;
 import com.tony_tang.android.demo.common.DemoApplicationComponent;

@@ -36,7 +36,6 @@ android {
 
 dependencies {
 
-    compile project(':db')
     compile project(':data')
 
 
@@ -44,9 +43,21 @@ dependencies {
     def test_dependencies = rootProject.ext.test_dependencies
     
     compile ext_dependencies.javaxAnnotation
+    compile ext_dependencies.roomRxjava2
+    compile ext_dependencies.roomRuntime
+    compile ext_dependencies.pagingRuntime
+    compile ext_dependencies.lifecycleRuntime
+    compile ext_dependencies.lifecycleExtension
+
+    provided ext_dependencies.autoValue
+    annotationProcessor ext_dependencies.autoValue
+    provided ext_dependencies.autoValueGson
+    annotationProcessor ext_dependencies.autoValueGson
+
 
     testCompile test_dependencies.junit
     testCompile test_dependencies.mockito
     testCompile test_dependencies.commonsIO
 
+    annotationProcessor ext_dependencies.roomCompiler
 }

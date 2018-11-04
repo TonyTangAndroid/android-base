@@ -4,7 +4,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
-import com.jordifierro.androidbase.data.repository.NoteBean;
+import com.tony.tang.note.cache.NoteBean;
 import com.tony_tang.android.demo.R;
 
 import androidx.annotation.Nullable;
