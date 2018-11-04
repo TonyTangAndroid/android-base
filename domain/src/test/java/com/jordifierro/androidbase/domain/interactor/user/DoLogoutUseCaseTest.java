@@ -4,7 +4,7 @@ import com.jordifierro.androidbase.domain.entity.UserEntity;
 import com.jordifierro.androidbase.domain.entity.VoidEntity;
 import com.jordifierro.androidbase.domain.executor.ThreadExecutor;
 import com.jordifierro.androidbase.domain.executor.UIThread;
-import com.jordifierro.androidbase.domain.repository.SessionRepository;
+import com.jordifierro.androidbase.domain.repository.TokenRepository;
 import com.jordifierro.androidbase.domain.repository.UserRepository;
 
 import org.junit.Before;
@@ -30,7 +30,7 @@ public class DoLogoutUseCaseTest {
     @Mock
     private UserRepository mockUserRepository;
     @Mock
-    private SessionRepository mockSessionRepository;
+    private TokenRepository mockSessionRepository;
 
     @Mock
     private UserEntity mockUser;
@@ -45,12 +45,9 @@ public class DoLogoutUseCaseTest {
 
     @Test
     public void testDoLogoutUseCaseSuccess() {
-        DoLogoutUseCase doLogoutUseCase = new DoLogoutUseCase(mockThreadExecutor,
-                mockUIThread, mockUserRepository, mockSessionRepository);
+        DoLogoutUseCase doLogoutUseCase = new DoLogoutUseCase(mockThreadExecutor, mockUIThread, mockUserRepository, mockSessionRepository);
 
-        given(mockSessionRepository.getCurrentUser()).willReturn(mockUser);
-
-        given(mockUserRepository.logoutUser(mockUser)).willReturn(Completable.complete());
+        given(mockUserRepository.logoutUser()).willReturn(Completable.complete());
 
         TestObserver<VoidEntity> testObserver = new TestObserver<>();
         TestScheduler testScheduler = new TestScheduler();
@@ -58,12 +55,11 @@ public class DoLogoutUseCaseTest {
         completable.observeOn(testScheduler).subscribe(testObserver);
         testScheduler.triggerActions();
 
-        verify(mockUserRepository).logoutUser(mockUser);
+        verify(mockUserRepository).logoutUser();
         testObserver.assertComplete();
-        verify(mockSessionRepository).getCurrentUser();
         verify(mockSessionRepository).invalidateSession();
         verifyNoMoreInteractions(mockSessionRepository);
-        verify(mockUserRepository).logoutUser(mockUser);
+        verify(mockUserRepository).logoutUser();
         verifyNoMoreInteractions(mockUserRepository);
         verifyZeroInteractions(mockThreadExecutor);
         verifyZeroInteractions(mockUIThread);

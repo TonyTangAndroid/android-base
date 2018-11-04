@@ -29,32 +29,31 @@ public class UserRemoteRepository implements UserRepository {
 
 
     @Override
-    public Completable deleteUser(final UserEntity user) {
-        return this.restApi.deleteUser(user.getObjectId())
+    public Completable deleteUser(String objectId) {
+        return this.restApi.deleteUser(objectId)
                 .flatMap(Validator::validate).ignoreElement();
     }
 
     @Override
-    public Completable resetPassword(UserEntity user) {
+    public Completable resetPassword(String email) {
         Map<String, Object> params = new HashMap<>();
-        params.put(RestApi.FIELD_EMAIL, user.getEmail());
+        params.put(RestApi.FIELD_EMAIL, email);
         return this.restApi.resetPassword(params).flatMap(Validator::validate).ignoreElement();
     }
 
     @Override
-    public Single<UserEntity> getUserBySessionToken(String token) {
-        return this.restApi.getUserBySessionToken(token).flatMap(Validator::validate);
+    public Single<UserEntity> getUserBySessionToken() {
+        return this.restApi.getUserBySessionToken().flatMap(Validator::validate);
     }
 
     @Override
-    public Single<UserEntity> loginUser(UserEntity user) {
-        return this.restApi.doLogin(user.getUsername(), user.getPassword())
-                .flatMap(Validator::validate);
+    public Single<UserEntity> loginUser(String username, String password) {
+        return this.restApi.doLogin(username, password).flatMap(Validator::validate);
     }
 
     @Override
-    public Completable logoutUser(UserEntity user) {
-        return this.restApi.doLogout(user.getSessionToken())
+    public Completable logoutUser() {
+        return this.restApi.doLogout()
                 .flatMap(Validator::validate).ignoreElement();
     }
 }

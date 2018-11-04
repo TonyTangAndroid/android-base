@@ -14,7 +14,6 @@ import retrofit2.Response;
 import retrofit2.http.Body;
 import retrofit2.http.DELETE;
 import retrofit2.http.GET;
-import retrofit2.http.Header;
 import retrofit2.http.POST;
 import retrofit2.http.PUT;
 import retrofit2.http.Path;
@@ -24,8 +23,6 @@ import retrofit2.http.QueryMap;
 public interface RestApi {
 
     String PARSE_APPLICATION_ID_VALUE = "vstpbbwVyVsYYQaMTkYp8OWaRTf4XTMefcmSVAWP";
-    String PARSE_SESSION_KEY = "X-Parse-Session-Token";
-
 
     String URL_BASE = "https://parse.anycopy.io/parse_server_demo/";
     String URL_PATH_USERS = "users";
@@ -53,7 +50,7 @@ public interface RestApi {
     Single<Response<UserEntity>> doLogin(@Query(FIELD_USERNAME) String username, @Query(FIELD_PASSWORD) String password);
 
     @POST(URL_PATH_LOGOUT)
-    Single<Response<VoidEntity>> doLogout(@Header(PARSE_SESSION_KEY) String token);
+    Single<Response<VoidEntity>> doLogout();
 
     @POST(URL_PATH_CLASSES_NOTE)
     Single<Response<CreatedWrapper>> createNote(@Body NoteEntity note);
@@ -63,7 +60,7 @@ public interface RestApi {
             @Path("objectId") String objectId);
 
     @GET(URL_PATH_USERS_ME)
-    Single<Response<UserEntity>> getUserBySessionToken(@Header(PARSE_SESSION_KEY) String token);
+    Single<Response<UserEntity>> getUserBySessionToken();
 
     @GET(URL_PATH_CLASSES_NOTE)
     Single<Response<NoteEntitiesWrapper>> getNotes(@QueryMap Map<String, Object> queryParams);

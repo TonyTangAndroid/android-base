@@ -10,11 +10,9 @@ import java.util.List;
 @AutoValue
 public abstract class NoteEntitiesWrapper {
 
-
     public static TypeAdapter<NoteEntitiesWrapper> typeAdapter(Gson gson) {
         return new AutoValue_NoteEntitiesWrapper.GsonTypeAdapter(gson);
     }
-
 
     @SerializedName("results")
     public abstract List<NoteEntity> results();

@@ -3,7 +3,7 @@ package com.jordifierro.androidbase.domain.interactor.note;
 import com.jordifierro.androidbase.domain.executor.UIThread;
 import com.jordifierro.androidbase.domain.executor.ThreadExecutor;
 import com.jordifierro.androidbase.domain.repository.NoteRepository;
-import com.jordifierro.androidbase.domain.repository.SessionRepository;
+import com.jordifierro.androidbase.domain.repository.TokenRepository;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -21,7 +21,7 @@ public class GetNoteUseCaseTest {
     @Mock
     private NoteRepository mockNoteRepository;
     @Mock
-    private SessionRepository mockSessionRepository;
+    private TokenRepository mockSessionRepository;
 
     @Before
     public void setup() {
@@ -42,7 +42,7 @@ public class GetNoteUseCaseTest {
 //
 //        Assert.Truth.assertThat(note.title(),
 //                ((NoteEntity) (testObserver.getEvents().get(0)).get(0)).title());
-//        verify(mockSessionRepository).getCurrentUser();
+//        verify(mockSessionRepository).sessionToken();
 //        verifyNoMoreInteractions(mockSessionRepository);
 //        verify(mockNoteRepository).getNote(null, FAKE_ID);
 //        verifyNoMoreInteractions(mockNoteRepository);

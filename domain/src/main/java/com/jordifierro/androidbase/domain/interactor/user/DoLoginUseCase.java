@@ -4,7 +4,7 @@ import com.jordifierro.androidbase.domain.entity.UserEntity;
 import com.jordifierro.androidbase.domain.executor.ThreadExecutor;
 import com.jordifierro.androidbase.domain.executor.UIThread;
 import com.jordifierro.androidbase.domain.interactor.SingleUseCase;
-import com.jordifierro.androidbase.domain.repository.SessionRepository;
+import com.jordifierro.androidbase.domain.repository.TokenRepository;
 import com.jordifierro.androidbase.domain.repository.UserRepository;
 
 import javax.inject.Inject;
@@ -14,13 +14,13 @@ import io.reactivex.Single;
 public class DoLoginUseCase extends SingleUseCase<UserEntity> {
 
     private UserRepository userRepository;
-    private SessionRepository sessionRepository;
+    private TokenRepository sessionRepository;
 
     private UserEntity user;
 
     @Inject
     public DoLoginUseCase(ThreadExecutor threadExecutor, UIThread UIThread,
-                          UserRepository userRepository, SessionRepository sessionRepository) {
+                          UserRepository userRepository, TokenRepository sessionRepository) {
         super(threadExecutor, UIThread);
         this.userRepository = userRepository;
         this.sessionRepository = sessionRepository;
@@ -32,11 +32,11 @@ public class DoLoginUseCase extends SingleUseCase<UserEntity> {
 
     @Override
     protected Single<UserEntity> build() {
-        return this.userRepository.loginUser(this.user)
+        return this.userRepository.loginUser(this.user.username(), "")
                 .doOnSuccess(this::updateSession);
     }
 
     private void updateSession(UserEntity userEntity) {
-        sessionRepository.setCurrentUser(userEntity);
+        sessionRepository.update(userEntity.sessionToken());
     }
 }

@@ -6,7 +6,7 @@ package com.jordifierro.androidbase.domain.cache;
 
 public interface UserCache {
 
-    void save(String userJsonString);
+    void save(String token);
 
     void remove();
 

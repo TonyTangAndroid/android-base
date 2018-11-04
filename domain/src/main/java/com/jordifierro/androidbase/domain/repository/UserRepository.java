@@ -9,14 +9,14 @@ import io.reactivex.Single;
 public interface UserRepository {
     Single<String> createUser(UserEntity user);
 
-    Completable deleteUser(UserEntity user);
+    Completable deleteUser(String objectId);
 
-    Completable resetPassword(UserEntity user);
+    Completable resetPassword(String email);
 
-    Single<UserEntity> loginUser(UserEntity user);
+    Single<UserEntity> loginUser(String username, String password);
 
-    Completable logoutUser(UserEntity user);
+    Completable logoutUser();
 
-    Single<UserEntity> getUserBySessionToken(String token);
+    Single<UserEntity> getUserBySessionToken();
 
 }

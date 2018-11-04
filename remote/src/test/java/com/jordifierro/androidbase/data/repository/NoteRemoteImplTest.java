@@ -67,7 +67,6 @@ public class NoteRemoteImplTest extends BaseDataRepositoryTest {
     }
 
 
-
     @After
     public void tearDown() throws IOException {
         this.mockWebServer.shutdown();
@@ -148,7 +147,8 @@ public class NoteRemoteImplTest extends BaseDataRepositoryTest {
         RecordedRequest request = this.mockWebServer.takeRequest();
         Truth.assertThat(request.getPath()).isEqualTo(getFormattedUrl(this.fakeNote.objectId(), RestApi.URL_PATH_CLASSES_NOTE_OBJECT_ID));
         Truth.assertThat(request.getMethod()).isEqualTo(HttpMethod.PUT);
-        Truth.assertThat(request.getBody().readUtf8()).isEqualTo(new Gson().toJson(this.fakeNote));
+        String expected = new Gson().toJson(this.fakeNote);
+        Truth.assertThat(request.getBody().readUtf8()).isEqualTo(expected);
     }
 
 

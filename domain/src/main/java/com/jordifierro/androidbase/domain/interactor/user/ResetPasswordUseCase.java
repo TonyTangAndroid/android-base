@@ -30,6 +30,6 @@ public class ResetPasswordUseCase extends CompletableUseCase {
 
     @Override
     protected Completable build() {
-        return this.userRepository.resetPassword(this.user);
+        return this.userRepository.resetPassword(this.user.email());
     }
 }

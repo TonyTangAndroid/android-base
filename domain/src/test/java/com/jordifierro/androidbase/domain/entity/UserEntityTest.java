@@ -1,50 +1,22 @@
 package com.jordifierro.androidbase.domain.entity;
 
-import org.junit.Before;
+import com.google.gson.Gson;
+
 import org.junit.Test;
 
-import static org.hamcrest.core.Is.is;
-import static org.junit.Assert.assertThat;
+import java.io.IOException;
+
+import static com.google.common.truth.Truth.assertThat;
 
 public class UserEntityTest {
 
-    private static final String FAKE_EMAIL = "email@test.com";
-
-    private UserEntity user;
-
-    @Before
-    public void setup() {
-        this.user = new UserEntity(FAKE_EMAIL);
-    }
-
     @Test
-    public void testUserConstructor() {
-        assertThat(this.user.getUsername(), is(FAKE_EMAIL));
-        assertThat(this.user.getEmail(), is(user.getUsername()));
+    public void testUserConstructor() throws IOException {
+
+        String json = TestUtils.json("user_me_ok.json", this);
+        UserEntity userEntity = UserEntity.typeAdapter(new Gson()).fromJson(json);
+        assertThat(userEntity.email()).isEqualTo("tangzhilu@gmail.com");
+        assertThat(userEntity.sessionToken()).isEqualTo("r:LhHHilHJ4tgD7762f5SG19mmd");
     }
 
-    @Test
-    public void testUserSetters() {
-        this.user.setUsername("another@email.com");
-        this.user.setEmail("another@email.com");
-        this.user.setSessionToken("1234TOKEN");
-        this.user.setPassword("password");
-
-        assertThat(this.user.getEmail(), is("another@email.com"));
-        assertThat(this.user.getUsername(), is("another@email.com"));
-        assertThat(this.user.getSessionToken(), is("1234TOKEN"));
-        assertThat(this.user.getPassword(), is("password"));
-    }
-
-    @Test
-    public void testUserSetUserName() {
-        this.user.setUsername("another@email.com");
-        assertThat(this.user.getEmail(), is(this.user.getUsername()));
-    }
-
-    @Test
-    public void testUserSetEmail() {
-        this.user.setEmail("another@email.com");
-        assertThat(this.user.getEmail(), is(this.user.getUsername()));
-    }
 }

@@ -1,108 +1,62 @@
 package com.jordifierro.androidbase.domain.entity;
 
-import com.google.gson.annotations.Expose;
+import com.google.auto.value.AutoValue;
+import com.google.gson.Gson;
+import com.google.gson.TypeAdapter;
+import com.google.gson.annotations.SerializedName;
 
-import java.util.Objects;
+import javax.annotation.Nullable;
 
-public class UserEntity {
+@AutoValue
+public abstract class UserEntity {
 
-
-    private String email;
-    private String username;
-    private String password;
-    @Expose(deserialize = false)
-    private String objectId;
-    @Expose(deserialize = false)
-    private String createdAt;
-    @Expose(deserialize = false)
-    private String updatedAt;
-    @Expose(deserialize = false)
-    private String sessionToken;
-
-    public UserEntity() {
+    public static TypeAdapter<UserEntity> typeAdapter(Gson gson) {
+        return new AutoValue_UserEntity.GsonTypeAdapter(gson);
     }
 
-    public UserEntity(String username) {
-        this.username = username;
-        this.email = username;
-    }
-
-    public String getEmail() {
-        return email;
-    }
-
-    public void setEmail(String email) {
-        this.email = email;
-        this.username = email;
-    }
-
-    public String getCreatedAt() {
-        return createdAt;
-    }
-
-    public void setCreatedAt(String createdAt) {
-        this.createdAt = createdAt;
-    }
-
-    public String getUpdatedAt() {
-        return updatedAt;
-    }
-
-    public void setUpdatedAt(String updatedAt) {
-        this.updatedAt = updatedAt;
-    }
-
-    public String getObjectId() {
-        return objectId;
-    }
-
-    public void setObjectId(String objectId) {
-        this.objectId = objectId;
-    }
-
-    public String getUsername() {
-        return username;
-    }
-
-    public void setUsername(String username) {
-        this.username = username;
-        this.email = username;
-    }
-
-    public String getSessionToken() {
-        return sessionToken;
-    }
-
-    public void setSessionToken(String sessionToken) {
-        this.sessionToken = sessionToken;
-    }
-
-    public String getPassword() {
-        return password;
-    }
-
-    public void setPassword(String password) {
-        this.password = password;
+    public static Builder builder() {
+        return new AutoValue_UserEntity.Builder();
     }
 
 
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        UserEntity that = (UserEntity) o;
-        return Objects.equals(email, that.email) &&
-                Objects.equals(username, that.username) &&
-                Objects.equals(password, that.password) &&
-                Objects.equals(objectId, that.objectId) &&
-                Objects.equals(createdAt, that.createdAt) &&
-                Objects.equals(updatedAt, that.updatedAt) &&
-                Objects.equals(sessionToken, that.sessionToken);
-    }
+    @SerializedName("email")
+    public abstract String email();
 
-    @Override
-    public int hashCode() {
+    @SerializedName("username")
+    public abstract String username();
 
-        return Objects.hash(email, username, password, objectId, createdAt, updatedAt, sessionToken);
+    @SerializedName("objectId")
+    public abstract String objectId();
+
+    @SerializedName("createdAt")
+    public abstract String createdAt();
+
+    @Nullable
+    @SerializedName("password")
+    public abstract String password();
+
+    @SerializedName("updatedAt")
+    public abstract String updatedAt();
+
+    @SerializedName("sessionToken")
+    public abstract String sessionToken();
+
+    @AutoValue.Builder
+    public abstract static class Builder {
+        public abstract Builder email(String email);
+
+        public abstract Builder username(String username);
+
+        public abstract Builder objectId(String objectId);
+
+        public abstract Builder password(String password);
+
+        public abstract Builder createdAt(String createdAt);
+
+        public abstract Builder updatedAt(String updatedAt);
+
+        public abstract Builder sessionToken(String sessionToken);
+
+        public abstract UserEntity build();
     }
 }

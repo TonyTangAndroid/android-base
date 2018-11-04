@@ -3,7 +3,7 @@ package com.jordifierro.androidbase.domain.interactor.note;
 import com.jordifierro.androidbase.domain.executor.ThreadExecutor;
 import com.jordifierro.androidbase.domain.executor.UIThread;
 import com.jordifierro.androidbase.domain.repository.NoteRepository;
-import com.jordifierro.androidbase.domain.repository.SessionRepository;
+import com.jordifierro.androidbase.domain.repository.TokenRepository;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -25,7 +25,7 @@ public class DeleteNoteUseCaseTest {
     @Mock
     private NoteRepository mockNoteRepository;
     @Mock
-    private SessionRepository mockSessionRepository;
+    private TokenRepository mockSessionRepository;
 
     @Before
     public void setup() {

@@ -24,6 +24,7 @@ dependencies {
     testCompile test_dependencies.truth
     testCompile test_dependencies.junit
     testCompile test_dependencies.mockito
+    testCompile test_dependencies.commonsIO
     testCompile test_dependencies.jetAnnotations
 
 

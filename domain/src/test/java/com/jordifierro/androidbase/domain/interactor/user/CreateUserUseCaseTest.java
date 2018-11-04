@@ -4,7 +4,7 @@ import com.google.common.truth.Truth;
 import com.jordifierro.androidbase.domain.entity.UserEntity;
 import com.jordifierro.androidbase.domain.executor.ThreadExecutor;
 import com.jordifierro.androidbase.domain.executor.UIThread;
-import com.jordifierro.androidbase.domain.repository.SessionRepository;
+import com.jordifierro.androidbase.domain.repository.TokenRepository;
 import com.jordifierro.androidbase.domain.repository.UserRepository;
 
 import org.junit.Before;
@@ -31,7 +31,7 @@ public class CreateUserUseCaseTest {
     @Mock
     private UserRepository mockUserRepository;
     @Mock
-    private SessionRepository mockSessionRepository;
+    private TokenRepository mockSessionRepository;
     @Mock
     private UserEntity mockUser;
 
@@ -45,22 +45,21 @@ public class CreateUserUseCaseTest {
     public void testCreateUserUseCaseSuccess() {
 
 
-
         CreateUserUseCase createUserUseCase = new CreateUserUseCase(mockThreadExecutor,
                 mockUIThread, mockUserRepository, mockSessionRepository);
         TestObserver<UserEntity> testObserver = new TestObserver<>();
         given(mockUserRepository.createUser(mockUser)).willReturn(Single.just(FAKE_SESSION_TOKEN));
-        given(mockUserRepository.getUserBySessionToken(FAKE_SESSION_TOKEN)).willReturn(Single.just(mockUser));
+        given(mockUserRepository.getUserBySessionToken()).willReturn(Single.just(mockUser));
 
         createUserUseCase.setParams(mockUser);
         testObserver = createUserUseCase.build().subscribeWith(testObserver);
 
         verify(mockUserRepository).createUser(mockUser);
-        verify(mockUserRepository).getUserBySessionToken(FAKE_SESSION_TOKEN);
+        verify(mockUserRepository).getUserBySessionToken();
 
         Truth.assertThat(testObserver.getEvents().get(0).get(0)).isEqualTo(mockUser);
         verifyNoMoreInteractions(mockUserRepository);
-        verify(mockSessionRepository).setCurrentUser(mockUser);
+        verify(mockSessionRepository).update(FAKE_SESSION_TOKEN);
         verifyNoMoreInteractions(mockSessionRepository);
         verifyZeroInteractions(mockThreadExecutor);
         verifyZeroInteractions(mockUIThread);

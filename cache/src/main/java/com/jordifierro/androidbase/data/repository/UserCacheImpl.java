@@ -4,6 +4,8 @@ import android.content.SharedPreferences;
 
 import com.jordifierro.androidbase.domain.cache.UserCache;
 
+import javax.inject.Inject;
+
 
 public class UserCacheImpl implements UserCache {
 
@@ -11,15 +13,15 @@ public class UserCacheImpl implements UserCache {
 
     private final SharedPreferences sharedPreferences;
 
-
+    @Inject
     public UserCacheImpl(SharedPreferences sharedPreferences) {
         this.sharedPreferences = sharedPreferences;
     }
 
     @Override
-    public void save(String userJsonString) {
+    public void save(String token) {
         SharedPreferences.Editor editor = sharedPreferences.edit();
-        editor.putString(PREF_USER_KEY, userJsonString);
+        editor.putString(PREF_USER_KEY, token);
         editor.apply();
     }
 
@@ -32,7 +34,6 @@ public class UserCacheImpl implements UserCache {
 
     @Override
     public String get() {
-
         return sharedPreferences.getString(PREF_USER_KEY, null);
     }
 }

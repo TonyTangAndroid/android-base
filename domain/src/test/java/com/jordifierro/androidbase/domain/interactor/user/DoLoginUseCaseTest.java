@@ -4,7 +4,7 @@ import com.google.common.truth.Truth;
 import com.jordifierro.androidbase.domain.entity.UserEntity;
 import com.jordifierro.androidbase.domain.executor.ThreadExecutor;
 import com.jordifierro.androidbase.domain.executor.UIThread;
-import com.jordifierro.androidbase.domain.repository.SessionRepository;
+import com.jordifierro.androidbase.domain.repository.TokenRepository;
 import com.jordifierro.androidbase.domain.repository.UserRepository;
 
 import org.junit.Before;
@@ -30,7 +30,7 @@ public class DoLoginUseCaseTest {
     @Mock
     private UserRepository mockUserRepository;
     @Mock
-    private SessionRepository mockSessionRepository;
+    private TokenRepository mockSessionRepository;
     @Mock
     private UserEntity mockUser;
 
@@ -44,15 +44,15 @@ public class DoLoginUseCaseTest {
         DoLoginUseCase doLoginUseCase = new DoLoginUseCase(mockThreadExecutor,
                 mockUIThread, mockUserRepository, mockSessionRepository);
         TestObserver<UserEntity> testObserver = new TestObserver<>();
-        given(mockUserRepository.loginUser(mockUser)).willReturn(Single.just(mockUser));
+        given(mockUserRepository.loginUser(mockUser.username(), "")).willReturn(Single.just(mockUser));
 
         doLoginUseCase.setParams(mockUser);
         testObserver = doLoginUseCase.build().subscribeWith(testObserver);
 
-        verify(mockUserRepository).loginUser(mockUser);
+        verify(mockUserRepository).loginUser(mockUser.username(), "");
         Truth.assertThat(testObserver.getEvents().get(0).get(0)).isEqualTo(mockUser);
         verifyNoMoreInteractions(mockUserRepository);
-        verify(mockSessionRepository).setCurrentUser(mockUser);
+        verify(mockSessionRepository).update(mockUser.sessionToken());
         verifyNoMoreInteractions(mockSessionRepository);
         verifyZeroInteractions(mockThreadExecutor);
         verifyZeroInteractions(mockUIThread);

@@ -45,7 +45,7 @@ public class DoResetPasswordUseCaseTest {
         resetPasswordUseCase.setParams(mockUser);
 
 
-        given(mockUserRepository.resetPassword(mockUser))
+        given(mockUserRepository.resetPassword(mockUser.email()))
                 .willReturn(Completable.complete());
 
         TestObserver<VoidEntity> testObserver = new TestObserver<>();
@@ -54,7 +54,7 @@ public class DoResetPasswordUseCaseTest {
         testScheduler.triggerActions();
 
 
-        verify(mockUserRepository).resetPassword(mockUser);
+        verify(mockUserRepository).resetPassword(mockUser.email());
         testObserver.assertComplete();
         verifyNoMoreInteractions(mockUserRepository);
         verifyZeroInteractions(mockThreadExecutor);

@@ -1,10 +1,9 @@
 package com.jordifierro.androidbase.domain.interactor.user;
 
-import com.jordifierro.androidbase.domain.entity.UserEntity;
 import com.jordifierro.androidbase.domain.executor.ThreadExecutor;
 import com.jordifierro.androidbase.domain.executor.UIThread;
 import com.jordifierro.androidbase.domain.interactor.CompletableUseCase;
-import com.jordifierro.androidbase.domain.repository.SessionRepository;
+import com.jordifierro.androidbase.domain.repository.TokenRepository;
 import com.jordifierro.androidbase.domain.repository.UserRepository;
 
 import javax.inject.Inject;
@@ -14,11 +13,11 @@ import io.reactivex.Completable;
 public class DoLogoutUseCase extends CompletableUseCase {
 
     private UserRepository userRepository;
-    private SessionRepository sessionRepository;
+    private TokenRepository sessionRepository;
 
     @Inject
     public DoLogoutUseCase(ThreadExecutor threadExecutor, UIThread UIThread,
-                           UserRepository userRepository, SessionRepository sessionRepository) {
+                           UserRepository userRepository, TokenRepository sessionRepository) {
         super(threadExecutor, UIThread);
         this.userRepository = userRepository;
         this.sessionRepository = sessionRepository;
@@ -26,8 +25,10 @@ public class DoLogoutUseCase extends CompletableUseCase {
 
     @Override
     protected Completable build() {
-        UserEntity currentUser = this.sessionRepository.getCurrentUser();
+        return this.userRepository.logoutUser().doOnComplete(this::invalidate);
+    }
+
+    private void invalidate() {
         this.sessionRepository.invalidateSession();
-        return this.userRepository.logoutUser(currentUser);
     }
 }
