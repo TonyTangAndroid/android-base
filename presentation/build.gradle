@@ -3,22 +3,13 @@ apply plugin: 'net.ltgt.apt-idea'
 apply plugin: 'idea'
 apply plugin: 'net.ltgt.apt'
 
-sourceCompatibility = 1.7
-targetCompatibility = 1.7
-
 dependencies {
 
     compile project(':domain')
 
-    def ext_dependencies = rootProject.ext.ext_dependencies
     def test_dependencies = rootProject.ext.test_dependencies
-
+    
     testCompile test_dependencies.junit
     testCompile test_dependencies.mockito
 
-}
-
-tasks.withType(JavaCompile) {
-    sourceCompatibility = "1.7"
-    targetCompatibility = "1.7"
 }

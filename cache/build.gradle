@@ -39,12 +39,6 @@ dependencies {
     compile project(':db')
     compile project(':data')
 
-
-    def ext_dependencies = rootProject.ext.ext_dependencies
-    def test_dependencies = rootProject.ext.test_dependencies
-    
-    compile ext_dependencies.javaxAnnotation
-
     testCompile test_dependencies.junit
     testCompile test_dependencies.mockito
     testCompile test_dependencies.commonsIO

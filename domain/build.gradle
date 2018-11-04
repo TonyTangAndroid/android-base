@@ -14,7 +14,6 @@ dependencies {
 
     apt ext_dependencies.autoValue
     apt ext_dependencies.autoValueGson
-    apt ext_dependencies.autoValueWith
 
     compile ext_dependencies.gson
     compile ext_dependencies.rxJava
@@ -27,12 +26,4 @@ dependencies {
     testCompile test_dependencies.commonsIO
     testCompile test_dependencies.jetAnnotations
 
-
-
-
 }
-
-//tasks.withType(JavaCompile) {
-//    sourceCompatibility = "1.8"
-//    targetCompatibility = "1.8"
-//}
