@@ -1,4 +1,4 @@
-package com.jordifierro.androidbase.domain.entity;
+package com.jordifierro.androidbase.data;
 
 public class UpdatedWrapper {
 

@@ -1,4 +1,4 @@
-package com.jordifierro.androidbase.domain.entity;
+package com.jordifierro.androidbase.data;
 
 import com.google.gson.TypeAdapterFactory;
 import com.ryanharter.auto.value.gson.GsonTypeAdapterFactory;

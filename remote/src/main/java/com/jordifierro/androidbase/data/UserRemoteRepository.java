@@ -1,7 +1,5 @@
-package com.jordifierro.androidbase.data.repository;
+package com.jordifierro.androidbase.data;
 
-import com.jordifierro.androidbase.data.net.RestApi;
-import com.jordifierro.androidbase.domain.entity.CreatedWrapper;
 import com.jordifierro.androidbase.domain.entity.UserEntity;
 import com.jordifierro.androidbase.domain.repository.UserRepository;
 

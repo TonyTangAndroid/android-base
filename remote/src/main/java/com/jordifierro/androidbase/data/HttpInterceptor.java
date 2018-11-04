@@ -1,6 +1,4 @@
-package com.jordifierro.androidbase.data.net.interceptor;
-
-import com.jordifierro.androidbase.data.net.RestApi;
+package com.jordifierro.androidbase.data;
 
 import java.io.IOException;
 import java.util.Locale;

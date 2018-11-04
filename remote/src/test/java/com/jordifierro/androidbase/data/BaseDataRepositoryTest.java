@@ -1,4 +1,4 @@
-package com.jordifierro.androidbase.data.repository;
+package com.jordifierro.androidbase.data;
 
 public class BaseDataRepositoryTest {
 

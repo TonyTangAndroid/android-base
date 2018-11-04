@@ -1,10 +1,7 @@
-package com.jordifierro.androidbase.data.repository;
+package com.jordifierro.androidbase.data;
 
 import com.google.common.truth.Truth;
 import com.google.gson.Gson;
-import com.jordifierro.androidbase.data.net.RestApi;
-import com.jordifierro.androidbase.data.utils.TestUtils;
-import com.jordifierro.androidbase.domain.entity.WrapperGsonHelper;
 import com.jordifierro.androidbase.domain.entity.UserEntity;
 import com.jordifierro.androidbase.domain.exception.RestApiErrorException;
 

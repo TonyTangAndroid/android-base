@@ -1,4 +1,4 @@
-package com.jordifierro.androidbase.data.net.wrapper;
+package com.jordifierro.androidbase.data;
 
 public class ResponseErrorWrapper {
 

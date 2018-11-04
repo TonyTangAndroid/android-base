@@ -2,8 +2,8 @@ package com.tony_tang.android.demo.common.module;
 
 import android.content.Context;
 
-import com.jordifierro.androidbase.data.net.interceptor.AuthInterceptor;
-import com.jordifierro.androidbase.data.net.interceptor.HttpInterceptor;
+import com.jordifierro.androidbase.data.AuthInterceptor;
+import com.jordifierro.androidbase.data.HttpInterceptor;
 import com.jordifierro.androidbase.domain.repository.TokenRepository;
 import com.readystatesoftware.chuck.ChuckInterceptor;
 import com.tony_tang.android.demo.common.scope.ApplicationScope;

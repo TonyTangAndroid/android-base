@@ -1,10 +1,10 @@
 package com.tony_tang.android.demo.common.module;
 
-import com.jordifierro.androidbase.data.net.RestApi;
+import com.jordifierro.androidbase.data.RestApi;
 import com.jordifierro.androidbase.data.repository.NoteListRemote;
 import com.jordifierro.androidbase.data.repository.NoteRemote;
-import com.jordifierro.androidbase.data.repository.NoteRemoteImpl;
-import com.jordifierro.androidbase.data.repository.UserRemoteRepository;
+import com.jordifierro.androidbase.data.NoteRemoteImpl;
+import com.jordifierro.androidbase.data.UserRemoteRepository;
 import com.jordifierro.androidbase.domain.repository.UserRepository;
 import com.tony_tang.android.demo.common.scope.ApplicationScope;
 

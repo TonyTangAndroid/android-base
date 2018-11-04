@@ -1,4 +1,4 @@
-package com.jordifierro.androidbase.data.net.interceptor;
+package com.jordifierro.androidbase.data;
 
 
 import com.jordifierro.androidbase.domain.repository.TokenRepository;

@@ -1,11 +1,7 @@
-package com.jordifierro.androidbase.data.net;
+package com.jordifierro.androidbase.data;
 
-import com.jordifierro.androidbase.domain.entity.CreatedWrapper;
-import com.jordifierro.androidbase.domain.entity.NoteEntitiesWrapper;
 import com.jordifierro.androidbase.domain.entity.NoteEntity;
-import com.jordifierro.androidbase.domain.entity.UpdatedWrapper;
 import com.jordifierro.androidbase.domain.entity.UserEntity;
-import com.jordifierro.androidbase.domain.entity.VoidEntity;
 
 import java.util.Map;
 

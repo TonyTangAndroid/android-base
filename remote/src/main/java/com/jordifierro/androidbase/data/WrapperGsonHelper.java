@@ -1,7 +1,9 @@
-package com.jordifierro.androidbase.domain.entity;
+package com.jordifierro.androidbase.data;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
+import com.jordifierro.androidbase.domain.entity.ArsenalAdapterFactory;
+import com.jordifierro.androidbase.domain.entity.PermissionItemList;
 
 public class WrapperGsonHelper {
 

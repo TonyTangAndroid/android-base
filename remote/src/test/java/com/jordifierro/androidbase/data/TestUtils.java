@@ -1,4 +1,4 @@
-package com.jordifierro.androidbase.data.utils;
+package com.jordifierro.androidbase.data;
 
 import org.apache.commons.io.FileUtils;
 

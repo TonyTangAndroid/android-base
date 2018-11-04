@@ -1,4 +1,4 @@
-package com.jordifierro.androidbase.domain.entity;
+package com.jordifierro.androidbase.data;
 
 /**
  * Created by jordifierro on 18/12/16.

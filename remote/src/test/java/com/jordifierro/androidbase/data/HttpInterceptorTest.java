@@ -1,7 +1,8 @@
-package com.jordifierro.androidbase.data.net.interceptor;
+package com.jordifierro.androidbase.data;
 
 import com.google.common.truth.Truth;
-import com.jordifierro.androidbase.data.net.RestApi;
+import com.jordifierro.androidbase.data.RestApi;
+import com.jordifierro.androidbase.data.HttpInterceptor;
 
 import org.junit.Test;
 

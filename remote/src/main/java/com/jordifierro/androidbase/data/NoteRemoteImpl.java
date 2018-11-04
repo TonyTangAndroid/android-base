@@ -1,8 +1,7 @@
-package com.jordifierro.androidbase.data.repository;
+package com.jordifierro.androidbase.data;
 
-import com.jordifierro.androidbase.data.net.RestApi;
-import com.jordifierro.androidbase.domain.entity.CreatedWrapper;
-import com.jordifierro.androidbase.domain.entity.NoteEntitiesWrapper;
+import com.jordifierro.androidbase.data.repository.NoteListRemote;
+import com.jordifierro.androidbase.data.repository.NoteRemote;
 import com.jordifierro.androidbase.domain.entity.NoteEntity;
 
 import java.util.List;
