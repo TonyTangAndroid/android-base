@@ -69,13 +69,12 @@ ext {
             timber                       : "com.jakewharton.timber:timber:${timberVersion}",
             rxjava2Debug                 : "com.akaita.java:rxjava2-debug:${rxjava2DebugVersion}",
             autoValueGson                : "com.ryanharter.auto.value:auto-value-gson:${autoValueGsonVersion}",
-            lifecycle                    : "android.arch.lifecycle:runtime:${lifecycleVersion}",
-            archExtensions               : "android.arch.lifecycle:extensions:${lifecycleVersion}",
-            archCompiler                 : "android.arch.lifecycle:common-java8:${lifecycleVersion}",
-            roomRuntime                  : "android.arch.persistence.room:runtime:${roomVersion}",
-            roomCompiler                 : "android.arch.persistence.room:compiler:${roomVersion}",
-            roomRxjava2                  : "android.arch.persistence.room:rxjava2:${roomVersion}",
-            paging                       : "android.arch.paging:runtime:${pagingVersion}",
+            lifecycleRuntime             : "androidx.lifecycle:lifecycle-runtime:${lifecycleVersion}",
+            lifecycleExtension           : "androidx.lifecycle:lifecycle-extensions:${lifecycleVersion}",
+            roomRuntime                  : "androidx.room:room-runtime:${roomVersion}",
+            roomCompiler                 : "androidx.room:room-compiler:${roomVersion}",
+            roomRxjava2                  : "androidx.room:room-rxjava2:${roomVersion}",
+            pagingRuntime                : "androidx.paging:paging-runtime:${pagingVersion}",
 
 
 

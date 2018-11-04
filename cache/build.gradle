@@ -34,24 +34,20 @@ android {
     }
 }
 
-task copyResToDebugClasses(type: Copy) {
-    from "${projectDir}/src/test/res"
-    into "${buildDir}/intermediates/classes/test/debug/res"
-}
-task copyResToReleaseClasses(type: Copy) {
-    from "${projectDir}/src/test/res"
-    into "${buildDir}/intermediates/classes/test/release/res"
-}
-preBuild.dependsOn(copyResToDebugClasses)
-preBuild.dependsOn(copyResToReleaseClasses)
-
 dependencies {
-    def ext_dependencies = rootProject.ext.ext_dependencies
-    def test_dependencies = rootProject.ext.test_dependencies
 
     compile project(':data')
 
+
+    def ext_dependencies = rootProject.ext.ext_dependencies
+    def test_dependencies = rootProject.ext.test_dependencies
+    
     compile ext_dependencies.javaxAnnotation
+    compile ext_dependencies.roomRxjava2
+    compile ext_dependencies.roomRuntime
+    compile ext_dependencies.pagingRuntime
+    compile ext_dependencies.lifecycleRuntime
+    compile ext_dependencies.lifecycleExtension
 
     provided ext_dependencies.autoValue
     annotationProcessor ext_dependencies.autoValue
@@ -63,12 +59,5 @@ dependencies {
     testCompile test_dependencies.mockito
     testCompile test_dependencies.commonsIO
 
-    compile 'androidx.room:room-rxjava2:2.0.0'
-    compile 'androidx.room:room-runtime:2.0.0'
-    annotationProcessor 'androidx.room:room-compiler:2.0.0'
-
-    compile 'androidx.paging:paging-runtime:2.0.0'
-    compile 'androidx.lifecycle:lifecycle-runtime:2.0.0'
-    compile 'androidx.lifecycle:lifecycle-extensions:2.0.0'
-
+    annotationProcessor ext_dependencies.roomCompiler
 }
