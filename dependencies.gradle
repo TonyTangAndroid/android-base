@@ -48,6 +48,8 @@ ext {
     espressoCoreVersion = '3.1.0'
     testRunnerVersion = '1.1.0'
     testRulesVersion = '1.1.0'
+    extJunitVersion = '1.0.0'
+    testCoreVersion = '1.0.0'
 
 
     ext_dependencies = [
@@ -116,6 +118,8 @@ ext {
             dexmakerParent : "com.crittercism.dexmaker:dexmaker-parent:${dexmakerVersion}",
             dexmakerMockito: "com.crittercism.dexmaker:dexmaker-mockito:${dexmakerVersion}",
 
+            extJunit       : "androidx.test.ext:junit:${extJunitVersion}",
+            testCore       : "androidx.test:core:${testCoreVersion}",
             testRules      : "androidx.test:runner:${testRulesVersion}",
             testRunner     : "androidx.test:runner:${testRunnerVersion}",
             espressoCore   : "androidx.test.espresso:espresso-core:${espressoCoreVersion}",

@@ -88,17 +88,15 @@ dependencies {
     annotationProcessor ext_dependencies.daggerProcessor
     annotationProcessor ext_dependencies.everNoteAndroidStateProcessor
 
+    androidTestImplementation test_dependencies.junit
+    androidTestImplementation test_dependencies.truth
+    androidTestImplementation test_dependencies.testCore
 
+    androidTestImplementation test_dependencies.extJunit
+    androidTestImplementation test_dependencies.commonsIO
+    androidTestImplementation test_dependencies.testRunner
+    androidTestImplementation test_dependencies.espressoCore
 
-    androidTestCompile test_dependencies.mockito
-    androidTestCompile test_dependencies.dexmaker
-    androidTestCompile test_dependencies.dexmakerDx
-    androidTestCompile test_dependencies.dexmakerParent
-    androidTestCompile test_dependencies.dexmakerMockito
-    androidTestCompile test_dependencies.testRules
-    androidTestCompile test_dependencies.testRunner
-    androidTestCompile test_dependencies.espressoCore
-    androidTestCompile test_dependencies.findbugsJsr305
     androidTestAnnotationProcessor test_dependencies.daggerCompiler
 
 }

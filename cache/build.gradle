@@ -10,7 +10,7 @@ android {
         targetSdkVersion rootProject.ext.androidTargetSdkVersion
         versionCode rootProject.ext.appVersionCode
         versionName rootProject.ext.appVersionName
-        testInstrumentationRunner 'android.test.InstrumentationTestRunner'
+        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
     buildTypes {
         release {
@@ -21,9 +21,7 @@ android {
         debug {
             defaultPublishConfig "debug"
         }
-
     }
-
 
     lintOptions {
         abortOnError false
@@ -42,5 +40,14 @@ dependencies {
     testCompile test_dependencies.junit
     testCompile test_dependencies.mockito
     testCompile test_dependencies.commonsIO
+
+    androidTestImplementation test_dependencies.junit
+    androidTestImplementation test_dependencies.truth
+    androidTestImplementation test_dependencies.testCore
+
+    androidTestImplementation test_dependencies.extJunit
+    androidTestImplementation test_dependencies.commonsIO
+    androidTestImplementation test_dependencies.testRunner
+    androidTestImplementation test_dependencies.espressoCore
 
 }
