@@ -1,5 +1,6 @@
 package com.tony_tang.android.demo.feature.note_detail;
 
+import android.app.ProgressDialog;
 import android.view.View;
 import android.widget.TextView;
 
@@ -20,6 +21,9 @@ public class NoteDetailFragment extends CleanFragment implements NoteDetailView 
 
     TextView titleTV;
     TextView contentTV;
+
+    //late initial
+    private ProgressDialog progressDialog;
 
     public static NoteDetailFragment newInstance() {
 
@@ -54,7 +58,23 @@ public class NoteDetailFragment extends CleanFragment implements NoteDetailView 
         return ((Listener) getActivity()).getNoteObjectId();
     }
 
+    @Override
+    public void showLoader() {
+        if (this.progressDialog == null) {
+            this.progressDialog = new ProgressDialog(getActivity());
+        }
+        this.progressDialog.show();
+    }
+
+    @Override
+    public void hideLoader() {
+        if (this.progressDialog != null) {
+            this.progressDialog.dismiss();
+        }
+    }
+
     public interface Listener {
         String getNoteObjectId();
     }
+
 }

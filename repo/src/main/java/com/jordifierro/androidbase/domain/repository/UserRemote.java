@@ -7,7 +7,7 @@ import io.reactivex.Completable;
 import io.reactivex.Single;
 
 
-public interface UserRepository {
+public interface UserRemote {
     Single<CreatedWrapper> createUser(UserEntity user);
 
     Completable deleteUser(UserEntity user);

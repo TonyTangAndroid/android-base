@@ -9,7 +9,7 @@ import io.reactivex.Single;
 /**
  * Interface that represents a data store from where data is retrieved.
  */
-public class NoteDiskDataStore implements BadgeDataStore {
+public class NoteDiskDataStore implements NoteDataStore {
 
     private final NoteDiskCacheImpl noteDiskCache;
 

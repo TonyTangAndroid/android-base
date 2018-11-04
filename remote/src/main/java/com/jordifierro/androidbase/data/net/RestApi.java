@@ -66,7 +66,7 @@ public interface RestApi {
     Single<Response<UserEntity>> getUserBySessionToken(@Header(PARSE_SESSION_KEY) String token);
 
     @GET(URL_PATH_CLASSES_NOTE)
-    Single<Response<NoteEntitiesWrapper>> getNotes(@Header(PARSE_SESSION_KEY) String token, @QueryMap Map<String, Object> queryParams);
+    Single<Response<NoteEntitiesWrapper>> getNotes(@QueryMap Map<String, Object> queryParams);
 
     @PUT(URL_PATH_CLASSES_NOTE_OBJECT_ID)
     Single<Response<UpdatedWrapper>> updateNote(@Path("objectId") String objectId, @Body NoteEntity note);

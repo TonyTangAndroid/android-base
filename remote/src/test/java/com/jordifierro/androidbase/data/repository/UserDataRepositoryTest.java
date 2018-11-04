@@ -32,7 +32,7 @@ import static junit.framework.Assert.assertTrue;
 
 public class UserDataRepositoryTest extends BaseDataRepositoryTest {
 
-    private UserDataRepositoryV2 userDataRepository;
+    private UserRemoteImpl userRemote;
     private MockWebServer mockWebServer;
     private UserEntity fakeUser;
     private Gson gson;
@@ -49,7 +49,7 @@ public class UserDataRepositoryTest extends BaseDataRepositoryTest {
         this.mockWebServer = new MockWebServer();
         this.mockWebServer.start();
 
-        this.userDataRepository = new UserDataRepositoryV2(
+        this.userRemote = new UserRemoteImpl(
                 new Retrofit.Builder()
                         .baseUrl(mockWebServer.url(MOCK_SERVER))
                         .addConverterFactory(GsonConverterFactory.create(this.gson))
@@ -74,7 +74,7 @@ public class UserDataRepositoryTest extends BaseDataRepositoryTest {
         this.mockWebServer.enqueue(new MockResponse());
 
 
-        this.userDataRepository.getUserBySessionToken(MOCK_AUTH_TOKEN).subscribe(testObserver);
+        this.userRemote.getUserBySessionToken(MOCK_AUTH_TOKEN).subscribe(testObserver);
 
         RecordedRequest request = this.mockWebServer.takeRequest();
 
@@ -90,7 +90,7 @@ public class UserDataRepositoryTest extends BaseDataRepositoryTest {
                 json));
 
 
-        this.userDataRepository.getUserBySessionToken(MOCK_AUTH_TOKEN).subscribe(testObserver);
+        this.userRemote.getUserBySessionToken(MOCK_AUTH_TOKEN).subscribe(testObserver);
         testObserver.awaitTerminalEvent();
 
         testObserver.assertValueCount(0);
@@ -107,7 +107,7 @@ public class UserDataRepositoryTest extends BaseDataRepositoryTest {
         String json = TestUtils.json("user_me_ok.json", this);
         this.mockWebServer.enqueue(new MockResponse().setResponseCode(200).setBody(json));
 
-        this.userDataRepository.getUserBySessionToken(MOCK_AUTH_TOKEN).subscribe(testObserver);
+        this.userRemote.getUserBySessionToken(MOCK_AUTH_TOKEN).subscribe(testObserver);
         testObserver.awaitTerminalEvent();
 
         UserEntity responseUser = (UserEntity) testObserver.getEvents().get(0).get(0);
@@ -124,7 +124,7 @@ public class UserDataRepositoryTest extends BaseDataRepositoryTest {
         this.mockWebServer.enqueue(new MockResponse());
 
         TestObserver<CreatedWrapper> testObserver = new TestObserver<>();
-        this.userDataRepository.createUser(this.fakeUser).subscribe(testObserver);
+        this.userRemote.createUser(this.fakeUser).subscribe(testObserver);
         RecordedRequest request = this.mockWebServer.takeRequest();
         Truth.assertThat(request.getPath()).isEqualTo(constructUrl(RestApi.URL_PATH_USERS));
         Truth.assertThat(request.getMethod()).isEqualTo(HttpMethod.POST);
@@ -139,7 +139,7 @@ public class UserDataRepositoryTest extends BaseDataRepositoryTest {
         TestObserver<CreatedWrapper> testObserver = new TestObserver<>();
 
 
-        this.userDataRepository.createUser(this.fakeUser).subscribe(testObserver);
+        this.userRemote.createUser(this.fakeUser).subscribe(testObserver);
         testObserver.awaitTerminalEvent();
 
         testObserver.assertValueCount(0);
@@ -158,7 +158,7 @@ public class UserDataRepositoryTest extends BaseDataRepositoryTest {
         TestObserver<CreatedWrapper> testObserver = new TestObserver<>();
 
 
-        this.userDataRepository.createUser(this.fakeUser).subscribe(testObserver);
+        this.userRemote.createUser(this.fakeUser).subscribe(testObserver);
         testObserver.awaitTerminalEvent();
 
         CreatedWrapper responseUser = (CreatedWrapper) testObserver.getEvents().get(0).get(0);
@@ -173,7 +173,7 @@ public class UserDataRepositoryTest extends BaseDataRepositoryTest {
         this.mockWebServer.enqueue(new MockResponse().setResponseCode(200).setBody("{}"));
 
 
-        this.userDataRepository.deleteUser(this.fakeUser).subscribe(testObserver);
+        this.userRemote.deleteUser(this.fakeUser).subscribe(testObserver);
         testObserver.awaitTerminalEvent();
         testObserver.assertNoErrors();
         testObserver.assertComplete();
@@ -185,7 +185,7 @@ public class UserDataRepositoryTest extends BaseDataRepositoryTest {
         this.mockWebServer.enqueue(new MockResponse());
 
 
-        this.userDataRepository.deleteUser(this.fakeUser).subscribe(testObserver);
+        this.userRemote.deleteUser(this.fakeUser).subscribe(testObserver);
         RecordedRequest request = this.mockWebServer.takeRequest();
         Truth.assertThat(request.getPath()).isEqualTo(getFormattedUrl(fakeUser.getObjectId(), RestApi.URL_PATH_USERS_OBJECT_ID));
         Truth.assertThat(request.getMethod()).isEqualTo(HttpMethod.DELETE);
@@ -198,7 +198,7 @@ public class UserDataRepositoryTest extends BaseDataRepositoryTest {
         this.mockWebServer.enqueue(new MockResponse().setResponseCode(400).setBody(TestUtils.json("user_delete_error.json", this)));
 
 
-        this.userDataRepository.deleteUser(this.fakeUser).subscribe(testObserver);
+        this.userRemote.deleteUser(this.fakeUser).subscribe(testObserver);
         testObserver.awaitTerminalEvent();
 
         testObserver.assertValueCount(0);
@@ -214,7 +214,7 @@ public class UserDataRepositoryTest extends BaseDataRepositoryTest {
         this.mockWebServer.enqueue(new MockResponse());
 
 
-        this.userDataRepository.resetPassword(this.fakeUser).subscribe(testObserver);
+        this.userRemote.resetPassword(this.fakeUser).subscribe(testObserver);
 
         RecordedRequest request = this.mockWebServer.takeRequest();
         Truth.assertThat(request.getPath()).isEqualTo(constructUrl(RestApi.URL_PATH_REQUEST_PASSWORD_RESET));
@@ -230,7 +230,7 @@ public class UserDataRepositoryTest extends BaseDataRepositoryTest {
         this.mockWebServer.enqueue(new MockResponse().setResponseCode(200).setBody("{}"));
 
 
-        this.userDataRepository.resetPassword(this.fakeUser).subscribe(testObserver);
+        this.userRemote.resetPassword(this.fakeUser).subscribe(testObserver);
         testObserver.awaitTerminalEvent();
 
         testObserver.assertNoErrors();
@@ -243,7 +243,7 @@ public class UserDataRepositoryTest extends BaseDataRepositoryTest {
                 TestUtils.json("reset_password_error.json", this)));
 
 
-        this.userDataRepository.resetPassword(this.fakeUser).subscribe(testObserver);
+        this.userRemote.resetPassword(this.fakeUser).subscribe(testObserver);
         testObserver.awaitTerminalEvent();
 
         testObserver.assertValueCount(0);
@@ -258,7 +258,7 @@ public class UserDataRepositoryTest extends BaseDataRepositoryTest {
 
 
         this.mockWebServer.enqueue(new MockResponse());
-        this.userDataRepository.loginUser(this.fakeUser).subscribe(testObserver);
+        this.userRemote.loginUser(this.fakeUser).subscribe(testObserver);
         RecordedRequest request = this.mockWebServer.takeRequest();
         Truth.assertThat(request.getMethod()).isEqualTo(HttpMethod.GET);
         final String path = request.getPath();
@@ -272,7 +272,7 @@ public class UserDataRepositoryTest extends BaseDataRepositoryTest {
                 TestUtils.json("session_login_ok.json", this)));
 
 
-        this.userDataRepository.loginUser(this.fakeUser).subscribe(testObserver);
+        this.userRemote.loginUser(this.fakeUser).subscribe(testObserver);
         testObserver.awaitTerminalEvent();
         testObserver.assertValueCount(1);
 
@@ -286,7 +286,7 @@ public class UserDataRepositoryTest extends BaseDataRepositoryTest {
 
 
         this.mockWebServer.enqueue(new MockResponse().setResponseCode(200).setBody("{}"));
-        this.userDataRepository.logoutUser(this.fakeUser).subscribe(testObserver);
+        this.userRemote.logoutUser(this.fakeUser).subscribe(testObserver);
         testObserver.awaitTerminalEvent();
         testObserver.assertComplete();
     }
@@ -299,7 +299,7 @@ public class UserDataRepositoryTest extends BaseDataRepositoryTest {
                 TestUtils.json("session_login_error.json", this)));
 
 
-        this.userDataRepository.loginUser(this.fakeUser).subscribe(testObserver);
+        this.userRemote.loginUser(this.fakeUser).subscribe(testObserver);
         testObserver.awaitTerminalEvent();
 
         testObserver.assertValueCount(0);
@@ -314,7 +314,7 @@ public class UserDataRepositoryTest extends BaseDataRepositoryTest {
         this.mockWebServer.enqueue(new MockResponse());
 
 
-        this.userDataRepository.logoutUser(this.fakeUser).subscribe(testObserver);
+        this.userRemote.logoutUser(this.fakeUser).subscribe(testObserver);
 
         RecordedRequest request = this.mockWebServer.takeRequest();
         Truth.assertThat(request.getPath()).isEqualTo(constructUrl(RestApi.URL_PATH_LOGOUT));
@@ -330,7 +330,7 @@ public class UserDataRepositoryTest extends BaseDataRepositoryTest {
                 "  \"error\": \"invalid session token\"\n" +
                 "}"));
 
-        this.userDataRepository.logoutUser(this.fakeUser).subscribe(testObserver);
+        this.userRemote.logoutUser(this.fakeUser).subscribe(testObserver);
         testObserver.awaitTerminalEvent();
 
         testObserver.assertValueCount(0);

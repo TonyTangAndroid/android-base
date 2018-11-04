@@ -21,13 +21,18 @@ public abstract class CleanActivity extends BaseActivity implements CleanView {
                     createUpgradeDialog();
                     break;
                 default:
-                    showMessage(throwable.getMessage());
+                    onUnknownError(throwable);
             }
         } else {
             Log.e("error", "unexpected error:", throwable);
             Toast.makeText(context(), getResources().getString(R.string.message_error),
                     Toast.LENGTH_LONG).show();
         }
+    }
+
+    private void onUnknownError(Throwable throwable) {
+        Toast.makeText(this, throwable.getMessage(), Toast.LENGTH_SHORT).show();
+
     }
 
 
@@ -50,18 +55,7 @@ public abstract class CleanActivity extends BaseActivity implements CleanView {
     }
 
     @Override
-    public void showMessage(String message) {
-        Toast.makeText(context(), message, Toast.LENGTH_LONG).show();
-    }
-
-    @Override
     public void initUI() {
 
     }
-
-    @Override
-    public void close() {
-        this.finish();
-    }
-
 }

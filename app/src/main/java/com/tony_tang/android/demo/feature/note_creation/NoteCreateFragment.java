@@ -1,6 +1,7 @@
 package com.tony_tang.android.demo.feature.note_creation;
 
 import android.annotation.SuppressLint;
+import android.app.ProgressDialog;
 import android.view.View;
 import android.widget.EditText;
 
@@ -15,9 +16,9 @@ public class NoteCreateFragment extends CleanFragment implements NoteCreateView 
 
     @Inject
     NoteCreatePresenter noteCreatePresenter;
-
     EditText etTitle;
     EditText etContent;
+    private ProgressDialog progressDialog;
 
     @Override
     protected int getLayoutId() {
@@ -46,6 +47,22 @@ public class NoteCreateFragment extends CleanFragment implements NoteCreateView 
 
     public void createButtonPressed() {
         this.noteCreatePresenter.createButtonPressed(etTitle.getText().toString(), etContent.getText().toString());
+    }
+
+    @Override
+    public void showLoader() {
+        if (this.progressDialog == null) {
+            this.progressDialog = new ProgressDialog(getActivity());
+        }
+        this.progressDialog.show();
+    }
+
+    @Override
+    public void hideLoader() {
+        if (this.progressDialog != null) {
+            this.progressDialog.dismiss();
+            this.progressDialog = null;
+        }
     }
 
 }

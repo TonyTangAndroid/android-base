@@ -2,7 +2,7 @@ package com.jordifierro.androidbase.data.repository;
 
 import javax.inject.Inject;
 
-public class BadgeDataStoreFactory {
+public class NoteDataStoreFactory {
 
     private final NoteDiskDataStore badgeCacheInDisk;
     private final NoteInMemoryDataStore badgeCacheInMemory;
@@ -11,11 +11,11 @@ public class BadgeDataStoreFactory {
     private final NoteDiskCacheImpl noteDiskCacheImpl;
 
     @Inject
-    BadgeDataStoreFactory(NoteDiskDataStore badgeCacheInDisk,
-                          NoteInMemoryDataStore badgeCacheInMemory,
-                          NoteInMemoryImpl noteInMemoryImpl,
-                          NoteCloudDataStore cloudBadgeDataStore,
-                          NoteDiskCacheImpl noteDiskCacheImpl) {
+    NoteDataStoreFactory(NoteDiskDataStore badgeCacheInDisk,
+                         NoteInMemoryDataStore badgeCacheInMemory,
+                         NoteInMemoryImpl noteInMemoryImpl,
+                         NoteCloudDataStore cloudBadgeDataStore,
+                         NoteDiskCacheImpl noteDiskCacheImpl) {
         this.badgeCacheInDisk = badgeCacheInDisk;
         this.badgeCacheInMemory = badgeCacheInMemory;
         this.noteInMemoryImpl = noteInMemoryImpl;
@@ -23,8 +23,8 @@ public class BadgeDataStoreFactory {
         this.noteDiskCacheImpl = noteDiskCacheImpl;
     }
 
-    BadgeDataStore getDataStore(String objectId) {
-        BadgeDataStore badgeDataStore;
+    NoteDataStore getDataStore(String objectId) {
+        NoteDataStore badgeDataStore;
         if (noteInMemoryImpl.isValid(objectId)) {
             System.out.println("hit memory");
             badgeDataStore = badgeCacheInMemory;

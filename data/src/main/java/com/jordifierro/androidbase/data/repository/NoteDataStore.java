@@ -4,9 +4,6 @@ import com.jordifierro.androidbase.domain.entity.NoteEntity;
 
 import io.reactivex.Single;
 
-/**
- * Interface that represents a data store from where data is retrieved.
- */
-public interface BadgeDataStore {
+public interface NoteDataStore {
     Single<NoteEntity> getNoteEntity(String noteObjectId);
 }

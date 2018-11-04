@@ -16,8 +16,7 @@ apply plugin: 'net.ltgt.apt'
 
 dependencies {
 
-    compile project(':repo')
-    compile project(':cache_interface')
+    compile project(':data')
 
 
     def ext_dependencies = rootProject.ext.ext_dependencies
@@ -31,6 +30,12 @@ dependencies {
     apt ext_dependencies.autoValueGson
     compile ext_dependencies.findbugsJsr305
     compile ext_dependencies.rxJava
+    compile ext_dependencies.retrofit
+    compile ext_dependencies.retrofitGson
+    compile ext_dependencies.retrofitRxJava2
+    compile ext_dependencies.okhttp3_log
+    compile ext_dependencies.okhttp3
+    compile ext_dependencies.okhttp3_mockwebserver
 
     compile ext_dependencies.javaxInject
     compile ext_dependencies.gson
@@ -41,6 +46,7 @@ dependencies {
     testCompile test_dependencies.truth
     testCompile test_dependencies.junit
     testCompile test_dependencies.mockito
+    testCompile test_dependencies.mockWebServer
     testCompile test_dependencies.commonsIO
     testCompile test_dependencies.jetAnnotations
 

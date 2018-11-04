@@ -6,7 +6,6 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Toast;
 
 import com.tony_tang.android.demo.presentation.presenter.base.BasePresenter;
 import com.tony_tang.android.demo.presentation.view.base.CleanView;
@@ -71,29 +70,8 @@ public abstract class CleanFragment extends BaseFragment implements CleanView {
     }
 
     @Override
-    public void showLoader() {
-        if (this.progressDialog == null) this.progressDialog = new ProgressDialog(getActivity());
-        this.progressDialog.show();
-    }
-
-    @Override
-    public void hideLoader() {
-        if (this.progressDialog != null) this.progressDialog.dismiss();
-    }
-
-    @Override
     public void handleError(Throwable throwable) {
         ((CleanView) getActivity()).handleError(throwable);
-    }
-
-    @Override
-    public void showMessage(String message) {
-        Toast.makeText(context(), message, Toast.LENGTH_SHORT).show();
-    }
-
-    @Override
-    public void close() {
-        ((CleanView) getActivity()).close();
     }
 
 }

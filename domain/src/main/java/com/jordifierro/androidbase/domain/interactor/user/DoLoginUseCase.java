@@ -5,7 +5,7 @@ import com.jordifierro.androidbase.domain.executor.ThreadExecutor;
 import com.jordifierro.androidbase.domain.executor.UIThread;
 import com.jordifierro.androidbase.domain.interactor.SingleUseCase;
 import com.jordifierro.androidbase.domain.repository.SessionRepository;
-import com.jordifierro.androidbase.domain.repository.UserRepository;
+import com.jordifierro.androidbase.domain.repository.UserRemote;
 
 import javax.inject.Inject;
 
@@ -13,14 +13,14 @@ import io.reactivex.Single;
 
 public class DoLoginUseCase extends SingleUseCase<UserEntity> {
 
-    private UserRepository userRepository;
+    private UserRemote userRepository;
     private SessionRepository sessionRepository;
 
     private UserEntity user;
 
     @Inject
     public DoLoginUseCase(ThreadExecutor threadExecutor, UIThread UIThread,
-                          UserRepository userRepository, SessionRepository sessionRepository) {
+                          UserRemote userRepository, SessionRepository sessionRepository) {
         super(threadExecutor, UIThread);
         this.userRepository = userRepository;
         this.sessionRepository = sessionRepository;

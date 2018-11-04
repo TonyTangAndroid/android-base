@@ -5,8 +5,7 @@ import com.jordifierro.androidbase.domain.entity.NoteEntity;
 import com.jordifierro.androidbase.domain.executor.ThreadExecutor;
 import com.jordifierro.androidbase.domain.executor.UIThread;
 import com.jordifierro.androidbase.domain.interactor.SingleUseCase;
-import com.jordifierro.androidbase.domain.repository.NoteRepository;
-import com.jordifierro.androidbase.domain.repository.SessionRepository;
+import com.jordifierro.androidbase.domain.repository.NoteListRepository;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -23,17 +22,15 @@ import io.reactivex.functions.Function;
 
 public class GetNotesUseCase extends SingleUseCase<List<?>> {
 
-    private NoteRepository noteRepository;
-    private SessionRepository sessionRepository;
+    private NoteListRepository noteRepository;
     private Map<String, Object> queryParam = new HashMap<>();
     private List<NoteEntity> noteEntityList = new ArrayList<>();
 
     @Inject
     public GetNotesUseCase(ThreadExecutor threadExecutor, UIThread UIThread,
-                           NoteRepository noteRepository, SessionRepository sessionRepository) {
+                           NoteListRepository noteRepository) {
         super(threadExecutor, UIThread);
         this.noteRepository = noteRepository;
-        this.sessionRepository = sessionRepository;
         initQueryParam();
     }
 

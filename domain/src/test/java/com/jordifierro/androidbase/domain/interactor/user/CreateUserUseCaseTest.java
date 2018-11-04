@@ -6,7 +6,7 @@ import com.jordifierro.androidbase.domain.entity.UserEntity;
 import com.jordifierro.androidbase.domain.executor.ThreadExecutor;
 import com.jordifierro.androidbase.domain.executor.UIThread;
 import com.jordifierro.androidbase.domain.repository.SessionRepository;
-import com.jordifierro.androidbase.domain.repository.UserRepository;
+import com.jordifierro.androidbase.domain.repository.UserRemote;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -31,7 +31,7 @@ public class CreateUserUseCaseTest {
     @Mock
     private UIThread mockUIThread;
     @Mock
-    private UserRepository mockUserRepository;
+    private UserRemote mockUserRepository;
     @Mock
     private SessionRepository mockSessionRepository;
     @Mock

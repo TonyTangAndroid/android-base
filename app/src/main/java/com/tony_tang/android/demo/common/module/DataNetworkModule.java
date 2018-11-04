@@ -1,24 +1,43 @@
 package com.tony_tang.android.demo.common.module;
 
+import com.jordifierro.androidbase.data.net.RestApi;
 import com.jordifierro.androidbase.data.repository.NoteDataRepository;
-import com.jordifierro.androidbase.data.repository.UserDataRepositoryV2;
+import com.jordifierro.androidbase.data.repository.NoteListRemote;
+import com.jordifierro.androidbase.data.repository.NoteRemote;
+import com.jordifierro.androidbase.data.repository.NoteRemoteImpl;
+import com.jordifierro.androidbase.data.repository.UserRemoteImpl;
 import com.jordifierro.androidbase.domain.repository.NoteRepository;
-import com.jordifierro.androidbase.domain.repository.UserRepository;
+import com.jordifierro.androidbase.domain.repository.UserRemote;
 import com.tony_tang.android.demo.common.scope.ApplicationScope;
 
 import dagger.Binds;
 import dagger.Module;
+import dagger.Provides;
 
 @Module(includes = {NetworkModule.class})
 public abstract class DataNetworkModule {
 
+    @Provides
+    @ApplicationScope
+    static NoteRemoteImpl provideNoteRemoteImpl(RestApi restApi) {
+        return new NoteRemoteImpl(restApi);
+    }
+
     @Binds
     @ApplicationScope
-    abstract UserRepository provideUserRepository
-            (UserDataRepositoryV2 userDataRepository);
+    abstract UserRemote provideUserRepository(UserRemoteImpl userDataRepository);
+
+    @Binds
+    @ApplicationScope
+    abstract NoteRemote bindNoteRemoteImpl(NoteRemoteImpl userDataRepository);
+
+    @Binds
+    @ApplicationScope
+    abstract NoteListRemote bindNoteListRemoteImpl(NoteRemoteImpl userDataRepository);
 
     @Binds
     @ApplicationScope
     abstract NoteRepository provideNoteRepository(NoteDataRepository noteDataRepository);
+
 
 }

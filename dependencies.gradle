@@ -34,6 +34,7 @@ ext {
     javaxAnnotationVersion = '1.0'
     javaxInjectVersion = '1'
     retrofitVersion = '2.4.0'
+    timberVersion = '4.7.1'
 
     roomVersion = '2.1.0-alpha02'
     pagingVersion = '2.1.0-beta01'
@@ -64,6 +65,7 @@ ext {
             findbugsJsr305               : "com.google.code.findbugs:jsr305:${findbugsJsr305Version}",
             retrofitRxJava2              : "com.squareup.retrofit2:adapter-rxjava2:${retrofitVersion}",
             okhttp3_log                  : "com.squareup.okhttp3:logging-interceptor:${okhttp3Version}",
+            timber                       : "com.jakewharton.timber:timber:${timberVersion}",
 
             autoValueGson                : "com.ryanharter.auto.value:auto-value-gson:${autoValueGsonVersion}",
             lifecycle                    : "android.arch.lifecycle:runtime:${lifecycleVersion}",
