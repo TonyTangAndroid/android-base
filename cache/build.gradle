@@ -49,7 +49,7 @@ dependencies {
     def ext_dependencies = rootProject.ext.ext_dependencies
     def test_dependencies = rootProject.ext.test_dependencies
 
-    compile project(':cache_interface')
+    compile project(':data')
 
     compile ext_dependencies.javaxAnnotation
 

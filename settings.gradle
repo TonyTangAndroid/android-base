@@ -1,7 +1,4 @@
-include ':entity'
-include ':repo'
 include ':domain'
-include ':cache_interface'
 include ':remote'
 include ':data'
 include ':cache'
