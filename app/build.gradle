@@ -54,7 +54,7 @@ dependencies {
     compile project(':domain')
     compile project(':remote')
     compile project(':data')
-    compile project(':presentation')
+    compile project(':presenter')
 
 
     compile ext_dependencies.timber
