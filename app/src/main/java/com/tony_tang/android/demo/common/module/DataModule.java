@@ -1,5 +1,6 @@
 package com.tony_tang.android.demo.common.module;
 
+import com.jordifierro.androidbase.data.remote.DataRemoteModule;
 import com.jordifierro.androidbase.data.repository.NoteDataRepository;
 import com.jordifierro.androidbase.domain.repository.NoteRepository;
 import com.tony_tang.android.demo.common.scope.ApplicationScope;

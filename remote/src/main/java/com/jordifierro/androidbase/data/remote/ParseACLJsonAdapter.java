@@ -1,4 +1,4 @@
-package com.jordifierro.androidbase.data;
+package com.jordifierro.androidbase.data.remote;
 
 import com.google.gson.JsonDeserializationContext;
 import com.google.gson.JsonDeserializer;

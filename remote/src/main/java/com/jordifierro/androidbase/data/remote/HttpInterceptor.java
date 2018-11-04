@@ -1,4 +1,4 @@
-package com.jordifierro.androidbase.data;
+package com.jordifierro.androidbase.data.remote;
 
 import java.io.IOException;
 import java.util.Locale;
@@ -9,7 +9,7 @@ import okhttp3.Interceptor;
 import okhttp3.Request;
 import okhttp3.Response;
 
-public class HttpInterceptor implements Interceptor {
+class HttpInterceptor implements Interceptor {
 
 
     public static final String X_PARSE_APPLICATION_ID = "X-Parse-Application-Id";

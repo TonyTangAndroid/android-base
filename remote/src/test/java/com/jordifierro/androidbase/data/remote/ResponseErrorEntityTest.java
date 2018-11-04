@@ -1,4 +1,4 @@
-package com.jordifierro.androidbase.data;
+package com.jordifierro.androidbase.data.remote;
 
 import com.jordifierro.androidbase.domain.exception.ResponseErrorEntity;
 

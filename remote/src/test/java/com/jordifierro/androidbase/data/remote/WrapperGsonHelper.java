@@ -1,4 +1,4 @@
-package com.jordifierro.androidbase.data;
+package com.jordifierro.androidbase.data.remote;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;

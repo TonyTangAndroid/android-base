@@ -1,6 +1,6 @@
-package com.jordifierro.androidbase.data;
+package com.jordifierro.androidbase.data.remote;
 
-public class CreatedWrapper {
+class CreatedWrapper {
 
     private String createdAt;
     private String objectId;

@@ -1,6 +1,6 @@
-package com.jordifierro.androidbase.data;
+package com.jordifierro.androidbase.data.remote;
 
-public final class HttpMethod {
+final class HttpMethod {
 
     public final static String GET = "GET";
     public final static String POST = "POST";

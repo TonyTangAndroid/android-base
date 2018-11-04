@@ -1,4 +1,4 @@
-package com.jordifierro.androidbase.data;
+package com.jordifierro.androidbase.data.remote;
 
 import com.jordifierro.androidbase.domain.entity.NoteEntity;
 import com.jordifierro.androidbase.domain.entity.UserEntity;
@@ -16,7 +16,7 @@ import retrofit2.http.Path;
 import retrofit2.http.Query;
 import retrofit2.http.QueryMap;
 
-public interface RestApi {
+interface RestApi {
 
     String PARSE_APPLICATION_ID_VALUE = "vstpbbwVyVsYYQaMTkYp8OWaRTf4XTMefcmSVAWP";
 

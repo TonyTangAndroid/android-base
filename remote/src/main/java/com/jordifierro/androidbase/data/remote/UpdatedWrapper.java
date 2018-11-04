@@ -1,6 +1,6 @@
-package com.jordifierro.androidbase.data;
+package com.jordifierro.androidbase.data.remote;
 
-public class UpdatedWrapper {
+class UpdatedWrapper {
 
     private String updatedAt;
 

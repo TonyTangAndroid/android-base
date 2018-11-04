@@ -1,4 +1,4 @@
-package com.jordifierro.androidbase.data;
+package com.jordifierro.androidbase.data.remote;
 
 
 import com.jordifierro.androidbase.domain.repository.TokenRepository;
@@ -11,7 +11,7 @@ import okhttp3.Interceptor;
 import okhttp3.Request;
 import okhttp3.Response;
 
-public class AuthInterceptor implements Interceptor {
+class AuthInterceptor implements Interceptor {
 
     private final TokenRepository tokenRepository;
 

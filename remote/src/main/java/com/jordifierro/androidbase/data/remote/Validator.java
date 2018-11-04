@@ -1,4 +1,4 @@
-package com.jordifierro.androidbase.data;
+package com.jordifierro.androidbase.data.remote;
 
 import com.google.gson.Gson;
 import com.jordifierro.androidbase.domain.exception.RestApiErrorException;
@@ -9,7 +9,7 @@ import io.reactivex.Single;
 import okhttp3.ResponseBody;
 import retrofit2.Response;
 
-public class Validator<T> {
+class Validator<T> {
 
     private Validator() {
     }

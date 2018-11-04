@@ -1,4 +1,4 @@
-package com.jordifierro.androidbase.data;
+package com.jordifierro.androidbase.data.remote;
 
 import com.google.auto.value.AutoValue;
 import com.google.gson.Gson;
@@ -9,7 +9,7 @@ import com.jordifierro.androidbase.domain.entity.NoteEntity;
 import java.util.List;
 
 @AutoValue
-public abstract class NoteEntitiesWrapper {
+abstract class NoteEntitiesWrapper {
 
     public static TypeAdapter<NoteEntitiesWrapper> typeAdapter(Gson gson) {
         return new AutoValue_NoteEntitiesWrapper.GsonTypeAdapter(gson);
