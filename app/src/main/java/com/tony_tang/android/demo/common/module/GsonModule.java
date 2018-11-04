@@ -2,8 +2,8 @@ package com.tony_tang.android.demo.common.module;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
-import com.jordifierro.androidbase.data.remote.ParseACLJsonAdapter;
-import com.jordifierro.androidbase.data.remote.WrapperAdapterFactory;
+import com.tony.tang.note.remote.ParseACLJsonAdapter;
+import com.tony.tang.note.remote.WrapperAdapterFactory;
 import com.jordifierro.androidbase.domain.entity.ArsenalAdapterFactory;
 import com.jordifierro.androidbase.domain.entity.PermissionItemList;
 import com.tony_tang.android.demo.common.scope.ApplicationScope;
