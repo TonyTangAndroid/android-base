@@ -1,12 +1,5 @@
-allprojects {
-    repositories {
-        jcenter()
-    }
-}
-
 ext {
-    //Android
-    appVersionCode = 20161231
+    appVersionCode = 1
     appVersionName = '1.0'
     androidBuildToolsVersion = '28.0.3'
 
@@ -24,7 +17,6 @@ ext {
     gsonVersion = '2.8.4'
     proguardSnippetsVersion = '1.0.0'
     chuckVersion = '1.1.0'
-    //Libraries
     everNoteAndroidStateVersion = '1.4.1'
     //XXX why 2.19 not good
     daggerVersion = '2.11'
