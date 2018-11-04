@@ -1,6 +1,6 @@
 package com.tony.tang.note.data;
 
-import com.jordifierro.androidbase.domain.repository.TokenRepository;
+import com.tony.tang.note.domain.repository.TokenRepository;
 
 import javax.inject.Inject;
 

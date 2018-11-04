@@ -1,7 +1,7 @@
 package com.tony.tang.note.remote;
 
 import com.google.common.truth.Truth;
-import com.jordifierro.androidbase.domain.exception.RestApiErrorException;
+import com.tony.tang.note.domain.exception.RestApiErrorException;
 
 import org.junit.Before;
 import org.junit.Test;

@@ -1,7 +1,7 @@
 package com.tony.tang.note.data;
 
-import com.jordifierro.androidbase.domain.entity.NoteEntity;
-import com.jordifierro.androidbase.domain.repository.NoteRepository;
+import com.tony.tang.note.domain.entity.NoteEntity;
+import com.tony.tang.note.domain.repository.NoteRepository;
 
 import javax.inject.Inject;
 

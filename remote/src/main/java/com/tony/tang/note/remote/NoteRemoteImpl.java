@@ -2,7 +2,7 @@ package com.tony.tang.note.remote;
 
 import com.tony.tang.note.data.NoteListRemote;
 import com.tony.tang.note.data.NoteRemote;
-import com.jordifierro.androidbase.domain.entity.NoteEntity;
+import com.tony.tang.note.domain.entity.NoteEntity;
 
 import java.util.List;
 import java.util.Map;

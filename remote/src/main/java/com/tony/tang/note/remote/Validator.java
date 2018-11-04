@@ -1,7 +1,7 @@
 package com.tony.tang.note.remote;
 
 import com.google.gson.Gson;
-import com.jordifierro.androidbase.domain.exception.RestApiErrorException;
+import com.tony.tang.note.domain.exception.RestApiErrorException;
 
 import java.io.IOException;
 

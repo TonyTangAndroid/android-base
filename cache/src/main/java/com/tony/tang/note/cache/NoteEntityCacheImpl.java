@@ -2,7 +2,9 @@ package com.tony.tang.note.cache;
 
 import com.google.gson.Gson;
 import com.tony.tang.note.data.NoteEntityCache;
-import com.jordifierro.androidbase.domain.entity.NoteEntity;
+import com.tony.tang.note.domain.entity.NoteEntity;
+import com.tony.tang.note.db.NoteBean;
+import com.tony.tang.note.db.NoteBeanDao;
 
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;

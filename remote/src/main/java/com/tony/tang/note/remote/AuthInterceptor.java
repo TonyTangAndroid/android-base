@@ -1,7 +1,7 @@
 package com.tony.tang.note.remote;
 
 
-import com.jordifierro.androidbase.domain.repository.TokenRepository;
+import com.tony.tang.note.domain.repository.TokenRepository;
 
 import java.io.IOException;
 

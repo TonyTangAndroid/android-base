@@ -2,8 +2,8 @@ package com.tony.tang.note.remote;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
-import com.jordifierro.androidbase.domain.entity.ArsenalAdapterFactory;
-import com.jordifierro.androidbase.domain.entity.PermissionItemList;
+import com.tony.tang.note.domain.entity.ArsenalAdapterFactory;
+import com.tony.tang.note.domain.entity.PermissionItemList;
 
 public class WrapperGsonHelper {
 

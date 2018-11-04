@@ -1,19 +1,19 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
           xmlns:tools="http://schemas.android.com/tools"
-          package="com.tony_tang.android.demo">
+          package="com.tony.tang.note.app">
 
 
     <uses-permission android:name="android.permission.INTERNET"/>
 
     <application
-        android:name="com.tony_tang.android.demo.common.DemoApplication"
+        android:name="com.tony.tang.note.app.DemoApplication"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
         android:theme="@style/AppThemeNoTitleBar"
         tools:ignore="AllowBackup,GoogleAppIndexingWarning">
         <activity
-            android:name=".feature.note_list_paging.NoteListPagingActivity"
+            android:name="com.tony.tang.note.ui.feature.note.list.NoteListPagingActivity"
             android:label="@string/note_list">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN"/>
@@ -22,10 +22,10 @@
         </activity>
 
         <activity
-            android:name="com.tony_tang.android.demo.feature.note_detail.NoteDetailActivity"
+            android:name="com.tony.tang.note.ui.feature.note.detail.NoteDetailActivity"
             android:label="@string/note_detail"/>
         <activity
-            android:name="com.tony_tang.android.demo.feature.note_creation.NoteCreateActivity"
+            android:name="com.tony.tang.note.ui.feature.note.creation.NoteCreateActivity"
             android:label="@string/note_create"/>
     </application>
 

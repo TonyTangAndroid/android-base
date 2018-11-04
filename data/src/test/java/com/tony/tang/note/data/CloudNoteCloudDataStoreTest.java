@@ -1,7 +1,7 @@
 package com.tony.tang.note.data;
 
 import com.google.common.truth.Truth;
-import com.jordifierro.androidbase.domain.entity.NoteEntity;
+import com.tony.tang.note.domain.entity.NoteEntity;
 
 import org.junit.Before;
 import org.junit.Test;

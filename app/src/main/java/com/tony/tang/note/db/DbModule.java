@@ -2,9 +2,7 @@ package com.tony.tang.note.db;
 
 import android.content.Context;
 
-import com.tony.tang.note.cache.NoteBeanDao;
-import com.tony.tang.note.cache.NoteRoomDatabase;
-import com.tony_tang.android.demo.common.scope.ApplicationScope;
+import com.tony.tang.note.app.ApplicationScope;
 
 import androidx.room.Room;
 import dagger.Module;

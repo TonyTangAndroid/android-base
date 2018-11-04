@@ -1,5 +1,5 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-          package="com.jordifierro.androidbase.cache">
+          package="com.tony.tang.note.cache">
 
     <application>
 

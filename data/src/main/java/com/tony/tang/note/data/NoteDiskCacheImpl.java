@@ -1,7 +1,7 @@
 package com.tony.tang.note.data;
 
-import com.jordifierro.androidbase.domain.entity.NoteEntity;
-import com.jordifierro.androidbase.domain.executor.ThreadExecutor;
+import com.tony.tang.note.domain.entity.NoteEntity;
+import com.tony.tang.note.domain.executor.ThreadExecutor;
 
 import java.util.List;
 

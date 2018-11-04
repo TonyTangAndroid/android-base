@@ -3,7 +3,7 @@ package com.tony.tang.note.cache;
 import com.tony.tang.note.data.NoteEntityCache;
 import com.tony.tang.note.data.TokenCache;
 import com.tony.tang.note.db.DbModule;
-import com.tony_tang.android.demo.common.scope.ApplicationScope;
+import com.tony.tang.note.app.ApplicationScope;
 
 import dagger.Binds;
 import dagger.Module;

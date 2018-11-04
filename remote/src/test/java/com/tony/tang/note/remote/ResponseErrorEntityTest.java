@@ -1,6 +1,6 @@
 package com.tony.tang.note.remote;
 
-import com.jordifierro.androidbase.domain.exception.ResponseErrorEntity;
+import com.tony.tang.note.domain.exception.ResponseErrorEntity;
 
 import org.junit.Before;
 import org.junit.Test;

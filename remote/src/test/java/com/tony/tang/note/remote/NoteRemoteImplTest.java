@@ -2,8 +2,8 @@ package com.tony.tang.note.remote;
 
 import com.google.common.truth.Truth;
 import com.google.gson.Gson;
-import com.jordifierro.androidbase.domain.entity.NoteEntity;
-import com.jordifierro.androidbase.domain.exception.RestApiErrorException;
+import com.tony.tang.note.domain.entity.NoteEntity;
+import com.tony.tang.note.domain.exception.RestApiErrorException;
 
 import org.junit.After;
 import org.junit.Before;

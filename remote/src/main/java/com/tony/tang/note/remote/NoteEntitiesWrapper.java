@@ -4,7 +4,7 @@ import com.google.auto.value.AutoValue;
 import com.google.gson.Gson;
 import com.google.gson.TypeAdapter;
 import com.google.gson.annotations.SerializedName;
-import com.jordifierro.androidbase.domain.entity.NoteEntity;
+import com.tony.tang.note.domain.entity.NoteEntity;
 
 import java.util.List;
 

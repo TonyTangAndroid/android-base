@@ -14,13 +14,12 @@ android {
     buildToolsVersion rootProject.ext.androidBuildToolsVersion
     defaultConfig {
 
-        applicationId "com.tony_tang.android.demo"
+        applicationId "com.tony.tang.note.app"
         minSdkVersion rootProject.ext.androidMinSdkVersion
         targetSdkVersion rootProject.ext.androidTargetSdkVersion
         versionCode rootProject.ext.appVersionCode
-        multiDexEnabled true
         versionName rootProject.ext.appVersionName
-        testInstrumentationRunner 'com.jordifierro.androidbase.application.TestMockerRunner'
+        testInstrumentationRunner 'com.tony.tang.note.application.TestMockerRunner'
     }
     buildTypes {
         release {
@@ -73,7 +72,6 @@ dependencies {
 
 
     compile ext_dependencies.cardview
-    compile ext_dependencies.multidex
     compile ext_dependencies.material
     compile ext_dependencies.legacyV13
     compile ext_dependencies.appcompat

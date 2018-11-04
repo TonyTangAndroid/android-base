@@ -1,7 +1,7 @@
 package com.tony.tang.note.remote;
 
-import com.jordifierro.androidbase.domain.entity.UserEntity;
-import com.jordifierro.androidbase.domain.repository.UserRepository;
+import com.tony.tang.note.domain.entity.UserEntity;
+import com.tony.tang.note.domain.repository.UserRepository;
 
 import java.util.HashMap;
 import java.util.Map;

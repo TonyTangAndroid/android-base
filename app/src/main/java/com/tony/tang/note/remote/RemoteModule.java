@@ -4,15 +4,15 @@ import android.content.Context;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
-import com.jordifierro.androidbase.domain.entity.ArsenalAdapterFactory;
-import com.jordifierro.androidbase.domain.entity.PermissionItemList;
-import com.jordifierro.androidbase.domain.repository.TokenRepository;
-import com.jordifierro.androidbase.domain.repository.UserRepository;
+import com.tony.tang.note.domain.entity.ArsenalAdapterFactory;
+import com.tony.tang.note.domain.entity.PermissionItemList;
+import com.tony.tang.note.domain.repository.TokenRepository;
+import com.tony.tang.note.domain.repository.UserRepository;
 import com.readystatesoftware.chuck.ChuckInterceptor;
 import com.tony.tang.note.data.DataLocalModule;
 import com.tony.tang.note.data.NoteListRemote;
 import com.tony.tang.note.data.NoteRemote;
-import com.tony_tang.android.demo.common.scope.ApplicationScope;
+import com.tony.tang.note.app.ApplicationScope;
 
 import dagger.Binds;
 import dagger.Module;
