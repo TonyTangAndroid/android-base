@@ -1,7 +1,6 @@
 package com.tony.tang.movie;
 
 import com.google.common.truth.Truth;
-import com.google.gson.Gson;
 
 import org.junit.After;
 import org.junit.Before;
@@ -9,6 +8,7 @@ import org.junit.Test;
 
 import java.io.IOException;
 import java.util.List;
+import java.util.logging.LogManager;
 
 import io.reactivex.observers.TestObserver;
 import okhttp3.mockwebserver.MockResponse;
@@ -27,17 +27,15 @@ public class MovieEntityRemoteImplTest {
 
     @Before
     public void setUp() throws IOException {
+        LogManager.getLogManager().reset();
         this.testObserver = new TestObserver<>();
-
-        Gson gson = GsonHelper.build();
-
         this.mockWebServer = new MockWebServer();
         this.mockWebServer.start();
 
         this.movieRemote = new MovieEntityRemoteImpl(
                 new Retrofit.Builder()
                         .baseUrl(mockWebServer.url(MOCK_SERVER))
-                        .addConverterFactory(GsonConverterFactory.create(gson))
+                        .addConverterFactory(GsonConverterFactory.create(GsonHelper.build()))
                         .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
                         .build()
                         .create(RestApi.class)
