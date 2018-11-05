@@ -1,30 +1,29 @@
 package com.tony.tang.movie;
 
+import java.util.List;
+
 class ResponseErrorWrapper {
 
 
-    private String error;
-    private int code;
+    private String status_message;
+    private int status_code;
 
-    public ResponseErrorWrapper(String error, int code) {
-        this.error = error;
-        this.code = code;
+    private List<String> errors;
+
+    public String getStatus_message() {
+        return status_message;
     }
 
-    public String getError() {
-        return error;
+    public void setStatus_message(String status_message) {
+        this.status_message = status_message;
     }
 
-    public void setError(String error) {
-        this.error = error;
+    public int getStatus_code() {
+        return status_code;
     }
 
-    public int getCode() {
-        return code;
-    }
-
-    public void setCode(int code) {
-        this.code = code;
+    public void setStatus_code(int status_code) {
+        this.status_code = status_code;
     }
 
 }

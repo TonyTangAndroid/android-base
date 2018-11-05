@@ -1,20 +1,18 @@
 package com.tony.tang.movie;
 
-import com.google.gson.Gson;
-
-import java.io.IOException;
-
 import io.reactivex.Single;
-import okhttp3.ResponseBody;
 import retrofit2.Response;
 
 class Validator<T> {
 
-    private Validator() {
+    private final ErrorMapper errorMapper;
+
+    private Validator(ErrorMapper errorMapper) {
+        this.errorMapper = errorMapper;
     }
 
     public static <T> Single<T> validate(Response<T> response) {
-        Validator<T> validator = new Validator<>();
+        Validator<T> validator = new Validator<>(new ErrorMapper());
         return validator.execute(response);
     }
 
@@ -25,19 +23,7 @@ class Validator<T> {
             assert body != null;
             return Single.just(body);
         } else {
-            return Single.error(toException(response));
-        }
-    }
-
-    protected RestApiErrorException toException(Response response) {
-        try {
-            ResponseErrorWrapper errorWrapper;
-            ResponseBody responseBody = response.errorBody();
-            final String errorBody = responseBody != null ? responseBody.string() : null;
-            errorWrapper = new Gson().fromJson(errorBody, ResponseErrorWrapper.class);
-            throw new RestApiErrorException(errorWrapper.getError(), errorWrapper.getCode());
-        } catch (IOException | NullPointerException e) {
-            throw new RestApiErrorException(response.message(), response.code());
+            return Single.error(errorMapper.toException(response));
         }
     }
 
