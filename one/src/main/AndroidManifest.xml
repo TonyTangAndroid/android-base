@@ -7,13 +7,13 @@
     <uses-permission android:name="android.permission.INTERNET"/>
 
     <application
-        android:name="com.tony.tang.movie.App"
+        android:name="com.tony.tang.movie.app.App"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
         android:theme="@style/AppTheme"
         tools:ignore="AllowBackup,GoogleAppIndexingWarning">
         <activity
-            android:name="com.tony.tang.movie.MovieEntityListPagingActivity"
+            android:name="com.tony.tang.movie.ui.feature.list.MovieEntityListPagingActivity"
             android:label="@string/movie_list">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN"/>
@@ -22,7 +22,7 @@
         </activity>
 
         <activity
-            android:name="com.tony.tang.movie.MovieEntitySearchActivity"
+            android:name="com.tony.tang.movie.ui.feature.search.MovieEntitySearchActivity"
             android:label="@string/search">
         </activity>
     </application>
