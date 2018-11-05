@@ -13,6 +13,7 @@ public class App extends Application {
         super.onCreate();
         appComponent = create();
         appComponent.inject(this);
+        TimberLogUtil.initLog();
         RxJava2Debug.enableRxJava2AssemblyTracking();
     }
 

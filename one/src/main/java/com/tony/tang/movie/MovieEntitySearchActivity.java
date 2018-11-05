@@ -24,8 +24,10 @@ import androidx.recyclerview.widget.DividerItemDecoration;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import dagger.Provides;
+import hugo.weaving.DebugLog;
 import io.reactivex.Observable;
 import io.reactivex.disposables.Disposable;
+import io.reactivex.schedulers.Schedulers;
 import timber.log.Timber;
 
 
@@ -36,6 +38,10 @@ public class MovieEntitySearchActivity extends AppCompatActivity implements Movi
 
     @Inject
     MovieEntitySearchPresenter presenter;
+
+    @Inject
+    UIThread uiThread;
+
     private EditText inputSearchText;
     private RecyclerView recyclerView;
     private FrameLayout topEmptyView;
@@ -109,7 +115,6 @@ public class MovieEntitySearchActivity extends AppCompatActivity implements Movi
 
 
     private void showLoadingView() {
-        //TODO
         recyclerView.setVisibility(View.INVISIBLE);
         progressBar.setVisibility(View.VISIBLE);
         topEmptyView.setVisibility(View.VISIBLE);
@@ -140,7 +145,15 @@ public class MovieEntitySearchActivity extends AppCompatActivity implements Movi
                 .debounce(400, TimeUnit.MILLISECONDS)
                 .map(this::toKeyword)
                 .filter(this::notNull)
-                .distinctUntilChanged().subscribe(s -> relay.accept(s));
+                .distinctUntilChanged()
+                .observeOn(uiThread.getScheduler())
+                .subscribe(this::onKeywordReady);
+    }
+
+    @DebugLog
+    private void onKeywordReady(String s) {
+        showLoadingView();
+        relay.accept(s);
     }
 
     @Override
@@ -177,7 +190,8 @@ public class MovieEntitySearchActivity extends AppCompatActivity implements Movi
         private final MovieEntitySearchActivity fragment;
         private final Observable<String> relay;
 
-        Module(MovieEntitySearchActivity fragment, Observable<String> relay) {
+        Module(MovieEntitySearchActivity fragment,
+               Observable<String> relay) {
             this.fragment = fragment;
             this.relay = relay;
         }
@@ -191,7 +205,7 @@ public class MovieEntitySearchActivity extends AppCompatActivity implements Movi
         @ActivityScope
         @Provides
         Observable<String> keywordStreamingObservable() {
-            return relay;
+            return relay.observeOn(Schedulers.io());
         }
     }
 
