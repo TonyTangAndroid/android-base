@@ -46,6 +46,7 @@ public class MovieEntitySearchPresenter {
         @Override
         public void onError(Throwable e) {
             movieListView.handleError(e);
+            observe();
         }
 
         @Override

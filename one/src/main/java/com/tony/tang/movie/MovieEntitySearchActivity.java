@@ -11,6 +11,7 @@ import android.widget.TextView;
 
 import com.jakewharton.rxbinding3.widget.RxTextView;
 import com.jakewharton.rxbinding3.widget.TextViewTextChangeEvent;
+import com.jakewharton.rxrelay2.PublishRelay;
 
 import java.util.List;
 import java.util.concurrent.TimeUnit;
@@ -24,10 +25,14 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import dagger.Provides;
 import io.reactivex.Observable;
+import io.reactivex.disposables.Disposable;
 import timber.log.Timber;
 
 
 public class MovieEntitySearchActivity extends AppCompatActivity implements MovieEntitySearchPresenter.MovieListView {
+
+    PublishRelay<String> relay = PublishRelay.create();
+
 
     @Inject
     MovieEntitySearchPresenter presenter;
@@ -37,6 +42,7 @@ public class MovieEntitySearchActivity extends AppCompatActivity implements Movi
     private ProgressBar progressBar;
     private TextView tvEmptyViewHint;
     private MovieEntityAdapter movieAdapter;
+    private Disposable disposable;
 
     public static Intent constructIntent(Activity activity) {
         return new Intent(activity, MovieEntitySearchActivity.class);
@@ -44,11 +50,11 @@ public class MovieEntitySearchActivity extends AppCompatActivity implements Movi
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
+        inject();
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_search);
         bindView();
         initUI();
-        inject();
     }
 
     @Override
@@ -118,23 +124,29 @@ public class MovieEntitySearchActivity extends AppCompatActivity implements Movi
         recyclerView.addItemDecoration(new DividerItemDecoration(this, DividerItemDecoration.VERTICAL));
         movieAdapter = new MovieEntityAdapter(this);
         recyclerView.setAdapter(movieAdapter);
-
+        observe();
 
     }
 
     private void inject() {
         DaggerMovieEntitySearchActivity_Component.builder()
-                .module(new Module(this, streaming()))
+                .module(new Module(this, relay))
                 .appComponent(((App) getApplication()).appComponent())
                 .build().inject(this);
     }
 
-    private Observable<String> streaming() {
-        return RxTextView.textChangeEvents(inputSearchText)
-                .debounce(800, TimeUnit.MILLISECONDS)
+    private void observe() {
+        disposable = RxTextView.textChangeEvents(inputSearchText)
+                .debounce(400, TimeUnit.MILLISECONDS)
                 .map(this::toKeyword)
                 .filter(this::notNull)
-                .distinctUntilChanged();
+                .distinctUntilChanged().subscribe(s -> relay.accept(s));
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        disposable.dispose();
     }
 
     private boolean notNull(String keyWord) {
@@ -163,11 +175,11 @@ public class MovieEntitySearchActivity extends AppCompatActivity implements Movi
     static class Module {
 
         private final MovieEntitySearchActivity fragment;
-        private final Observable<String> keywordStreamingObservable;
+        private final Observable<String> relay;
 
-        Module(MovieEntitySearchActivity fragment, Observable<String> keywordStreamingObservable) {
+        Module(MovieEntitySearchActivity fragment, Observable<String> relay) {
             this.fragment = fragment;
-            this.keywordStreamingObservable = keywordStreamingObservable;
+            this.relay = relay;
         }
 
         @ActivityScope
@@ -179,7 +191,7 @@ public class MovieEntitySearchActivity extends AppCompatActivity implements Movi
         @ActivityScope
         @Provides
         Observable<String> keywordStreamingObservable() {
-            return keywordStreamingObservable;
+            return relay;
         }
     }
 
