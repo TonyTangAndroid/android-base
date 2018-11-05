@@ -93,6 +93,7 @@ dependencies {
     compile ext_dependencies.rxAndroid
 
     //annotation
+    compile ext_dependencies.annotation
     compile ext_dependencies.javaxInject
     compile ext_dependencies.findbugsJsr305
     compile ext_dependencies.javaxAnnotation
@@ -106,11 +107,12 @@ dependencies {
     compile ext_dependencies.retrofitRxJava2
 
     //ui
+    compile ext_dependencies.glide
     compile ext_dependencies.cardview
     compile ext_dependencies.material
     compile ext_dependencies.legacyV13
     compile ext_dependencies.appcompat
-    compile ext_dependencies.annotation
+    compile ext_dependencies.rxbinding3
 
     //debug
     compile ext_dependencies.timber
@@ -125,15 +127,21 @@ dependencies {
 //    annotationProcessor ext_dependencies.autoValueGson
 
 
-    implementation 'com.jakewharton.rxbinding3:rxbinding:3.0.0-alpha1'
-    implementation 'com.github.bumptech.glide:glide:4.8.0'
-    annotationProcessor 'com.github.bumptech.glide:compiler:4.8.0'
-
+    annotationProcessor ext_dependencies.glideCompiler
     annotationProcessor ext_dependencies.epoxyProcessor
     annotationProcessor ext_dependencies.daggerCompiler
     annotationProcessor ext_dependencies.daggerProcessor
     annotationProcessor ext_dependencies.everNoteAndroidStateProcessor
 
+    //test
+    testCompile test_dependencies.truth
+    testCompile test_dependencies.junit
+    testCompile test_dependencies.mockito
+    testCompile test_dependencies.mockWebServer
+    testCompile test_dependencies.commonsIO
+    testCompile test_dependencies.jetAnnotations
+
+    //android test
     androidTestImplementation test_dependencies.junit
     androidTestImplementation test_dependencies.truth
     androidTestImplementation test_dependencies.testCore
@@ -143,15 +151,5 @@ dependencies {
     androidTestImplementation test_dependencies.commonsIO
     androidTestImplementation test_dependencies.testRunner
     androidTestImplementation test_dependencies.espressoCore
-
-    testCompile test_dependencies.truth
-    testCompile test_dependencies.junit
-    testCompile test_dependencies.mockito
-    testCompile test_dependencies.mockWebServer
-    testCompile test_dependencies.commonsIO
-    testCompile test_dependencies.jetAnnotations
-
-
-    androidTestAnnotationProcessor test_dependencies.daggerCompiler
 
 }
