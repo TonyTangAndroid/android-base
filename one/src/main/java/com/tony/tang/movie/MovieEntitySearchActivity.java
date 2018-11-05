@@ -168,7 +168,7 @@ public class MovieEntitySearchActivity extends AppCompatActivity implements Movi
     }
 
     private String toKeyword(TextViewTextChangeEvent textViewTextChangeEvent) {
-        return textViewTextChangeEvent.getText().toString();
+        return textViewTextChangeEvent.getText().toString().trim();
     }
 
     @Override
