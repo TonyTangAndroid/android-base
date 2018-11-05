@@ -8,8 +8,6 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
-import com.tony.tang.movie.BuildConfig;
-import com.tony.tang.movie.R;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -45,9 +43,8 @@ public class MovieEntityAdapter extends RecyclerView.Adapter<MovieEntityAdapter.
     @Override
     public void onBindViewHolder(MovieViewHolder holder, int position) {
         MovieEntity currentItem = dataList.get(position);
-        holder.tv_title.setText(currentItem.title);
-        Glide.with(context).load(BuildConfig.IMAGE_SERVER_URL + currentItem.poster_path).into(holder.iv_cover);
-        holder.tv_title.setText(currentItem.title);
+        holder.tv_title.setText(currentItem.getTitle());
+        Glide.with(context).load(BuildConfig.IMAGE_SERVER_URL + currentItem.getPosterPath()).into(holder.iv_cover);
 
     }
 

@@ -1,5 +1,7 @@
 package com.tony.tang.movie;
 
+import com.google.gson.annotations.SerializedName;
+
 import java.util.Objects;
 
 import androidx.room.Entity;
@@ -8,31 +10,48 @@ import androidx.room.PrimaryKey;
 @Entity(tableName = MovieEntity.TABLE_NAME_NOTE_CACHE)
 public class MovieEntity {
 
-    public static final String TABLE_NAME_NOTE_CACHE = "note";
+    public static final String TABLE_NAME_NOTE_CACHE = "movie";
     public static final String OBJECT_ID = "id";
 
-
     @PrimaryKey
-    public long id;
+    private long id;
+    private String title;
+    private String overview;
 
-    public String overview;
-    public String release_date;
-    public String poster_path;
+    @SerializedName("poster_path")
+    private String posterPath;
 
+    public long getId() {
+        return id;
+    }
 
-    public String original_title;
-    public String original_language;
-    public String title;
-    public String backdrop_path;
-    public int vote_count;
+    public void setId(long id) {
+        this.id = id;
+    }
 
+    public String getTitle() {
+        return title;
+    }
 
-//    public int[] genre_ids;
-//    public double popularity;
-//    public double vote_average;
-//    public boolean adult;
-//    public boolean video;
+    public void setTitle(String title) {
+        this.title = title;
+    }
 
+    public String getOverview() {
+        return overview;
+    }
+
+    public void setOverview(String overview) {
+        this.overview = overview;
+    }
+
+    public String getPosterPath() {
+        return posterPath;
+    }
+
+    public void setPosterPath(String posterPath) {
+        this.posterPath = posterPath;
+    }
 
     @Override
     public boolean equals(Object o) {
@@ -40,19 +59,13 @@ public class MovieEntity {
         if (o == null || getClass() != o.getClass()) return false;
         MovieEntity that = (MovieEntity) o;
         return id == that.id &&
-                vote_count == that.vote_count &&
-                Objects.equals(overview, that.overview) &&
-                Objects.equals(release_date, that.release_date) &&
-                Objects.equals(poster_path, that.poster_path) &&
-                Objects.equals(original_title, that.original_title) &&
-                Objects.equals(original_language, that.original_language) &&
                 Objects.equals(title, that.title) &&
-                Objects.equals(backdrop_path, that.backdrop_path);
+                Objects.equals(overview, that.overview) &&
+                Objects.equals(posterPath, that.posterPath);
     }
 
     @Override
     public int hashCode() {
-
-        return Objects.hash(id, overview, release_date, poster_path, original_title, original_language, title, backdrop_path, vote_count);
+        return Objects.hash(id, title, overview, posterPath);
     }
 }

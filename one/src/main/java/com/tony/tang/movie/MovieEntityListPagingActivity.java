@@ -92,7 +92,7 @@ public class MovieEntityListPagingActivity extends AppCompatActivity
 
     @Override
     public void delete(MovieEntity noteEntity) {
-        notePagingListPresenter.delete(noteEntity.id);
+        notePagingListPresenter.delete(noteEntity.getId());
     }
 
     @Override

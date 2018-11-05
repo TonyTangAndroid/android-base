@@ -4,8 +4,6 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
-import com.tony.tang.movie.R;
-
 import androidx.annotation.Nullable;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -31,9 +29,9 @@ public final class MovieEntityViewHolder extends RecyclerView.ViewHolder {
 
     public final void bindTo(@Nullable MovieEntity item) {
         if (item != null) {
-            this.tv_id.setText(String.valueOf(item.id));
-            this.tv_title.setText(item.title);
-            this.tv_content.setText(item.overview);
+            this.tv_id.setText(String.valueOf(item.getId()));
+            this.tv_title.setText(item.getTitle());
+            this.tv_content.setText(item.getOverview());
             this.btn_delete.setOnClickListener(view -> listener.delete(item));
             this.btn_toggle_title.setOnClickListener(view -> listener.toggleTitle(item));
             this.btn_toggle_order.setOnClickListener(view -> listener.toggleOrder(item));
