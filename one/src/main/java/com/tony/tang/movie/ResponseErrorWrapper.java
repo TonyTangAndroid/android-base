@@ -8,6 +8,14 @@ class ResponseErrorWrapper {
     private String status_message;
     private int status_code;
 
+    public List<String> getErrors() {
+        return errors;
+    }
+
+    public void setErrors(List<String> errors) {
+        this.errors = errors;
+    }
+
     private List<String> errors;
 
     public String getStatus_message() {

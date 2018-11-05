@@ -16,15 +16,13 @@ class Validator<T> {
         return validator.execute(response);
     }
 
-
     private Single<T> execute(Response<T> response) {
-        if (response.isSuccessful()) {
+        if (!response.isSuccessful()) {
+            return Single.error(errorMapper.toException(response));
+        } else {
             T body = response.body();
             assert body != null;
             return Single.just(body);
-        } else {
-            return Single.error(errorMapper.toException(response));
         }
     }
-
 }
