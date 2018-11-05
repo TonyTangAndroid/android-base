@@ -1,0 +1,157 @@
+apply plugin: 'com.android.application'
+apply plugin: 'com.jakewharton.hugo'
+
+android {
+
+    signingConfigs {
+        tony_dev_sign {
+            keyAlias 'tony_dev_sign'
+            keyPassword 'tony_dev_sign'
+            storeFile file('tony_dev_sign.jks')
+            storePassword 'tony_dev_sign'
+        }
+    }
+
+    compileSdkVersion rootProject.ext.androidCompileSdkVersion
+    buildToolsVersion rootProject.ext.androidBuildToolsVersion
+
+    defaultConfig {
+
+        applicationId "com.tony.tang.movie"
+        versionCode rootProject.ext.appVersionCode
+        versionName rootProject.ext.appVersionName
+        minSdkVersion rootProject.ext.androidMinSdkVersion
+        targetSdkVersion rootProject.ext.androidTargetSdkVersion
+        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+
+
+        buildConfigField 'String', 'API_KEY', "$apiKey"
+        buildConfigField 'String', 'SERVER_URL', "$serverUrl"
+        buildConfigField 'String', 'IMAGE_SERVER_URL', "$imageServerUrl"
+
+
+    }
+
+    buildTypes {
+
+        release {
+            minifyEnabled true
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+            signingConfig signingConfigs.tony_dev_sign
+        }
+
+        debug {
+            signingConfig signingConfigs.tony_dev_sign
+        }
+
+    }
+
+    packagingOptions {
+        exclude 'META-INF/maven/com.google.guava/guava/pom.properties'
+        exclude 'META-INF/maven/com.google.guava/guava/pom.xml'
+    }
+
+    lintOptions {
+        abortOnError false
+    }
+
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
+
+    useLibrary 'android.test.runner'
+    useLibrary 'android.test.base'
+    useLibrary 'android.test.mock'
+
+}
+
+
+
+dependencies {
+    def ext_dependencies = rootProject.ext.ext_dependencies
+    def test_dependencies = rootProject.ext.test_dependencies
+
+    //room
+    compile ext_dependencies.javaxAnnotation
+    compile ext_dependencies.roomRxjava2
+    compile ext_dependencies.roomRuntime
+    compile ext_dependencies.pagingRuntime
+    compile ext_dependencies.lifecycleRuntime
+    compile ext_dependencies.lifecycleExtension
+    annotationProcessor ext_dependencies.roomCompiler
+
+    //state
+    compile ext_dependencies.everNoteAndroidState
+
+
+
+    compile ext_dependencies.dagger
+
+
+    compile ext_dependencies.rxJava
+    compile ext_dependencies.rxAndroid
+
+    //annotation
+    compile ext_dependencies.javaxInject
+    compile ext_dependencies.findbugsJsr305
+    compile ext_dependencies.javaxAnnotation
+
+    //remote
+    compile ext_dependencies.gson
+    compile ext_dependencies.retrofit
+    compile ext_dependencies.okhttp3
+    compile ext_dependencies.okhttp3_log
+    compile ext_dependencies.retrofitGson
+    compile ext_dependencies.retrofitRxJava2
+
+    //ui
+    compile ext_dependencies.cardview
+    compile ext_dependencies.material
+    compile ext_dependencies.legacyV13
+    compile ext_dependencies.appcompat
+    compile ext_dependencies.annotation
+
+    //debug
+    compile ext_dependencies.timber
+    compile ext_dependencies.rxjava2Debug
+    debugCompile ext_dependencies.chuck
+    releaseCompile ext_dependencies.chuckNoOp
+
+    //auto value
+//    compileOnly ext_dependencies.autoValue
+//    compileOnly ext_dependencies.autoValueGson
+//    annotationProcessor ext_dependencies.autoValue
+//    annotationProcessor ext_dependencies.autoValueGson
+
+
+    implementation 'com.jakewharton.rxbinding3:rxbinding:3.0.0-alpha1'
+    implementation 'com.github.bumptech.glide:glide:4.8.0'
+    annotationProcessor 'com.github.bumptech.glide:compiler:4.8.0'
+
+    annotationProcessor ext_dependencies.epoxyProcessor
+    annotationProcessor ext_dependencies.daggerCompiler
+    annotationProcessor ext_dependencies.daggerProcessor
+    annotationProcessor ext_dependencies.everNoteAndroidStateProcessor
+
+    androidTestImplementation test_dependencies.junit
+    androidTestImplementation test_dependencies.truth
+    androidTestImplementation test_dependencies.testCore
+    androidTestImplementation test_dependencies.findbugsJsr305
+
+    androidTestImplementation test_dependencies.extJunit
+    androidTestImplementation test_dependencies.commonsIO
+    androidTestImplementation test_dependencies.testRunner
+    androidTestImplementation test_dependencies.espressoCore
+
+    testCompile test_dependencies.truth
+    testCompile test_dependencies.junit
+    testCompile test_dependencies.mockito
+    testCompile test_dependencies.mockWebServer
+    testCompile test_dependencies.commonsIO
+    testCompile test_dependencies.jetAnnotations
+
+
+    androidTestAnnotationProcessor test_dependencies.daggerCompiler
+
+}

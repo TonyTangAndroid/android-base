@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+          xmlns:tools="http://schemas.android.com/tools"
+          package="com.tony.tang.note.app">
+
+
+    <uses-permission android:name="android.permission.INTERNET"/>
+
+    <application
+        android:name="com.tony.tang.note.app.App"
+        android:icon="@mipmap/ic_launcher"
+        android:label="@string/app_name"
+        android:theme="@style/AppTheme"
+        tools:ignore="AllowBackup,GoogleAppIndexingWarning">
+        <activity
+            android:name=".NoteListPagingActivity"
+            android:theme="@style/AppThemeNoTitleBar"
+            android:label="@string/movie_list">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN"/>
+                <category android:name="android.intent.category.LAUNCHER"/>
+            </intent-filter>
+        </activity>
+
+
+        <activity
+            android:name=".MovieSearchActivity"
+            android:label="@string/search">
+
+        </activity>
+    </application>
+
+</manifest>

@@ -15,7 +15,6 @@ ext {
     autoValueGsonVersion = '0.8.0'
     autoValueWithVersion = '1.0.0'
     gsonVersion = '2.8.4'
-    proguardSnippetsVersion = '1.0.0'
     chuckVersion = '1.1.0'
     everNoteAndroidStateVersion = '1.4.1'
     //XXX why 2.19 not good
@@ -88,7 +87,6 @@ ext {
             daggerCompiler               : "com.google.dagger:dagger-compiler:${daggerVersion}",
             dagger                       : "com.google.dagger:dagger:${daggerVersion}",
             daggerAndroid                : "com.google.dagger:dagger-android-support:${daggerVersion}",
-            proguardSnippets             : "com.infstory:proguard-snippets:${proguardSnippetsVersion}",
             rxAndroid                    : "io.reactivex.rxjava2:rxandroid:${rxAndroidVersion}",
             autoValueWith                : "com.gabrielittner.auto.value:auto-value-with:${autoValueWithVersion}",
             appcompat                    : "androidx.appcompat:appcompat:${appcompatVersion}",

@@ -1,0 +1,32 @@
+<resources>
+    <string name="app_name">Public Notes</string>
+    <string name="note_detail">Note Detail</string>
+    <string name="message_error">Error</string>
+    <string name="note_list">Note List</string>
+    <string name="no_more">No More</string>
+    <string name="loading">Loading</string>
+    <string name="click_retry">Retry</string>
+    <string name="edit_text_title">Edit Title</string>
+    <string name="edit_text_content">Edit Content</string>
+    <string name="button_create">Create</string>
+    <string name="note_create">Create Note</string>
+    <string name="button_generate">Generate</string>
+    <string name="button_clear">Clear</string>
+    <string name="network_not_available">Network Not Available</string>
+    <string name="unknown_error">Unknown Error</string>
+    <string name="network_connection_timeout">Network Connection Timeout</string>
+    <string name="paging">Paging</string>
+    <string name="note_list_paging">Note Paging List</string>
+    <string name="toggle_order">Toggle Order</string>
+    <string name="toggle_title">Toggle Title</string>
+    <string name="delete">Delete</string>
+
+
+    <string name="enter_any_keyword">Enter any keyword</string>
+    <string name="network_error">Network Error</string>
+    <string name="error">Error:</string>
+    <string name="no_result">No matched result</string>
+    <string name="movie_list">Movie List</string>
+    <string name="search">Search</string>
+
+</resources>
