@@ -28,7 +28,7 @@ public class App extends Application {
         return AppConfig.builder()
                 .apiKey(BuildConfig.API_KEY)
                 .serverUrl(BuildConfig.SERVER_URL)
-                .inMemoryTtl(10 * 1000)
+                .inMemoryTtl(15 * 1000)
                 .build();
     }
 

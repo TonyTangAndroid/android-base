@@ -38,6 +38,7 @@ ext {
     lifecycleVersion = '2.0.0'
     glideVersion = '4.8.0'
     rxbinding3Version = '3.0.0-alpha1'
+    rxrelayVersion = '2.1.0'
 
     //Testing
     jUnitVersion = '4.12'
@@ -61,6 +62,7 @@ ext {
             javaxInject                  : "javax.inject:javax.inject:${javaxInjectVersion}",
             autoValue                    : "com.google.auto.value:auto-value:${autoValueVersion}",
             rxJava                       : "io.reactivex.rxjava2:rxjava:${rxJavaVersion}",
+            rxRelay                      : "com.jakewharton.rxrelay2:rxrelay:${rxrelayVersion}",
             findbugsJsr305               : "com.google.code.findbugs:jsr305:${findbugsJsr305Version}",
             retrofitRxJava2              : "com.squareup.retrofit2:adapter-rxjava2:${retrofitVersion}",
             okhttp3_log                  : "com.squareup.okhttp3:logging-interceptor:${okhttp3Version}",

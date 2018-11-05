@@ -19,6 +19,10 @@ public class MovieEntitySearchPresenter {
     }
 
     public void resume() {
+        observe();
+    }
+
+    private void observe() {
         this.getNoteUseCase.execute(new MovieListSubscriber());
     }
 

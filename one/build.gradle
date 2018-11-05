@@ -90,6 +90,7 @@ dependencies {
 
 
     compile ext_dependencies.rxJava
+    compile ext_dependencies.rxRelay
     compile ext_dependencies.rxAndroid
 
     //annotation
