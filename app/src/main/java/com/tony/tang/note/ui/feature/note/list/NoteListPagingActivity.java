@@ -8,10 +8,10 @@ import android.view.MenuItem;
 import android.widget.Toast;
 
 import com.tony.tang.note.app.ActivityScope;
+import com.tony.tang.note.app.App;
+import com.tony.tang.note.app.AppComponent;
 import com.tony.tang.note.db.NoteBean;
 import com.tony.tang.note.app.R;
-import com.tony.tang.note.app.DemoApplication;
-import com.tony.tang.note.app.DemoApplicationComponent;
 import com.tony.tang.note.ui.feature.note.creation.NoteCreateActivity;
 
 import javax.inject.Inject;
@@ -85,7 +85,7 @@ public class NoteListPagingActivity extends AppCompatActivity
     private void inject() {
         DaggerNoteListPagingActivity_Component.builder()
                 .activityModule(new ActivityModule(this))
-                .demoApplicationComponent(((DemoApplication) getApplication()).applicationComponent())
+                .appComponent(((App) getApplication()).applicationComponent())
                 .build().inject(this);
     }
 
@@ -142,7 +142,7 @@ public class NoteListPagingActivity extends AppCompatActivity
 
     @ActivityScope
     @dagger.Component(modules = NoteListPagingActivity.ActivityModule.class,
-            dependencies = DemoApplicationComponent.class)
+            dependencies = AppComponent.class)
     interface Component {
         void inject(NoteListPagingActivity activity);
     }

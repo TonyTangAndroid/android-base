@@ -18,27 +18,26 @@ import dagger.BindsInstance;
 import dagger.Component;
 import dagger.android.AndroidInjectionModule;
 
-@ApplicationScope
+@AppScope
 @Component(modules = {
         AndroidInjectionModule.class,
-        DemoApplicationModule.class,
+        AppModule.class,
         PrefModule.class,
-        InMemoryRepoModule.class,
+        InMemoryModule.class,
         ThreadModule.class,
         GsonModule.class,
         DataRemoteModule.class,
         MovieRemoteModule.class,
-        DemoFragmentInjector.class})
-public interface DemoApplicationComponent {
+        FragmentInjector.class})
+public interface AppComponent {
 
-    void inject(DemoApplication app);
+    void inject(App app);
 
     NoteRoomDatabase database();
 
     CreateNoteUseCase createNoteUseCase();
 
     DeleteNoteUseCase deleteNoteUseCase();
-
 
     MovieRepository movieRepository();
 
@@ -58,6 +57,6 @@ public interface DemoApplicationComponent {
         @BindsInstance
         Builder application(Application application);
 
-        DemoApplicationComponent build();
+        AppComponent build();
     }
 }

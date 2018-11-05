@@ -10,13 +10,13 @@ import dagger.Provides;
 public class ThreadModule {
 
     @Provides
-    @ApplicationScope
+    @AppScope
     ThreadExecutor provideThreadExecutor(JobExecutor jobExecutor) {
         return jobExecutor;
     }
 
     @Provides
-    @ApplicationScope
+    @AppScope
     UIThread providePostExecutionThread(MainThread mainThread) {
         return mainThread;
     }

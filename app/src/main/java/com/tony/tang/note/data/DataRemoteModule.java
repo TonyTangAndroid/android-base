@@ -3,7 +3,7 @@ package com.tony.tang.note.data;
 import com.tony.tang.note.domain.repository.NoteRepository;
 import com.tony.tang.note.cache.CacheModule;
 import com.tony.tang.note.remote.RemoteModule;
-import com.tony.tang.note.app.ApplicationScope;
+import com.tony.tang.note.app.AppScope;
 
 import dagger.Binds;
 import dagger.Module;
@@ -12,7 +12,7 @@ import dagger.Module;
 public abstract class DataRemoteModule {
 
     @Binds
-    @ApplicationScope
+    @AppScope
     abstract NoteRepository provideNoteRepository(NoteDataRepository noteDataRepository);
 
 }

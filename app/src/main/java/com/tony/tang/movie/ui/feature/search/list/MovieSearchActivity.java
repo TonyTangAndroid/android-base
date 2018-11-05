@@ -11,8 +11,8 @@ import com.jakewharton.rxbinding3.widget.RxTextView;
 import com.jakewharton.rxbinding3.widget.TextViewTextChangeEvent;
 import com.tony.tang.movie.presenter.search.list.MovieListPresenter;
 import com.tony.tang.note.app.ActivityScope;
-import com.tony.tang.note.app.DemoApplication;
-import com.tony.tang.note.app.DemoApplicationComponent;
+import com.tony.tang.note.app.App;
+import com.tony.tang.note.app.AppComponent;
 import com.tony.tang.note.app.R;
 import com.tony.tang.note.domain.entity.Movie;
 
@@ -124,7 +124,7 @@ public class MovieSearchActivity extends AppCompatActivity implements MovieListP
     private void inject() {
         DaggerMovieSearchActivity_Component.builder()
                 .module(new Module(this, streaming()))
-                .demoApplicationComponent(((DemoApplication) getApplication()).applicationComponent())
+                .appComponent(((App) getApplication()).applicationComponent())
                 .build().inject(this);
     }
 
@@ -146,14 +146,14 @@ public class MovieSearchActivity extends AppCompatActivity implements MovieListP
 
     @Override
     public void handleError(Throwable throwable) {
-        showEmptyView(getString(R.string.network_error));
+        showEmptyView(getString(R.string.error) + throwable.getMessage());
         Timber.e(throwable);
     }
 
 
     @ActivityScope
     @dagger.Component(modules = Module.class,
-            dependencies = DemoApplicationComponent.class)
+            dependencies = AppComponent.class)
     interface Component {
         void inject(MovieSearchActivity activity);
     }

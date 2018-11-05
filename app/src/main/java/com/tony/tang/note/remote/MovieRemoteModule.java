@@ -1,7 +1,7 @@
 package com.tony.tang.note.remote;
 
 import com.readystatesoftware.chuck.ChuckInterceptor;
-import com.tony.tang.note.app.ApplicationScope;
+import com.tony.tang.note.app.AppScope;
 import com.tony.tang.note.domain.repository.MovieRepository;
 
 import javax.inject.Named;
@@ -19,13 +19,13 @@ import retrofit2.converter.gson.GsonConverterFactory;
 public abstract class MovieRemoteModule {
 
     @Provides
-    @ApplicationScope
+    @AppScope
     static MovieRestApi provideMovieRestApi(Retrofit retrofit) {
         return retrofit.create(MovieRestApi.class);
     }
 
     @Provides
-    @ApplicationScope
+    @AppScope
     static Retrofit provideRetrofit(
             @Named("movie_server_url") String url,
             @Named("movie") OkHttpClient okHttpClient,
@@ -39,21 +39,21 @@ public abstract class MovieRemoteModule {
     }
 
     @Binds
-    @ApplicationScope
+    @AppScope
     public abstract MovieRepository bindNoteRemoteImpl(MovieRemoteRepository movieRemoteRepository);
 
     @Module(includes = InterceptorModule.class)
     public static class OkHttpModule {
 
         @Provides
-        @ApplicationScope
+        @AppScope
         MovieAuthInterceptor provideAuthInterceptor(@Named("movie_api_key") String apiKey) {
             return new MovieAuthInterceptor(apiKey);
         }
 
         @Provides
         @Named("movie")
-        @ApplicationScope
+        @AppScope
         OkHttpClient provideOkHttpClient(HttpLoggingInterceptor httpLoggingInterceptor,
                                          HttpInterceptor httpInterceptor,
                                          MovieAuthInterceptor authInterceptor,

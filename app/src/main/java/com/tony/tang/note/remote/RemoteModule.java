@@ -1,7 +1,7 @@
 package com.tony.tang.note.remote;
 
 import com.readystatesoftware.chuck.ChuckInterceptor;
-import com.tony.tang.note.app.ApplicationScope;
+import com.tony.tang.note.app.AppScope;
 import com.tony.tang.note.data.DataLocalModule;
 import com.tony.tang.note.data.NoteListRemote;
 import com.tony.tang.note.data.NoteRemote;
@@ -21,13 +21,13 @@ import retrofit2.converter.gson.GsonConverterFactory;
 public abstract class RemoteModule {
 
     @Provides
-    @ApplicationScope
+    @AppScope
     public static NoteRemoteImpl provideNoteRemoteImpl(RestApi restApi) {
         return new NoteRemoteImpl(restApi);
     }
 
     @Provides
-    @ApplicationScope
+    @AppScope
     static RestApi provideRestApi(OkHttpClient okHttpClient, GsonConverterFactory gsonConverterFactory) {
         return new Retrofit.Builder()
                 .baseUrl(RestApi.URL_BASE)
@@ -38,15 +38,15 @@ public abstract class RemoteModule {
     }
 
     @Binds
-    @ApplicationScope
+    @AppScope
     public abstract NoteRemote bindNoteRemoteImpl(NoteRemoteImpl userDataRepository);
 
     @Binds
-    @ApplicationScope
+    @AppScope
     public abstract NoteListRemote bindNoteListRemoteImpl(NoteRemoteImpl userDataRepository);
 
     @Binds
-    @ApplicationScope
+    @AppScope
     public abstract UserRepository bindUserRepository(UserRemoteRepository userDataRepository);
 
 
@@ -55,13 +55,13 @@ public abstract class RemoteModule {
 
 
         @Provides
-        @ApplicationScope
+        @AppScope
         AuthInterceptor provideAuthInterceptor(TokenRepository tokenRepository) {
             return new AuthInterceptor(tokenRepository);
         }
 
         @Provides
-        @ApplicationScope
+        @AppScope
         OkHttpClient provideOkHttpClient(HttpLoggingInterceptor httpLoggingInterceptor,
                                          HttpInterceptor httpInterceptor,
                                          AuthInterceptor authInterceptor,

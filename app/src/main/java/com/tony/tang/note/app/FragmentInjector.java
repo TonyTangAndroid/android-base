@@ -9,7 +9,7 @@ import dagger.Module;
 import dagger.android.ContributesAndroidInjector;
 
 @Module
-public abstract class DemoFragmentInjector {
+public abstract class FragmentInjector {
     @FragmentScope
     @ContributesAndroidInjector(modules = {NoteDetailModule.class})
     abstract NoteDetailFragment bindNoteDetailFragment();

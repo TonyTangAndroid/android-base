@@ -12,29 +12,29 @@ import dagger.android.AndroidInjector;
 import dagger.android.DispatchingAndroidInjector;
 import dagger.android.HasFragmentInjector;
 
-public class DemoApplication extends Application implements HasFragmentInjector {
+public class App extends Application implements HasFragmentInjector {
 
     @Inject
     DispatchingAndroidInjector<Activity> activityDispatchingAndroidInjector;
 
     @Inject
     DispatchingAndroidInjector<Fragment> fragmentDispatchingAndroidInjector;
-    private DemoApplicationComponent demoApplicationComponent;
+    private AppComponent appComponent;
 
-    public DemoApplicationComponent applicationComponent() {
-        return demoApplicationComponent;
+    public AppComponent applicationComponent() {
+        return appComponent;
     }
 
     @Override
     public void onCreate() {
         super.onCreate();
-        demoApplicationComponent = DaggerDemoApplicationComponent
+        appComponent = DaggerAppComponent
                 .builder()
                 .application(this)
                 .serverUrl(BuildConfig.SERVER_URL)
                 .apiKey(BuildConfig.API_KEY)
                 .build();
-        demoApplicationComponent
+        appComponent
                 .inject(this);
         RxJava2Debug.enableRxJava2AssemblyTracking();
 

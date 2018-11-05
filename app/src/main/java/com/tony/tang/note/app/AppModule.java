@@ -7,9 +7,9 @@ import dagger.Module;
 import dagger.Provides;
 
 @Module
-public class DemoApplicationModule {
+public class AppModule {
 
-    @ApplicationScope
+    @AppScope
     @Provides
     Context provideContext(Application application) {
         return application;

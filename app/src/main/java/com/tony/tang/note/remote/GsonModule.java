@@ -2,7 +2,7 @@ package com.tony.tang.note.remote;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
-import com.tony.tang.note.app.ApplicationScope;
+import com.tony.tang.note.app.AppScope;
 import com.tony.tang.note.domain.entity.ArsenalAdapterFactory;
 import com.tony.tang.note.domain.entity.PermissionItemList;
 
@@ -15,13 +15,13 @@ import retrofit2.converter.gson.GsonConverterFactory;
 @Module
 public class GsonModule {
 
-    @ApplicationScope
+    @AppScope
     @Provides
     GsonConverterFactory getFactory(Gson gson) {
         return GsonConverterFactory.create(gson);
     }
 
-    @ApplicationScope
+    @AppScope
     @Provides
     Gson getGson() {
         GsonBuilder gsonBuilder = new GsonBuilder();
