@@ -2,6 +2,7 @@ package com.tony.tang.note.presenter;
 
 import com.tony.tang.note.domain.interactor.SingleUseCase;
 
+import io.reactivex.observers.DisposableObserver;
 import io.reactivex.observers.DisposableSingleObserver;
 
 public abstract class BasePresenter implements Presenter {
@@ -49,6 +50,19 @@ public abstract class BasePresenter implements Presenter {
 
 
     protected abstract class BaseSubscriber<T> extends DisposableSingleObserver<T> {
+
+        @Override
+        public void onError(Throwable e) {
+            BasePresenter.this.handleError(e);
+        }
+    }
+
+    protected abstract class ObservableBaseSubscriber<T> extends DisposableObserver<T> {
+
+        @Override
+        public void onComplete() {
+
+        }
 
         @Override
         public void onError(Throwable e) {

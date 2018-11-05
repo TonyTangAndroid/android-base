@@ -31,6 +31,8 @@ public class DemoApplication extends Application implements HasFragmentInjector 
         demoApplicationComponent = DaggerDemoApplicationComponent
                 .builder()
                 .application(this)
+                .serverUrl(BuildConfig.SERVER_URL)
+                .apiKey(BuildConfig.API_KEY)
                 .build();
         demoApplicationComponent
                 .inject(this);

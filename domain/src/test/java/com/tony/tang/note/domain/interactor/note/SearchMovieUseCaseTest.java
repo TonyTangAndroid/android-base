@@ -7,7 +7,7 @@ import com.tony.tang.note.domain.entity.Movie;
 import com.tony.tang.note.domain.entity.TestUtils;
 import com.tony.tang.note.domain.executor.ThreadExecutor;
 import com.tony.tang.note.domain.executor.UIThread;
-import com.tony.tang.note.domain.repository.MovieListRepository;
+import com.tony.tang.note.domain.repository.MovieRepository;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -35,7 +35,7 @@ public class SearchMovieUseCaseTest {
     @Mock
     private UIThread mockUIThread;
     @Mock
-    private MovieListRepository mockMovieListRepository;
+    private MovieRepository mockMovieListRepository;
     private PublishSubject<String> publishSubject;
     private TestObserver<List<Movie>> testObserver;
 

@@ -7,7 +7,7 @@ import java.util.List;
 import io.reactivex.Single;
 
 
-public interface MovieListRepository {
+public interface MovieRepository {
 
     Single<List<Movie>> list(String keyword);
 

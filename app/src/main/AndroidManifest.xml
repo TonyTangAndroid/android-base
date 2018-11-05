@@ -15,10 +15,7 @@
         <activity
             android:name="com.tony.tang.note.ui.feature.note.list.NoteListPagingActivity"
             android:label="@string/note_list">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN"/>
-                <category android:name="android.intent.category.LAUNCHER"/>
-            </intent-filter>
+
         </activity>
 
         <activity
@@ -27,6 +24,14 @@
         <activity
             android:name="com.tony.tang.note.ui.feature.note.creation.NoteCreateActivity"
             android:label="@string/note_create"/>
+        <activity
+            android:name="com.tony.tang.movie.ui.feature.search.list.MovieSearchActivity"
+            android:label="@string/note_create">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN"/>
+                <category android:name="android.intent.category.LAUNCHER"/>
+            </intent-filter>
+        </activity>
     </application>
 
 </manifest>

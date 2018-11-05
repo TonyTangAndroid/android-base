@@ -20,4 +20,10 @@
     <string name="toggle_order">Toggle Order</string>
     <string name="toggle_title">Toggle Title</string>
     <string name="delete">Delete</string>
+
+
+    <string name="enter_any_keyword">Enter any keyword</string>
+    <string name="network_error">Network Error</string>
+    <string name="no_result">No matched result</string>
+
 </resources>

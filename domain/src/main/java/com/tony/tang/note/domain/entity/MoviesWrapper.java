@@ -1,22 +1,16 @@
 package com.tony.tang.note.domain.entity;
 
 
-import java.io.Serializable;
 import java.util.List;
 
-public class MoviesWrapper implements Serializable {
+public class MoviesWrapper {
 
-    private Number page;
 
     private List<Movie> results;
-
+    private Number page;
     private Number total_pages;
     private Number total_results;
 
-    public MoviesWrapper(List<Movie> results) {
-
-        this.results = results;
-    }
 
     public Number getPage() {
 
@@ -31,6 +25,10 @@ public class MoviesWrapper implements Serializable {
     public List<Movie> getResults() {
 
         return results;
+    }
+
+    public void setResults(List<Movie> results) {
+        this.results = results;
     }
 
     public Number getTotal_pages() {

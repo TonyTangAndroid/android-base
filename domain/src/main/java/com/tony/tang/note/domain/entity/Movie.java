@@ -13,11 +13,10 @@
  */
 package com.tony.tang.note.domain.entity;
 
-import java.io.Serializable;
 import java.util.Arrays;
 import java.util.Objects;
 
-public class Movie implements Serializable {
+public class Movie {
 
     private String poster_path;
     private boolean adult;

@@ -94,6 +94,7 @@ public class UserRemoteRepositoryTest extends BaseDataRepositoryTest {
         this.userRemote.getUserBySessionToken().subscribe(testObserver);
         testObserver.awaitTerminalEvent();
 
+        //XXX
         UserEntity responseUser = (UserEntity) testObserver.getEvents().get(0).get(0);
         Truth.assertThat(responseUser.sessionToken().length() > 0);
         Truth.assertThat(responseUser.objectId().length() > 0);
