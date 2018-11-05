@@ -14,6 +14,7 @@ import java.util.List;
 
 import io.reactivex.Single;
 import io.reactivex.observers.TestObserver;
+import io.reactivex.schedulers.TestScheduler;
 import io.reactivex.subjects.PublishSubject;
 
 import static org.mockito.BDDMockito.given;
@@ -33,6 +34,7 @@ public class SearchMovieEntityUseCaseTest {
     private MovieEntityRepository mockNoteEntityListRepository;
     private PublishSubject<String> publishSubject;
     private TestObserver<List<MovieEntity>> testObserver;
+    private TestScheduler testScheduler = new TestScheduler();
 
     @Before
     public void setup() throws IOException {
@@ -45,7 +47,7 @@ public class SearchMovieEntityUseCaseTest {
         publishSubject = PublishSubject.create();
 
         SearchMovieEntityUseCase searchNoteEntityUseCase = new SearchMovieEntityUseCase(mockThreadExecutor,
-                mockUIThread, publishSubject, mockNoteEntityListRepository);
+                mockUIThread, publishSubject, mockNoteEntityListRepository, testScheduler);
         testObserver = searchNoteEntityUseCase.build().subscribeWith(testObserver);
 
 
@@ -67,7 +69,10 @@ public class SearchMovieEntityUseCaseTest {
     }
 
     private void complete() {
+        //when
         publishSubject.onComplete();
+        testScheduler.triggerActions();
+
         testObserver.assertComplete();
         verifyNoMoreInteractions(mockNoteEntityListRepository);
     }
@@ -75,6 +80,8 @@ public class SearchMovieEntityUseCaseTest {
     private void emit(String keyword) throws IOException {
         //when
         publishSubject.onNext(keyword);
+        testScheduler.triggerActions();
+
         //then
         testObserver.assertNoErrors();
         testObserver.assertNotComplete();

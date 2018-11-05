@@ -26,6 +26,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import dagger.Provides;
 import hugo.weaving.DebugLog;
 import io.reactivex.Observable;
+import io.reactivex.Scheduler;
 import io.reactivex.disposables.Disposable;
 import io.reactivex.schedulers.Schedulers;
 import timber.log.Timber;
@@ -206,6 +207,12 @@ public class MovieEntitySearchActivity extends AppCompatActivity implements Movi
         @Provides
         Observable<String> keywordStreamingObservable() {
             return relay.observeOn(Schedulers.newThread());
+        }
+
+        @ActivityScope
+        @Provides
+        Scheduler scheduler() {
+            return Schedulers.newThread();
         }
     }
 
