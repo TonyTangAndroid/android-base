@@ -78,6 +78,7 @@ public class SearchMovieEntityUseCaseTest {
         //then
         testObserver.assertNoErrors();
         testObserver.assertNotComplete();
+        testObserver.assertNoErrors();
         Truth.assertThat(testObserver.values()).contains(list(keyword));
         verify(mockNoteEntityListRepository).list(keyword);
         verifyNoMoreInteractions(mockNoteEntityListRepository);

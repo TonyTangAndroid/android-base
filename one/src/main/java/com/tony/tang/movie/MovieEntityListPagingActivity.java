@@ -35,11 +35,15 @@ public class MovieEntityListPagingActivity extends AppCompatActivity
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
             case R.id.item_search:
-                startActivity(MovieEntitySearchActivity.constructIntent(this));
+                showSearchActivity();
                 return true;
             default:
                 return super.onOptionsItemSelected(item);
         }
+    }
+
+    private void showSearchActivity() {
+        startActivity(MovieEntitySearchActivity.constructIntent(this));
     }
 
 
@@ -76,6 +80,9 @@ public class MovieEntityListPagingActivity extends AppCompatActivity
         System.out.println("new page size :" + noteBeans.size());
         Toast.makeText(MovieEntityListPagingActivity.this, "total:" + noteBeans.size(), Toast.LENGTH_SHORT).show();
         adapter.submitList(noteBeans);
+        if (noteBeans.size() == 0) {
+            showSearchActivity();
+        }
     }
 
 

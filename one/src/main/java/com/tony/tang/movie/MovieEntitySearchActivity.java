@@ -205,7 +205,7 @@ public class MovieEntitySearchActivity extends AppCompatActivity implements Movi
         @ActivityScope
         @Provides
         Observable<String> keywordStreamingObservable() {
-            return relay.observeOn(Schedulers.io());
+            return relay.observeOn(Schedulers.newThread());
         }
     }
 
