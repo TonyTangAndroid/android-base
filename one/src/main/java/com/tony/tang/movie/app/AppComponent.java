@@ -3,6 +3,7 @@ package com.tony.tang.movie.app;
 import android.app.Application;
 
 import com.tony.tang.movie.AppScope;
+import com.tony.tang.movie.data.DataLocalModule;
 import com.tony.tang.movie.data.InMemoryModule;
 import com.tony.tang.movie.db.DbModule;
 import com.tony.tang.movie.db.MovieEntityRoomDatabase;
@@ -21,6 +22,7 @@ import dagger.Component;
         DbModule.class,
         InMemoryModule.class,
         ThreadModule.class,
+        DataLocalModule.class,
         DataRemoteModule.class})
 public interface AppComponent {
 

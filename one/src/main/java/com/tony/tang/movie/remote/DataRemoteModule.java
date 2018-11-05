@@ -3,10 +3,7 @@ package com.tony.tang.movie.remote;
 import com.readystatesoftware.chuck.ChuckInterceptor;
 import com.tony.tang.movie.AppScope;
 import com.tony.tang.movie.app.AppConfig;
-import com.tony.tang.movie.cache.CacheModule;
-import com.tony.tang.movie.data.MovieEntityDataRepository;
 import com.tony.tang.movie.data.MovieEntityRemote;
-import com.tony.tang.movie.domain.MovieEntityRepository;
 
 import dagger.Binds;
 import dagger.Module;
@@ -17,7 +14,7 @@ import retrofit2.Retrofit;
 import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory;
 import retrofit2.converter.gson.GsonConverterFactory;
 
-@Module(includes = {CacheModule.class, GsonModule.class, DataRemoteModule.OkHttpModule.class})
+@Module(includes = {GsonModule.class, DataRemoteModule.OkHttpModule.class})
 public abstract class DataRemoteModule {
 
     @Provides
@@ -39,10 +36,6 @@ public abstract class DataRemoteModule {
                 .client(okHttpClient)
                 .build();
     }
-
-    @Binds
-    @AppScope
-    abstract MovieEntityRepository provideNoteRepository(MovieEntityDataRepository noteDataRepository);
 
     @Binds
     @AppScope
