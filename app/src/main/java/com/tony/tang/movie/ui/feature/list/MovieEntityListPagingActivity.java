@@ -6,10 +6,11 @@ import android.view.MenuItem;
 import android.widget.Toast;
 
 import com.tony.tang.movie.ActivityScope;
+import com.tony.tang.movie.R;
 import com.tony.tang.movie.app.App;
 import com.tony.tang.movie.app.AppComponent;
-import com.tony.tang.movie.R;
 import com.tony.tang.movie.domain.MovieEntity;
+import com.tony.tang.movie.ui.feature.detail.MovieEntityDetailActivity;
 import com.tony.tang.movie.ui.feature.search.MovieEntitySearchActivity;
 
 import javax.inject.Inject;
@@ -104,7 +105,7 @@ public class MovieEntityListPagingActivity extends AppCompatActivity
 
     @Override
     public void toggleTitle(MovieEntity noteEntity) {
-
+        startActivity(MovieEntityDetailActivity.constructIntent(this, noteEntity.getId()));
     }
 
     @Override

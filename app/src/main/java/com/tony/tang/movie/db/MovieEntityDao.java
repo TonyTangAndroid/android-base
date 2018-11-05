@@ -6,6 +6,7 @@ import java.util.List;
 
 import javax.annotation.Nullable;
 
+import androidx.lifecycle.LiveData;
 import androidx.paging.DataSource;
 import androidx.room.Dao;
 import androidx.room.Insert;
@@ -34,6 +35,9 @@ public interface MovieEntityDao {
     @Nullable
     MovieEntity get(long id);
 
+    @Query("SELECT * FROM " + TABLE_NAME_NOTE_CACHE + " WHERE " + OBJECT_ID + " = :id limit 1")
+    LiveData<MovieEntity> find(long id);
+
     @Query("SELECT * FROM " + TABLE_NAME_NOTE_CACHE + " WHERE " + OBJECT_ID + " LIKE '%' || :keyword || '%'")
     List<MovieEntity> list(String keyword);
 
@@ -45,7 +49,6 @@ public interface MovieEntityDao {
 
     @Query(value = "DELETE FROM " + TABLE_NAME_NOTE_CACHE)
     void clear();
-
 
     @Query("SELECT * FROM " + TABLE_NAME_NOTE_CACHE)
     DataSource.Factory<Integer, MovieEntity> allNoteBean();

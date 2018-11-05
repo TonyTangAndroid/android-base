@@ -20,6 +20,9 @@
                 <category android:name="android.intent.category.LAUNCHER"/>
             </intent-filter>
         </activity>
+        <activity
+            android:name="com.tony.tang.movie.ui.feature.detail.MovieEntityDetailActivity"
+            android:label="@string/note_detail"/>
 
         <activity
             android:name="com.tony.tang.movie.ui.feature.search.MovieEntitySearchActivity"
