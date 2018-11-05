@@ -61,7 +61,7 @@ public class MovieEntityListPagingActivity extends AppCompatActivity
     private void inject() {
         DaggerMovieEntityListPagingActivity_Component.builder()
                 .activityModule(new ActivityModule(this))
-                .appComponent(((App) getApplication()).applicationComponent())
+                .appComponent(((App) getApplication()).appComponent())
                 .build().inject(this);
     }
 

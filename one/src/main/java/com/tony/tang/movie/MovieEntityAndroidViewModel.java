@@ -18,7 +18,7 @@ public class MovieEntityAndroidViewModel extends AndroidViewModel {
         super(application);
 
 
-        MovieEntityDao dao = ((App) application).applicationComponent().database().noteBeanDao();
+        MovieEntityDao dao = ((App) application).appComponent().database().noteBeanDao();
 
         PagedList.Config config = new PagedList.Config.Builder()
                 .setPageSize(10)

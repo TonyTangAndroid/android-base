@@ -125,7 +125,7 @@ public class MovieEntitySearchActivity extends AppCompatActivity implements Movi
     private void inject() {
         DaggerMovieEntitySearchActivity_Component.builder()
                 .module(new Module(this, streaming()))
-                .appComponent(((App) getApplication()).applicationComponent())
+                .appComponent(((App) getApplication()).appComponent())
                 .build().inject(this);
     }
 

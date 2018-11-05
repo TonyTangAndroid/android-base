@@ -121,10 +121,11 @@ dependencies {
     releaseCompile ext_dependencies.chuckNoOp
 
     //auto value
-//    compileOnly ext_dependencies.autoValue
-//    compileOnly ext_dependencies.autoValueGson
-//    annotationProcessor ext_dependencies.autoValue
-//    annotationProcessor ext_dependencies.autoValueGson
+    compileOnly ext_dependencies.autoValue
+    annotationProcessor ext_dependencies.autoValue
+
+    compileOnly ext_dependencies.autoValueGson
+    annotationProcessor ext_dependencies.autoValueGson
 
 
     annotationProcessor ext_dependencies.glideCompiler

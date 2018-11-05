@@ -2,8 +2,6 @@ package com.tony.tang.movie;
 
 import com.readystatesoftware.chuck.ChuckInterceptor;
 
-import javax.inject.Named;
-
 import dagger.Binds;
 import dagger.Module;
 import dagger.Provides;
@@ -25,11 +23,11 @@ public abstract class DataRemoteModule {
     @Provides
     @AppScope
     static Retrofit provideRetrofit(
-            @Named("movie_server_url") String url,
+            AppConfig appConfig,
             OkHttpClient okHttpClient,
             GsonConverterFactory gsonConverterFactory) {
         return new Retrofit.Builder()
-                .baseUrl(url)
+                .baseUrl(appConfig.serverUrl())
                 .addConverterFactory(gsonConverterFactory)
                 .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
                 .client(okHttpClient)
@@ -49,8 +47,8 @@ public abstract class DataRemoteModule {
 
         @Provides
         @AppScope
-        AuthInterceptor provideAuthInterceptor(@Named("movie_api_key") String apiKey) {
-            return new AuthInterceptor(apiKey);
+        AuthInterceptor provideAuthInterceptor(AppConfig appConfig) {
+            return new AuthInterceptor(appConfig.apiKey());
         }
 
         @Provides

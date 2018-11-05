@@ -9,8 +9,8 @@ public abstract class InMemoryModule {
 
     @Provides
     @AppScope
-    static InMemoryImpl provideNoteInMemoryImpl() {
-        return new InMemoryImpl(5 * 1000);
+    static InMemoryImpl provideNoteInMemoryImpl(AppConfig appConfig) {
+        return new InMemoryImpl(appConfig.inMemoryTtl());
     }
 
 }

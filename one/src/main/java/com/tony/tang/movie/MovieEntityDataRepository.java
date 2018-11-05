@@ -21,8 +21,8 @@ public class MovieEntityDataRepository implements MovieEntityRepository {
     }
 
     @Override
-    public Single<List<MovieEntity>> list(String noteObjectId) {
-        return this.factory.getDataStore(noteObjectId).list(noteObjectId);
+    public Single<List<MovieEntity>> list(String keyword) {
+        return this.factory.getDataStore(keyword).list(keyword);
     }
 
     @Override

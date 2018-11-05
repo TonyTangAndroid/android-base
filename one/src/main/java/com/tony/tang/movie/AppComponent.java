@@ -2,8 +2,6 @@ package com.tony.tang.movie;
 
 import android.app.Application;
 
-import javax.inject.Named;
-
 import dagger.BindsInstance;
 import dagger.Component;
 
@@ -34,10 +32,7 @@ public interface AppComponent {
     interface Builder {
 
         @BindsInstance
-        Builder apiKey(@Named("movie_api_key") String api_key);
-
-        @BindsInstance
-        Builder serverUrl(@Named("movie_server_url") String api_key);
+        Builder appConfig(AppConfig appConfig);
 
         @BindsInstance
         Builder application(Application application);

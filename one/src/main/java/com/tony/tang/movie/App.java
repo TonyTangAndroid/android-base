@@ -3,29 +3,38 @@ package com.tony.tang.movie;
 import android.app.Application;
 
 import com.akaita.java.rxjava2debug.RxJava2Debug;
-import com.tony.tang.movie.BuildConfig;
 
 public class App extends Application {
 
     private AppComponent appComponent;
 
-    public AppComponent applicationComponent() {
-        return appComponent;
-    }
-
     @Override
     public void onCreate() {
         super.onCreate();
-        appComponent = DaggerAppComponent
+        appComponent = create();
+        appComponent.inject(this);
+        RxJava2Debug.enableRxJava2AssemblyTracking();
+    }
+
+    private AppComponent create() {
+        return DaggerAppComponent
                 .builder()
                 .application(this)
-                .serverUrl(BuildConfig.SERVER_URL)
-                .apiKey(BuildConfig.API_KEY)
+                .appConfig(appConfig())
                 .build();
-        appComponent
-                .inject(this);
-        RxJava2Debug.enableRxJava2AssemblyTracking();
-
-
     }
+
+    private AppConfig appConfig() {
+        return AppConfig.builder()
+                .apiKey(BuildConfig.API_KEY)
+                .serverUrl(BuildConfig.SERVER_URL)
+                .inMemoryTtl(10 * 1000)
+                .build();
+    }
+
+
+    public AppComponent appComponent() {
+        return appComponent;
+    }
+
 }
