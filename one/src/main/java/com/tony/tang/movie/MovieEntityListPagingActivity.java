@@ -77,7 +77,7 @@ public class MovieEntityListPagingActivity extends AppCompatActivity
     }
 
     private void onDataReady(PagedList<MovieEntity> noteBeans) {
-        System.out.println("new page size :" + noteBeans.size());
+        System.out.println("new getPage size :" + noteBeans.size());
         Toast.makeText(MovieEntityListPagingActivity.this, "total:" + noteBeans.size(), Toast.LENGTH_SHORT).show();
         adapter.submitList(noteBeans);
         if (noteBeans.size() == 0) {

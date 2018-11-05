@@ -1,7 +1,6 @@
 package com.tony.tang.movie;
 
 import com.google.common.truth.Truth;
-import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 
 import org.junit.Before;
@@ -55,7 +54,7 @@ public class SearchMovieEntityUseCaseTest {
 
     private List<MovieEntity> list(String keywordDarkNight) throws IOException {
         String json = TestUtils.json(keywordDarkNight + ".json", this);
-        return new Gson().fromJson(json, new TypeToken<List<MovieEntity>>() {
+        return GsonHelper.build().fromJson(json, new TypeToken<List<MovieEntity>>() {
         }.getType());
     }
 

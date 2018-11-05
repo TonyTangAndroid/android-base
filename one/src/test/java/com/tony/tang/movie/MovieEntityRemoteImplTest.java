@@ -29,7 +29,7 @@ public class MovieEntityRemoteImplTest {
     public void setUp() throws IOException {
         this.testObserver = new TestObserver<>();
 
-        Gson gson = new Gson();
+        Gson gson = GsonHelper.build();
 
         this.mockWebServer = new MockWebServer();
         this.mockWebServer.start();
@@ -82,7 +82,7 @@ public class MovieEntityRemoteImplTest {
         testObserver.awaitTerminalEvent();
         Truth.assertThat(testObserver.errors().size()).isEqualTo(1);
         Truth.assertThat(testObserver.errors().get(0)).isInstanceOf(RestApiErrorException.class);
-        Truth.assertThat(((RestApiErrorException) testObserver.errors().get(0)).getStatusCode()).isEqualTo(7);
+        Truth.assertThat(((RestApiErrorException) testObserver.errors().get(0)).getCode()).isEqualTo(7);
         Truth.assertThat(testObserver.errors().get(0).getMessage()).isEqualTo("Invalid API key: You must be granted a valid key.");
     }
 
@@ -94,7 +94,7 @@ public class MovieEntityRemoteImplTest {
         testObserver.awaitTerminalEvent();
         Truth.assertThat(testObserver.errors().size()).isEqualTo(1);
         Truth.assertThat(testObserver.errors().get(0)).isInstanceOf(RestApiErrorException.class);
-        Truth.assertThat(((RestApiErrorException) testObserver.errors().get(0)).getStatusCode()).isEqualTo(422);
+        Truth.assertThat(((RestApiErrorException) testObserver.errors().get(0)).getCode()).isEqualTo(422);
         Truth.assertThat(testObserver.errors().get(0).getMessage()).isEqualTo("[query must be provided]");
     }
 
@@ -106,7 +106,7 @@ public class MovieEntityRemoteImplTest {
         testObserver.awaitTerminalEvent();
         Truth.assertThat(testObserver.errors().size()).isEqualTo(1);
         Truth.assertThat(testObserver.errors().get(0)).isInstanceOf(RestApiErrorException.class);
-        Truth.assertThat(((RestApiErrorException) testObserver.errors().get(0)).getStatusCode()).isEqualTo(500);
+        Truth.assertThat(((RestApiErrorException) testObserver.errors().get(0)).getCode()).isEqualTo(500);
         Truth.assertThat(testObserver.errors().get(0).getMessage()).isEqualTo("SERVER IS DOWN");
     }
 
@@ -118,13 +118,13 @@ public class MovieEntityRemoteImplTest {
         testObserver.awaitTerminalEvent();
         Truth.assertThat(testObserver.errors().size()).isEqualTo(1);
         Truth.assertThat(testObserver.errors().get(0)).isInstanceOf(RestApiErrorException.class);
-        Truth.assertThat(((RestApiErrorException) testObserver.errors().get(0)).getStatusCode()).isEqualTo(403);
+        Truth.assertThat(((RestApiErrorException) testObserver.errors().get(0)).getCode()).isEqualTo(403);
         Truth.assertThat(testObserver.errors().get(0).getMessage()).isEqualTo("PAGE NOT FOUND");
     }
 
     //PAGE NOT FOUND
     private List<MovieEntity> expected(String json) {
-        return new Gson().fromJson(json, MovieEntityDto.class).getResults();
+        return GsonHelper.build().fromJson(json, MovieEntityDto.class).getResults();
     }
 
 

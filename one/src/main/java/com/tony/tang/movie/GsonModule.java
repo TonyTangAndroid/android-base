@@ -22,7 +22,7 @@ public class GsonModule {
     @Provides
     Gson getGson() {
         GsonBuilder gsonBuilder = new GsonBuilder();
-//        gsonBuilder.registerTypeAdapterFactory(ArsenalAdapterFactory.create());
+        gsonBuilder.registerTypeAdapterFactory(GsonAdapterFactory.create());
         return gsonBuilder.create();
 
     }

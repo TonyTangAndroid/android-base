@@ -1,7 +1,6 @@
 package com.tony.tang.movie;
 
 import com.google.common.truth.Truth;
-import com.tony.tang.movie.RestApiErrorException;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -18,13 +17,13 @@ public class RestApiErrorExceptionTest {
 
     @Before
     public void setup() {
-        this.restApiErrorException = new RestApiErrorException(FAKE_MESSAGE, FAKE_STATUS);
+        this.restApiErrorException = new RestApiErrorException(FAKE_STATUS, FAKE_MESSAGE);
     }
 
     @Test
     public void testRestApiErrorConstructor() {
         assertThat(this.restApiErrorException.getMessage(), is(FAKE_MESSAGE));
-        assertThat(this.restApiErrorException.getStatusCode(), is(FAKE_STATUS));
+        assertThat(this.restApiErrorException.getCode(), is(FAKE_STATUS));
     }
 
     @Test
@@ -36,12 +35,6 @@ public class RestApiErrorExceptionTest {
         Truth.assertThat(RestApiErrorException.UNPROCESSABLE_ENTITY).isEqualTo(422);
         Truth.assertThat(RestApiErrorException.INVALID_SESSION_TOKEN).isEqualTo(209);
         Truth.assertThat(RestApiErrorException.INTERNAL_SERVER_ERROR).isEqualTo(500);
-    }
-
-    @Test
-    public void testRestApiErrorSetStatus() {
-        this.restApiErrorException.setStatusCode(300);
-        assertThat(this.restApiErrorException.getStatusCode(), is(300));
     }
 
 }
