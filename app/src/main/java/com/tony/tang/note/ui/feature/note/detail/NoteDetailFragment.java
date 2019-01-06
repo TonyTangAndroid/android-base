@@ -11,10 +11,16 @@ import com.tony.tang.note.app.R;
 import com.tony.tang.note.domain.entity.NoteEntity;
 import com.tony.tang.note.presenter.BasePresenter;
 import com.tony.tang.note.presenter.NoteDetailPresenter;
+import com.tony.tang.note.presenter.NoteDetailPresenter.NoteDetailView;
 
 import javax.inject.Inject;
 
-public class NoteDetailFragment extends CleanFragment implements NoteDetailPresenter.NoteDetailView {
+import dagger.Binds;
+import dagger.BindsInstance;
+import dagger.Module;
+import dagger.Subcomponent;
+
+public class NoteDetailFragment extends CleanFragment implements NoteDetailView {
 
 
     @Inject
@@ -35,7 +41,7 @@ public class NoteDetailFragment extends CleanFragment implements NoteDetailPrese
     public void onAttach(Context context) {
         super.onAttach(context);
         ((DemoApplication) context.getApplicationContext()).applicationComponent()
-                .noteDetailSubComponentBuilder().fragment(this).build().inject(this);
+                .noteDetailComponentBuilder().fragment(this).build().inject(this);
     }
 
 
@@ -86,4 +92,26 @@ public class NoteDetailFragment extends CleanFragment implements NoteDetailPrese
         String getNoteObjectId();
     }
 
+    @Subcomponent(modules = {Component.NoteDetailModule.class})
+    public interface Component {
+
+        void inject(NoteDetailFragment fragment);
+
+        @Subcomponent.Builder
+        interface Builder {
+
+            @BindsInstance
+            Builder fragment(NoteDetailFragment fragment);
+
+            Component build();
+        }
+
+        @Module
+        abstract class NoteDetailModule {
+
+            @Binds
+            abstract NoteDetailView bindNoteDetailView(NoteDetailFragment noteDetailFragment);
+
+        }
+    }
 }

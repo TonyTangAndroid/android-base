@@ -7,14 +7,13 @@ import com.tony.tang.note.db.NoteRoomDatabase;
 import com.tony.tang.note.domain.interactor.note.CreateNoteUseCase;
 import com.tony.tang.note.domain.interactor.note.DeleteNoteUseCase;
 import com.tony.tang.note.remote.RemoteModule;
-import com.tony.tang.note.ui.feature.note.creation.NoteCreationSubComponent;
-import com.tony.tang.note.ui.feature.note.detail.NoteDetailSubComponent;
+import com.tony.tang.note.ui.feature.note.creation.NoteCreateFragment;
+import com.tony.tang.note.ui.feature.note.detail.NoteDetailFragment;
 
 import dagger.BindsInstance;
-import dagger.Component;
 
 @ApplicationScope
-@Component(modules = {
+@dagger.Component(modules = {
         DemoApplicationModule.class,
         PrefModule.class,
         InMemoryRepoModule.class,
@@ -32,11 +31,11 @@ public interface DemoApplicationComponent {
 
     DeleteNoteUseCase deleteNoteUseCase();
 
-    NoteDetailSubComponent.Builder noteDetailSubComponentBuilder();
+    NoteDetailFragment.Component.Builder noteDetailComponentBuilder();
 
-    NoteCreationSubComponent.Builder noteCreationSubComponentBuilder();
+    NoteCreateFragment.Component.Builder noteCreationComponentBuilder();
 
-    @Component.Builder
+    @dagger.Component.Builder
     interface Builder {
 
         @BindsInstance

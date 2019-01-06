@@ -6,14 +6,20 @@ import android.content.Context;
 import android.view.View;
 import android.widget.EditText;
 
+import com.tony.tang.note.app.CleanFragment;
 import com.tony.tang.note.app.DemoApplication;
 import com.tony.tang.note.app.R;
-import com.tony.tang.note.app.CleanFragment;
 import com.tony.tang.note.presenter.NoteCreatePresenter;
+import com.tony.tang.note.presenter.NoteCreatePresenter.NoteCreateView;
 
 import javax.inject.Inject;
 
-public class NoteCreateFragment extends CleanFragment implements NoteCreatePresenter.NoteCreateView {
+import dagger.Binds;
+import dagger.BindsInstance;
+import dagger.Module;
+import dagger.Subcomponent;
+
+public class NoteCreateFragment extends CleanFragment implements NoteCreateView {
 
     @Inject
     NoteCreatePresenter noteCreatePresenter;
@@ -25,7 +31,7 @@ public class NoteCreateFragment extends CleanFragment implements NoteCreatePrese
     public void onAttach(Context context) {
         super.onAttach(context);
         ((DemoApplication) context.getApplicationContext()).applicationComponent()
-                .noteCreationSubComponentBuilder().fragment(this).build().inject(this);
+                .noteCreationComponentBuilder().fragment(this).build().inject(this);
     }
 
     @Override
@@ -73,4 +79,25 @@ public class NoteCreateFragment extends CleanFragment implements NoteCreatePrese
         }
     }
 
+    @Subcomponent(modules = {Component.NoteCreateModule.class})
+    public interface Component {
+
+        void inject(NoteCreateFragment fragment);
+
+        @Subcomponent.Builder
+        interface Builder {
+
+            @BindsInstance
+            Builder fragment(NoteCreateFragment fragment);
+
+            Component build();
+        }
+
+        @Module
+        abstract class NoteCreateModule {
+
+            @Binds
+            abstract NoteCreateView bind(NoteCreateFragment noteCreateFragment);
+        }
+    }
 }
