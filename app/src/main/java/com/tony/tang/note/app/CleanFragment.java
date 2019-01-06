@@ -9,15 +9,7 @@ import android.view.ViewGroup;
 import com.tony.tang.note.presenter.BasePresenter;
 import com.tony.tang.note.presenter.CleanView;
 
-import dagger.android.support.AndroidSupportInjection;
-
 public abstract class CleanFragment extends BaseFragment implements CleanView {
-
-    @Override
-    public void onAttach(Context context) {
-        AndroidSupportInjection.inject(this);
-        super.onAttach(context);
-    }
 
     protected abstract int getLayoutId();
 

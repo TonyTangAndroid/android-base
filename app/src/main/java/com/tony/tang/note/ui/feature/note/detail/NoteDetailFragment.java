@@ -1,10 +1,12 @@
 package com.tony.tang.note.ui.feature.note.detail;
 
 import android.app.ProgressDialog;
+import android.content.Context;
 import android.view.View;
 import android.widget.TextView;
 
 import com.tony.tang.note.app.CleanFragment;
+import com.tony.tang.note.app.DemoApplication;
 import com.tony.tang.note.app.R;
 import com.tony.tang.note.domain.entity.NoteEntity;
 import com.tony.tang.note.presenter.BasePresenter;
@@ -28,6 +30,14 @@ public class NoteDetailFragment extends CleanFragment implements NoteDetailPrese
 
         return new NoteDetailFragment();
     }
+
+    @Override
+    public void onAttach(Context context) {
+        super.onAttach(context);
+        ((DemoApplication) context.getApplicationContext()).applicationComponent()
+                .noteDetailSubComponentBuilder().fragment(this).build().inject(this);
+    }
+
 
     @Override
     protected int getLayoutId() {

@@ -78,22 +78,18 @@ dependencies {
     implementation "com.evernote:android-state:${everNoteAndroidStateVersion}"
 
     implementation "com.readystatesoftware.chuck:library:${chuckVersion}"
-    implementation "com.google.dagger:dagger:${daggerVersion}"
-    implementation "com.google.dagger:dagger-android-support:${daggerVersion}"
     implementation "androidx.appcompat:appcompat:${appcompatVersion}"
     implementation "androidx.annotation:annotation:${annotationVersion}"
     implementation "androidx.cardview:cardview:${cardviewVersion}"
     implementation "androidx.recyclerview:recyclerview:${recyclerviewVersion}"
     implementation "androidx.multidex:multidex:${multidexVersion}"
     implementation "com.google.android.material:material:${materialVersion}"
-    implementation "androidx.legacy:legacy-support-v13:${legacyV13Version}"
 
 
     compile 'com.github.TonyTangAndroid:aar:1.0.0'
 
 
     annotationProcessor "com.google.dagger:dagger-compiler:${daggerVersion}"
-    annotationProcessor "com.google.dagger:dagger-android-processor:${daggerVersion}"
 
     annotationProcessor "com.evernote:android-state-processor:${everNoteAndroidStateVersion}"
 

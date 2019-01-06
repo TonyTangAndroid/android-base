@@ -2,9 +2,11 @@ package com.tony.tang.note.ui.feature.note.creation;
 
 import android.annotation.SuppressLint;
 import android.app.ProgressDialog;
+import android.content.Context;
 import android.view.View;
 import android.widget.EditText;
 
+import com.tony.tang.note.app.DemoApplication;
 import com.tony.tang.note.app.R;
 import com.tony.tang.note.app.CleanFragment;
 import com.tony.tang.note.presenter.NoteCreatePresenter;
@@ -18,6 +20,13 @@ public class NoteCreateFragment extends CleanFragment implements NoteCreatePrese
     EditText etTitle;
     EditText etContent;
     private ProgressDialog progressDialog;
+
+    @Override
+    public void onAttach(Context context) {
+        super.onAttach(context);
+        ((DemoApplication) context.getApplicationContext()).applicationComponent()
+                .noteCreationSubComponentBuilder().fragment(this).build().inject(this);
+    }
 
     @Override
     protected int getLayoutId() {
