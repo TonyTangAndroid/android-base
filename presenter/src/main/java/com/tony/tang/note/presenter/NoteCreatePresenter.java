@@ -30,6 +30,8 @@ public class NoteCreatePresenter extends BasePresenter implements Presenter {
         void showLoader();
 
         void hideLoader();
+
+        void exit(String objectId);
     }
 
     protected class NoteCreateSubscriber extends BaseSubscriber<NoteEntity> {
@@ -37,6 +39,7 @@ public class NoteCreatePresenter extends BasePresenter implements Presenter {
         @Override
         public void onSuccess(NoteEntity note) {
             NoteCreatePresenter.this.noteCreateView.hideLoader();
+            NoteCreatePresenter.this.noteCreateView.exit(note.objectId());
         }
     }
 }

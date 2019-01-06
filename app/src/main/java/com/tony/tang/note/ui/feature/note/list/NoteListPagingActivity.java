@@ -1,7 +1,5 @@
 package com.tony.tang.note.ui.feature.note.list;
 
-import android.app.Activity;
-import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -9,9 +7,9 @@ import android.widget.Toast;
 
 import com.tony.tang.note.app.ActivityScope;
 import com.tony.tang.note.app.App;
-import com.tony.tang.note.db.NoteBean;
-import com.tony.tang.note.app.R;
 import com.tony.tang.note.app.AppComponent;
+import com.tony.tang.note.app.R;
+import com.tony.tang.note.db.NoteBean;
 import com.tony.tang.note.ui.feature.note.creation.NoteCreateActivity;
 
 import javax.inject.Inject;
@@ -32,15 +30,8 @@ public class NoteListPagingActivity extends AppCompatActivity
 
     @Inject
     NotePagingListPresenter notePagingListPresenter;
-    private Toolbar toolbar;
     private RecyclerView rv_entity_list;
-    private SwipeRefreshLayout swipe_refresh_layout;
     private NoteBeanPagedListAdapter adapter;
-
-    public static Intent constructIntent(Activity activity) {
-        return new Intent(activity, NoteListPagingActivity.class);
-    }
-
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -104,10 +95,10 @@ public class NoteListPagingActivity extends AppCompatActivity
 
 
     private void bindView() {
-        toolbar = findViewById(R.id.toolbar);
-        setSupportActionBar(this.toolbar);
+        Toolbar toolbar = findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);
         rv_entity_list = findViewById(R.id.rv_entity_list);
-        swipe_refresh_layout = findViewById(R.id.swipe_refresh_layout);
+        SwipeRefreshLayout swipe_refresh_layout = findViewById(R.id.swipe_refresh_layout);
         swipe_refresh_layout.setOnRefreshListener(this);
     }
 

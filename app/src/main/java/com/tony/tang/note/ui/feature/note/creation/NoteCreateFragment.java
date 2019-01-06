@@ -1,8 +1,10 @@
 package com.tony.tang.note.ui.feature.note.creation;
 
 import android.annotation.SuppressLint;
+import android.app.Activity;
 import android.app.ProgressDialog;
 import android.content.Context;
+import android.content.Intent;
 import android.view.View;
 import android.widget.EditText;
 
@@ -21,6 +23,7 @@ import dagger.Subcomponent;
 
 public class NoteCreateFragment extends CleanFragment implements NoteCreateView {
 
+    private static final String EXTRA_OBJECT_ID = "extra_object_id";
     @Inject
     NoteCreatePresenter noteCreatePresenter;
     EditText etTitle;
@@ -66,7 +69,7 @@ public class NoteCreateFragment extends CleanFragment implements NoteCreateView 
     @Override
     public void showLoader() {
         if (this.progressDialog == null) {
-            this.progressDialog = new ProgressDialog(getActivity());
+            this.progressDialog = new ProgressDialog(requireActivity());
         }
         this.progressDialog.show();
     }
@@ -77,6 +80,13 @@ public class NoteCreateFragment extends CleanFragment implements NoteCreateView 
             this.progressDialog.dismiss();
             this.progressDialog = null;
         }
+    }
+
+    @Override
+    public void exit(String objectId) {
+        requireActivity().setResult(Activity.RESULT_OK,
+                new Intent().putExtra(EXTRA_OBJECT_ID, objectId));
+        requireActivity().finish();
     }
 
     @Subcomponent(modules = {Component.NoteCreateModule.class})

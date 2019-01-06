@@ -2,28 +2,18 @@ package com.tony.tang.note.ui.feature.note.creation;
 
 import android.app.Activity;
 import android.content.Intent;
-import android.os.Bundle;
 
-import com.tony.tang.note.app.CleanActivity;
+import com.tony.tang.note.app.BaseActivity;
 
 
-public class NoteCreateActivity extends CleanActivity {
+public class NoteCreateActivity extends BaseActivity {
 
     public static Intent constructIntent(Activity activity) {
-
         return new Intent(activity, NoteCreateActivity.class);
     }
 
     @Override
-    protected void bindView() {
-
+    protected void onCreate() {
+        bindFragment(new NoteCreateFragment());
     }
-
-    @Override
-    protected void initializeActivity(Bundle savedInstanceState) {
-        if (savedInstanceState == null) {
-            addFragment(new NoteCreateFragment());
-        }
-    }
-
 }

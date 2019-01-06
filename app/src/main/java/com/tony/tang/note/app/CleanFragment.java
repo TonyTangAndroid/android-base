@@ -1,20 +1,23 @@
 package com.tony.tang.note.app;
 
-import android.content.Context;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
 import com.tony.tang.note.presenter.BasePresenter;
 import com.tony.tang.note.presenter.CleanView;
 
-public abstract class CleanFragment extends BaseFragment implements CleanView {
+import androidx.annotation.NonNull;
+import androidx.fragment.app.Fragment;
+
+public abstract class CleanFragment extends Fragment implements CleanView {
 
     protected abstract int getLayoutId();
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
+    public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         final View fragmentView = inflater.inflate(getLayoutId(), container, false);
         bindView(fragmentView);
@@ -31,7 +34,7 @@ public abstract class CleanFragment extends BaseFragment implements CleanView {
     protected abstract BasePresenter presenter();
 
     @Override
-    public void onViewCreated(View view, Bundle savedInstanceState) {
+    public void onViewCreated(@NonNull View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         presenter().create();
     }
@@ -54,13 +57,9 @@ public abstract class CleanFragment extends BaseFragment implements CleanView {
         presenter().destroy();
     }
 
-    public Context context() {
-        return getActivity().getApplicationContext();
-    }
-
     @Override
     public void handleError(Throwable throwable) {
-        ((CleanView) getActivity()).handleError(throwable);
+        Toast.makeText(requireContext(), throwable.getMessage(), Toast.LENGTH_SHORT).show();
     }
 
 }
