@@ -39,7 +39,10 @@ public class NoteDetailFragment extends CleanFragment implements NoteDetailView 
     public void onAttach(Context context) {
         super.onAttach(context);
         ((App) context.getApplicationContext()).appComponent()
-                .noteDetailComponentBuilder().noteDetailView(this).build().inject(this);
+                .noteDetailComponentBuilder()
+                .noteDetailView(this)
+                .build()
+                .inject(this);
     }
 
 
