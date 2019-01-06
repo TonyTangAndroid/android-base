@@ -1,6 +1,7 @@
 package com.tony.tang.note.app;
 
-import android.app.Fragment;
+
+import androidx.fragment.app.Fragment;
 
 public class BaseFragment extends Fragment {
 

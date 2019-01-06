@@ -8,6 +8,7 @@ ext {
     androidCompileSdkVersion = 28
     multidexVersion = '2.0.1'
     materialVersion = '1.0.0'
+    fragmentVersion = '1.0.0'
     legacyV13Version = '1.0.0'
     epoxyVersion = '2.19.0'
 

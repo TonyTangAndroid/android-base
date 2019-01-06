@@ -73,13 +73,13 @@ dependencies {
     implementation "androidx.room:room-runtime:${roomVersion}"
     implementation "androidx.room:room-rxjava2:${roomVersion}"
     implementation "androidx.paging:paging-runtime:${pagingVersion}"
-
+    implementation "androidx.fragment:fragment:${fragmentVersion}"
 
     implementation "com.evernote:android-state:${everNoteAndroidStateVersion}"
 
     implementation "com.readystatesoftware.chuck:library:${chuckVersion}"
     implementation "com.google.dagger:dagger:${daggerVersion}"
-    implementation "com.google.dagger:dagger-android:${daggerVersion}"
+    implementation "com.google.dagger:dagger-android-support:${daggerVersion}"
     implementation "androidx.appcompat:appcompat:${appcompatVersion}"
     implementation "androidx.annotation:annotation:${annotationVersion}"
     implementation "androidx.cardview:cardview:${cardviewVersion}"

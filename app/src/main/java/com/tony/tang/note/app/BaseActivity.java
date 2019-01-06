@@ -1,18 +1,17 @@
 package com.tony.tang.note.app;
 
-import android.app.Fragment;
-import android.app.FragmentTransaction;
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.os.Bundle;
 import android.view.View;
 
 import com.evernote.android.state.StateSaver;
-import com.tony.tang.note.app.R;
 
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
+import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentTransaction;
 
 /**
 
@@ -83,9 +82,9 @@ public abstract class BaseActivity extends AppCompatActivity {
         return true;
     }
 
-    protected void addFragment(int containerViewId, Fragment fragment) {
-        FragmentTransaction fragmentTransaction = this.getFragmentManager().beginTransaction();
-        fragmentTransaction.add(containerViewId, fragment);
+    protected void addFragment(Fragment fragment) {
+        FragmentTransaction fragmentTransaction = this.getSupportFragmentManager().beginTransaction();
+        fragmentTransaction.add(R.id.fragment_container, fragment);
         fragmentTransaction.commit();
     }
 

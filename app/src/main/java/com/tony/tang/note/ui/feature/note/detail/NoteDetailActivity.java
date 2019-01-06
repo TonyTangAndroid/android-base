@@ -5,7 +5,6 @@ import android.content.Intent;
 import android.os.Bundle;
 
 import com.evernote.android.state.State;
-import com.tony.tang.note.app.R;
 import com.tony.tang.note.app.CleanActivity;
 
 /**
@@ -35,7 +34,7 @@ public class NoteDetailActivity extends CleanActivity implements NoteDetailFragm
     protected void initializeActivity(Bundle savedInstanceState) {
         if (savedInstanceState == null) {
             noteObjectId = getIntent().getStringExtra(PARAM_NOTE_ID);
-            addFragment(R.id.fragment_container, NoteDetailFragment.newInstance());
+            addFragment(NoteDetailFragment.newInstance());
         }
     }
 
