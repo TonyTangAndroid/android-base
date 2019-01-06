@@ -37,16 +37,13 @@ dependencies {
     compile project(':db')
     compile project(':data')
 
-    testCompile test_dependencies.junit
-    testCompile test_dependencies.mockito
-    testCompile test_dependencies.commonsIO
+    testImplementation 'org.jetbrains:annotations:16.0.3'
+    testImplementation 'com.github.TonyTangAndroid:test:1.0.0'
 
-    androidTestImplementation test_dependencies.junit
-    androidTestImplementation test_dependencies.truth
-    androidTestImplementation test_dependencies.testCore
+    androidTestImplementation 'org.jetbrains:annotations:16.0.3'
+    androidTestImplementation 'com.github.TonyTangAndroid:test:1.0.0'
 
     androidTestImplementation test_dependencies.extJunit
-    androidTestImplementation test_dependencies.commonsIO
     androidTestImplementation test_dependencies.testRunner
     androidTestImplementation test_dependencies.espressoCore
 

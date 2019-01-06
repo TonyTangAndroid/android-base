@@ -40,18 +40,17 @@ dependencies {
 
 
     def ext_dependencies = rootProject.ext.ext_dependencies
-    def test_dependencies = rootProject.ext.test_dependencies
 
-    compile ext_dependencies.javaxAnnotation
     compile ext_dependencies.roomRxjava2
     compile ext_dependencies.roomRuntime
     compile ext_dependencies.pagingRuntime
     compile ext_dependencies.lifecycleRuntime
     compile ext_dependencies.lifecycleExtension
 
-    testCompile test_dependencies.junit
-    testCompile test_dependencies.mockito
-    testCompile test_dependencies.commonsIO
-
     annotationProcessor ext_dependencies.roomCompiler
+
+
+    testImplementation 'org.jetbrains:annotations:16.0.3'
+    testImplementation 'com.github.TonyTangAndroid:test:1.0.0'
+
 }

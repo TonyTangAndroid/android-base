@@ -1,34 +1,18 @@
-apply plugin: 'java'
+apply plugin: 'java-library'
 apply plugin: 'net.ltgt.apt-idea'
 apply plugin: 'idea'
 apply plugin: 'net.ltgt.apt'
 
 dependencies {
 
-    compile project(':domain')
+    api project(':domain')
 
-    def ext_dependencies = rootProject.ext.ext_dependencies
-    def test_dependencies = rootProject.ext.test_dependencies
+    testImplementation 'org.jetbrains:annotations:16.0.3'
+    testImplementation 'com.github.TonyTangAndroid:test:1.0.0'
 
-    compile ext_dependencies.javaxAnnotation
-
-    compileOnly ext_dependencies.autoValue
-    compileOnly ext_dependencies.autoValueGson
-
-    apt ext_dependencies.autoValue
-    apt ext_dependencies.autoValueGson
-
-    compile ext_dependencies.findbugsJsr305
-    compile ext_dependencies.gson
-    compile ext_dependencies.rxJava
-    compile ext_dependencies.javaxInject
-
-
-    testCompile test_dependencies.truth
-    testCompile test_dependencies.junit
-    testCompile test_dependencies.mockito
-    testCompile test_dependencies.commonsIO
-    testCompile test_dependencies.jetAnnotations
-
-
+    annotationProcessor 'com.google.auto.value:auto-value:1.6.3'
+    annotationProcessor 'com.ryanharter.auto.value:auto-value-gson:0.8.0'
 }
+
+sourceCompatibility = JavaVersion.VERSION_1_8
+targetCompatibility = JavaVersion.VERSION_1_8

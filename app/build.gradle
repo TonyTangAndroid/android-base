@@ -69,42 +69,37 @@ dependencies {
     compile project(':presenter')
 
 
-    compile ext_dependencies.timber
-    compile ext_dependencies.rxjava2Debug
-    compile ext_dependencies.proguardSnippets
-
-
-
-
-    compile ext_dependencies.dagger
-    compile ext_dependencies.rxAndroid
-    compile ext_dependencies.daggerAndroid
-    compile ext_dependencies.javaxAnnotation
+    compile 'com.github.TonyTangAndroid:aar:1.0.0'
     compile ext_dependencies.everNoteAndroidState
-
-
     compile ext_dependencies.cardview
     compile ext_dependencies.material
     compile ext_dependencies.legacyV13
     compile ext_dependencies.appcompat
     compile ext_dependencies.annotation
 
+    compile ext_dependencies.rxjava2Debug
+
     debugCompile ext_dependencies.chuck
     releaseCompile ext_dependencies.chuckNoOp
 
 
-    annotationProcessor ext_dependencies.epoxyProcessor
-    annotationProcessor ext_dependencies.daggerCompiler
+    compile ext_dependencies.dagger
     annotationProcessor ext_dependencies.daggerProcessor
+
+    compile ext_dependencies.daggerAndroid
+    annotationProcessor ext_dependencies.daggerAndroidProcessor
+
+    annotationProcessor ext_dependencies.epoxyProcessor
     annotationProcessor ext_dependencies.everNoteAndroidStateProcessor
 
-    androidTestImplementation test_dependencies.junit
-    androidTestImplementation test_dependencies.truth
-    androidTestImplementation test_dependencies.testCore
-    androidTestImplementation test_dependencies.findbugsJsr305
+
+
+
+    implementation 'org.jetbrains:annotations:16.0.3'
+
+    androidTestImplementation 'com.github.TonyTangAndroid:test:1.0.0'
 
     androidTestImplementation test_dependencies.extJunit
-    androidTestImplementation test_dependencies.commonsIO
     androidTestImplementation test_dependencies.testRunner
     androidTestImplementation test_dependencies.espressoCore
 
