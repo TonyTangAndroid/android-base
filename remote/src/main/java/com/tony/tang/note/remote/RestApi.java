@@ -1,5 +1,6 @@
 package com.tony.tang.note.remote;
 
+import com.tony.tang.note.domain.entity.NoteData;
 import com.tony.tang.note.domain.entity.NoteEntity;
 import com.tony.tang.note.domain.entity.UserEntity;
 
@@ -49,7 +50,7 @@ interface RestApi {
     Single<Response<VoidEntity>> doLogout();
 
     @POST(URL_PATH_CLASSES_NOTE)
-    Single<Response<CreatedWrapper>> createNote(@Body NoteEntity note);
+    Single<Response<CreatedWrapper>> createNote(@Body NoteData note);
 
     @GET(URL_PATH_CLASSES_NOTE_OBJECT_ID)
     Single<Response<NoteEntity>> getNote(
@@ -62,7 +63,7 @@ interface RestApi {
     Single<Response<NoteEntitiesWrapper>> getNotes(@QueryMap Map<String, Object> queryParams);
 
     @PUT(URL_PATH_CLASSES_NOTE_OBJECT_ID)
-    Single<Response<UpdatedWrapper>> updateNote(@Path("objectId") String objectId, @Body NoteEntity note);
+    Single<Response<UpdatedWrapper>> updateNote(@Path("objectId") String objectId, @Body NoteData note);
 
     @DELETE(URL_PATH_CLASSES_NOTE_OBJECT_ID)
     Single<Response<VoidEntity>> deleteNote(@Path("objectId") String objectId);

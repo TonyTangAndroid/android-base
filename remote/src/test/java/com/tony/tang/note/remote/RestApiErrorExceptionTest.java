@@ -29,12 +29,8 @@ public class RestApiErrorExceptionTest {
 
     @Test
     public void testStatusCodes() {
-        Truth.assertThat(RestApiErrorException.NOT_FOUND).isEqualTo(404);
         Truth.assertThat(RestApiErrorException.BAD_REQUEST).isEqualTo(400);
         Truth.assertThat(RestApiErrorException.UNAUTHORIZED).isEqualTo(401);
-        Truth.assertThat(RestApiErrorException.UPGRADE_REQUIRED).isEqualTo(426);
-        Truth.assertThat(RestApiErrorException.UNPROCESSABLE_ENTITY).isEqualTo(422);
-        Truth.assertThat(RestApiErrorException.INVALID_SESSION_TOKEN).isEqualTo(209);
         Truth.assertThat(RestApiErrorException.INTERNAL_SERVER_ERROR).isEqualTo(500);
     }
 

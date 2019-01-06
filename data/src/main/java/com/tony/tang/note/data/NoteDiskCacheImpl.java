@@ -7,48 +7,26 @@ import java.util.List;
 
 import javax.inject.Inject;
 
-/**
- * Interface that represents a data store from where data is retrieved.
- */
-
 public class NoteDiskCacheImpl {
 
-    private final NoteInMemoryImpl noteInMemory;
     private final NoteEntityCache noteEntityDao;
     private final ThreadExecutor threadExecutor;
 
 
     @Inject
-    public NoteDiskCacheImpl(NoteInMemoryImpl noteInMemory,
-                             NoteEntityCache noteEntityDao,
+    public NoteDiskCacheImpl(NoteEntityCache noteEntityDao,
                              ThreadExecutor threadExecutor) {
-        this.noteInMemory = noteInMemory;
         this.noteEntityDao = noteEntityDao;
         this.threadExecutor = threadExecutor;
     }
 
-    public NoteEntity get(String objectId) {
-        NoteEntity noteEntity = noteEntityDao.find(objectId);
-        if (noteEntity != null) {
-            noteInMemory.put(noteEntity);
-        }
-        return noteEntity;
-    }
 
     public void put(NoteEntity noteEntity) {
-        noteInMemory.put(noteEntity);
         this.executeAsynchronously(new CacheWriter(noteEntity, this.noteEntityDao));
-
-
     }
 
     public void delete(String objectId) {
-        noteInMemory.evict(objectId);
         noteEntityDao.delete(objectId);
-    }
-
-    public boolean isValid(String objectId) {
-        return noteEntityDao.isExist(objectId) && !noteEntityDao.isExpired(objectId);
     }
 
     public void put(List<NoteEntity> list) {

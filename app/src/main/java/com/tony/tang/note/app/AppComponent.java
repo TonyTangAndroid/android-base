@@ -16,7 +16,6 @@ import dagger.BindsInstance;
 @dagger.Component(modules = {
         DemoApplicationModule.class,
         PrefModule.class,
-        InMemoryRepoModule.class,
         ThreadModule.class,
         RemoteModule.GsonModule.class,
         DataRemoteModule.class})

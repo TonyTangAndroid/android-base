@@ -5,8 +5,6 @@ import com.google.gson.Gson;
 import com.google.gson.TypeAdapter;
 import com.google.gson.annotations.SerializedName;
 
-import javax.annotation.Nullable;
-
 @AutoValue
 public abstract class PermissionItem {
 
@@ -25,7 +23,6 @@ public abstract class PermissionItem {
     @SerializedName("write")
     public abstract boolean write();
 
-    @Nullable
     @SerializedName("objectId")
     public abstract String objectId();
 

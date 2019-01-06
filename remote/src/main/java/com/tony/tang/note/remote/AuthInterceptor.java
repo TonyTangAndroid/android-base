@@ -5,12 +5,12 @@ import com.tony.tang.note.domain.repository.TokenRepository;
 
 import java.io.IOException;
 
-import javax.annotation.Nonnull;
-
 import okhttp3.Interceptor;
 import okhttp3.Request;
 import okhttp3.Response;
+import okhttp3.internal.annotations.EverythingIsNonNull;
 
+@EverythingIsNonNull
 class AuthInterceptor implements Interceptor {
 
     private final TokenRepository tokenRepository;
@@ -22,7 +22,7 @@ class AuthInterceptor implements Interceptor {
     }
 
     @Override
-    public Response intercept(@Nonnull Chain chain) throws IOException {
+    public Response intercept(Chain chain) throws IOException {
         String sessionToken = tokenRepository.sessionToken();
         if (sessionToken == null) {
             return chain.proceed(chain.request());

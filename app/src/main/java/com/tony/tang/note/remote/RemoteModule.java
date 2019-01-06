@@ -10,9 +10,16 @@ import com.tony.tang.note.data.DataLocalModule;
 import com.tony.tang.note.data.NoteListRemote;
 import com.tony.tang.note.data.NoteRemote;
 import com.tony.tang.note.domain.entity.ArsenalAdapterFactory;
+import com.tony.tang.note.domain.entity.GsonUTCDateAdapter;
 import com.tony.tang.note.domain.entity.PermissionItemList;
 import com.tony.tang.note.domain.repository.TokenRepository;
 import com.tony.tang.note.domain.repository.UserRepository;
+
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.Locale;
+import java.util.TimeZone;
 
 import dagger.Binds;
 import dagger.Module;
@@ -106,6 +113,7 @@ public abstract class RemoteModule {
     @Module
     public static class GsonModule {
 
+
         @Reusable
         @Provides
         GsonConverterFactory getFactory(Gson gson) {
@@ -114,11 +122,20 @@ public abstract class RemoteModule {
 
         @Reusable
         @Provides
-        Gson getGson() {
+        DateFormat dateFormat() {
+            DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'", Locale.US);
+            dateFormat.setTimeZone(TimeZone.getTimeZone("UTC"));
+            return dateFormat;
+        }
+
+        @Reusable
+        @Provides
+        Gson getGson(ParseACLJsonAdapter parseACLJsonAdapter, GsonUTCDateAdapter gsonUTCDateAdapter) {
             GsonBuilder gsonBuilder = new GsonBuilder();
             gsonBuilder.registerTypeAdapterFactory(WrapperAdapterFactory.create());
             gsonBuilder.registerTypeAdapterFactory(ArsenalAdapterFactory.create());
-            gsonBuilder.registerTypeAdapter(PermissionItemList.class, new ParseACLJsonAdapter());
+            gsonBuilder.registerTypeAdapter(PermissionItemList.class, parseACLJsonAdapter);
+            gsonBuilder.registerTypeAdapter(Date.class, gsonUTCDateAdapter);
             return gsonBuilder.create();
 
         }

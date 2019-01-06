@@ -4,13 +4,9 @@ package com.tony.tang.note.data;
 import com.tony.tang.note.domain.entity.NoteEntity;
 
 import javax.annotation.Nonnull;
-import javax.annotation.Nullable;
 
 
 public interface NoteEntityCache {
-
-    @Nullable
-    NoteEntity find(String objectId);
 
     void delete(String objectId);
 
@@ -18,5 +14,4 @@ public interface NoteEntityCache {
 
     boolean isExist(String objectId);
 
-    boolean isExpired(String objectId);
 }

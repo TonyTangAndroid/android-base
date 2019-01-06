@@ -15,7 +15,16 @@ import java.util.ArrayList;
 import java.util.Map.Entry;
 import java.util.Set;
 
+import javax.inject.Inject;
+
+import dagger.Reusable;
+
+@Reusable
 public class ParseACLJsonAdapter implements JsonDeserializer<PermissionItemList>, JsonSerializer<PermissionItemList> {
+
+    @Inject
+    public ParseACLJsonAdapter() {
+    }
 
     @Override
     public PermissionItemList deserialize(JsonElement json, Type typeOfT, JsonDeserializationContext ctx) throws JsonParseException {

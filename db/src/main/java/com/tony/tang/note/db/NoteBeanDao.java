@@ -27,12 +27,16 @@ public interface NoteBeanDao {
     @Nullable
     NoteBean get(String objectId);
 
+
+    @Query("SELECT count(1) FROM " + TABLE_NAME_NOTE_CACHE + " WHERE " + OBJECT_ID + " = :objectId limit 1")
+    int count(String objectId);
+
+
     @Query("SELECT * FROM " + TABLE_NAME_NOTE_CACHE)
     List<NoteBean> list();
 
     @Query(value = "DELETE FROM " + TABLE_NAME_NOTE_CACHE)
     void clear();
-
 
     /**
      * Room knows how to return a LivePagedListProvider, from which we can get a LiveData and serve

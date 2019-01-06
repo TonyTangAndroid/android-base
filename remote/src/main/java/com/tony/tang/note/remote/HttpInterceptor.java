@@ -8,6 +8,7 @@ import javax.inject.Inject;
 import okhttp3.Interceptor;
 import okhttp3.Request;
 import okhttp3.Response;
+import okhttp3.internal.annotations.EverythingIsNonNull;
 
 class HttpInterceptor implements Interceptor {
 
@@ -25,7 +26,8 @@ class HttpInterceptor implements Interceptor {
     }
 
     @Override
-    public Response intercept(Chain chain) throws IOException {
+    @EverythingIsNonNull
+    public Response intercept(@EverythingIsNonNull Chain chain) throws IOException {
         Request request = chain.request().newBuilder()
                 .addHeader(ACCEPT_LANGUAGE, Locale.getDefault().getLanguage())
                 .addHeader(X_PARSE_APPLICATION_ID, RestApi.PARSE_APPLICATION_ID_VALUE)
@@ -34,5 +36,4 @@ class HttpInterceptor implements Interceptor {
                 .build();
         return chain.proceed(request);
     }
-
 }

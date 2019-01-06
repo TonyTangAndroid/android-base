@@ -1,38 +1,21 @@
 package com.tony.tang.note.cache;
 
-import com.google.gson.Gson;
 import com.tony.tang.note.data.NoteEntityCache;
-import com.tony.tang.note.domain.entity.NoteEntity;
 import com.tony.tang.note.db.NoteBean;
 import com.tony.tang.note.db.NoteBeanDao;
+import com.tony.tang.note.domain.entity.NoteEntity;
 
 import javax.annotation.Nonnull;
-import javax.annotation.Nullable;
 import javax.inject.Inject;
 
 
 public class NoteEntityCacheImpl implements NoteEntityCache {
 
-
-    private final Gson gson;
     private final NoteBeanDao noteBeanDao;
-    private static final long TTL_IN_DISK = 2 * 5 * 1000;
 
     @Inject
-    public NoteEntityCacheImpl(NoteBeanDao noteBeanDao, Gson gson) {
+    public NoteEntityCacheImpl(NoteBeanDao noteBeanDao) {
         this.noteBeanDao = noteBeanDao;
-        this.gson = gson;
-    }
-
-    @Nullable
-    @Override
-    public NoteEntity find(String objectId) {
-        NoteBean noteBean = noteBeanDao.get(objectId);
-        return noteBean != null ? toEntity(noteBean) : null;
-    }
-
-    private NoteEntity toEntity(NoteBean noteBean) {
-        return gson.fromJson(noteBean.content, NoteEntity.class);
     }
 
     @Override
@@ -46,17 +29,18 @@ public class NoteEntityCacheImpl implements NoteEntityCache {
     }
 
     private NoteBean toBean(NoteEntity noteEntity) {
-        return new NoteBean(noteEntity.objectId(), gson.toJson(noteEntity), System.currentTimeMillis());
+        return new NoteBean(
+                noteEntity.objectId(),
+                noteEntity.title(),
+                noteEntity.content(),
+                noteEntity.status(),
+                noteEntity.createdAt(),
+                noteEntity.updatedAt());
     }
 
     @Override
     public boolean isExist(String objectId) {
-        return noteBeanDao.get(objectId) != null;
+        return noteBeanDao.count(objectId) > 0;
     }
 
-    @Override
-    public boolean isExpired(String objectId) {
-        NoteBean noteBean = noteBeanDao.get(objectId);
-        return noteBean != null && (System.currentTimeMillis() - noteBean.createdAt) > TTL_IN_DISK;
-    }
 }

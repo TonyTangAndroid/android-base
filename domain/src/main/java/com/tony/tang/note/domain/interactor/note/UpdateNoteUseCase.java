@@ -1,21 +1,22 @@
 package com.tony.tang.note.domain.interactor.note;
 
+import com.tony.tang.note.domain.entity.NoteData;
 import com.tony.tang.note.domain.entity.NoteEntity;
 import com.tony.tang.note.domain.executor.ThreadExecutor;
 import com.tony.tang.note.domain.executor.UIThread;
-import com.tony.tang.note.domain.interactor.CompletableUseCase;
+import com.tony.tang.note.domain.interactor.SingleUseCase;
 import com.tony.tang.note.domain.repository.NoteRepository;
 
 import javax.inject.Inject;
 
-import io.reactivex.Completable;
+import io.reactivex.Single;
 
 
-public class UpdateNoteUseCase extends CompletableUseCase {
+public class UpdateNoteUseCase extends SingleUseCase<NoteEntity> {
 
     private NoteRepository noteRepository;
 
-    private NoteEntity note;
+    private NoteData note;
 
     @Inject
     public UpdateNoteUseCase(ThreadExecutor threadExecutor, UIThread UIThread,
@@ -24,12 +25,12 @@ public class UpdateNoteUseCase extends CompletableUseCase {
         this.noteRepository = noteRepository;
     }
 
-    public void setParams(NoteEntity note) {
+    public void setParams(NoteData note) {
         this.note = note;
     }
 
     @Override
-    protected Completable build() {
+    protected Single<NoteEntity> build() {
         return this.noteRepository.updateNote(this.note);
     }
 }

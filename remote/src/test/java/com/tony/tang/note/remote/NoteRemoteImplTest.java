@@ -2,6 +2,7 @@ package com.tony.tang.note.remote;
 
 import com.google.common.truth.Truth;
 import com.google.gson.Gson;
+import com.tony.tang.note.domain.entity.NoteData;
 import com.tony.tang.note.domain.entity.NoteEntity;
 import com.tony.tang.note.domain.exception.RestApiErrorException;
 
@@ -27,7 +28,7 @@ import static com.google.common.truth.Truth.assertThat;
 
 public class NoteRemoteImplTest extends BaseDataRepositoryTest {
 
-    private NoteEntity fakeNote;
+    private NoteData fakeNote;
     private MockWebServer mockWebServer;
     private NoteRemoteImpl noteRemoteImpl;
     private Map<String, Object> fakeQueryParam;
@@ -43,7 +44,7 @@ public class NoteRemoteImplTest extends BaseDataRepositoryTest {
         this.mockWebServer.start();
 
         this.noteRemoteImpl = new NoteRemoteImpl(restApi());
-        this.fakeNote = NoteEntity.builder().objectId(OBJECT_ID).title(MOCK_NOTE_TITLE).content(MOCK_NOTE_CONTENT).build();
+        this.fakeNote = NoteData.builder().objectId(OBJECT_ID).title(MOCK_NOTE_TITLE).content(MOCK_NOTE_CONTENT).build();
         fakeQueryParam = new HashMap<>();
     }
 

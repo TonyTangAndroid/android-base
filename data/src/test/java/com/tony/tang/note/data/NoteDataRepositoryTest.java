@@ -1,6 +1,7 @@
 package com.tony.tang.note.data;
 
 import com.google.common.truth.Truth;
+import com.tony.tang.note.domain.entity.NoteData;
 import com.tony.tang.note.domain.entity.NoteEntity;
 
 import org.junit.Before;
@@ -15,7 +16,6 @@ import io.reactivex.Single;
 import io.reactivex.observers.TestObserver;
 
 import static org.mockito.BDDMockito.given;
-import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.verifyNoMoreInteractions;
 
@@ -27,75 +27,90 @@ public class NoteDataRepositoryTest {
     @Mock
     private NoteRemote noteRemote;
     @Mock
-    private NoteDiskDataStore noteDiskDataStore;
-
-    @Mock
-    private NoteDataStoreFactory badgeDataStoreFactory;
+    private NoteDiskCacheImpl noteDiskCache;
 
 
     @Mock
-    private NoteEntity fakeNote;
+    private NoteEntity noteEntity;
+
+    @Mock
+    private NoteData noteData;
+
     private NoteDataRepository noteDataRepository;
 
 
     @Before
     public void setUp() {
         MockitoAnnotations.initMocks(this);
-        this.noteDataRepository = new NoteDataRepository(noteRemote, noteDiskDataStore, badgeDataStoreFactory);
+        this.noteDataRepository = new NoteDataRepository(noteRemote, noteDiskCache);
     }
 
 
     @Test
     public void testGetNoteRequest() {
 
-        NoteDataStore mockStore = mock(NoteDataStore.class);
-        given(mockStore.getNoteEntity(OBJECT_ID)).willReturn(Single.just(fakeNote));
-        given(badgeDataStoreFactory.getDataStore(OBJECT_ID)).willReturn(mockStore);
+        given(noteRemote.getNote(OBJECT_ID)).willReturn(Single.just(noteEntity));
         TestObserver<NoteEntity> testObserver = new TestObserver<>();
         this.noteDataRepository.getNote(OBJECT_ID).subscribe(testObserver);
 
-        Truth.assertThat(testObserver.values()).isEqualTo(Collections.singletonList(fakeNote));
+        Truth.assertThat(testObserver.values()).isEqualTo(Collections.singletonList(noteEntity));
         testObserver.assertComplete();
 
-        verify(badgeDataStoreFactory).getDataStore(OBJECT_ID);
-        verifyNoMoreInteractions(badgeDataStoreFactory);
-        verify(mockStore).getNoteEntity(OBJECT_ID);
-        verifyNoMoreInteractions(mockStore);
+        verify(noteRemote).getNote(OBJECT_ID);
+        verifyNoMoreInteractions(noteRemote);
+
+
+        verify(noteDiskCache).put(noteEntity);
+        verifyNoMoreInteractions(noteDiskCache);
     }
 
 
     @Test
     public void testCreateNoteSuccessResponse() {
 
-        TestObserver<String> testObserver = new TestObserver<>();
+        TestObserver<NoteEntity> testObserver = new TestObserver<>();
 
-        given(noteRemote.createNote(fakeNote)).willReturn(Single.just(OBJECT_ID));
+        given(noteRemote.createNote(noteData)).willReturn(Single.just(OBJECT_ID));
+        given(noteRemote.getNote(OBJECT_ID)).willReturn(Single.just(noteEntity));
 
-        this.noteDataRepository.createNote(this.fakeNote).subscribe(testObserver);
+        this.noteDataRepository.createNote(this.noteData).subscribe(testObserver);
         testObserver.awaitTerminalEvent();
 
-        Truth.assertThat(testObserver.values().get(0)).isEqualTo(OBJECT_ID);
+        Truth.assertThat(testObserver.values().get(0)).isEqualTo(noteEntity);
 
-        verify(noteRemote).createNote(fakeNote);
+        verify(noteRemote).createNote(noteData);
+        verify(noteRemote).getNote(OBJECT_ID);
+
+
         verifyNoMoreInteractions(noteRemote);
+
+
+        verify(noteDiskCache).put(noteEntity);
+        verifyNoMoreInteractions(noteDiskCache);
     }
 
 
     @Test
     public void testUpdateNoteRequest() {
 
-        TestObserver<String> testObserver = new TestObserver<>();
+        TestObserver<NoteEntity> testObserver = new TestObserver<>();
 
-        given(noteRemote.updateNote(fakeNote)).willReturn(Completable.complete());
+        given(noteData.objectId()).willReturn(OBJECT_ID);
+        given(noteRemote.updateNote(noteData)).willReturn(Completable.complete());
+        given(noteRemote.getNote(OBJECT_ID)).willReturn(Single.just(noteEntity));
 
-        this.noteDataRepository.updateNote(this.fakeNote).subscribe(testObserver);
+        this.noteDataRepository.updateNote(this.noteData).subscribe(testObserver);
         testObserver.awaitTerminalEvent();
         testObserver.assertComplete();
-        testObserver.assertNoValues();
+        testObserver.assertValue(noteEntity);
 
-        verify(noteRemote).updateNote(fakeNote);
+        verify(noteRemote).updateNote(noteData);
+        verify(noteRemote).getNote(OBJECT_ID);
         verifyNoMoreInteractions(noteRemote);
-        testObserver.assertComplete();
+
+
+        verify(noteDiskCache).put(noteEntity);
+        verifyNoMoreInteractions(noteDiskCache);
     }
 
     @Test
@@ -115,5 +130,9 @@ public class NoteDataRepositoryTest {
 
         verify(noteRemote).deleteNote(OBJECT_ID);
         verifyNoMoreInteractions(noteRemote);
+
+        verify(noteDiskCache).delete(OBJECT_ID);
+        verifyNoMoreInteractions(noteDiskCache);
+
     }
 }

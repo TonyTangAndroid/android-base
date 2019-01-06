@@ -1,5 +1,6 @@
 package com.tony.tang.note.data;
 
+import com.tony.tang.note.domain.entity.NoteData;
 import com.tony.tang.note.domain.entity.NoteEntity;
 
 import io.reactivex.Completable;
@@ -9,9 +10,9 @@ public interface NoteRemote {
 
     Single<NoteEntity> getNote(String noteObjectId);
 
-    Single<String> createNote(NoteEntity note);
+    Single<String> createNote(NoteData note);
 
-    Completable updateNote(NoteEntity note);
+    Completable updateNote(NoteData note);
 
     Completable deleteNote(String noteObjectId);
 }

@@ -11,31 +11,37 @@ import java.util.Date;
 import javax.annotation.Nullable;
 
 @AutoValue
-public abstract class NoteEntity {
+public abstract class NoteData {
 
-    public static TypeAdapter<NoteEntity> typeAdapter(Gson gson) {
-        return new AutoValue_NoteEntity.GsonTypeAdapter(gson);
+    public static TypeAdapter<NoteData> typeAdapter(Gson gson) {
+        return new AutoValue_NoteData.GsonTypeAdapter(gson);
     }
 
     public static Builder builder() {
-        return new AutoValue_NoteEntity.Builder();
+        return new AutoValue_NoteData.Builder();
     }
 
+    @Nullable
     @SerializedName("objectId")
     public abstract String objectId();
 
+    @Nullable
     @SerializedName("title")
     public abstract String title();
 
+    @Nullable
     @SerializedName("content")
     public abstract String content();
 
+    @Nullable
     @SerializedName("status")
-    public abstract int status();
+    public abstract Integer status();
 
+    @Nullable
     @SerializedName("createdAt")
     public abstract Date createdAt();
 
+    @Nullable
     @SerializedName("updatedAt")
     public abstract Date updatedAt();
 
@@ -51,7 +57,7 @@ public abstract class NoteEntity {
 
         public abstract Builder content(String content);
 
-        public abstract Builder status(int status);
+        public abstract Builder status(Integer status);
 
         public abstract Builder createdAt(Date createdAt);
 
@@ -59,6 +65,6 @@ public abstract class NoteEntity {
 
         public abstract Builder ACL(PermissionItemList ACL22);
 
-        public abstract NoteEntity build();
+        public abstract NoteData build();
     }
 }

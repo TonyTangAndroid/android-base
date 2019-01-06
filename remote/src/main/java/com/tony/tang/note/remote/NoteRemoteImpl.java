@@ -2,6 +2,7 @@ package com.tony.tang.note.remote;
 
 import com.tony.tang.note.data.NoteListRemote;
 import com.tony.tang.note.data.NoteRemote;
+import com.tony.tang.note.domain.entity.NoteData;
 import com.tony.tang.note.domain.entity.NoteEntity;
 
 import java.util.List;
@@ -22,7 +23,7 @@ public class NoteRemoteImpl implements NoteListRemote, NoteRemote {
     }
 
     @Override
-    public Single<String> createNote(final NoteEntity note) {
+    public Single<String> createNote(final NoteData note) {
         return this.restApi.createNote(note)
                 .flatMap(Validator::validate).map(CreatedWrapper::getObjectId);
     }
@@ -39,7 +40,7 @@ public class NoteRemoteImpl implements NoteListRemote, NoteRemote {
     }
 
     @Override
-    public Completable updateNote(NoteEntity note) {
+    public Completable updateNote(NoteData note) {
         return this.restApi.updateNote(note.objectId(), note)
                 .flatMap(Validator::validate).ignoreElement();
     }
