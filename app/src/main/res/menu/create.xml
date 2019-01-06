@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+      xmlns:app="http://schemas.android.com/apk/res-auto">
+    <item
+        android:id="@+id/item_create"
+        android:icon="@android:drawable/ic_menu_save"
+        android:title="@string/button_create"
+        android:visible="true"
+        app:showAsAction="ifRoom"/>
+</menu>

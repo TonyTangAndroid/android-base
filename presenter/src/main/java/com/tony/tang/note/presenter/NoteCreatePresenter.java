@@ -20,10 +20,9 @@ public class NoteCreatePresenter extends BasePresenter implements Presenter {
         this.createNoteUseCase = createNoteUseCase;
     }
 
-    public void createButtonPressed(String title, String content) {
-        NoteData note = NoteData.builder().title(title).content(content).build();
+    public void createButtonPressed(NoteData noteData) {
         this.noteCreateView.showLoader();
-        this.createNoteUseCase.setParams(note);
+        this.createNoteUseCase.setParams(noteData);
         this.createNoteUseCase.execute(new NoteCreateSubscriber());
     }
 

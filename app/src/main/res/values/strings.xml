@@ -20,4 +20,5 @@
     <string name="toggle_order">Toggle Order</string>
     <string name="toggle_title">Toggle Title</string>
     <string name="delete">Delete</string>
+    <string name="star">Star</string>
 </resources>
