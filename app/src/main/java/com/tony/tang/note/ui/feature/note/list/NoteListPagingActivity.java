@@ -13,6 +13,7 @@ import com.tony.tang.note.app.Status;
 import com.tony.tang.note.db.NoteBean;
 import com.tony.tang.note.domain.entity.NoteData;
 import com.tony.tang.note.ui.feature.note.creation.NoteCreateActivity;
+import com.tony.tang.note.ui.feature.note.detail.NoteDetailActivity;
 
 import javax.inject.Inject;
 
@@ -131,6 +132,11 @@ public class NoteListPagingActivity extends AppCompatActivity
     @Override
     public void toggleStatus(boolean isChecked, String objectId) {
         notePagingListPresenter.toggleStatus(data(isChecked, objectId));
+    }
+
+    @Override
+    public void view(NoteBean item) {
+        startActivity(NoteDetailActivity.constructIntent(this, item.objectId));
     }
 
     private NoteData data(boolean isChecked, String objectId) {

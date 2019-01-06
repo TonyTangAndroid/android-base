@@ -37,6 +37,7 @@ public final class NoteBeanViewHolder extends RecyclerView.ViewHolder {
             this.tv_title.setText(item.objectId);
             this.tv_content.setText(item.content);
             this.cb_star.setChecked(item.status == Status.STAR);
+            this.itemView.setOnClickListener(view -> listener.view(item));
             this.btn_delete.setOnClickListener(view -> listener.delete(item));
             this.btn_toggle_title.setOnClickListener(view -> listener.toggleTitle(item));
             this.btn_toggle_order.setOnClickListener(view -> listener.toggleOrder(item));
@@ -52,5 +53,7 @@ public final class NoteBeanViewHolder extends RecyclerView.ViewHolder {
         void toggleOrder(NoteBean notebean);
 
         void toggleStatus(boolean isChecked, String objectId);
+
+        void view(NoteBean item);
     }
 }

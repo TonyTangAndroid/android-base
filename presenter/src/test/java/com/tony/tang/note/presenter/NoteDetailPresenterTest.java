@@ -29,7 +29,7 @@ public class NoteDetailPresenterTest {
     public void setUp() {
         MockitoAnnotations.initMocks(this);
         given(mockNoteDetailView.getNoteObjectId()).willReturn(MOCK_OBJECT_ID);
-        this.noteDetailPresenter = new NoteDetailPresenter(mockNoteDetailView, this.getNoteUseCase);
+        this.noteDetailPresenter = new NoteDetailPresenter(mockNoteDetailView, this.getNoteUseCase, updateNoteUseCase);
         this.noteDetailPresenter.create();
         this.noteDetailSubscriber = this.noteDetailPresenter.new NoteDetailSubscriber();
     }

@@ -21,4 +21,6 @@
     <string name="toggle_title">Toggle Title</string>
     <string name="delete">Delete</string>
     <string name="star">Star</string>
+    <string name="button_edit">Edit</string>
+    <string name="note_edit">Edit note</string>
 </resources>

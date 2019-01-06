@@ -27,6 +27,9 @@
         <activity
             android:name="com.tony.tang.note.ui.feature.note.creation.NoteCreateActivity"
             android:label="@string/note_create"/>
+        <activity
+            android:name="com.tony.tang.note.ui.feature.note.edit.NoteEditActivity"
+            android:label="@string/note_edit"/>
     </application>
 
 </manifest>

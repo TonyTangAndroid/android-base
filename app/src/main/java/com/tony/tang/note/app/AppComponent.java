@@ -10,6 +10,7 @@ import com.tony.tang.note.domain.interactor.note.UpdateNoteUseCase;
 import com.tony.tang.note.remote.RemoteModule;
 import com.tony.tang.note.ui.feature.note.creation.NoteCreateFragment;
 import com.tony.tang.note.ui.feature.note.detail.NoteDetailFragment;
+import com.tony.tang.note.ui.feature.note.edit.NoteEditFragment;
 
 import dagger.BindsInstance;
 
@@ -35,6 +36,8 @@ public interface AppComponent {
     NoteDetailFragment.Component.Builder noteDetailComponentBuilder();
 
     NoteCreateFragment.Component.Builder noteCreationComponentBuilder();
+
+    NoteEditFragment.Component.Builder noteEditComponentBuilder();
 
     @dagger.Component.Builder
     interface Builder {
