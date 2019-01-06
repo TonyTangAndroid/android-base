@@ -30,47 +30,4 @@ ext {
     testRulesVersion = '1.1.0'
     extJunitVersion = '1.0.0'
     testCoreVersion = '1.0.0'
-
-    ext_dependencies = [
-            rxjava2Debug                 : "com.akaita.java:rxjava2-debug:${rxjava2DebugVersion}",
-            lifecycleRuntime             : "androidx.lifecycle:lifecycle-runtime:${lifecycleVersion}",
-            lifecycleExtension           : "androidx.lifecycle:lifecycle-extensions:${lifecycleVersion}",
-            roomRuntime                  : "androidx.room:room-runtime:${roomVersion}",
-            roomCompiler                 : "androidx.room:room-compiler:${roomVersion}",
-            roomRxjava2                  : "androidx.room:room-rxjava2:${roomVersion}",
-            pagingRuntime                : "androidx.paging:paging-runtime:${pagingVersion}",
-
-
-            everNoteAndroidState         : "com.evernote:android-state:${everNoteAndroidStateVersion}",
-            everNoteAndroidStateProcessor: "com.evernote:android-state-processor:${everNoteAndroidStateVersion}",
-
-            chuck                        : "com.readystatesoftware.chuck:library:${chuckVersion}",
-            chuckNoOp                    : "com.readystatesoftware.chuck:library-no-op:${chuckVersion}",
-            epoxy                        : "com.airbnb.android:epoxy:${epoxyVersion}",
-            epoxyProcessor               : "com.airbnb.android:epoxy-processor:${epoxyVersion}",
-            dagger                       : "com.google.dagger:dagger:${daggerVersion}",
-            daggerProcessor              : "com.google.dagger:dagger-compiler:${daggerVersion}",
-            daggerAndroid                : "com.google.dagger:dagger-android:${daggerVersion}",
-            daggerAndroidSupport         : "com.google.dagger:dagger-android-support:${daggerVersion}",
-            daggerAndroidProcessor       : "com.google.dagger:dagger-android-processor:${daggerVersion}",
-            appcompat                    : "androidx.appcompat:appcompat:${appcompatVersion}",
-            annotation                   : "androidx.annotation:annotation:${annotationVersion}",
-            cardview                     : "androidx.cardview:cardview:${cardviewVersion}",
-            recyclerview                 : "androidx.recyclerview:recyclerview:${recyclerviewVersion}",
-            multidex                     : "androidx.multidex:multidex:${multidexVersion}",
-            material                     : "com.google.android.material:material:${materialVersion}",
-            legacyV13                    : "androidx.legacy:legacy-support-v13:${legacyV13Version}",
-
-
-    ]
-
-
-    test_dependencies = [
-            daggerCompiler: "com.google.dagger:dagger-compiler:${daggerVersion}",
-            extJunit      : "androidx.test.ext:junit:${extJunitVersion}",
-            testCore      : "androidx.test:core:${testCoreVersion}",
-            testRules     : "androidx.test:runner:${testRulesVersion}",
-            testRunner    : "androidx.test:runner:${testRunnerVersion}",
-            espressoCore  : "androidx.test.espresso:espresso-core:${espressoCoreVersion}",
-    ]
 }

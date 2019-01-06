@@ -59,9 +59,6 @@ android {
 
 
 dependencies {
-    def ext_dependencies = rootProject.ext.ext_dependencies
-    def test_dependencies = rootProject.ext.test_dependencies
-
     compile project(':cache')
     compile project(':domain')
     compile project(':remote')
@@ -69,40 +66,46 @@ dependencies {
     compile project(':presenter')
 
 
+    implementation "com.akaita.java:rxjava2-debug:${rxjava2DebugVersion}"
+    implementation "androidx.lifecycle:lifecycle-runtime:${lifecycleVersion}"
+    implementation "androidx.lifecycle:lifecycle-extensions:${lifecycleVersion}"
+    implementation "androidx.room:room-runtime:${roomVersion}"
+    implementation "androidx.room:room-rxjava2:${roomVersion}"
+    implementation "androidx.paging:paging-runtime:${pagingVersion}"
+
+
+    implementation "com.evernote:android-state:${everNoteAndroidStateVersion}"
+
+    implementation "com.readystatesoftware.chuck:library:${chuckVersion}"
+    implementation "com.airbnb.android:epoxy:${epoxyVersion}"
+    implementation "com.google.dagger:dagger:${daggerVersion}"
+    implementation "com.google.dagger:dagger-android:${daggerVersion}"
+    implementation "androidx.appcompat:appcompat:${appcompatVersion}"
+    implementation "androidx.annotation:annotation:${annotationVersion}"
+    implementation "androidx.cardview:cardview:${cardviewVersion}"
+    implementation "androidx.recyclerview:recyclerview:${recyclerviewVersion}"
+    implementation "androidx.multidex:multidex:${multidexVersion}"
+    implementation "com.google.android.material:material:${materialVersion}"
+    implementation "androidx.legacy:legacy-support-v13:${legacyV13Version}"
+
+
     compile 'com.github.TonyTangAndroid:aar:1.0.0'
-    compile ext_dependencies.everNoteAndroidState
-    compile ext_dependencies.cardview
-    compile ext_dependencies.material
-    compile ext_dependencies.legacyV13
-    compile ext_dependencies.appcompat
-    compile ext_dependencies.annotation
-
-    compile ext_dependencies.rxjava2Debug
-
-    debugCompile ext_dependencies.chuck
-    releaseCompile ext_dependencies.chuckNoOp
 
 
-    compile ext_dependencies.dagger
-    annotationProcessor ext_dependencies.daggerProcessor
+    annotationProcessor "com.google.dagger:dagger-compiler:${daggerVersion}"
+    annotationProcessor "com.google.dagger:dagger-android-processor:${daggerVersion}"
 
-    compile ext_dependencies.daggerAndroid
-    annotationProcessor ext_dependencies.daggerAndroidProcessor
-
-    annotationProcessor ext_dependencies.epoxyProcessor
-    annotationProcessor ext_dependencies.everNoteAndroidStateProcessor
-
-
+    annotationProcessor "com.airbnb.android:epoxy-processor:${epoxyVersion}"
+    annotationProcessor "com.evernote:android-state-processor:${everNoteAndroidStateVersion}"
 
 
     implementation 'org.jetbrains:annotations:16.0.3'
 
     androidTestImplementation 'com.github.TonyTangAndroid:test:1.0.0'
-
-    androidTestImplementation test_dependencies.extJunit
-    androidTestImplementation test_dependencies.testRunner
-    androidTestImplementation test_dependencies.espressoCore
-
-    androidTestAnnotationProcessor test_dependencies.daggerCompiler
+    androidTestImplementation "androidx.test.ext:junit:${extJunitVersion}"
+    androidTestImplementation "androidx.test:core:${testCoreVersion}"
+    androidTestImplementation "androidx.test:runner:${testRulesVersion}"
+    androidTestImplementation "com.google.dagger:dagger-compiler:${daggerVersion}"
+    androidTestImplementation "androidx.test.espresso:espresso-core:${espressoCoreVersion}"
 
 }

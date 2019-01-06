@@ -39,15 +39,13 @@ dependencies {
     compile project(':data')
 
 
-    def ext_dependencies = rootProject.ext.ext_dependencies
 
-    compile ext_dependencies.roomRxjava2
-    compile ext_dependencies.roomRuntime
-    compile ext_dependencies.pagingRuntime
-    compile ext_dependencies.lifecycleRuntime
-    compile ext_dependencies.lifecycleExtension
-
-    annotationProcessor ext_dependencies.roomCompiler
+    implementation "androidx.lifecycle:lifecycle-runtime:${lifecycleVersion}"
+    implementation "androidx.lifecycle:lifecycle-extensions:${lifecycleVersion}"
+    implementation "androidx.room:room-runtime:${roomVersion}"
+    implementation "androidx.room:room-rxjava2:${roomVersion}"
+    implementation "androidx.paging:paging-runtime:${pagingVersion}"
+    annotationProcessor "androidx.room:room-compiler:${roomVersion}"
 
 
     testImplementation 'org.jetbrains:annotations:16.0.3'
