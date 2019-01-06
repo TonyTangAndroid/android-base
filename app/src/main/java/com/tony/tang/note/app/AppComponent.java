@@ -20,10 +20,9 @@ import dagger.BindsInstance;
         ThreadModule.class,
         RemoteModule.GsonModule.class,
         DataRemoteModule.class})
-public interface DemoApplicationComponent {
+public interface AppComponent {
 
-
-    void inject(DemoApplication app);
+    void inject(App app);
 
     NoteRoomDatabase database();
 
@@ -41,6 +40,6 @@ public interface DemoApplicationComponent {
         @BindsInstance
         Builder application(Application application);
 
-        DemoApplicationComponent build();
+        AppComponent build();
     }
 }

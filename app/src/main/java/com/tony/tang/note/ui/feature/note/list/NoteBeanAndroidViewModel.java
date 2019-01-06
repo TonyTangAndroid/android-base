@@ -5,7 +5,7 @@ import android.app.Application;
 
 import com.tony.tang.note.db.NoteBean;
 import com.tony.tang.note.db.NoteBeanDao;
-import com.tony.tang.note.app.DemoApplication;
+import com.tony.tang.note.app.App;
 
 import javax.inject.Inject;
 
@@ -22,7 +22,7 @@ public class NoteBeanAndroidViewModel extends AndroidViewModel {
         super(application);
 
 
-        NoteBeanDao dao = ((DemoApplication) application).applicationComponent().database().noteBeanDao();
+        NoteBeanDao dao = ((App) application).appComponent().database().noteBeanDao();
 
         PagedList.Config config = new PagedList.Config.Builder()
                 .setPageSize(10)

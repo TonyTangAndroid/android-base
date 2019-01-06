@@ -6,8 +6,8 @@ import android.content.Context;
 import android.view.View;
 import android.widget.EditText;
 
+import com.tony.tang.note.app.App;
 import com.tony.tang.note.app.CleanFragment;
-import com.tony.tang.note.app.DemoApplication;
 import com.tony.tang.note.app.R;
 import com.tony.tang.note.presenter.NoteCreatePresenter;
 import com.tony.tang.note.presenter.NoteCreatePresenter.NoteCreateView;
@@ -30,7 +30,7 @@ public class NoteCreateFragment extends CleanFragment implements NoteCreateView 
     @Override
     public void onAttach(Context context) {
         super.onAttach(context);
-        ((DemoApplication) context.getApplicationContext()).applicationComponent()
+        ((App) context.getApplicationContext()).appComponent()
                 .noteCreationComponentBuilder().fragment(this).build().inject(this);
     }
 
