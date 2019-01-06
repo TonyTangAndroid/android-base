@@ -4,19 +4,20 @@ import android.content.Context;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
+import com.readystatesoftware.chuck.ChuckInterceptor;
+import com.tony.tang.note.app.AppScope;
+import com.tony.tang.note.data.DataLocalModule;
+import com.tony.tang.note.data.NoteListRemote;
+import com.tony.tang.note.data.NoteRemote;
 import com.tony.tang.note.domain.entity.ArsenalAdapterFactory;
 import com.tony.tang.note.domain.entity.PermissionItemList;
 import com.tony.tang.note.domain.repository.TokenRepository;
 import com.tony.tang.note.domain.repository.UserRepository;
-import com.readystatesoftware.chuck.ChuckInterceptor;
-import com.tony.tang.note.data.DataLocalModule;
-import com.tony.tang.note.data.NoteListRemote;
-import com.tony.tang.note.data.NoteRemote;
-import com.tony.tang.note.app.ApplicationScope;
 
 import dagger.Binds;
 import dagger.Module;
 import dagger.Provides;
+import dagger.Reusable;
 import hugo.weaving.DebugLog;
 import okhttp3.OkHttpClient;
 import okhttp3.logging.HttpLoggingInterceptor;
@@ -28,13 +29,13 @@ import retrofit2.converter.gson.GsonConverterFactory;
 public abstract class RemoteModule {
 
     @Provides
-    @ApplicationScope
+    @Reusable
     public static NoteRemoteImpl provideNoteRemoteImpl(RestApi restApi) {
         return new NoteRemoteImpl(restApi);
     }
 
     @Provides
-    @ApplicationScope
+    @AppScope
     static RestApi provideRestApi(OkHttpClient okHttpClient, GsonConverterFactory gsonConverterFactory) {
         return new Retrofit.Builder()
                 .baseUrl(RestApi.URL_BASE)
@@ -45,15 +46,15 @@ public abstract class RemoteModule {
     }
 
     @Binds
-    @ApplicationScope
+    @Reusable
     public abstract NoteRemote bindNoteRemoteImpl(NoteRemoteImpl userDataRepository);
 
     @Binds
-    @ApplicationScope
+    @Reusable
     public abstract NoteListRemote bindNoteListRemoteImpl(NoteRemoteImpl userDataRepository);
 
     @Binds
-    @ApplicationScope
+    @Reusable
     public abstract UserRepository bindUserRepository(UserRemoteRepository userDataRepository);
 
 
@@ -61,7 +62,7 @@ public abstract class RemoteModule {
     public static class OkHttpModule {
 
         @Provides
-        @ApplicationScope
+        @AppScope
         HttpLoggingInterceptor provideHttpLoggingInterceptor() {
             final HttpLoggingInterceptor interceptor = new HttpLoggingInterceptor();
             interceptor.setLevel(HttpLoggingInterceptor.Level.BASIC);
@@ -69,25 +70,25 @@ public abstract class RemoteModule {
         }
 
         @Provides
-        @ApplicationScope
+        @AppScope
         ChuckInterceptor provideChuckInterceptor(Context context) {
             return new ChuckInterceptor(context);
         }
 
         @Provides
-        @ApplicationScope
+        @AppScope
         AuthInterceptor provideAuthInterceptor(TokenRepository tokenRepository) {
             return new AuthInterceptor(tokenRepository);
         }
 
         @Provides
-        @ApplicationScope
+        @AppScope
         HttpInterceptor provideHttpInterceptor() {
             return new HttpInterceptor();
         }
 
         @Provides
-        @ApplicationScope
+        @Reusable
         OkHttpClient provideOkHttpClient(HttpLoggingInterceptor httpLoggingInterceptor,
                                          HttpInterceptor httpInterceptor,
                                          AuthInterceptor authInterceptor,
@@ -105,13 +106,13 @@ public abstract class RemoteModule {
     @Module
     public static class GsonModule {
 
-        @ApplicationScope
+        @Reusable
         @Provides
         GsonConverterFactory getFactory(Gson gson) {
             return GsonConverterFactory.create(gson);
         }
 
-        @ApplicationScope
+        @Reusable
         @Provides
         Gson getGson() {
             GsonBuilder gsonBuilder = new GsonBuilder();

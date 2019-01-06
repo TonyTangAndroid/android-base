@@ -12,7 +12,7 @@ import com.tony.tang.note.ui.feature.note.detail.NoteDetailFragment;
 
 import dagger.BindsInstance;
 
-@ApplicationScope
+@AppScope
 @dagger.Component(modules = {
         DemoApplicationModule.class,
         PrefModule.class,

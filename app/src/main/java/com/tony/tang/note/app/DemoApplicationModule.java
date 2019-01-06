@@ -5,11 +5,12 @@ import android.content.Context;
 
 import dagger.Module;
 import dagger.Provides;
+import dagger.Reusable;
 
 @Module
 public class DemoApplicationModule {
 
-    @ApplicationScope
+    @Reusable
     @Provides
     Context provideContext(Application application) {
         return application;
