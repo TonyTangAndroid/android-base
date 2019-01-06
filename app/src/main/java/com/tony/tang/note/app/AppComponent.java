@@ -6,6 +6,7 @@ import com.tony.tang.note.data.DataRemoteModule;
 import com.tony.tang.note.db.NoteRoomDatabase;
 import com.tony.tang.note.domain.interactor.note.CreateNoteUseCase;
 import com.tony.tang.note.domain.interactor.note.DeleteNoteUseCase;
+import com.tony.tang.note.domain.interactor.note.UpdateNoteUseCase;
 import com.tony.tang.note.remote.RemoteModule;
 import com.tony.tang.note.ui.feature.note.creation.NoteCreateFragment;
 import com.tony.tang.note.ui.feature.note.detail.NoteDetailFragment;
@@ -26,6 +27,8 @@ public interface AppComponent {
     NoteRoomDatabase database();
 
     CreateNoteUseCase createNoteUseCase();
+
+    UpdateNoteUseCase updateNoteUseCase();
 
     DeleteNoteUseCase deleteNoteUseCase();
 

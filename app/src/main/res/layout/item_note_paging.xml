@@ -23,18 +23,25 @@
             android:layout_height="wrap_content"
             android:text="@string/delete"/>
 
+        <CheckBox
+            android:id="@+id/cb_star"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/star"/>
 
         <Button
             android:id="@+id/btn_toggle_title"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/toggle_title"/>
+            android:text="@string/toggle_title"
+            android:visibility="gone"/>
 
         <Button
             android:id="@+id/btn_toggle_order"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/toggle_order"/>
+            android:text="@string/toggle_order"
+            android:visibility="gone"/>
 
 
     </LinearLayout>
@@ -45,14 +52,6 @@
         android:layout_height="wrap_content"
         android:layout_weight="1"
         android:orientation="vertical">
-
-        <TextView
-            android:id="@+id/tv_id"
-            style="@style/Base.TextAppearance.AppCompat.Title"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:padding="@dimen/activity_horizontal_margin_quarter"
-            tools:text="ID"/>
 
         <TextView
             android:id="@+id/tv_title"

@@ -9,7 +9,9 @@ import com.tony.tang.note.app.ActivityScope;
 import com.tony.tang.note.app.App;
 import com.tony.tang.note.app.AppComponent;
 import com.tony.tang.note.app.R;
+import com.tony.tang.note.app.Status;
 import com.tony.tang.note.db.NoteBean;
+import com.tony.tang.note.domain.entity.NoteData;
 import com.tony.tang.note.ui.feature.note.creation.NoteCreateActivity;
 
 import javax.inject.Inject;
@@ -124,6 +126,17 @@ public class NoteListPagingActivity extends AppCompatActivity
     @Override
     public void toggleOrder(NoteBean notebean) {
 
+    }
+
+    @Override
+    public void toggleStatus(boolean isChecked, String objectId) {
+        notePagingListPresenter.toggleStatus(data(isChecked, objectId));
+    }
+
+    private NoteData data(boolean isChecked, String objectId) {
+        return NoteData.builder()
+                .status(isChecked ? Status.STAR : Status.DEFAULT)
+                .objectId(objectId).build();
     }
 
     @Override
