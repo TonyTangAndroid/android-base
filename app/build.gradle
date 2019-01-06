@@ -1,5 +1,6 @@
 apply plugin: 'com.android.application'
 apply plugin: 'com.jakewharton.hugo'
+apply plugin: "com.github.ben-manes.versions"
 
 android {
     signingConfigs {
@@ -77,7 +78,6 @@ dependencies {
     implementation "com.evernote:android-state:${everNoteAndroidStateVersion}"
 
     implementation "com.readystatesoftware.chuck:library:${chuckVersion}"
-    implementation "com.airbnb.android:epoxy:${epoxyVersion}"
     implementation "com.google.dagger:dagger:${daggerVersion}"
     implementation "com.google.dagger:dagger-android:${daggerVersion}"
     implementation "androidx.appcompat:appcompat:${appcompatVersion}"
@@ -95,7 +95,6 @@ dependencies {
     annotationProcessor "com.google.dagger:dagger-compiler:${daggerVersion}"
     annotationProcessor "com.google.dagger:dagger-android-processor:${daggerVersion}"
 
-    annotationProcessor "com.airbnb.android:epoxy-processor:${epoxyVersion}"
     annotationProcessor "com.evernote:android-state-processor:${everNoteAndroidStateVersion}"
 
 
