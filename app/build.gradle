@@ -103,8 +103,21 @@ dependencies {
     androidTestImplementation 'com.github.TonyTangAndroid:test:1.0.0'
     androidTestImplementation "androidx.test.ext:junit:${extJunitVersion}"
     androidTestImplementation "androidx.test:core:${testCoreVersion}"
-    androidTestImplementation "androidx.test:runner:${testRulesVersion}"
+    androidTestImplementation "androidx.test:runner:${testRunnerVersion}"
     androidTestImplementation "com.google.dagger:dagger-compiler:${daggerVersion}"
     androidTestImplementation "androidx.test.espresso:espresso-core:${espressoCoreVersion}"
 
+}
+
+dependencyUpdates.resolutionStrategy {
+    componentSelection { rules ->
+        rules.all { ComponentSelection selection ->
+            boolean rejected = ['alpha', 'beta', 'rc', 'cr', 'm', 'preview'].any { qualifier ->
+                selection.candidate.version ==~ /(?i).*[.-]${qualifier}[.\d-]*/
+            }
+            if (rejected) {
+                selection.reject('Release candidate')
+            }
+        }
+    }
 }

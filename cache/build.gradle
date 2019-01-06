@@ -43,7 +43,7 @@ dependencies {
     androidTestImplementation 'com.github.TonyTangAndroid:test:1.0.0'
     androidTestImplementation "androidx.test.ext:junit:${extJunitVersion}"
     androidTestImplementation "androidx.test:core:${testCoreVersion}"
-    androidTestImplementation "androidx.test:runner:${testRulesVersion}"
+    androidTestImplementation "androidx.test:runner:${testRunnerVersion}"
     androidTestImplementation "androidx.test.espresso:espresso-core:${espressoCoreVersion}"
 
 }
