@@ -3,9 +3,9 @@ package com.tony.tang.note.ui.feature.note.list;
 
 import android.app.Application;
 
+import com.tony.tang.note.app.App;
 import com.tony.tang.note.db.NoteBean;
 import com.tony.tang.note.db.NoteBeanDao;
-import com.tony.tang.note.app.App;
 
 import javax.inject.Inject;
 
@@ -35,6 +35,4 @@ public class NoteBeanAndroidViewModel extends AndroidViewModel {
     public LiveData<PagedList<NoteBean>> get() {
         return noteBeanPageListLiveData;
     }
-
-
 }

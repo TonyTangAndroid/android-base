@@ -22,7 +22,6 @@ public class NoteBean {
     public final long createdAt;
     @PrimaryKey(autoGenerate = true)
     @ColumnInfo(name = ID)
-    @NonNull
     public int id;
 
 
