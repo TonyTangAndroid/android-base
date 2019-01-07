@@ -21,6 +21,7 @@ import javax.inject.Inject;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
+import androidx.lifecycle.ViewModelProviders;
 import androidx.paging.PagedList;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -34,7 +35,11 @@ public class NoteListPagingActivity extends AppCompatActivity
         NotePagingListPresenter.NotePagingUI {
 
     @Inject
+    NoteBeanAndroidViewModel viewModel;
+
+    @Inject
     NotePagingListPresenter notePagingListPresenter;
+
     private ProgressDialog progressDialog;
     private RecyclerView rv_entity_list;
     private NoteBeanPagedListAdapter adapter;
@@ -87,6 +92,8 @@ public class NoteListPagingActivity extends AppCompatActivity
     }
 
     private void inject() {
+
+
         DaggerNoteListPagingActivity_Component.builder()
                 .activityModule(new ActivityModule(this))
                 .appComponent(((App) getApplication()).appComponent())
@@ -97,7 +104,7 @@ public class NoteListPagingActivity extends AppCompatActivity
         rv_entity_list.setLayoutManager(new LinearLayoutManager(this));
         adapter = new NoteBeanPagedListAdapter(new NoteBeanDiffUtilItemCallback(), this);
         rv_entity_list.setAdapter(adapter);
-        new NoteBeanAndroidViewModel(getApplication()).get().observe(this, this::onDataReady);
+        viewModel.get().observe(this, this::onDataReady);
     }
 
     private void onDataReady(PagedList<NoteBean> noteBeans) {
@@ -205,6 +212,13 @@ public class NoteListPagingActivity extends AppCompatActivity
         NotePagingListPresenter.NotePagingUI ui() {
             return activity;
         }
+
+        @ActivityScope
+        @Provides
+        NoteBeanAndroidViewModel viewModel(ViewModelFactory factory) {
+            return ViewModelProviders.of(activity, factory).get(NoteBeanAndroidViewModel.class);
+        }
+
     }
 
 

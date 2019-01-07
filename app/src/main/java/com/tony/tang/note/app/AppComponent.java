@@ -3,6 +3,7 @@ package com.tony.tang.note.app;
 import android.app.Application;
 
 import com.tony.tang.note.data.DataRemoteModule;
+import com.tony.tang.note.db.NoteBean;
 import com.tony.tang.note.db.NoteRoomDatabase;
 import com.tony.tang.note.domain.interactor.note.ClearNoteListUseCase;
 import com.tony.tang.note.domain.interactor.note.CreateNoteUseCase;
@@ -13,8 +14,13 @@ import com.tony.tang.note.remote.RemoteModule;
 import com.tony.tang.note.ui.feature.note.creation.NoteCreateFragment;
 import com.tony.tang.note.ui.feature.note.detail.NoteDetailFragment;
 import com.tony.tang.note.ui.feature.note.edit.NoteEditFragment;
+import com.tony.tang.note.ui.feature.note.list.LiveDataModule;
 import com.tony.tang.note.ui.feature.note.list.NoteBeanBoundaryCallback;
+import com.tony.tang.note.ui.feature.note.list.ViewModelFactory;
+import com.tony.tang.note.ui.feature.note.list.ViewModelModule;
 
+import androidx.lifecycle.LiveData;
+import androidx.paging.PagedList;
 import dagger.BindsInstance;
 
 @AppScope
@@ -23,6 +29,8 @@ import dagger.BindsInstance;
         PrefModule.class,
         ThreadModule.class,
         RemoteModule.GsonModule.class,
+        ViewModelModule.class,
+        LiveDataModule.class,
         DataRemoteModule.class})
 public interface AppComponent {
 
@@ -47,6 +55,10 @@ public interface AppComponent {
     NoteCreateFragment.Component.Builder noteCreationComponentBuilder();
 
     NoteEditFragment.Component.Builder noteEditComponentBuilder();
+
+    ViewModelFactory viewModelFactory();
+
+    LiveData<PagedList<NoteBean>> liveData();
 
     @dagger.Component.Builder
     interface Builder {

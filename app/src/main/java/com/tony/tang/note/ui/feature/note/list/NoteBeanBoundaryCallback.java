@@ -17,9 +17,7 @@ import javax.inject.Inject;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.paging.PagedList;
-import dagger.Reusable;
 
-@Reusable
 public class NoteBeanBoundaryCallback extends PagedList.BoundaryCallback<NoteBean> {
     private final DateFormat dateFormat;
     private final NoteListRepository repository;
