@@ -175,6 +175,11 @@ public class NoteListPagingActivity extends AppCompatActivity
         }
     }
 
+    @Override
+    public void showCount(int count) {
+        Toast.makeText(NoteListPagingActivity.this, "final count :" + count, Toast.LENGTH_SHORT).show();
+    }
+
 
     @ActivityScope
     @dagger.Component(modules = NoteListPagingActivity.ActivityModule.class,

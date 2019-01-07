@@ -1,5 +1,6 @@
 package com.tony.tang.note.domain.interactor.note;
 
+import com.tony.tang.note.domain.entity.NoteData;
 import com.tony.tang.note.domain.entity.NoteEntity;
 import com.tony.tang.note.domain.executor.ThreadExecutor;
 import com.tony.tang.note.domain.executor.UIThread;
@@ -11,20 +12,22 @@ import java.util.Random;
 
 import javax.inject.Inject;
 
+import io.reactivex.Observable;
 import io.reactivex.Single;
+import io.reactivex.annotations.NonNull;
 
 public class GenerateNoteListUseCase extends SingleUseCase<Integer> {
 
 
-    public static final int COUNT = 1000;
+    public static final int COUNT = 98;
     private CreateNoteUseCase createNoteUseCase;
     private List<Quote> quoteArrayList = new ArrayList<>();
 
     @Inject
     public GenerateNoteListUseCase(ThreadExecutor threadExecutor,
-                                   UIThread UIThread,
+                                   UIThread postExecutionThread,
                                    CreateNoteUseCase createNoteUseCase) {
-        super(threadExecutor, UIThread);
+        super(threadExecutor, postExecutionThread);
         this.createNoteUseCase = createNoteUseCase;
         quoteArrayList.add(new Quote("Christopher Moltisanti", " It's an idea, I don't know. Who knows where it fucking came from? Isaac Newton invented gravity because some asshole hit him with an apple."));
         quoteArrayList.add(new Quote("Anthony 'Tony' Soprano Sr.", "Even a broken clock is right twice a day."));
@@ -39,16 +42,27 @@ public class GenerateNoteListUseCase extends SingleUseCase<Integer> {
 
     @Override
     protected Single<Integer> build() {
-
-        throw new RuntimeException();
+        return Observable.range(1, COUNT)
+                .flatMapSingle(this::create)
+                .toList()
+                .map(List::size);
     }
 
-    private NoteEntity constructNote(int index) {
-        Quote quote = quoteArrayList.get((index + new Random().nextInt(COUNT)) % quoteArrayList.size());
-        return NoteEntity.builder().title(index + " " + quote.title).content(index + " " + quote.content).build();
+    private Single<NoteEntity> create(@NonNull Integer index) {
+        return createNoteUseCase.setParams(constructNote(index)).build();
     }
 
-    static class Quote {
+    private NoteData constructNote(int count) {
+        int index = (count + new Random().nextInt(COUNT)) % quoteArrayList.size();
+        Quote quote = quoteArrayList.get(index);
+        return NoteData.builder()
+                .title(count + " " + quote.title)
+                .content(count + " " + quote.content)
+                .status(count % 10 == 0 ? 1 : 0)
+                .build();
+    }
+
+    class Quote {
         String title;
         String content;
 

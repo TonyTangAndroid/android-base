@@ -9,6 +9,7 @@ import com.tony.tang.note.domain.interactor.note.UpdateNoteUseCase;
 import javax.inject.Inject;
 
 import io.reactivex.observers.DisposableCompletableObserver;
+import io.reactivex.observers.DisposableSingleObserver;
 
 class NotePagingListPresenter {
 
@@ -84,7 +85,18 @@ class NotePagingListPresenter {
     }
 
     public void generate() {
+        generateNoteListUseCase.execute(new DisposableSingleObserver<Integer>() {
 
+            @Override
+            public void onSuccess(Integer count) {
+                notePagingUI.showCount(count);
+            }
+
+            @Override
+            public void onError(Throwable e) {
+                notePagingUI.handleError(e);
+            }
+        });
     }
 
     public interface NotePagingUI {
@@ -94,6 +106,8 @@ class NotePagingListPresenter {
         void showLoading();
 
         void hideLoading();
+
+        void showCount(int count);
     }
 
 
