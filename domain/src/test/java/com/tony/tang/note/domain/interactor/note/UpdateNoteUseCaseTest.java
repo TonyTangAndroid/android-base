@@ -1,5 +1,6 @@
 package com.tony.tang.note.domain.interactor.note;
 
+import com.tony.tang.note.domain.entity.NoteData;
 import com.tony.tang.note.domain.entity.NoteEntity;
 import com.tony.tang.note.domain.executor.ThreadExecutor;
 import com.tony.tang.note.domain.executor.UIThread;
@@ -10,7 +11,7 @@ import org.junit.Test;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 
-import io.reactivex.Completable;
+import io.reactivex.Single;
 import io.reactivex.observers.TestObserver;
 
 import static org.mockito.BDDMockito.given;
@@ -34,6 +35,8 @@ public class UpdateNoteUseCaseTest {
     private UIThread mockUIThread;
     @Mock
     private NoteRepository mockNoteRepository;
+    @Mock
+    private NoteEntity entity;
 
     @Before
     public void setup() {
@@ -44,8 +47,8 @@ public class UpdateNoteUseCaseTest {
     @Test
     public void testUpdateNoteUseCaseSuccess() {
 
-        NoteEntity note = mock(NoteEntity.class);
-        given(mockNoteRepository.updateNote(note)).willReturn(Completable.complete());
+        NoteData note = mock(NoteData.class);
+        given(mockNoteRepository.updateNote(note)).willReturn(Single.just(entity));
         UpdateNoteUseCase updateNoteUseCase = new UpdateNoteUseCase(mockThreadExecutor,
                 mockUIThread, mockNoteRepository);
         updateNoteUseCase.setParams(note);

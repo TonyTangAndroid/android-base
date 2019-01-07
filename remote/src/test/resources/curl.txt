@@ -1,0 +1,18 @@
+curl 'https://parse.anycopy.io/prod/classes/_User'
+-H 'origin: https://parse.anycopy.io'
+-H 'accept-encoding: gzip, deflate, br'
+-H 'accept-language: en-US,en;q=0.9,zh-CN;q=0.8,zh;q=0.7'
+-H 'user-agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10_13_6) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/71.0.3578.98 Safari/537.36'
+-H 'content-type: text/plain'
+-H 'accept: */*'
+-H 'referer: https://parse.anycopy.io/dashboard/apps/anycopy_prod_parse_server/browser/_User?filters=%5B%7B%22field%22%3A%22createdAt%22%2C%22constraint%22%3A%22after%22%2C%22compareTo%22%3A%7B%22__type%22%3A%22Date%22%2C%22iso%22%3A%222019-01-01T19%3A46%3A00.000Z%22%7D%7D%5D'
+-H 'authority: parse.anycopy.io'
+-H 'cookie: session=eyJjc3JmU2VjcmV0IjoiMWpYRW5zSEM4QlVZS2dYOHZsSkZOY2ktIiwiZmxhc2giOnt9LCJwYXNzcG9ydCI6eyJ1c2VyIjoidG9ueXRhbmdhbmRyb2lkQGdtYWlsLmNvbSJ9fQ==; session.sig=70tKt_xTj1sp3kaCvjdznGNbbjM' --data-binary '{"where":{"createdAt":{"$gt":{"__type":"Date","iso":"2019-01-01T19:46:00.000Z"}}},"limit":200,"order":"-createdAt","_method":"GET","_ApplicationId":"yfEdqI7Acp4gilWKcLlpFXm8izVHobgfYLOxkd0s","_ClientVersion":"js1.6.14","_MasterKey":"eMMtBWle83GkPqeTSiK6AlBd5DXRNGqZzUWn6fdI","_InstallationId":"61078f10-4dca-638d-07ae-29c08680d5a6"}' --compressed
+
+
+curl 'https://parse.anycopy.io/prod/classes/_User' -H 'origin: https://parse.anycopy.io' -H 'accept-encoding: gzip, deflate, br' -H 'accept-language: en-US,en;q=0.9,zh-CN;q=0.8,zh;q=0.7' -H 'user-agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10_13_6) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/71.0.3578.98 Safari/537.36' -H 'content-type: text/plain' -H 'accept: */*' -H 'referer: https://parse.anycopy.io/dashboard/apps/anycopy_prod_parse_server/browser/_User?filters=%5B%7B%22field%22%3A%22createdAt%22%2C%22constraint%22%3A%22after%22%2C%22compareTo%22%3A%7B%22__type%22%3A%22Date%22%2C%22iso%22%3A%222019-01-01T19%3A46%3A00.000Z%22%7D%7D%5D' -H 'authority: parse.anycopy.io' -H 'cookie: session=eyJjc3JmU2VjcmV0IjoiMWpYRW5zSEM4QlVZS2dYOHZsSkZOY2ktIiwiZmxhc2giOnt9LCJwYXNzcG9ydCI6eyJ1c2VyIjoidG9ueXRhbmdhbmRyb2lkQGdtYWlsLmNvbSJ9fQ==; session.sig=70tKt_xTj1sp3kaCvjdznGNbbjM' --data-binary '{"where":{"createdAt":{"$gt":{"__type":"Date","iso":"2019-01-01T19:46:00.000Z"}}},"limit":200,"order":"-createdAt","_method":"GET","_ApplicationId":"yfEdqI7Acp4gilWKcLlpFXm8izVHobgfYLOxkd0s","_ClientVersion":"js1.6.14","_MasterKey":"eMMtBWle83GkPqeTSiK6AlBd5DXRNGqZzUWn6fdI","_InstallationId":"61078f10-4dca-638d-07ae-29c08680d5a6"}' --compressed
+
+
+{"title":"风和日丽的默默"}
+{"createAt":{"$gte":{"iso":"iso","__type":"2019-01-06T23:23:50.123Z"}}}
+{"createAt":{"$gte":{"iso":"iso","__type":"2019-01-06T23:23:50.123Z"}}}

@@ -1,6 +1,7 @@
 package com.tony.tang.note.domain.interactor.note;
 
 import com.google.common.truth.Truth;
+import com.tony.tang.note.domain.entity.NoteData;
 import com.tony.tang.note.domain.entity.NoteEntity;
 import com.tony.tang.note.domain.executor.ThreadExecutor;
 import com.tony.tang.note.domain.executor.UIThread;
@@ -29,6 +30,8 @@ public class CreateNoteUseCaseTest {
     private static final String FAKE_SESSION = "sdajkfjwexssSdsdljlsdfweds";
 
     @Mock
+    private NoteEntity noteEntity;
+    @Mock
     private ThreadExecutor mockThreadExecutor;
     @Mock
     private UIThread mockUIThread;
@@ -42,9 +45,9 @@ public class CreateNoteUseCaseTest {
 
     @Test
     public void testCreateNoteUseCaseSuccess() {
-        NoteEntity note = mock(NoteEntity.class);
-        given(mockNoteRepository.createNote(note)).willReturn(Single.just(FAKE_ID));
-        given(mockNoteRepository.getNote(FAKE_ID)).willReturn(Single.just(note));
+        NoteData note = mock(NoteData.class);
+        given(mockNoteRepository.createNote(note)).willReturn(Single.just(noteEntity));
+        given(mockNoteRepository.getNote(FAKE_ID)).willReturn(Single.just(noteEntity));
 
 
         TestObserver<NoteEntity> testObserver = new TestObserver<>();

@@ -7,11 +7,13 @@ import com.google.gson.GsonBuilder;
 import com.readystatesoftware.chuck.ChuckInterceptor;
 import com.tony.tang.note.app.AppScope;
 import com.tony.tang.note.data.DataLocalModule;
+import com.tony.tang.note.data.NoteListDataRepository;
 import com.tony.tang.note.data.NoteListRemote;
 import com.tony.tang.note.data.NoteRemote;
 import com.tony.tang.note.domain.entity.ArsenalAdapterFactory;
 import com.tony.tang.note.domain.entity.GsonUTCDateAdapter;
 import com.tony.tang.note.domain.entity.PermissionItemList;
+import com.tony.tang.note.domain.repository.NoteListRepository;
 import com.tony.tang.note.domain.repository.TokenRepository;
 import com.tony.tang.note.domain.repository.UserRepository;
 
@@ -25,7 +27,6 @@ import dagger.Binds;
 import dagger.Module;
 import dagger.Provides;
 import dagger.Reusable;
-import hugo.weaving.DebugLog;
 import okhttp3.OkHttpClient;
 import okhttp3.logging.HttpLoggingInterceptor;
 import retrofit2.Retrofit;
@@ -37,8 +38,8 @@ public abstract class RemoteModule {
 
     @Provides
     @Reusable
-    public static NoteRemoteImpl provideNoteRemoteImpl(RestApi restApi) {
-        return new NoteRemoteImpl(restApi);
+    public static NoteRemoteImpl provideNoteRemoteImpl(Gson gson, RestApi restApi) {
+        return new NoteRemoteImpl(gson, restApi);
     }
 
     @Provides
@@ -63,6 +64,10 @@ public abstract class RemoteModule {
     @Binds
     @Reusable
     public abstract UserRepository bindUserRepository(UserRemoteRepository userDataRepository);
+
+    @Binds
+    @Reusable
+    public abstract NoteListRepository bindNoteListRepository(NoteListDataRepository noteListDataRepository);
 
 
     @Module(includes = DataLocalModule.class)
@@ -109,20 +114,13 @@ public abstract class RemoteModule {
         }
     }
 
-    @DebugLog
     @Module
     public static class GsonModule {
 
 
         @Reusable
         @Provides
-        GsonConverterFactory getFactory(Gson gson) {
-            return GsonConverterFactory.create(gson);
-        }
-
-        @Reusable
-        @Provides
-        DateFormat dateFormat() {
+        static DateFormat dateFormat() {
             DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'", Locale.US);
             dateFormat.setTimeZone(TimeZone.getTimeZone("UTC"));
             return dateFormat;
@@ -130,7 +128,13 @@ public abstract class RemoteModule {
 
         @Reusable
         @Provides
-        Gson getGson(ParseACLJsonAdapter parseACLJsonAdapter, GsonUTCDateAdapter gsonUTCDateAdapter) {
+        static GsonConverterFactory getFactory(Gson gson) {
+            return GsonConverterFactory.create(gson);
+        }
+
+        @Reusable
+        @Provides
+        static Gson getGson(ParseACLJsonAdapter parseACLJsonAdapter, GsonUTCDateAdapter gsonUTCDateAdapter) {
             GsonBuilder gsonBuilder = new GsonBuilder();
             gsonBuilder.registerTypeAdapterFactory(WrapperAdapterFactory.create());
             gsonBuilder.registerTypeAdapterFactory(ArsenalAdapterFactory.create());

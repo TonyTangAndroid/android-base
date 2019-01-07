@@ -1,0 +1,16 @@
+{
+  "where": {
+    "createdAt": {
+      "$gte": {
+        "__type": "Date",
+        "iso": "2019-01-01T19:46:00.000Z"
+      },
+      "$lte": {
+        "__type": "Date",
+        "iso": "2020-01-01T19:46:00.000Z"
+      }
+    }
+  },
+  "limit": 200,
+  "order": "-createdAt"
+}

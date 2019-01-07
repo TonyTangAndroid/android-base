@@ -2,6 +2,7 @@ package com.tony.tang.note.remote;
 
 import com.google.common.truth.Truth;
 import com.google.gson.Gson;
+import com.tony.tang.note.domain.constant.Constants;
 import com.tony.tang.note.domain.entity.NoteData;
 import com.tony.tang.note.domain.entity.NoteEntity;
 import com.tony.tang.note.domain.exception.RestApiErrorException;
@@ -31,7 +32,6 @@ public class NoteRemoteImplTest extends BaseDataRepositoryTest {
     private NoteData fakeNote;
     private MockWebServer mockWebServer;
     private NoteRemoteImpl noteRemoteImpl;
-    private Map<String, Object> fakeQueryParam;
 
 
     @Before
@@ -43,9 +43,8 @@ public class NoteRemoteImplTest extends BaseDataRepositoryTest {
         this.mockWebServer = new MockWebServer();
         this.mockWebServer.start();
 
-        this.noteRemoteImpl = new NoteRemoteImpl(restApi());
+        this.noteRemoteImpl = new NoteRemoteImpl(WrapperGsonHelper.build(), restApi());
         this.fakeNote = NoteData.builder().objectId(OBJECT_ID).title(MOCK_NOTE_TITLE).content(MOCK_NOTE_CONTENT).build();
-        fakeQueryParam = new HashMap<>();
     }
 
     private RestApi restApi() {
@@ -100,13 +99,56 @@ public class NoteRemoteImplTest extends BaseDataRepositoryTest {
         MockResponse response = new MockResponse().setResponseCode(200).setBody(json);
         this.mockWebServer.enqueue(response);
 
-        this.noteRemoteImpl.getNotes(fakeQueryParam).subscribe(testObserver);
+        this.noteRemoteImpl.getNotes(null).subscribe(testObserver);
         testObserver.awaitTerminalEvent();
 
         Truth.assertThat(testObserver.values().size()).isEqualTo(1);
         Truth.assertThat(testObserver.values().get(0)).isEqualTo(WrapperGsonHelper.build().fromJson(json, NoteEntitiesWrapper.class).results());
 
     }
+
+    @Test
+    public void testGetNotesRequest_has_correct_param() throws IOException, InterruptedException {
+        TestObserver<List<NoteEntity>> testObserver = new TestObserver<>();
+
+        String json = TestUtils.json("note_getall_ok.json", this);
+        MockResponse response = new MockResponse().setResponseCode(200).setBody(json);
+        this.mockWebServer.enqueue(response);
+
+        this.noteRemoteImpl.getNotes(null).subscribe(testObserver);
+        testObserver.awaitTerminalEvent();
+
+
+        RecordedRequest request = this.mockWebServer.takeRequest();
+        Truth.assertThat(request.getPath()).isEqualTo("/" + RestApi.URL_PATH_CLASSES_NOTE + "?limit=100");
+        Truth.assertThat(request.getMethod()).isEqualTo(HttpMethod.GET);
+    }
+
+    @Test
+    public void testGetNotesRequest_has_correct_param_with_query() throws IOException, InterruptedException {
+        TestObserver<List<NoteEntity>> testObserver = new TestObserver<>();
+
+        String json = TestUtils.json("note_getall_ok.json", this);
+        MockResponse response = new MockResponse().setResponseCode(200).setBody(json);
+        this.mockWebServer.enqueue(response);
+
+
+        Map<String, Object> query = new HashMap<>();
+        query.put(Constants.KEY_CREATED_AT, query());
+        this.noteRemoteImpl.getNotes(query).subscribe(testObserver);
+        testObserver.awaitTerminalEvent();
+        RecordedRequest request = this.mockWebServer.takeRequest();
+        Truth.assertThat(request.getRequestUrl().queryParameter("where")).isEqualTo("{\"createdAt\":{\"$gt\":{\"__type\":\"Date\",\"iso\":\"2019-01-02T19:46:00.000Z\"}}}");
+        Truth.assertThat(request.getMethod()).isEqualTo(HttpMethod.GET);
+    }
+
+
+    private ParseOperator query() {
+        String isoDate = "2019-01-02T19:46:00.000Z";
+        ParseDate parseDate = ParseDate.builder().iso(isoDate).build();
+        return ParseOperator.builder().greatThan(parseDate).build();
+    }
+
 
     @Test
     public void testCreateNoteSuccessResponse() throws IOException {

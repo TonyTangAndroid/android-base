@@ -42,7 +42,7 @@ public interface NoteBeanDao {
      * Room knows how to return a LivePagedListProvider, from which we can get a LiveData and serve
      * it back to UI via ViewModel.
      */
-    @Query("SELECT * FROM note ORDER BY createAt COLLATE NOCASE DESC")
+    @Query("SELECT * FROM note ORDER BY createAt COLLATE NOCASE ASC")
     DataSource.Factory<Integer, NoteBean> allNoteBean();
 
 

@@ -29,7 +29,8 @@ public class GsonUTCDateAdapter implements JsonSerializer<Date>, JsonDeserialize
 
     @Override
     public synchronized JsonElement serialize(Date date, Type type, JsonSerializationContext jsonSerializationContext) {
-        return new JsonPrimitive(dateFormat.format(date));
+        String format = dateFormat.format(date);
+        return new JsonPrimitive(format);
     }
 
     @Override

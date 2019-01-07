@@ -30,7 +30,7 @@ public class UpdateNoteUseCase extends CompletableUseCase {
     }
 
     @Override
-    protected Completable  build() {
+    protected Completable build() {
         return this.noteRepository.updateNote(this.note).ignoreElement();
     }
 }

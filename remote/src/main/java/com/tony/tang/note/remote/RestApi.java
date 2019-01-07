@@ -6,6 +6,8 @@ import com.tony.tang.note.domain.entity.UserEntity;
 
 import java.util.Map;
 
+import javax.annotation.Nullable;
+
 import io.reactivex.Single;
 import retrofit2.Response;
 import retrofit2.http.Body;
@@ -15,7 +17,6 @@ import retrofit2.http.POST;
 import retrofit2.http.PUT;
 import retrofit2.http.Path;
 import retrofit2.http.Query;
-import retrofit2.http.QueryMap;
 
 interface RestApi {
 
@@ -60,7 +61,8 @@ interface RestApi {
     Single<Response<UserEntity>> getUserBySessionToken();
 
     @GET(URL_PATH_CLASSES_NOTE)
-    Single<Response<NoteEntitiesWrapper>> getNotes(@QueryMap Map<String, Object> queryParams);
+    Single<Response<NoteEntitiesWrapper>> getNotes(@Query("limit") int limit, @Nullable @Query(value = "where") String where);
+
 
     @PUT(URL_PATH_CLASSES_NOTE_OBJECT_ID)
     Single<Response<UpdatedWrapper>> updateNote(@Path("objectId") String objectId, @Body NoteData note);
