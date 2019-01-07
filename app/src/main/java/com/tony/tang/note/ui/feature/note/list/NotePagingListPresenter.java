@@ -69,7 +69,6 @@ class NotePagingListPresenter {
         clearNoteListUseCase.execute(new DisposableCompletableObserver() {
             @Override
             protected void onStart() {
-                notePagingUI.showLoading();
             }
 
             @Override

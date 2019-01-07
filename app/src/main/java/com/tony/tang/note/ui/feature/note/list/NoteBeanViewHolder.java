@@ -9,7 +9,8 @@ import com.tony.tang.note.app.R;
 import com.tony.tang.note.app.Status;
 import com.tony.tang.note.db.NoteBean;
 
-import androidx.annotation.Nullable;
+import javax.annotation.Nonnull;
+
 import androidx.recyclerview.widget.RecyclerView;
 
 public final class NoteBeanViewHolder extends RecyclerView.ViewHolder {
@@ -23,6 +24,7 @@ public final class NoteBeanViewHolder extends RecyclerView.ViewHolder {
 
     public NoteBeanViewHolder(View rootView, Listener listener) {
         super(rootView);
+//        this.setIsRecyclable(false);
         this.listener = listener;
         this.cb_star = this.itemView.findViewById(R.id.cb_star);
         this.btn_delete = this.itemView.findViewById(R.id.btn_delete);
@@ -32,17 +34,19 @@ public final class NoteBeanViewHolder extends RecyclerView.ViewHolder {
         this.tv_content = this.itemView.findViewById(R.id.tv_content);
     }
 
-    public final void bindTo(@Nullable NoteBean item) {
-        if (item != null) {
-            this.tv_title.setText(item.objectId);
-            this.tv_content.setText(item.content);
-            this.cb_star.setChecked(item.status == Status.STAR);
-            this.itemView.setOnClickListener(view -> listener.view(item));
-            this.btn_delete.setOnClickListener(view -> listener.delete(item));
-            this.btn_toggle_title.setOnClickListener(view -> listener.toggleTitle(item));
-            this.btn_toggle_order.setOnClickListener(view -> listener.toggleOrder(item));
-            this.cb_star.setOnCheckedChangeListener((buttonView, isChecked) -> listener.toggleStatus(isChecked, item.objectId));
-        }
+    public final void bindTo(@Nonnull NoteBean item) {
+        this.tv_title.setText(item.objectId);
+        this.tv_content.setText(item.content);
+        this.cb_star.setChecked(item.status == Status.STAR);
+        this.itemView.setOnClickListener(view -> listener.view(item));
+        this.btn_delete.setOnClickListener(view -> listener.delete(item));
+        this.btn_toggle_title.setOnClickListener(view -> listener.toggleTitle(item));
+        this.btn_toggle_order.setOnClickListener(view -> listener.toggleOrder(item));
+        this.cb_star.setOnCheckedChangeListener((buttonView, isChecked) -> listener.toggleStatus(isChecked, item.objectId));
+    }
+
+    public void unbind() {
+        this.cb_star.setOnCheckedChangeListener(null);
     }
 
     public interface Listener {

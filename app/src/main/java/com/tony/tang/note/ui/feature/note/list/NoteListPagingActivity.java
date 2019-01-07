@@ -26,6 +26,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 import dagger.Provides;
+import hugo.weaving.DebugLog;
 
 public class NoteListPagingActivity extends AppCompatActivity
         implements SwipeRefreshLayout.OnRefreshListener,
@@ -112,6 +113,7 @@ public class NoteListPagingActivity extends AppCompatActivity
         rv_entity_list = findViewById(R.id.rv_entity_list);
         SwipeRefreshLayout swipe_refresh_layout = findViewById(R.id.swipe_refresh_layout);
         swipe_refresh_layout.setOnRefreshListener(this);
+        swipe_refresh_layout.setEnabled(false);
     }
 
     @Override
@@ -138,6 +140,7 @@ public class NoteListPagingActivity extends AppCompatActivity
 
     }
 
+    @DebugLog
     @Override
     public void toggleStatus(boolean isChecked, String objectId) {
         notePagingListPresenter.toggleStatus(data(isChecked, objectId));
