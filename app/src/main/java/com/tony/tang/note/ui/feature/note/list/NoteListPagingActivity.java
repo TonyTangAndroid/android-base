@@ -1,5 +1,6 @@
 package com.tony.tang.note.ui.feature.note.list;
 
+import android.app.ProgressDialog;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -33,22 +34,16 @@ public class NoteListPagingActivity extends AppCompatActivity
 
     @Inject
     NotePagingListPresenter notePagingListPresenter;
+    private ProgressDialog progressDialog;
     private RecyclerView rv_entity_list;
     private NoteBeanPagedListAdapter adapter;
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        getMenuInflater().inflate(R.menu.menu_note_create, menu);
+        getMenuInflater().inflate(R.menu.menu_list, menu);
         return super.onCreateOptionsMenu(menu);
     }
 
-    @Override
-    public boolean onPrepareOptionsMenu(Menu menu) {
-        MenuItem item = menu.findItem(R.id.item_show_paging);
-        item.setVisible(false);
-        return super.onPrepareOptionsMenu(menu);
-
-    }
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
@@ -56,9 +51,23 @@ public class NoteListPagingActivity extends AppCompatActivity
             case R.id.item_create:
                 startActivity(NoteCreateActivity.constructIntent(this));
                 return true;
+            case R.id.item_generate:
+                generate();
+                return true;
+            case R.id.item_clear:
+                clear();
+                return true;
             default:
                 return super.onOptionsItemSelected(item);
         }
+    }
+
+    private void clear() {
+        notePagingListPresenter.clear();
+    }
+
+    private void generate() {
+        notePagingListPresenter.generate();
     }
 
     @Override
@@ -149,6 +158,23 @@ public class NoteListPagingActivity extends AppCompatActivity
     public void handleError(Throwable e) {
 
     }
+
+
+    @Override
+    public void showLoading() {
+        if (this.progressDialog == null) {
+            this.progressDialog = new ProgressDialog(this);
+        }
+        this.progressDialog.show();
+    }
+
+    @Override
+    public void hideLoading() {
+        if (this.progressDialog != null) {
+            this.progressDialog.dismiss();
+        }
+    }
+
 
     @ActivityScope
     @dagger.Component(modules = NoteListPagingActivity.ActivityModule.class,

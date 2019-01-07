@@ -10,16 +10,11 @@
     <item
         android:id="@+id/item_generate"
         android:title="@string/button_generate"
-        android:visible="false"
+        android:visible="true"
         app:showAsAction="never"/>
     <item
         android:id="@+id/item_clear"
         android:title="@string/button_clear"
-        android:visible="false"
+        android:visible="true"
         app:showAsAction="never"/>
-
-    <item
-        android:id="@+id/item_show_paging"
-        android:title="@string/paging"
-        app:showAsAction="ifRoom"/>
 </menu>

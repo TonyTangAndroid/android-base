@@ -4,6 +4,8 @@ import com.tony.tang.note.domain.entity.NoteData;
 import com.tony.tang.note.domain.entity.NoteEntity;
 import com.tony.tang.note.domain.repository.NoteRepository;
 
+import java.util.List;
+
 import javax.inject.Inject;
 
 import io.reactivex.Completable;
@@ -13,11 +15,15 @@ import io.reactivex.SingleSource;
 public class NoteDataRepository implements NoteRepository {
 
     private final NoteRemote remote;
+    private final NoteEntityCache noteEntityDao;
     private final NoteDiskCacheImpl noteDiskCacheImpl;
 
     @Inject
-    public NoteDataRepository(NoteRemote remote, NoteDiskCacheImpl noteDiskCacheImpl) {
+    public NoteDataRepository(NoteRemote remote,
+                              NoteEntityCache noteEntityDao,
+                              NoteDiskCacheImpl noteDiskCacheImpl) {
         this.remote = remote;
+        this.noteEntityDao = noteEntityDao;
         this.noteDiskCacheImpl = noteDiskCacheImpl;
     }
 
@@ -44,6 +50,11 @@ public class NoteDataRepository implements NoteRepository {
     public Single<NoteEntity> updateNote(NoteData note) {
         //XXX when the update note should be executed.
         return this.remote.updateNote(note).andThen(getNote(note.objectId()));
+    }
+
+    @Override
+    public Single<List<String>> objectIdList() {
+        return noteEntityDao.listObjectId();
     }
 
     @Override

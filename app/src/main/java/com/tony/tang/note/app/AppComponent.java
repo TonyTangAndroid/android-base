@@ -4,8 +4,10 @@ import android.app.Application;
 
 import com.tony.tang.note.data.DataRemoteModule;
 import com.tony.tang.note.db.NoteRoomDatabase;
+import com.tony.tang.note.domain.interactor.note.ClearNoteListUseCase;
 import com.tony.tang.note.domain.interactor.note.CreateNoteUseCase;
 import com.tony.tang.note.domain.interactor.note.DeleteNoteUseCase;
+import com.tony.tang.note.domain.interactor.note.GenerateNoteListUseCase;
 import com.tony.tang.note.domain.interactor.note.UpdateNoteUseCase;
 import com.tony.tang.note.remote.RemoteModule;
 import com.tony.tang.note.ui.feature.note.creation.NoteCreateFragment;
@@ -33,6 +35,10 @@ public interface AppComponent {
     CreateNoteUseCase createNoteUseCase();
 
     UpdateNoteUseCase updateNoteUseCase();
+
+    ClearNoteListUseCase clearNoteListUseCase();
+
+    GenerateNoteListUseCase generateNoteListUseCase();
 
     DeleteNoteUseCase deleteNoteUseCase();
 

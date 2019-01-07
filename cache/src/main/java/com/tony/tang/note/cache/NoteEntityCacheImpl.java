@@ -5,8 +5,12 @@ import com.tony.tang.note.db.NoteBean;
 import com.tony.tang.note.db.NoteBeanDao;
 import com.tony.tang.note.domain.entity.NoteEntity;
 
+import java.util.List;
+
 import javax.annotation.Nonnull;
 import javax.inject.Inject;
+
+import io.reactivex.Single;
 
 
 public class NoteEntityCacheImpl implements NoteEntityCache {
@@ -41,6 +45,11 @@ public class NoteEntityCacheImpl implements NoteEntityCache {
     @Override
     public boolean isExist(String objectId) {
         return noteBeanDao.count(objectId) > 0;
+    }
+
+    @Override
+    public Single<List<String>> listObjectId() {
+        return noteBeanDao.listObjectId();
     }
 
 }

@@ -1,7 +1,9 @@
 package com.tony.tang.note.ui.feature.note.list;
 
 import com.tony.tang.note.domain.entity.NoteData;
+import com.tony.tang.note.domain.interactor.note.ClearNoteListUseCase;
 import com.tony.tang.note.domain.interactor.note.DeleteNoteUseCase;
+import com.tony.tang.note.domain.interactor.note.GenerateNoteListUseCase;
 import com.tony.tang.note.domain.interactor.note.UpdateNoteUseCase;
 
 import javax.inject.Inject;
@@ -13,14 +15,20 @@ class NotePagingListPresenter {
     private final NotePagingUI notePagingUI;
     private final UpdateNoteUseCase updateNoteUseCase;
     private final DeleteNoteUseCase deleteNoteUseCase;
+    private final ClearNoteListUseCase clearNoteListUseCase;
+    private final GenerateNoteListUseCase generateNoteListUseCase;
 
     @Inject
     public NotePagingListPresenter(NotePagingUI notePagingUI,
                                    UpdateNoteUseCase updateNoteUseCase,
-                                   DeleteNoteUseCase deleteNoteUseCase) {
+                                   DeleteNoteUseCase deleteNoteUseCase,
+                                   ClearNoteListUseCase clearNoteListUseCase,
+                                   GenerateNoteListUseCase generateNoteListUseCase) {
         this.notePagingUI = notePagingUI;
         this.updateNoteUseCase = updateNoteUseCase;
         this.deleteNoteUseCase = deleteNoteUseCase;
+        this.clearNoteListUseCase = clearNoteListUseCase;
+        this.generateNoteListUseCase = generateNoteListUseCase;
     }
 
     void destroy() {
@@ -56,9 +64,36 @@ class NotePagingListPresenter {
         });
     }
 
+    public void clear() {
+        clearNoteListUseCase.execute(new DisposableCompletableObserver() {
+            @Override
+            protected void onStart() {
+                notePagingUI.showLoading();
+            }
+
+            @Override
+            public void onComplete() {
+                notePagingUI.hideLoading();
+            }
+
+            @Override
+            public void onError(Throwable e) {
+                notePagingUI.handleError(e);
+            }
+        });
+    }
+
+    public void generate() {
+
+    }
+
     public interface NotePagingUI {
 
         void handleError(Throwable e);
+
+        void showLoading();
+
+        void hideLoading();
     }
 
 

@@ -9,6 +9,7 @@ import androidx.room.Dao;
 import androidx.room.Insert;
 import androidx.room.OnConflictStrategy;
 import androidx.room.Query;
+import io.reactivex.Single;
 
 import static com.tony.tang.note.db.NoteBean.OBJECT_ID;
 import static com.tony.tang.note.db.NoteBean.TABLE_NAME_NOTE_CACHE;
@@ -45,5 +46,6 @@ public interface NoteBeanDao {
     @Query("SELECT * FROM note ORDER BY createAt COLLATE NOCASE ASC")
     DataSource.Factory<Integer, NoteBean> allNoteBean();
 
-
+    @Query("SELECT objectId FROM note ORDER BY createAt COLLATE NOCASE ASC")
+    Single<List<String>> listObjectId();
 }
