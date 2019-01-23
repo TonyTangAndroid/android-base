@@ -32,7 +32,7 @@ public class App extends Application {
         HunterLoggerHandler.installLogImpl(new HunterLoggerHandler() {
             @Override
             protected void log(String tag, String msg) {
-                Timber.v(tag, msg);
+                Timber.tag(tag).v(msg);
             }
         });
     }
