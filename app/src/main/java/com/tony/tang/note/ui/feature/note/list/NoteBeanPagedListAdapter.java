@@ -4,6 +4,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.hunter.library.debug.HunterDebug;
 import com.tony.tang.note.app.R;
 import com.tony.tang.note.db.NoteBean;
 
@@ -12,8 +13,8 @@ import java.util.Objects;
 import androidx.annotation.NonNull;
 import androidx.paging.PagedListAdapter;
 import androidx.recyclerview.widget.DiffUtil;
-import hugo.weaving.DebugLog;
 
+@HunterDebug
 public class NoteBeanPagedListAdapter extends PagedListAdapter<NoteBean, NoteBeanViewHolder> {
 
     private final NoteBeanViewHolder.Listener listener;
@@ -30,13 +31,11 @@ public class NoteBeanPagedListAdapter extends PagedListAdapter<NoteBean, NoteBea
         return new NoteBeanViewHolder(rootView, listener);
     }
 
-    @DebugLog
     @Override
     public void onBindViewHolder(@NonNull NoteBeanViewHolder holder, int position) {
         holder.bindTo(Objects.requireNonNull(getItem(position)));
     }
 
-    @DebugLog
     @Override
     public void onViewRecycled(@NonNull NoteBeanViewHolder holder) {
         super.onViewRecycled(holder);

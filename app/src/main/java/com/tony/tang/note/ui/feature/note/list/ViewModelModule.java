@@ -15,9 +15,7 @@ import dagger.MapKey;
 import dagger.Module;
 import dagger.Provides;
 import dagger.multibindings.IntoMap;
-import hugo.weaving.DebugLog;
 
-@DebugLog
 @Module
 public class ViewModelModule {
 

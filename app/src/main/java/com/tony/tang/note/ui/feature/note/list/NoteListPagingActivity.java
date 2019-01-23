@@ -27,7 +27,6 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 import dagger.Provides;
-import hugo.weaving.DebugLog;
 
 public class NoteListPagingActivity extends AppCompatActivity
         implements SwipeRefreshLayout.OnRefreshListener,
@@ -147,7 +146,6 @@ public class NoteListPagingActivity extends AppCompatActivity
 
     }
 
-    @DebugLog
     @Override
     public void toggleStatus(boolean isChecked, String objectId) {
         notePagingListPresenter.toggleStatus(data(isChecked, objectId));

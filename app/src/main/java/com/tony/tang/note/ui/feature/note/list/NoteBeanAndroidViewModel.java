@@ -10,9 +10,7 @@ import javax.inject.Inject;
 import androidx.lifecycle.AndroidViewModel;
 import androidx.lifecycle.LiveData;
 import androidx.paging.PagedList;
-import hugo.weaving.DebugLog;
 
-@DebugLog
 public class NoteBeanAndroidViewModel extends AndroidViewModel {
     private final LiveData<PagedList<NoteBean>> liveData;
 

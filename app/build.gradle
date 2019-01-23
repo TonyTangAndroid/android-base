@@ -1,5 +1,4 @@
 apply plugin: 'com.android.application'
-apply plugin: 'com.jakewharton.hugo'
 apply plugin: "com.github.ben-manes.versions"
 
 android {
@@ -66,6 +65,9 @@ dependencies {
     compile project(':data')
     compile project(':presenter')
 
+    implementation 'com.github.TonyTangAndroid.Wood:wood:0.3.1'
+    implementation 'com.quinn.hunter:hunter-debug-library:0.9.4'
+    implementation 'com.jakewharton.threetenabp:threetenabp:1.1.1'
 
     implementation "com.akaita.java:rxjava2-debug:${rxjava2DebugVersion}"
     implementation "androidx.lifecycle:lifecycle-runtime:${lifecycleVersion}"
@@ -117,4 +119,10 @@ dependencyUpdates.resolutionStrategy {
             }
         }
     }
+}
+
+
+apply plugin: 'hunter-debug'
+debugHunterExt {
+    runVariant = 'DEBUG'
 }
