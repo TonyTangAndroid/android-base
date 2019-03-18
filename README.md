@@ -24,7 +24,7 @@ Specification summary:
 * Continuous Integration system.
 * Scripts to reset project.
 
-Here is its counterpart server api from where this app consumes the data
+Here is its counterpart server api from where this app consumes the data : 
 -> [rails-api-base](https://github.com/jordifierro/rails-api-base)
 
 
