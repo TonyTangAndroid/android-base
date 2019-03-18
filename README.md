@@ -4,7 +4,7 @@
 
 
 
-## Introduction
+## Introduction.
 
 This projects aims to be:
 
