@@ -11,7 +11,7 @@ ext {
     fragmentVersion = '1.0.0'
 
     chuckVersion = '1.1.0'
-    daggerVersion = '2.21'
+    daggerVersion = '2.22.1'
     rxjava2DebugVersion = '1.4.0'
     appcompatVersion = '1.0.2'
     cardviewVersion = '1.0.0'
@@ -20,7 +20,7 @@ ext {
     everNoteAndroidStateVersion = '1.4.1'
 
     //jar
-    tonyJarVersion = '1.0.1'
+    tonyJarVersion = '1.0.2'
     autoValueVersion = '1.6.3'
     autoValueGsonVersion = '1.0.0'
     jetbrainsAnnotationsVersion = '16.0.3'
