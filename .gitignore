@@ -7,3 +7,5 @@
 /captures
 *.keystore
 sign.gradle
+.buckd
+buck-out
