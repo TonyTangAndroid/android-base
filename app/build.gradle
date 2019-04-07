@@ -59,11 +59,12 @@ android {
 
 
 dependencies {
-    api project(':cache')
-    api project(':domain')
-    api project(':remote')
-    api project(':data')
-    api project(':presenter')
+    implementation project(':cache')
+    implementation project(':domain')
+    implementation project(':remote')
+    implementation project(':data')
+    implementation project(':db')
+    implementation project(':presenter')
 
     implementation "com.google.dagger:dagger:${daggerVersion}"
 
@@ -90,7 +91,7 @@ dependencies {
     implementation "com.google.android.material:material:${materialVersion}"
 
 
-    api 'com.github.TonyTangAndroid:aar:1.0.0'
+    implementation 'com.github.TonyTangAndroid:aar:1.0.0'
 
 
     annotationProcessor "com.google.dagger:dagger-compiler:${daggerVersion}"
