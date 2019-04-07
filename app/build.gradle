@@ -60,8 +60,10 @@ android {
 
 dependencies {
 
+    implementation project(':db')
     implementation project(':data')
     implementation project(':cache')
+    implementation project(':domain')
     implementation project(':remote')
     implementation project(':presenter')
 

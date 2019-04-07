@@ -6,6 +6,7 @@ apply plugin: 'net.ltgt.apt'
 dependencies {
 
     implementation project(':data')
+    implementation project(':domain')
 
 
     testImplementation "com.github.TonyTangAndroid:test:${tonyTestVersion}"
