@@ -9,3 +9,4 @@
 sign.gradle
 .buckd
 buck-out
+.okbuck
