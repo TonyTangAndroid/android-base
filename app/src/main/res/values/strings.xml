@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">Public Notes</string>
+    <string name="app_name">Parse Notes</string>
     <string name="note_detail">Note Detail</string>
     <string name="message_error">Error</string>
     <string name="note_list">Note List</string>
