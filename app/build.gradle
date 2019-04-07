@@ -59,11 +59,11 @@ android {
 
 
 dependencies {
-    compile project(':cache')
-    compile project(':domain')
-    compile project(':remote')
-    compile project(':data')
-    compile project(':presenter')
+    api project(':cache')
+    api project(':domain')
+    api project(':remote')
+    api project(':data')
+    api project(':presenter')
 
     implementation "com.google.dagger:dagger:${daggerVersion}"
 
@@ -90,7 +90,7 @@ dependencies {
     implementation "com.google.android.material:material:${materialVersion}"
 
 
-    compile 'com.github.TonyTangAndroid:aar:1.0.0'
+    api 'com.github.TonyTangAndroid:aar:1.0.0'
 
 
     annotationProcessor "com.google.dagger:dagger-compiler:${daggerVersion}"
@@ -98,10 +98,10 @@ dependencies {
     annotationProcessor "com.evernote:android-state-processor:${everNoteAndroidStateVersion}"
 
 
-    implementation 'org.jetbrains:annotations:16.0.3'
+    implementation "org.jetbrains:annotations:${jetbrainsAnnotationsVersion}"
 
-    testImplementation 'com.github.TonyTangAndroid:test:1.0.0'
-    androidTestImplementation 'com.github.TonyTangAndroid:test:1.0.0'
+    testImplementation "com.github.TonyTangAndroid:test:${tonyTestVersion}"
+    androidTestImplementation "com.github.TonyTangAndroid:test:${tonyTestVersion}"
     androidTestImplementation "androidx.test.ext:junit:${extJunitVersion}"
     androidTestImplementation "androidx.test:core:${testCoreVersion}"
     androidTestImplementation "androidx.test:runner:${testRunnerVersion}"

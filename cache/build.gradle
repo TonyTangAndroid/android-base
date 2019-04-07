@@ -33,13 +33,9 @@ android {
 
 dependencies {
 
-    compile project(':db')
-    compile project(':data')
-
-    testImplementation 'org.jetbrains:annotations:16.0.3'
-    testImplementation 'com.github.TonyTangAndroid:test:1.0.0'
-
-    androidTestImplementation 'com.github.TonyTangAndroid:test:1.0.0'
+    api project(':db')
+    api project(':data')
+    androidTestImplementation "com.github.TonyTangAndroid:test:${tonyTestVersion}"
     androidTestImplementation "androidx.test.ext:junit:${extJunitVersion}"
     androidTestImplementation "androidx.test:core:${testCoreVersion}"
     androidTestImplementation "androidx.test:runner:${testRunnerVersion}"

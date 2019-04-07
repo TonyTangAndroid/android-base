@@ -35,7 +35,7 @@ android {
 
 dependencies {
 
-    compile project(':data')
+    api project(':data')
 
 
 
@@ -47,7 +47,7 @@ dependencies {
     annotationProcessor "androidx.room:room-compiler:${roomVersion}"
 
 
-    testImplementation 'org.jetbrains:annotations:16.0.3'
-    testImplementation 'com.github.TonyTangAndroid:test:1.0.0'
+    testImplementation "com.github.TonyTangAndroid:test:${tonyTestVersion}"
+    testImplementation "org.jetbrains:annotations:${jetbrainsAnnotationsVersion}"
 
 }

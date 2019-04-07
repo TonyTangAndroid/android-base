@@ -19,12 +19,19 @@ ext {
     annotationVersion = '1.0.1'
     everNoteAndroidStateVersion = '1.4.1'
 
+    //jar
+    tonyJarVersion = '1.0.1'
+    autoValueVersion = '1.6.3'
+    autoValueGsonVersion = '1.0.0'
+    jetbrainsAnnotationsVersion = '16.0.3'
+
     roomVersion = '2.0.0'
     pagingVersion = '2.1.0'
     lifecycleVersion = '2.0.0'
 
     //Testing
     espressoCoreVersion = '3.1.1'
+    tonyTestVersion = '1.0.0'
     testRunnerVersion = '1.1.1'
     extJunitVersion = '1.1.0'
     testCoreVersion = '1.1.0'
