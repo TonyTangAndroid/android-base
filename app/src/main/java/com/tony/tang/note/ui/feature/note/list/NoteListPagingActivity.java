@@ -108,7 +108,7 @@ public class NoteListPagingActivity extends AppCompatActivity
 
     private void onDataReady(PagedList<NoteBean> noteBeans) {
         System.out.println("new page size :" + noteBeans.size());
-        Toast.makeText(NoteListPagingActivity.this, "total:" + noteBeans.size(), Toast.LENGTH_SHORT).show();
+//        Toast.makeText(NoteListPagingActivity.this, "total:" + noteBeans.size(), Toast.LENGTH_SHORT).show();
         adapter.submitList(noteBeans);
     }
 
