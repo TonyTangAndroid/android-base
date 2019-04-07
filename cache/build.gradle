@@ -34,7 +34,7 @@ android {
 dependencies {
 
     api project(':db')
-    api project(':data')
+    implementation project(':data')
     androidTestImplementation "com.github.TonyTangAndroid:test:${tonyTestVersion}"
     androidTestImplementation "androidx.test.ext:junit:${extJunitVersion}"
     androidTestImplementation "androidx.test:core:${testCoreVersion}"
