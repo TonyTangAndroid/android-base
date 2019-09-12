@@ -31,6 +31,8 @@ public class NoteDataRepositoryTest {
 
 
     @Mock
+    private NoteEntityCache noteEntityCache;
+    @Mock
     private NoteEntity noteEntity;
 
     @Mock
@@ -42,7 +44,7 @@ public class NoteDataRepositoryTest {
     @Before
     public void setUp() {
         MockitoAnnotations.initMocks(this);
-        this.noteDataRepository = new NoteDataRepository(noteRemote, noteEntityDao, noteDiskCache);
+        this.noteDataRepository = new NoteDataRepository(noteRemote, noteEntityCache, noteDiskCache);
     }
 
 

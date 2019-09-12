@@ -1,6 +1,5 @@
 package com.tony.tang.note.domain.interactor.note;
 
-import com.google.common.truth.Truth;
 import com.tony.tang.note.domain.entity.NoteData;
 import com.tony.tang.note.domain.entity.NoteEntity;
 import com.tony.tang.note.domain.executor.ThreadExecutor;
@@ -13,7 +12,6 @@ import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 
 import io.reactivex.Single;
-import io.reactivex.observers.TestObserver;
 
 import static org.mockito.BDDMockito.given;
 import static org.mockito.Mockito.mock;
@@ -49,20 +47,13 @@ public class CreateNoteUseCaseTest {
         given(mockNoteRepository.createNote(note)).willReturn(Single.just(noteEntity));
         given(mockNoteRepository.getNote(FAKE_ID)).willReturn(Single.just(noteEntity));
 
-
-        TestObserver<NoteEntity> testObserver = new TestObserver<>();
-
-
         CreateNoteUseCase createNoteUseCase = new CreateNoteUseCase(mockThreadExecutor,
                 mockUIThread, mockNoteRepository);
-
         createNoteUseCase.setParams(note);
-        testObserver = createNoteUseCase.build().subscribeWith(testObserver);
-        Truth.assertThat(testObserver.getEvents().get(0).get(0)).isEqualTo(note);
+        createNoteUseCase.build().test().assertValue(noteEntity);
         verify(mockNoteRepository).createNote(note);
-        verify(mockNoteRepository).getNote(FAKE_ID);
-
         verifyNoMoreInteractions(mockNoteRepository);
+
         verifyZeroInteractions(mockThreadExecutor);
         verifyZeroInteractions(mockUIThread);
     }

@@ -120,7 +120,7 @@ public class NoteRemoteImplTest extends BaseDataRepositoryTest {
 
 
         RecordedRequest request = this.mockWebServer.takeRequest();
-        Truth.assertThat(request.getPath()).isEqualTo("/" + RestApi.URL_PATH_CLASSES_NOTE + "?limit=100");
+        Truth.assertThat(request.getPath()).isEqualTo("/" + RestApi.URL_PATH_CLASSES_NOTE + "?limit=10");
         Truth.assertThat(request.getMethod()).isEqualTo(HttpMethod.GET);
     }
 

@@ -20,8 +20,8 @@ ext {
     everNoteAndroidStateVersion = '1.4.1'
 
     //jar
-    tonyJarVersion = '1.0.2'
-    autoValueVersion = '1.6.3'
+    tonyJarVersion = '1.0.3'
+    autoValueVersion = '1.6.6'
     autoValueGsonVersion = '1.0.0'
     jetbrainsAnnotationsVersion = '16.0.3'
 
@@ -31,7 +31,7 @@ ext {
 
     //Testing
     espressoCoreVersion = '3.1.1'
-    tonyTestVersion = '1.0.0'
+    tonyTestVersion = '1.0.2'
     testRunnerVersion = '1.1.1'
     extJunitVersion = '1.1.0'
     testCoreVersion = '1.1.0'

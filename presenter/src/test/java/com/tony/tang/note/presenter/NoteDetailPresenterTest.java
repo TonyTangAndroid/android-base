@@ -3,6 +3,7 @@ package com.tony.tang.note.presenter;
 import com.tony.tang.note.domain.entity.NoteEntity;
 import com.tony.tang.note.domain.exception.RestApiErrorException;
 import com.tony.tang.note.domain.interactor.note.GetNoteUseCase;
+import com.tony.tang.note.domain.interactor.note.UpdateNoteUseCase;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -12,6 +13,7 @@ import org.mockito.MockitoAnnotations;
 import static junit.framework.Assert.assertNull;
 import static org.mockito.BDDMockito.given;
 import static org.mockito.Matchers.any;
+import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.verify;
 
 public class NoteDetailPresenterTest {
@@ -19,6 +21,8 @@ public class NoteDetailPresenterTest {
     private static final String MOCK_OBJECT_ID = "mock_object_id";
     @Mock
     GetNoteUseCase getNoteUseCase;
+    @Mock
+    UpdateNoteUseCase updateNoteUseCase;
     @Mock
     NoteDetailPresenter.NoteDetailView mockNoteDetailView;
 
@@ -65,10 +69,11 @@ public class NoteDetailPresenterTest {
     @Test
     public void testSubscriberOnNext() {
 
-        this.noteDetailSubscriber.onSuccess(NoteEntity.builder().objectId("3WQrZ0dyrt").content("").title("").build());
+        NoteEntity mock = mock(NoteEntity.class);
+        this.noteDetailSubscriber.onSuccess(mock);
 
         verify(this.mockNoteDetailView).hideLoader();
-        verify(this.mockNoteDetailView).showNote(any(NoteEntity.class));
+        verify(this.mockNoteDetailView).showNote(mock);
     }
 
 }

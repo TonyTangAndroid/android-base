@@ -92,7 +92,7 @@ dependencies {
     implementation "com.google.android.material:material:${materialVersion}"
 
 
-    implementation 'com.github.TonyTangAndroid:aar:1.0.0'
+    implementation 'com.github.TonyTangAndroid:aar:1.0.1'
 
 
     annotationProcessor "com.google.dagger:dagger-compiler:${daggerVersion}"
