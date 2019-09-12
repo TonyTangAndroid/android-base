@@ -8,12 +8,12 @@ ext {
     androidCompileSdkVersion = 28
     multidexVersion = '2.0.1'
     materialVersion = '1.0.0'
-    fragmentVersion = '1.0.0'
+    fragmentVersion = '1.1.0'
 
     chuckVersion = '1.1.0'
     daggerVersion = '2.22.1'
     rxjava2DebugVersion = '1.4.0'
-    appcompatVersion = '1.0.2'
+    appcompatVersion = '1.1.0'
     cardviewVersion = '1.0.0'
     recyclerviewVersion = '1.0.0'
     annotationVersion = '1.0.1'
@@ -25,9 +25,9 @@ ext {
     autoValueGsonVersion = '1.0.0'
     jetbrainsAnnotationsVersion = '16.0.3'
 
-    roomVersion = '2.0.0'
+    roomVersion = '2.1.0'
     pagingVersion = '2.1.0'
-    lifecycleVersion = '2.0.0'
+    lifecycleVersion = '2.1.0'
 
     //Testing
     espressoCoreVersion = '3.1.1'
