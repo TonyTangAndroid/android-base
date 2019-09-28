@@ -12,6 +12,8 @@ buildscript {
         classpath "net.ltgt.gradle:gradle-apt-plugin:0.21"
         classpath "com.github.ben-manes:gradle-versions-plugin:0.25.0"
         classpath 'com.quinn.hunter:hunter-debug-plugin:0.9.6'
+        classpath 'com.quinn.hunter:hunter-transform:0.9.3'
+
     }
 }
 
