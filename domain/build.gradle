@@ -5,6 +5,8 @@ apply plugin: 'net.ltgt.apt'
 
 dependencies {
     api "com.github.TonyTangAndroid:jar:${tonyJarVersion}"
+    api 'javax.annotation:javax.annotation-api:1.3.2'
+
     testImplementation "com.github.TonyTangAndroid:test:${tonyTestVersion}"
     testImplementation "org.jetbrains:annotations:${jetbrainsAnnotationsVersion}"
 
