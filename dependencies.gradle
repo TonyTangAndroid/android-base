@@ -1,22 +1,22 @@
 ext {
     appVersionCode = 1
     appVersionName = '1.0'
-    androidBuildToolsVersion = '28.0.3'
+    androidBuildToolsVersion = '29.0.2'
 
     androidMinSdkVersion = 21
-    androidTargetSdkVersion = 28
-    androidCompileSdkVersion = 28
+    androidTargetSdkVersion = 29
+    androidCompileSdkVersion = 29
     multidexVersion = '2.0.1'
     materialVersion = '1.0.0'
     fragmentVersion = '1.1.0'
 
     chuckVersion = '1.1.0'
-    daggerVersion = '2.22.1'
+    daggerVersion = '2.24'
     rxjava2DebugVersion = '1.4.0'
     appcompatVersion = '1.1.0'
     cardviewVersion = '1.0.0'
     recyclerviewVersion = '1.0.0'
-    annotationVersion = '1.0.1'
+    annotationVersion = '1.1.0'
     everNoteAndroidStateVersion = '1.4.1'
 
     //jar
