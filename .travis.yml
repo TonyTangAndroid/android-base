@@ -14,7 +14,7 @@ android:
     - android-23
     - extra-android-support
     - extra-android-m2repository
-    - sys-img-armeabi-v7a-android-28
+    - sys-img-armeabi-v7a-android-29
 
 before_install:
   - export JAVA8_HOME=/usr/lib/jvm/java-8-oracle
