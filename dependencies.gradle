@@ -60,7 +60,10 @@ ext {
             junit:              "junit:junit:${jUnitVersion}",
             mockito:            "org.mockito:mockito-core:${mockitoVersion}",
             mockWebServer:      "com.squareup.okhttp3:mockwebserver:${mockWebServerVersion}",
-            commonsIO:          "commons-io:commons-io:${commonsIOVersion}"
+            commonsIO:          "commons-io:commons-io:${commonsIOVersion}",
+            espresso:           "com.android.support.test.espresso:espresso-core:${espressoVersion}",
+            testRunner:         "com.android.support.test:runner:${testRunnerVersion}",
+            testRules:         "com.android.support.test:rules:${testRulesVersion}",
     ]
 
     presentationDependencies = [

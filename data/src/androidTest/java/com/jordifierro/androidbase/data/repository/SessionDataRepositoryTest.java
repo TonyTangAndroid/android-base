@@ -1,12 +1,19 @@
 package com.jordifierro.androidbase.data.repository;
 
+import static junit.framework.TestCase.assertEquals;
+import static org.junit.Assert.assertNull;
+
 import android.content.Context;
 import android.content.SharedPreferences;
-import android.test.InstrumentationTestCase;
-
+import android.support.test.InstrumentationRegistry;
+import android.support.test.runner.AndroidJUnit4;
 import com.jordifierro.androidbase.domain.entity.UserEntity;
+import org.junit.Before;
+import org.junit.Test;
+import org.junit.runner.RunWith;
 
-public class SessionDataRepositoryTest extends InstrumentationTestCase {
+@RunWith(AndroidJUnit4.class)
+public class SessionDataRepositoryTest {
 
     private static final String SHARED_PACKAGE = "SharedPreferencesTest";
     private static final String FAKE_EMAIL = "test@email.com";
@@ -16,8 +23,9 @@ public class SessionDataRepositoryTest extends InstrumentationTestCase {
     private SessionDataRepository sessionDataRepository;
     private UserEntity user;
 
-    protected void setUp() throws Exception {
-        this.sharedPreferences = getInstrumentation().getTargetContext()
+    @Before
+    public void setUp() throws Exception {
+        this.sharedPreferences = InstrumentationRegistry.getInstrumentation().getTargetContext()
                 .getSharedPreferences(SHARED_PACKAGE, Context.MODE_PRIVATE);
         SharedPreferences.Editor editor = sharedPreferences.edit();
         editor.clear();
@@ -28,11 +36,13 @@ public class SessionDataRepositoryTest extends InstrumentationTestCase {
         this.user.setAuthToken(FAKE_TOKEN);
     }
 
+    @Test
     public void testGetWithoutSetReturnsNull(){
         assertNull(this.sessionDataRepository.getCurrentUser().getEmail());
         assertNull(this.sessionDataRepository.getCurrentUser().getAuthToken());
     }
 
+    @Test
     public void testSetAndGetSettedUser() {
         this.sessionDataRepository.setCurrentUser(this.user);
         UserEntity currentUser = this.sessionDataRepository.getCurrentUser();
@@ -41,6 +51,7 @@ public class SessionDataRepositoryTest extends InstrumentationTestCase {
         assertEquals(currentUser.getAuthToken(), FAKE_TOKEN);
     }
 
+    @Test
     public void testSetInvalidateAndGetNullUser() {
         this.sessionDataRepository.setCurrentUser(this.user);
         this.sessionDataRepository.invalidateSession();
