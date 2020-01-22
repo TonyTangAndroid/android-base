@@ -1,13 +1,17 @@
 package com.jordifierro.androidbase.presentation.executor;
 
-import android.test.InstrumentationTestCase;
+import static junit.framework.TestCase.assertEquals;
 
+import android.support.test.runner.AndroidJUnit4;
 import io.reactivex.android.schedulers.AndroidSchedulers;
+import org.junit.Test;
+import org.junit.runner.RunWith;
 
-public class UIThreadTest extends InstrumentationTestCase {
+@RunWith(AndroidJUnit4.class)
+public class UIThreadTest {
 
+    @Test
     public void testExecute() {
-
         assertEquals(new UIThread().getScheduler(), AndroidSchedulers.mainThread());
     }
 }
