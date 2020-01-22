@@ -12,7 +12,8 @@ ext {
     androidMinSdkVersion = 15
     androidTargetSdkVersion = 29
     androidCompileSdkVersion = 29
-    appcompatVersion = '1.1.0'
+    //https://stackoverflow.com/a/57968071/4068957
+    appcompatVersion = '1.0.2'
     legacySupportV4Version = '1.0.0'
     materialDesignVersion = '1.0.0'
     annotationVersion = '1.1.0'
