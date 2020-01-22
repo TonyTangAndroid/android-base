@@ -1,35 +1,41 @@
 package com.jordifierro.androidbase.presentation.executor;
 
-import android.test.InstrumentationTestCase;
+import android.support.test.runner.AndroidJUnit4;
 
+import org.junit.After;
+import org.junit.Before;
+import org.junit.Test;
+import org.junit.runner.RunWith;
 import org.mockito.Mockito;
 
 import java.util.concurrent.ThreadPoolExecutor;
 
+import static junit.framework.TestCase.assertEquals;
+import static org.junit.Assert.assertNotSame;
 import static org.mockito.Matchers.any;
 import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
 
-public class JobExecutorTest extends InstrumentationTestCase {
+@RunWith(AndroidJUnit4.class)
+public class JobExecutorTest   {
 
     private JobExecutor jobExecutor;
     private ThreadPoolExecutor threadPoolExecutor;
     private JobExecutor.JobThreadFactory jobThreadFactory;
 
-    @Override
+    @Before
     public void setUp() throws Exception {
-        super.setUp();
         this.jobExecutor = new JobExecutor();
         this.threadPoolExecutor = this.jobExecutor.threadPoolExecutor;
         this.jobThreadFactory = new JobExecutor.JobThreadFactory();
     }
 
-    @Override
+    @After
     public void tearDown() throws Exception {
-        super.tearDown();
         this.threadPoolExecutor.shutdown();
     }
 
+    @Test
     public void testExecute() {
         ThreadPoolExecutor mockThreadPoolExecutor = Mockito.mock(ThreadPoolExecutor.class);
         this.jobExecutor.threadPoolExecutor = mockThreadPoolExecutor;
@@ -39,6 +45,7 @@ public class JobExecutorTest extends InstrumentationTestCase {
         verify(mockThreadPoolExecutor).execute(any(Runnable.class));
     }
 
+    @Test
     public void testParams() {
         assertEquals(JobExecutor.INITIAL_POOL_SIZE, this.threadPoolExecutor.getCorePoolSize());
         assertEquals(JobExecutor.MAX_POOL_SIZE, this.threadPoolExecutor.getMaximumPoolSize());
@@ -46,6 +53,7 @@ public class JobExecutorTest extends InstrumentationTestCase {
                         this.threadPoolExecutor.getKeepAliveTime(JobExecutor.KEEP_ALIVE_TIME_UNIT));
     }
 
+    @Test
     public void testJobThreadFactory() {
         Runnable mockCommand = Mockito.mock(Runnable.class);
         Thread one = this.jobThreadFactory.newThread(mockCommand);
