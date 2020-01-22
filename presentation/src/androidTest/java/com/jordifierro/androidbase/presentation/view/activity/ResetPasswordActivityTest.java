@@ -4,7 +4,6 @@ import android.content.pm.PackageManager;
 import android.support.test.espresso.intent.Intents;
 import android.support.test.rule.ActivityTestRule;
 import android.support.test.runner.AndroidJUnit4;
-import android.test.suitebuilder.annotation.SmallTest;
 
 import com.jordifierro.androidbase.presentation.R;
 import com.jordifierro.androidbase.presentation.view.fragment.RegisterFragment;
@@ -28,7 +27,6 @@ import static android.support.test.espresso.matcher.ViewMatchers.withText;
 import static org.mockito.Mockito.verify;
 
 @RunWith(AndroidJUnit4.class)
-@SmallTest
 public class ResetPasswordActivityTest {
 
     @Rule

@@ -3,7 +3,6 @@ package com.jordifierro.androidbase.presentation.view.activity;
 import android.support.test.rule.ActivityTestRule;
 import android.support.test.runner.AndroidJUnit4;
 import android.support.v7.widget.Toolbar;
-import android.test.suitebuilder.annotation.LargeTest;
 import android.widget.TextView;
 
 import com.jordifierro.androidbase.data.net.RestApi;
@@ -31,7 +30,6 @@ import static org.hamcrest.Matchers.allOf;
 import static org.hamcrest.core.IsEqual.equalTo;
 
 @RunWith(AndroidJUnit4.class)
-@LargeTest
 public class PrivacyActivityTest {
 
     @Rule
