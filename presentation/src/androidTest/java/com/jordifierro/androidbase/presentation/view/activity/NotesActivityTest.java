@@ -1,11 +1,12 @@
 package com.jordifierro.androidbase.presentation.view.activity;
 
 import android.content.pm.PackageManager;
-import androidx.test.espresso.intent.Intents;
-import androidx.test.rule.ActivityTestRule;
-import androidx.test.ext.junit.runners.AndroidJUnit4;
-import androidx.appcompat.widget.Toolbar;
 import android.widget.TextView;
+
+import androidx.appcompat.widget.Toolbar;
+import androidx.test.espresso.intent.Intents;
+import androidx.test.ext.junit.runners.AndroidJUnit4;
+import androidx.test.rule.ActivityTestRule;
 
 import com.jordifierro.androidbase.domain.entity.NoteEntity;
 import com.jordifierro.androidbase.presentation.R;
@@ -41,14 +42,14 @@ public class NotesActivityTest {
 
     @Rule
     public final ActivityTestRule<MainActivity> activityTestRule = new ActivityTestRule<>(
-            MainActivity.class);
+        MainActivity.class);
     private NotesFragment notesFragment;
     private List<NoteEntity> notes = new ArrayList<>();
 
     @Before
     public void setUp() throws Exception {
         this.notesFragment = ((NotesFragment) this.activityTestRule.getActivity()
-                                .getFragmentManager().findFragmentById(R.id.fragment_container));
+            .getFragmentManager().findFragmentById(R.id.fragment_container));
         this.notes.add(new NoteEntity(1, "First title", "First content"));
         this.notes.add(new NoteEntity(2, "Second title", "Second content"));
         this.notes.add(new NoteEntity(3, "Third title", "Third content"));
@@ -56,10 +57,10 @@ public class NotesActivityTest {
 
     @Test
     public void testViewElements() throws PackageManager.NameNotFoundException {
-        onView(Matchers.allOf(isAssignableFrom(TextView.class),withParent(isAssignableFrom(Toolbar.class))))
-                .check(matches(withText(R.string.title_activity_main)));
+        onView(Matchers.allOf(isAssignableFrom(TextView.class), withParent(isAssignableFrom(Toolbar.class))))
+            .check(matches(withText(R.string.title_activity_main)));
         onView(withId(R.id.btn_create_new_note))
-                .check(matches(withText(R.string.button_create_new_note)));
+            .check(matches(withText(R.string.button_create_new_note)));
     }
 
     @Test
@@ -90,8 +91,8 @@ public class NotesActivityTest {
         onView(withText("Second title")).perform(click());
 
         intended(allOf(
-                hasComponent(NoteDetailActivity.class.getName()),
-                hasExtra(NoteDetailActivity.PARAM_NOTE_ID, 2)));
+            hasComponent(NoteDetailActivity.class.getName()),
+            hasExtra(NoteDetailActivity.PARAM_NOTE_ID, 2)));
         Intents.release();
     }
 
@@ -126,16 +127,16 @@ public class NotesActivityTest {
         });
 
         String expiration = this.activityTestRule.getActivity()
-                .getResources().getString(R.string.message_expiration);
+            .getResources().getString(R.string.message_expiration);
         String update = this.activityTestRule.getActivity()
-                .getResources().getString(R.string.message_update);
+            .getResources().getString(R.string.message_update);
 
         onView(withText(containsString(expiration))).inRoot(
-                withDecorView(not(this.activityTestRule.getActivity().getWindow().getDecorView())))
-                .check(matches(isDisplayed()));
+            withDecorView(not(this.activityTestRule.getActivity().getWindow().getDecorView())))
+            .check(matches(isDisplayed()));
         onView(withText(containsString(update))).inRoot(
-                withDecorView(not(this.activityTestRule.getActivity().getWindow().getDecorView())))
-                .check(matches(isDisplayed()));
+            withDecorView(not(this.activityTestRule.getActivity().getWindow().getDecorView())))
+            .check(matches(isDisplayed()));
     }
 
 }

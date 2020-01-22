@@ -22,11 +22,16 @@ import static org.mockito.Mockito.verify;
 
 public class NoteEditPresenterTest {
 
-    @Mock GetNoteUseCase getNoteUseCase;
-    @Mock UpdateNoteUseCase updateNoteUseCase;
-    @Mock DeleteNoteUseCase deleteNoteUseCase;
-    @Mock NoteEditView mockNoteEditView;
-    @Mock Observable mockObservable;
+    @Mock
+    GetNoteUseCase getNoteUseCase;
+    @Mock
+    UpdateNoteUseCase updateNoteUseCase;
+    @Mock
+    DeleteNoteUseCase deleteNoteUseCase;
+    @Mock
+    NoteEditView mockNoteEditView;
+    @Mock
+    Observable mockObservable;
 
     private NoteEditPresenter noteEditPresenter;
     private NoteEditPresenter.GetNoteSubscriber getNoteSubscriber;
@@ -37,7 +42,7 @@ public class NoteEditPresenterTest {
     public void setUp() throws Exception {
         MockitoAnnotations.initMocks(this);
         this.noteEditPresenter = new NoteEditPresenter(this.updateNoteUseCase,
-                                                       this.getNoteUseCase, this.deleteNoteUseCase);
+            this.getNoteUseCase, this.deleteNoteUseCase);
         this.noteEditPresenter.initWithView(this.mockNoteEditView);
         this.getNoteSubscriber = this.noteEditPresenter.new GetNoteSubscriber();
         this.updateNoteSubscriber = this.noteEditPresenter.new UpdateNoteSubscriber();

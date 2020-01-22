@@ -25,22 +25,29 @@ public class CreateUserUseCaseTest {
 
     private static final String FAKE_PASS = "1234";
 
-    @Mock private ThreadExecutor mockThreadExecutor;
-    @Mock private PostExecutionThread mockPostExecutionThread;
-    @Mock private UserRepository mockUserRepository;
-    @Mock private SessionRepository mockSessionRepository;
-    @Mock private UserEntity mockUser;
+    @Mock
+    private ThreadExecutor mockThreadExecutor;
+    @Mock
+    private PostExecutionThread mockPostExecutionThread;
+    @Mock
+    private UserRepository mockUserRepository;
+    @Mock
+    private SessionRepository mockSessionRepository;
+    @Mock
+    private UserEntity mockUser;
 
     @Before
-    public void setup() { MockitoAnnotations.initMocks(this); }
+    public void setup() {
+        MockitoAnnotations.initMocks(this);
+    }
 
     @Test
     public void testCreateUserUseCaseSuccess() {
         CreateUserUseCase createUserUseCase = new CreateUserUseCase(mockThreadExecutor,
-                mockPostExecutionThread, mockUserRepository, mockSessionRepository);
+            mockPostExecutionThread, mockUserRepository, mockSessionRepository);
         TestObserver<UserEntity> testObserver = new TestObserver<>();
         given(mockUserRepository.createUser(mockUser))
-                .willReturn(Observable.just(mockUser));
+            .willReturn(Observable.just(mockUser));
 
         createUserUseCase.setParams(mockUser);
         createUserUseCase.buildUseCaseObservable().subscribeWith(testObserver);

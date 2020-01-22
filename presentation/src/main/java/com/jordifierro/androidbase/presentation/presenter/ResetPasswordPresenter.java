@@ -12,8 +12,8 @@ import javax.inject.Inject;
 @ActivityScope
 public class ResetPasswordPresenter extends BasePresenter implements Presenter {
 
-    private ResetPasswordUseCase resetPasswordUseCase;
     ResetPasswordView resetPasswordView;
+    private ResetPasswordUseCase resetPasswordUseCase;
 
     @Inject
     public ResetPasswordPresenter(ResetPasswordUseCase resetPasswordUseCase) {

@@ -21,8 +21,8 @@ import static org.mockito.BDDMockito.given;
 import static org.mockito.Matchers.any;
 import static org.mockito.Matchers.eq;
 import static org.mockito.Mockito.verify;
-import static org.mockito.Mockito.verifyZeroInteractions;
 import static org.mockito.Mockito.verifyNoMoreInteractions;
+import static org.mockito.Mockito.verifyZeroInteractions;
 
 public class CreateNoteUseCaseTest {
 
@@ -30,21 +30,29 @@ public class CreateNoteUseCaseTest {
     private static final String FAKE_TITLE = "MyTitle";
     private static final String FAKE_CONTENT = "MyContent";
 
-    @Mock private ThreadExecutor mockThreadExecutor;
-    @Mock private PostExecutionThread mockPostExecutionThread;
-    @Mock private NoteRepository mockNoteRepository;
-    @Mock private SessionRepository mockSessionRepository;
-    @Mock private UserEntity mockUserEntity;
+    @Mock
+    private ThreadExecutor mockThreadExecutor;
+    @Mock
+    private PostExecutionThread mockPostExecutionThread;
+    @Mock
+    private NoteRepository mockNoteRepository;
+    @Mock
+    private SessionRepository mockSessionRepository;
+    @Mock
+    private UserEntity mockUserEntity;
+
     @Before
-    public void setup() { MockitoAnnotations.initMocks(this); }
+    public void setup() {
+        MockitoAnnotations.initMocks(this);
+    }
 
     @Test
     public void testCreateNoteUseCaseSuccess() {
         NoteEntity note = new NoteEntity(FAKE_ID, FAKE_TITLE, FAKE_CONTENT);
         CreateNoteUseCase createNoteUseCase = new CreateNoteUseCase(mockThreadExecutor,
-                mockPostExecutionThread, mockNoteRepository, mockSessionRepository);
+            mockPostExecutionThread, mockNoteRepository, mockSessionRepository);
         given(mockNoteRepository.createNote(any(UserEntity.class), eq(note)))
-                .willReturn(Observable.just(note));
+            .willReturn(Observable.just(note));
         given(mockSessionRepository.getCurrentUser()).willReturn(mockUserEntity);
 
         TestObserver<NoteEntity> testObserver = new TestObserver<>();
@@ -53,9 +61,9 @@ public class CreateNoteUseCaseTest {
         createNoteUseCase.buildUseCaseObservable().subscribeWith(testObserver);
 
         Assert.assertEquals(FAKE_TITLE,
-                ((NoteEntity)(testObserver.getEvents().get(0)).get(0)).getTitle());
+            ((NoteEntity) (testObserver.getEvents().get(0)).get(0)).getTitle());
         Assert.assertEquals(FAKE_CONTENT,
-                ((NoteEntity)(testObserver.getEvents().get(0)).get(0)).getContent());
+            ((NoteEntity) (testObserver.getEvents().get(0)).get(0)).getContent());
         verify(mockSessionRepository).getCurrentUser();
         verifyNoMoreInteractions(mockSessionRepository);
         verify(mockNoteRepository).createNote(mockUserEntity, note);

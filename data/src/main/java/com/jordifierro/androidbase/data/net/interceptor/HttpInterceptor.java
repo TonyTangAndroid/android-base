@@ -16,14 +16,15 @@ import okhttp3.Response;
 public class HttpInterceptor implements Interceptor {
 
     @Inject
-    public HttpInterceptor() {}
+    public HttpInterceptor() {
+    }
 
     @Override
     public Response intercept(Chain chain) throws IOException {
         Request request = chain.request().newBuilder()
-                .addHeader("Accept-Language", Locale.getDefault().getLanguage())
-                .addHeader("Accept", RestApi.VERSION_HEADER)
-                .build();
+            .addHeader("Accept-Language", Locale.getDefault().getLanguage())
+            .addHeader("Accept", RestApi.VERSION_HEADER)
+            .build();
         return chain.proceed(request);
     }
 

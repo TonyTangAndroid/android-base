@@ -5,10 +5,11 @@ import android.app.FragmentTransaction;
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.os.Bundle;
+import android.view.View;
+
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
-import android.view.View;
 
 import com.jordifierro.androidbase.presentation.R;
 
@@ -17,9 +18,9 @@ import butterknife.ButterKnife;
 
 public abstract class BaseActivity extends AppCompatActivity {
 
+    @BindView(R.id.toolbar)
+    Toolbar toolbar;
     private ProgressDialog progressDialog;
-
-    @BindView(R.id.toolbar) Toolbar toolbar;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -32,7 +33,7 @@ public abstract class BaseActivity extends AppCompatActivity {
 
     protected abstract void initializeActivity(Bundle savedInstanceState);
 
-    protected void initializeToolbar(){
+    protected void initializeToolbar() {
         if (this.useToolbar()) {
             setSupportActionBar(this.toolbar);
             if (this.useBackToolbar()) {
@@ -50,8 +51,13 @@ public abstract class BaseActivity extends AppCompatActivity {
         } else toolbar.setVisibility(View.GONE);
     }
 
-    protected boolean useToolbar() { return true; }
-    protected boolean useBackToolbar() { return true; }
+    protected boolean useToolbar() {
+        return true;
+    }
+
+    protected boolean useBackToolbar() {
+        return true;
+    }
 
     protected void addFragment(int containerViewId, Fragment fragment) {
         FragmentTransaction fragmentTransaction = this.getFragmentManager().beginTransaction();

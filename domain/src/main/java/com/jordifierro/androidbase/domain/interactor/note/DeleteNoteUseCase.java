@@ -9,7 +9,6 @@ import com.jordifierro.androidbase.domain.repository.SessionRepository;
 
 import javax.inject.Inject;
 
-import io.reactivex.Completable;
 import io.reactivex.Observable;
 
 public class DeleteNoteUseCase extends UseCase<VoidEntity> {

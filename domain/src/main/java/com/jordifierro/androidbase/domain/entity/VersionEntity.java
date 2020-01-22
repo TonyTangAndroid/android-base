@@ -8,7 +8,8 @@ public class VersionEntity {
 
     private String state;
 
-    public VersionEntity() {}
+    public VersionEntity() {
+    }
 
     public VersionEntity(String state) {
         this.state = state;

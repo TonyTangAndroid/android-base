@@ -18,9 +18,12 @@ import static org.mockito.Mockito.verify;
 
 public class NoteCreatePresenterTest {
 
-    @Mock CreateNoteUseCase createNoteUseCase;
-    @Mock NoteCreateView mockNoteCreateView;
-    @Mock Observable mockObservable;
+    @Mock
+    CreateNoteUseCase createNoteUseCase;
+    @Mock
+    NoteCreateView mockNoteCreateView;
+    @Mock
+    Observable mockObservable;
 
     private NoteCreatePresenter noteCreatePresenter;
     private NoteCreatePresenter.NoteCreateSubscriber noteCreateSubscriber;

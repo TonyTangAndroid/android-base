@@ -23,7 +23,7 @@ public class HttpInterceptorTest {
         mockWebServer.enqueue(new MockResponse());
 
         OkHttpClient okHttpClient = new OkHttpClient().newBuilder()
-                .addInterceptor(new HttpInterceptor()).build();
+            .addInterceptor(new HttpInterceptor()).build();
         okHttpClient.newCall(new Request.Builder().url(mockWebServer.url("/")).build()).execute();
 
         RecordedRequest request = mockWebServer.takeRequest();

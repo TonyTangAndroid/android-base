@@ -46,18 +46,18 @@ public class UserDataRepositoryTest {
     @Before
     public void setUp() throws IOException {
         this.gson = new GsonBuilder()
-                .setFieldNamingPolicy(FieldNamingPolicy.LOWER_CASE_WITH_UNDERSCORES).create();
+            .setFieldNamingPolicy(FieldNamingPolicy.LOWER_CASE_WITH_UNDERSCORES).create();
 
         this.mockWebServer = new MockWebServer();
         this.mockWebServer.start();
 
         this.userDataRepository = new UserDataRepository(
-                new Retrofit.Builder()
-                        .baseUrl(mockWebServer.url("/"))
-                        .addConverterFactory(GsonConverterFactory.create(this.gson))
-                        .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
-                        .build()
-                        .create(RestApi.class)
+            new Retrofit.Builder()
+                .baseUrl(mockWebServer.url("/"))
+                .addConverterFactory(GsonConverterFactory.create(this.gson))
+                .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
+                .build()
+                .create(RestApi.class)
         );
 
         this.testObserver = new TestObserver();
@@ -83,20 +83,20 @@ public class UserDataRepositoryTest {
         assertEquals("/users", request.getPath());
         assertEquals("POST", request.getMethod());
         assertEquals(this.gson.toJson(new UserWrapper(this.fakeUser)).toString(),
-                     request.getBody().readUtf8());
+            request.getBody().readUtf8());
     }
 
     @Test
     public void testCreateUserSuccess() throws Exception {
         this.mockWebServer.enqueue(new MockResponse().setResponseCode(201).setBody(
-                FileUtils.readFileToString(
-                        TestUtils.getFileFromPath(this, "user_create_ok.json"))));
+            FileUtils.readFileToString(
+                TestUtils.getFileFromPath(this, "user_create_ok.json"))));
 
         this.userDataRepository.createUser(this.fakeUser).subscribe(this.testObserver);
         this.testObserver.awaitTerminalEvent();
 
         UserEntity responseUser =
-                (UserEntity) ((List<Object>)testObserver.getEvents().get(0)).get(0);
+            (UserEntity) ((List<Object>) testObserver.getEvents().get(0)).get(0);
         assertTrue(responseUser.getEmail().length() > 0);
         assertTrue(responseUser.getAuthToken().length() > 0);
     }
@@ -104,8 +104,8 @@ public class UserDataRepositoryTest {
     @Test
     public void testCreateUserError() throws Exception {
         this.mockWebServer.enqueue(new MockResponse().setResponseCode(422).setBody(
-                FileUtils.readFileToString(
-                        TestUtils.getFileFromPath(this, "user_create_error.json"))));
+            FileUtils.readFileToString(
+                TestUtils.getFileFromPath(this, "user_create_error.json"))));
 
         this.userDataRepository.createUser(this.fakeUser).subscribe(this.testObserver);
         this.testObserver.awaitTerminalEvent();
@@ -164,28 +164,28 @@ public class UserDataRepositoryTest {
         assertEquals("/users/reset_password", request.getPath());
         assertEquals("POST", request.getMethod());
         assertEquals(this.gson.toJson(new UserWrapper(this.fakeUser)).toString(),
-                     request.getBody().readUtf8());
+            request.getBody().readUtf8());
     }
 
     @Test
     public void testResetPasswordSuccess() throws Exception {
         this.mockWebServer.enqueue(new MockResponse().setResponseCode(201).setBody(
-                FileUtils.readFileToString(
-                        TestUtils.getFileFromPath(this, "reset_password_ok.json"))));
+            FileUtils.readFileToString(
+                TestUtils.getFileFromPath(this, "reset_password_ok.json"))));
 
         this.userDataRepository.resetPassword(this.fakeUser).subscribe(this.testObserver);
         this.testObserver.awaitTerminalEvent();
 
         MessageEntity responseMessage =
-                (MessageEntity) ((List<Object>)testObserver.getEvents().get(0)).get(0);
+            (MessageEntity) ((List<Object>) testObserver.getEvents().get(0)).get(0);
         assertEquals("Check your email to confirm the new password", responseMessage.getMessage());
     }
 
     @Test
     public void testResetPasswordError() throws Exception {
         this.mockWebServer.enqueue(new MockResponse().setResponseCode(422).setBody(
-                FileUtils.readFileToString(
-                        TestUtils.getFileFromPath(this, "reset_password_error.json"))));
+            FileUtils.readFileToString(
+                TestUtils.getFileFromPath(this, "reset_password_error.json"))));
 
         this.userDataRepository.resetPassword(this.fakeUser).subscribe(this.testObserver);
         this.testObserver.awaitTerminalEvent();
@@ -206,21 +206,21 @@ public class UserDataRepositoryTest {
         assertEquals("/users/login", request.getPath());
         assertEquals("POST", request.getMethod());
         assertEquals(gson.toJson(new UserWrapper(this.fakeUser)).toString(),
-                     request.getBody().readUtf8());
+            request.getBody().readUtf8());
     }
 
     @Test
     public void testLoginUserSuccess() throws Exception {
         this.mockWebServer.enqueue(new MockResponse().setResponseCode(200).setBody(
-                FileUtils.readFileToString(
-                        TestUtils.getFileFromPath(this, "session_login_ok.json"))));
+            FileUtils.readFileToString(
+                TestUtils.getFileFromPath(this, "session_login_ok.json"))));
 
 
         this.userDataRepository.loginUser(this.fakeUser).subscribe(this.testObserver);
         this.testObserver.awaitTerminalEvent();
 
         UserEntity responseUser =
-                (UserEntity) ((List<Object>)testObserver.getEvents().get(0)).get(0);
+            (UserEntity) ((List<Object>) testObserver.getEvents().get(0)).get(0);
         assertTrue(responseUser.getEmail().length() > 0);
         assertTrue(responseUser.getAuthToken().length() > 0);
     }
@@ -228,8 +228,8 @@ public class UserDataRepositoryTest {
     @Test
     public void testLoginUserError() throws Exception {
         this.mockWebServer.enqueue(new MockResponse().setResponseCode(422).setBody(
-                FileUtils.readFileToString(
-                        TestUtils.getFileFromPath(this, "session_login_error.json"))));
+            FileUtils.readFileToString(
+                TestUtils.getFileFromPath(this, "session_login_error.json"))));
 
 
         this.userDataRepository.loginUser(this.fakeUser).subscribe(this.testObserver);

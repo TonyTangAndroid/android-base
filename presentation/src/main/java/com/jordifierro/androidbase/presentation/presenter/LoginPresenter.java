@@ -11,8 +11,8 @@ import javax.inject.Inject;
 @ActivityScope
 public class LoginPresenter extends BasePresenter implements Presenter {
 
-    private DoLoginUseCase doLoginUseCase;
     LoginView loginView;
+    private DoLoginUseCase doLoginUseCase;
 
     @Inject
     public LoginPresenter(DoLoginUseCase doLoginUseCase) {

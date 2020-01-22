@@ -11,7 +11,6 @@ import javax.inject.Inject;
 
 import io.reactivex.Observable;
 import io.reactivex.functions.Action;
-import io.reactivex.functions.Function;
 
 public class DeleteUserUseCase extends UseCase<VoidEntity> {
 
@@ -29,11 +28,11 @@ public class DeleteUserUseCase extends UseCase<VoidEntity> {
     @Override
     protected Observable<VoidEntity> buildUseCaseObservable() {
         return this.userRepository.deleteUser(this.sessionRepository.getCurrentUser())
-                .doOnComplete(new Action() {
-                    @Override
-                    public void run() {
-                        sessionRepository.invalidateSession();
-                    }
-                });
+            .doOnComplete(new Action() {
+                @Override
+                public void run() {
+                    sessionRepository.invalidateSession();
+                }
+            });
     }
 }

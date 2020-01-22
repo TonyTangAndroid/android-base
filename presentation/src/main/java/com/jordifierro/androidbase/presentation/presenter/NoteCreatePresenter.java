@@ -11,8 +11,8 @@ import javax.inject.Inject;
 @ActivityScope
 public class NoteCreatePresenter extends BasePresenter implements Presenter {
 
-    private CreateNoteUseCase createNoteUseCase;
     NoteCreateView noteCreateView;
+    private CreateNoteUseCase createNoteUseCase;
 
     @Inject
     public NoteCreatePresenter(CreateNoteUseCase createNoteUseCase) {
@@ -42,7 +42,8 @@ public class NoteCreatePresenter extends BasePresenter implements Presenter {
 
     protected class NoteCreateSubscriber extends BaseSubscriber<NoteEntity> {
 
-        @Override public void onNext(NoteEntity note) {
+        @Override
+        public void onNext(NoteEntity note) {
             NoteCreatePresenter.this.hideLoader();
             NoteCreatePresenter.this.noteCreateView.close();
         }

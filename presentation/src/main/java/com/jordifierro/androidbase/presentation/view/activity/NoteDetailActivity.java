@@ -3,9 +3,10 @@ package com.jordifierro.androidbase.presentation.view.activity;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
-import androidx.appcompat.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
+
+import androidx.appcompat.widget.Toolbar;
 
 import com.jordifierro.androidbase.presentation.R;
 import com.jordifierro.androidbase.presentation.view.activity.base.CleanActivity;
@@ -28,8 +29,7 @@ public class NoteDetailActivity extends CleanActivity implements NoteDetailFragm
         if (savedInstanceState == null) {
             this.noteId = getIntent().getIntExtra(PARAM_NOTE_ID, -1);
             addFragment(R.id.fragment_container, new NoteDetailFragment());
-        }
-        else this.noteId = savedInstanceState.getInt(PARAM_NOTE_ID);
+        } else this.noteId = savedInstanceState.getInt(PARAM_NOTE_ID);
     }
 
     @Override

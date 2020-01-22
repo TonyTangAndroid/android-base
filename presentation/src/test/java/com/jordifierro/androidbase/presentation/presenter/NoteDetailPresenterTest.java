@@ -18,9 +18,12 @@ import static org.mockito.Mockito.verify;
 
 public class NoteDetailPresenterTest {
 
-    @Mock GetNoteUseCase getNoteUseCase;
-    @Mock NoteDetailView mockNoteDetailView;
-    @Mock Observable mockObservable;
+    @Mock
+    GetNoteUseCase getNoteUseCase;
+    @Mock
+    NoteDetailView mockNoteDetailView;
+    @Mock
+    Observable mockObservable;
 
     private NoteDetailPresenter noteDetailPresenter;
     private NoteDetailPresenter.NoteDetailSubscriber noteDetailSubscriber;
@@ -29,7 +32,7 @@ public class NoteDetailPresenterTest {
     public void setUp() throws Exception {
         MockitoAnnotations.initMocks(this);
         this.noteDetailPresenter =
-                new NoteDetailPresenter(this.getNoteUseCase);
+            new NoteDetailPresenter(this.getNoteUseCase);
         this.noteDetailPresenter.initWithView(this.mockNoteDetailView);
         this.noteDetailSubscriber = this.noteDetailPresenter.new NoteDetailSubscriber();
     }

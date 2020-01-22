@@ -1,9 +1,9 @@
 package com.jordifierro.androidbase.presentation.view.activity;
 
 import android.content.pm.PackageManager;
-import androidx.test.espresso.intent.Intents;
-import androidx.test.rule.ActivityTestRule;
+
 import androidx.test.ext.junit.runners.AndroidJUnit4;
+import androidx.test.rule.ActivityTestRule;
 
 import com.jordifierro.androidbase.presentation.R;
 import com.jordifierro.androidbase.presentation.view.fragment.ResetPasswordFragment;
@@ -18,8 +18,6 @@ import static androidx.test.espresso.action.ViewActions.click;
 import static androidx.test.espresso.action.ViewActions.closeSoftKeyboard;
 import static androidx.test.espresso.action.ViewActions.typeText;
 import static androidx.test.espresso.assertion.ViewAssertions.matches;
-import static androidx.test.espresso.intent.Intents.intended;
-import static androidx.test.espresso.intent.matcher.IntentMatchers.hasComponent;
 import static androidx.test.espresso.matcher.ViewMatchers.withHint;
 import static androidx.test.espresso.matcher.ViewMatchers.withId;
 import static androidx.test.espresso.matcher.ViewMatchers.withText;
@@ -30,13 +28,13 @@ public class ResetPasswordActivityTest {
 
     @Rule
     public final ActivityTestRule<ResetPasswordActivity> activityTestRule = new ActivityTestRule<>(
-            ResetPasswordActivity.class);
+        ResetPasswordActivity.class);
     private ResetPasswordFragment resetPasswordFragment;
 
     @Before
     public void setUp() throws Exception {
         this.resetPasswordFragment = ((ResetPasswordFragment) this.activityTestRule.getActivity()
-                                .getFragmentManager().findFragmentById(R.id.fragment_container));
+            .getFragmentManager().findFragmentById(R.id.fragment_container));
     }
 
     @Test
@@ -44,9 +42,9 @@ public class ResetPasswordActivityTest {
         onView(withId(R.id.et_email)).check(matches(withHint(R.string.edittext_email)));
         onView(withId(R.id.et_password)).check(matches(withHint(R.string.edittext_newpassword)));
         onView(withId(R.id.et_password_confirmation))
-                .check(matches(withHint(R.string.edittext_password_confirmation)));
+            .check(matches(withHint(R.string.edittext_password_confirmation)));
         onView(withId(R.id.btn_resetpassword))
-                .check(matches(withText(R.string.button_reset_password)));
+            .check(matches(withText(R.string.button_reset_password)));
     }
 
     @Test
@@ -55,11 +53,11 @@ public class ResetPasswordActivityTest {
         onView(withId(R.id.et_email)).perform(typeText("email@test.com"), closeSoftKeyboard());
         onView(withId(R.id.et_password)).perform(typeText("87654321"), closeSoftKeyboard());
         onView(withId(R.id.et_password_confirmation))
-                .perform(typeText("1234"), closeSoftKeyboard());
+            .perform(typeText("1234"), closeSoftKeyboard());
         onView(withId(R.id.btn_resetpassword)).perform(click());
 
         verify(this.resetPasswordFragment.getResetPasswordPresenter())
-                .resetPassword("email@test.com", "87654321", "1234");
+            .resetPassword("email@test.com", "87654321", "1234");
     }
 
 }

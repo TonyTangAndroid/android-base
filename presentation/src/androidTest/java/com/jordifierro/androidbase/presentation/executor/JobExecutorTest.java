@@ -17,7 +17,7 @@ import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
 
 @RunWith(AndroidJUnit4.class)
-public class JobExecutorTest   {
+public class JobExecutorTest {
 
     private JobExecutor jobExecutor;
     private ThreadPoolExecutor threadPoolExecutor;
@@ -50,7 +50,7 @@ public class JobExecutorTest   {
         assertEquals(JobExecutor.INITIAL_POOL_SIZE, this.threadPoolExecutor.getCorePoolSize());
         assertEquals(JobExecutor.MAX_POOL_SIZE, this.threadPoolExecutor.getMaximumPoolSize());
         assertEquals(JobExecutor.KEEP_ALIVE_TIME,
-                        this.threadPoolExecutor.getKeepAliveTime(JobExecutor.KEEP_ALIVE_TIME_UNIT));
+            this.threadPoolExecutor.getKeepAliveTime(JobExecutor.KEEP_ALIVE_TIME_UNIT));
     }
 
     @Test

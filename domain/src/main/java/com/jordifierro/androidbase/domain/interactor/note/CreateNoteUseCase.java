@@ -10,7 +10,6 @@ import com.jordifierro.androidbase.domain.repository.SessionRepository;
 import javax.inject.Inject;
 
 import io.reactivex.Observable;
-import io.reactivex.observers.DisposableObserver;
 
 public class CreateNoteUseCase extends UseCase<NoteEntity> {
 

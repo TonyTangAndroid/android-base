@@ -11,24 +11,31 @@ import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 
 import static org.mockito.Mockito.verify;
-import static org.mockito.Mockito.verifyZeroInteractions;
 import static org.mockito.Mockito.verifyNoMoreInteractions;
+import static org.mockito.Mockito.verifyZeroInteractions;
 
 public class DeleteNoteUseCaseTest {
 
     private static final int FAKE_ID = 1;
 
-    @Mock private ThreadExecutor mockThreadExecutor;
-    @Mock private PostExecutionThread mockPostExecutionThread;
-    @Mock private NoteRepository mockNoteRepository;
-    @Mock private SessionRepository mockSessionRepository;
+    @Mock
+    private ThreadExecutor mockThreadExecutor;
+    @Mock
+    private PostExecutionThread mockPostExecutionThread;
+    @Mock
+    private NoteRepository mockNoteRepository;
+    @Mock
+    private SessionRepository mockSessionRepository;
+
     @Before
-    public void setup() { MockitoAnnotations.initMocks(this); }
+    public void setup() {
+        MockitoAnnotations.initMocks(this);
+    }
 
     @Test
     public void testDeleteNoteUseCaseSuccess() {
         DeleteNoteUseCase deleteNoteUseCase = new DeleteNoteUseCase(mockThreadExecutor,
-                mockPostExecutionThread, mockNoteRepository, mockSessionRepository);
+            mockPostExecutionThread, mockNoteRepository, mockSessionRepository);
 
         deleteNoteUseCase.setParams(FAKE_ID);
         deleteNoteUseCase.buildUseCaseObservable();
