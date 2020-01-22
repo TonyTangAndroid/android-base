@@ -24,7 +24,7 @@ ext {
     retrofitVersion = '2.3.0'
 
     //Testing
-    jUnitVersion = '4.10'
+    jUnitVersion = '4.12'
     mockitoVersion = '1.9.5'//'2.0.43-beta', wait for dexmaker
     dexmakerVersion = '1.4'
     mockWebServerVersion = '3.6.0'
