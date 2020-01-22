@@ -60,11 +60,7 @@ dependencies {
     androidTestAnnotationProcessor presentationTestDependencies.daggerCompiler
 
     androidTestCompile presentationTestDependencies.androidAnnotations
-    androidTestCompile presentationTestDependencies.mockito
-    androidTestCompile presentationTestDependencies.dexmaker
-    androidTestCompile presentationTestDependencies.dexmakerDx
-    androidTestCompile presentationTestDependencies.dexmakerParent
-    androidTestCompile presentationTestDependencies.dexmakerMockito
+    androidTestCompile presentationTestDependencies.mockitoAndroid
     androidTestCompile presentationTestDependencies.espresso
     androidTestCompile presentationTestDependencies.testRunner
     androidTestCompile presentationTestDependencies.testRules
