@@ -18,41 +18,48 @@ import io.reactivex.Observable;
 import io.reactivex.observers.TestObserver;
 
 import static org.mockito.BDDMockito.given;
-import static org.mockito.Matchers.any;
-import static org.mockito.Matchers.eq;
 import static org.mockito.Mockito.verify;
-import static org.mockito.Mockito.verifyNoMoreInteractions;
 import static org.mockito.Mockito.verifyZeroInteractions;
+import static org.mockito.Mockito.verifyNoMoreInteractions;
 
 public class GetNoteUseCaseTest {
 
     private static final int FAKE_ID = 1;
 
-    @Mock private ThreadExecutor mockThreadExecutor;
-    @Mock private PostExecutionThread mockPostExecutionThread;
-    @Mock private NoteRepository mockNoteRepository;
-    @Mock private SessionRepository mockSessionRepository;
+    @Mock
+    private ThreadExecutor mockThreadExecutor;
+    @Mock
+    private PostExecutionThread mockPostExecutionThread;
+    @Mock
+    private NoteRepository mockNoteRepository;
+    @Mock
+    private SessionRepository mockSessionRepository;
+    @Mock
+    private UserEntity mockUserEntity;
 
     @Before
-    public void setup() { MockitoAnnotations.initMocks(this); }
+    public void setup() {
+        MockitoAnnotations.initMocks(this);
+    }
 
     @Test
     public void testGetNoteUseCaseSuccess() {
         GetNoteUseCase getNoteUseCase = new GetNoteUseCase(mockThreadExecutor,
-                mockPostExecutionThread, mockNoteRepository, mockSessionRepository);
+            mockPostExecutionThread, mockNoteRepository, mockSessionRepository);
+
         TestObserver<NoteEntity> testObserver = new TestObserver<>();
         NoteEntity note = new NoteEntity("Title", "Content");
-        given(mockNoteRepository.getNote(any(UserEntity.class), eq(FAKE_ID)))
-                .willReturn(Observable.just(note));
+        given(mockNoteRepository.getNote(mockUserEntity, FAKE_ID)).willReturn(Observable.just(note));
+        given(mockSessionRepository.getCurrentUser()).willReturn(mockUserEntity);
 
         getNoteUseCase.setParams(FAKE_ID);
         getNoteUseCase.buildUseCaseObservable().subscribe(testObserver);
 
         Assert.assertEquals(note.getTitle(),
-                ((NoteEntity)(testObserver.getEvents().get(0)).get(0)).getTitle());
+            ((NoteEntity) (testObserver.getEvents().get(0)).get(0)).getTitle());
         verify(mockSessionRepository).getCurrentUser();
         verifyNoMoreInteractions(mockSessionRepository);
-        verify(mockNoteRepository).getNote(null, FAKE_ID);
+        verify(mockNoteRepository).getNote(mockUserEntity, FAKE_ID);
         verifyNoMoreInteractions(mockNoteRepository);
         verifyZeroInteractions(mockThreadExecutor);
         verifyZeroInteractions(mockPostExecutionThread);

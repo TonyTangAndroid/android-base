@@ -11,8 +11,8 @@ import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 
 import static org.mockito.Mockito.verify;
-import static org.mockito.Mockito.verifyNoMoreInteractions;
 import static org.mockito.Mockito.verifyZeroInteractions;
+import static org.mockito.Mockito.verifyNoMoreInteractions;
 
 public class DeleteNoteUseCaseTest {
 
@@ -22,7 +22,6 @@ public class DeleteNoteUseCaseTest {
     @Mock private PostExecutionThread mockPostExecutionThread;
     @Mock private NoteRepository mockNoteRepository;
     @Mock private SessionRepository mockSessionRepository;
-
     @Before
     public void setup() { MockitoAnnotations.initMocks(this); }
 

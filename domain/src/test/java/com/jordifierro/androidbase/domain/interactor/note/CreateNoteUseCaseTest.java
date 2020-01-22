@@ -16,14 +16,13 @@ import org.mockito.MockitoAnnotations;
 
 import io.reactivex.Observable;
 import io.reactivex.observers.TestObserver;
-import io.reactivex.subscribers.TestSubscriber;
 
 import static org.mockito.BDDMockito.given;
 import static org.mockito.Matchers.any;
 import static org.mockito.Matchers.eq;
 import static org.mockito.Mockito.verify;
-import static org.mockito.Mockito.verifyNoMoreInteractions;
 import static org.mockito.Mockito.verifyZeroInteractions;
+import static org.mockito.Mockito.verifyNoMoreInteractions;
 
 public class CreateNoteUseCaseTest {
 
@@ -35,7 +34,7 @@ public class CreateNoteUseCaseTest {
     @Mock private PostExecutionThread mockPostExecutionThread;
     @Mock private NoteRepository mockNoteRepository;
     @Mock private SessionRepository mockSessionRepository;
-
+    @Mock private UserEntity mockUserEntity;
     @Before
     public void setup() { MockitoAnnotations.initMocks(this); }
 
@@ -46,6 +45,8 @@ public class CreateNoteUseCaseTest {
                 mockPostExecutionThread, mockNoteRepository, mockSessionRepository);
         given(mockNoteRepository.createNote(any(UserEntity.class), eq(note)))
                 .willReturn(Observable.just(note));
+        given(mockSessionRepository.getCurrentUser()).willReturn(mockUserEntity);
+
         TestObserver<NoteEntity> testObserver = new TestObserver<>();
 
         createNoteUseCase.setParams(note);
@@ -57,7 +58,7 @@ public class CreateNoteUseCaseTest {
                 ((NoteEntity)(testObserver.getEvents().get(0)).get(0)).getContent());
         verify(mockSessionRepository).getCurrentUser();
         verifyNoMoreInteractions(mockSessionRepository);
-        verify(mockNoteRepository).createNote(null, note);
+        verify(mockNoteRepository).createNote(mockUserEntity, note);
         verifyNoMoreInteractions(mockNoteRepository);
         verifyZeroInteractions(mockThreadExecutor);
         verifyZeroInteractions(mockPostExecutionThread);
