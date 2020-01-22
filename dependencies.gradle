@@ -12,11 +12,15 @@ ext {
     androidMinSdkVersion = 15
     androidTargetSdkVersion = 28
     androidCompileSdkVersion = 28
-    androidSupportVersion = '28.0.0'
+    appcompatVersion = '1.1.0'
+    legacySupportV4Version = '1.0.0'
+    materialDesignVersion = '1.0.0'
+    annotationVersion = '1.0.0'
+    androidTestVersion = '1.1.1'
 
     //Libraries
     daggerVersion = '2.14.1'
-    butterKnifeVersion = '9.0.0'
+    butterKnifeVersion = '10.2.1'
     rxJavaVersion = '2.1.8'
     rxAndroidVersion = '2.0.1'
     javaxAnnotationVersion = '1.0'
@@ -30,7 +34,7 @@ ext {
     mockWebServerVersion = '3.6.0'
     commonsIOVersion = '2.4'
     jetAnnotationVersion = '15.0'
-    espressoVersion = '3.0.2'
+    espressoVersion = '3.1.0'
     testRunnerVersion = '1.0.2'
     testRulesVersion = '1.0.2'
 
@@ -74,9 +78,9 @@ ext {
             rxJava:             "io.reactivex.rxjava2:rxjava:${rxJavaVersion}",
             rxAndroid:          "io.reactivex.rxjava2:rxandroid:${rxAndroidVersion}",
             javaxAnnotation:    "javax.annotation:jsr250-api:${javaxAnnotationVersion}",
-            androidCompatv7:    "com.android.support:appcompat-v7:${androidSupportVersion}",
-            androidSupportv4:   "com.android.support:support-v4:${androidSupportVersion}",
-            androidDesign:      "com.android.support:design:${androidSupportVersion}"
+            androidCompatv7:    "androidx.appcompat:appcompat:${appcompatVersion}",
+            androidSupportv4:   "androidx.legacy:legacy-support-v4:${legacySupportV4Version}",
+            androidDesign:      "com.google.android.material:material:${materialDesignVersion}"
     ]
     presentationTestDependencies = [
             junit:              "junit:junit:${jUnitVersion}",
@@ -85,12 +89,12 @@ ext {
             dexmakerDx:         "com.crittercism.dexmaker:dexmaker-dx:${dexmakerVersion}",
             dexmakerParent:     "com.crittercism.dexmaker:dexmaker-parent:${dexmakerVersion}",
             dexmakerMockito:    "com.crittercism.dexmaker:dexmaker-mockito:${dexmakerVersion}",
-            androidAnnotations: "com.android.support:support-annotations:${androidSupportVersion}",
-            espresso:           "com.android.support.test.espresso:espresso-core:${espressoVersion}",
-            espressoIntents:    "com.android.support.test.espresso:espresso-intents:${espressoVersion}",
-            espressoWeb:        "com.android.support.test.espresso:espresso-web:${espressoVersion}",
-            testRunner:         "com.android.support.test:runner:${testRunnerVersion}",
-            testRules:         "com.android.support.test:rules:${testRulesVersion}",
+            androidAnnotations: "androidx.annotation:annotation:${annotationVersion}",
+            espresso:           "androidx.test.espresso:espresso-core:${espressoVersion}",
+            espressoIntents:    "androidx.test.espresso:espresso-intents:${espressoVersion}",
+            espressoWeb:        "androidx.test.espresso:espresso-web:${espressoVersion}",
+            testRunner:         "androidx.test.ext:junit:${androidTestVersion}",
+            testRules:          "androidx.test:rules:${androidTestVersion}",
             daggerCompiler:     "com.google.dagger:dagger-compiler:${daggerVersion}",
 
     ]

@@ -1,6 +1,6 @@
 package com.jordifierro.androidbase.presentation.executor;
 
-import android.support.annotation.NonNull;
+import androidx.annotation.NonNull;
 
 import com.jordifierro.androidbase.domain.executor.ThreadExecutor;
 

@@ -3,12 +3,11 @@ package com.jordifierro.androidbase.presentation.view.activity;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.v7.widget.Toolbar;
+import androidx.appcompat.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 
 import com.jordifierro.androidbase.presentation.R;
-import com.jordifierro.androidbase.presentation.view.activity.base.BaseActivity;
 import com.jordifierro.androidbase.presentation.view.activity.base.CleanActivity;
 import com.jordifierro.androidbase.presentation.view.fragment.NoteDetailFragment;
 
