@@ -6,7 +6,6 @@ import android.support.test.espresso.intent.Intents;
 import android.support.test.rule.ActivityTestRule;
 import android.support.test.runner.AndroidJUnit4;
 import android.support.v7.widget.Toolbar;
-import android.test.suitebuilder.annotation.SmallTest;
 import android.widget.TextView;
 
 import com.jordifierro.androidbase.domain.entity.NoteEntity;
@@ -34,7 +33,6 @@ import static junit.framework.Assert.assertEquals;
 import static org.hamcrest.CoreMatchers.allOf;
 
 @RunWith(AndroidJUnit4.class)
-@SmallTest
 public class NoteDetailActivityTest {
 
     @Rule

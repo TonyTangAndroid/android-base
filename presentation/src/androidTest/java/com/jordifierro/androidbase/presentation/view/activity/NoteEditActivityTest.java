@@ -5,7 +5,6 @@ import android.content.pm.PackageManager;
 import android.support.test.rule.ActivityTestRule;
 import android.support.test.runner.AndroidJUnit4;
 import android.support.v7.widget.Toolbar;
-import android.test.suitebuilder.annotation.SmallTest;
 import android.widget.TextView;
 
 import com.jordifierro.androidbase.domain.entity.NoteEntity;
@@ -32,7 +31,6 @@ import static org.hamcrest.Matchers.allOf;
 import static org.mockito.Mockito.verify;
 
 @RunWith(AndroidJUnit4.class)
-@SmallTest
 public class NoteEditActivityTest {
 
     @Rule
