@@ -6,11 +6,20 @@ targetCompatibility = 1.8
 dependencies {
     def domainDependencies = rootProject.ext.domainDependencies
     def domainTestDependencies = rootProject.ext.domainTestDependencies
+    def annotationProcessors = rootProject.ext.annotationProcessors
+
 
     compile domainDependencies.javaxInject
     compile domainDependencies.rxJava
+    compile domainDependencies.jsr305
+    compile domainDependencies.gson
+
+    compile domainDependencies.autoValue
+    annotationProcessor annotationProcessors.autoValue
 
     testCompile domainTestDependencies.junit
     testCompile domainTestDependencies.mockito
     testCompile domainTestDependencies.jetAnnotations
+
+
 }

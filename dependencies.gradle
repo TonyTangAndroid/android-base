@@ -27,6 +27,9 @@ ext {
     javaxInjectVersion = '1'
     retrofitVersion = '2.7.1'
     okhttpVersion = '3.14.6'
+    autoValueVersion = '1.7'
+    jsr305Version = '3.0.2'
+    gsonVersion = '2.8.6'
 
     //Testing
     jUnitVersion = '4.12'
@@ -41,8 +44,15 @@ ext {
             retrofit:           "com.squareup.retrofit2:retrofit:${retrofitVersion}",
             retrofitGson:       "com.squareup.retrofit2:converter-gson:${retrofitVersion}",
             retrofitRxJava:     "com.squareup.retrofit2:adapter-rxjava:${retrofitVersion}",
+            gson:               "com.google.code.gson:gson:${gsonVersion}",
             javaxInject:        "javax.inject:javax.inject:${javaxInjectVersion}",
-            rxJava:             "io.reactivex.rxjava2:rxjava:${rxJavaVersion}"
+            rxJava:             "io.reactivex.rxjava2:rxjava:${rxJavaVersion}",
+            autoValue:          "com.google.auto.value:auto-value-annotations:${autoValueVersion}",
+            jsr305:             "com.google.code.findbugs:jsr305:${jsr305Version}",
+    ]
+
+    annotationProcessors = [
+            autoValue:           "com.google.auto.value:auto-value:${autoValueVersion}",
     ]
 
     domainTestDependencies = [
