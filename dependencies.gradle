@@ -16,7 +16,7 @@ ext {
 
     //Libraries
     daggerVersion = '2.14.1'
-    butterKnifeVersion = '8.8.1'
+    butterKnifeVersion = '9.0.0'
     rxJavaVersion = '2.1.8'
     rxAndroidVersion = '2.0.1'
     javaxAnnotationVersion = '1.0'
