@@ -35,6 +35,7 @@ dependencies {
     compile dataDependencies.javaxAnnotation
     compile dataDependencies.rxJava
     compile dataDependencies.retrofit
+    compile dataDependencies.okhttp
     compile dataDependencies.retrofitGson
     compile dataDependencies.retrofitRxJava2
 
