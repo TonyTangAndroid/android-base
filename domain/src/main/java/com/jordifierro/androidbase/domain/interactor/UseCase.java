@@ -7,7 +7,6 @@ import io.reactivex.Observable;
 import io.reactivex.Observer;
 import io.reactivex.disposables.Disposable;
 import io.reactivex.disposables.Disposables;
-import io.reactivex.observers.DisposableObserver;
 import io.reactivex.schedulers.Schedulers;
 
 public abstract class UseCase<T> {
@@ -26,9 +25,9 @@ public abstract class UseCase<T> {
 
     public <S extends Observer<T> & Disposable> void execute(S useCaseDisposable) {
         this.disposable = this.buildUseCaseObservable()
-                .subscribeOn(Schedulers.from(threadExecutor))
-                .observeOn(postExecutionThread.getScheduler())
-                .subscribeWith(useCaseDisposable);
+            .subscribeOn(Schedulers.from(threadExecutor))
+            .observeOn(postExecutionThread.getScheduler())
+            .subscribeWith(useCaseDisposable);
     }
 
     public void unsubscribe() {

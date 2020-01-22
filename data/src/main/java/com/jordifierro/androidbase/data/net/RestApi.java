@@ -8,6 +8,7 @@ import com.jordifierro.androidbase.domain.entity.VersionEntity;
 
 import java.util.List;
 
+import io.reactivex.Observable;
 import retrofit2.Response;
 import retrofit2.http.Body;
 import retrofit2.http.DELETE;
@@ -16,7 +17,6 @@ import retrofit2.http.Header;
 import retrofit2.http.POST;
 import retrofit2.http.PUT;
 import retrofit2.http.Path;
-import io.reactivex.Observable;
 
 public interface RestApi {
 
@@ -42,7 +42,7 @@ public interface RestApi {
 
     @GET("/versions/state")
     Observable<Response<VersionEntity>> checkVersionExpiration(
-                                                            @Header("Authorization") String token);
+        @Header("Authorization") String token);
 
     @POST("/notes")
     Observable<Response<NoteEntity>> createNote(@Header("Authorization") String token,

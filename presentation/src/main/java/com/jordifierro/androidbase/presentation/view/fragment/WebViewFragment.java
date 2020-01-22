@@ -38,18 +38,18 @@ public class WebViewFragment extends Fragment {
                 if (progress == 100) WebViewFragment.this.hideProgressBar();
             }
         });
-        webView.loadUrl(((Listener)getActivity()).getUrl());
+        webView.loadUrl(((Listener) getActivity()).getUrl());
     }
 
     private void hideProgressBar() {
         this.progressBar.setVisibility(View.GONE);
     }
 
-    public interface Listener {
-        String getUrl();
-    }
-
     public WebView getWebView() {
         return webView;
+    }
+
+    public interface Listener {
+        String getUrl();
     }
 }

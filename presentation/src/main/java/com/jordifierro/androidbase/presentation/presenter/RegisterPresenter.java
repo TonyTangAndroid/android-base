@@ -11,8 +11,8 @@ import javax.inject.Inject;
 @ActivityScope
 public class RegisterPresenter extends BasePresenter implements Presenter {
 
-    private CreateUserUseCase createUserUseCase;
     RegisterView registerView;
+    private CreateUserUseCase createUserUseCase;
 
     @Inject
     public RegisterPresenter(CreateUserUseCase createUserUseCase) {

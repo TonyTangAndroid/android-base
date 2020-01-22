@@ -17,10 +17,14 @@ import static org.mockito.Mockito.verify;
 
 public class SettingsPresenterTest {
 
-    @Mock DoLogoutUseCase mockDoLogoutUseCase;
-    @Mock DeleteUserUseCase mockDeleteUserUseCase;
-    @Mock SettingsView mockSettingsView;
-    @Mock Observable mockObservable;
+    @Mock
+    DoLogoutUseCase mockDoLogoutUseCase;
+    @Mock
+    DeleteUserUseCase mockDeleteUserUseCase;
+    @Mock
+    SettingsView mockSettingsView;
+    @Mock
+    Observable mockObservable;
 
     private SettingsPresenter settingsPresenter;
 
@@ -28,7 +32,7 @@ public class SettingsPresenterTest {
     public void setUp() throws Exception {
         MockitoAnnotations.initMocks(this);
         this.settingsPresenter =
-                new SettingsPresenter(this.mockDoLogoutUseCase, this.mockDeleteUserUseCase);
+            new SettingsPresenter(this.mockDoLogoutUseCase, this.mockDeleteUserUseCase);
         this.settingsPresenter.initWithView(this.mockSettingsView);
     }
 

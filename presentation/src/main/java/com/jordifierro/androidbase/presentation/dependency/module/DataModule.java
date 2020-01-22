@@ -37,19 +37,19 @@ public class DataModule {
     @Singleton
     RestApi provideRestApi() {
         OkHttpClient client = new OkHttpClient().newBuilder()
-                                                .addInterceptor(new HttpInterceptor())
-                                                .build();
+            .addInterceptor(new HttpInterceptor())
+            .build();
 
         GsonConverterFactory factory = GsonConverterFactory.create(new GsonBuilder()
-                    .setFieldNamingPolicy(FieldNamingPolicy.LOWER_CASE_WITH_UNDERSCORES).create());
+            .setFieldNamingPolicy(FieldNamingPolicy.LOWER_CASE_WITH_UNDERSCORES).create());
 
         return new Retrofit.Builder()
-                           .baseUrl(RestApi.URL_BASE)
-                           .addConverterFactory(factory)
-                           .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
-                           .client(client)
-                           .build()
-                           .create(RestApi.class);
+            .baseUrl(RestApi.URL_BASE)
+            .addConverterFactory(factory)
+            .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
+            .client(client)
+            .build()
+            .create(RestApi.class);
     }
 
     @Provides

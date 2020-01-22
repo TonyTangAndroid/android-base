@@ -6,4 +6,5 @@ import dagger.Component;
 
 @ActivityScope
 @Component(dependencies = ApplicationComponent.class)
-public interface ActivityComponent extends FragmentInjector {}
+public interface ActivityComponent extends FragmentInjector {
+}

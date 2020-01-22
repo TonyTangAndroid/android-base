@@ -41,14 +41,14 @@ public class VersionDataRepositoryTest {
         this.mockWebServer = new MockWebServer();
         this.mockWebServer.start();
         this.versionDataRepository = new VersionDataRepository(
-                new Retrofit.Builder()
-                        .baseUrl(mockWebServer.url("/"))
-                        .addConverterFactory(GsonConverterFactory.create(new GsonBuilder()
-                                .setFieldNamingPolicy(FieldNamingPolicy.LOWER_CASE_WITH_UNDERSCORES)
-                                .create()))
-                        .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
-                        .build()
-                        .create(RestApi.class)
+            new Retrofit.Builder()
+                .baseUrl(mockWebServer.url("/"))
+                .addConverterFactory(GsonConverterFactory.create(new GsonBuilder()
+                    .setFieldNamingPolicy(FieldNamingPolicy.LOWER_CASE_WITH_UNDERSCORES)
+                    .create()))
+                .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
+                .build()
+                .create(RestApi.class)
         );
         this.testObserver = new TestObserver();
         this.fakeUser = new UserEntity(FAKE_EMAIL);
@@ -65,7 +65,7 @@ public class VersionDataRepositoryTest {
         this.mockWebServer.enqueue(new MockResponse());
 
         this.versionDataRepository.checkVersionExpiration(this.fakeUser)
-                .subscribe(this.testObserver);
+            .subscribe(this.testObserver);
 
         RecordedRequest request = this.mockWebServer.takeRequest();
         assertEquals("/versions/state", request.getPath());
@@ -76,45 +76,45 @@ public class VersionDataRepositoryTest {
     @Test
     public void testCheckVersionExpirationOk() throws Exception {
         this.mockWebServer.enqueue(new MockResponse().setResponseCode(200).setBody(
-                FileUtils.readFileToString(
-                        TestUtils.getFileFromPath(this, "version_expiration_ok.json"))));
+            FileUtils.readFileToString(
+                TestUtils.getFileFromPath(this, "version_expiration_ok.json"))));
 
         this.versionDataRepository.checkVersionExpiration(this.fakeUser)
-                                    .subscribe(this.testObserver);
+            .subscribe(this.testObserver);
         this.testObserver.awaitTerminalEvent();
 
         VersionEntity responseVersion =
-                (VersionEntity) ((List<Object>)testObserver.getEvents().get(0)).get(0);
+            (VersionEntity) ((List<Object>) testObserver.getEvents().get(0)).get(0);
         assertEquals(VersionEntity.VERSION_OK, responseVersion.getState());
     }
 
     @Test
     public void testCheckVersionExpirationWarned() throws Exception {
         this.mockWebServer.enqueue(new MockResponse().setResponseCode(200).setBody(
-                FileUtils.readFileToString(
-                        TestUtils.getFileFromPath(this, "version_expiration_warned.json"))));
+            FileUtils.readFileToString(
+                TestUtils.getFileFromPath(this, "version_expiration_warned.json"))));
 
         this.versionDataRepository.checkVersionExpiration(this.fakeUser)
-                .subscribe(this.testObserver);
+            .subscribe(this.testObserver);
         this.testObserver.awaitTerminalEvent();
 
         VersionEntity responseVersion =
-                (VersionEntity) ((List<Object>)testObserver.getEvents().get(0)).get(0);
+            (VersionEntity) ((List<Object>) testObserver.getEvents().get(0)).get(0);
         assertEquals(VersionEntity.VERSION_WARNED, responseVersion.getState());
     }
 
     @Test
     public void testCheckVersionExpirationExpired() throws Exception {
         this.mockWebServer.enqueue(new MockResponse().setResponseCode(200).setBody(
-                FileUtils.readFileToString(
-                        TestUtils.getFileFromPath(this, "version_expiration_expired.json"))));
+            FileUtils.readFileToString(
+                TestUtils.getFileFromPath(this, "version_expiration_expired.json"))));
 
         this.versionDataRepository.checkVersionExpiration(this.fakeUser)
-                .subscribe(this.testObserver);
+            .subscribe(this.testObserver);
         this.testObserver.awaitTerminalEvent();
 
         VersionEntity responseVersion =
-                (VersionEntity) ((List<Object>)testObserver.getEvents().get(0)).get(0);
+            (VersionEntity) ((List<Object>) testObserver.getEvents().get(0)).get(0);
         assertEquals(VersionEntity.VERSION_EXPIRED, responseVersion.getState());
     }
 

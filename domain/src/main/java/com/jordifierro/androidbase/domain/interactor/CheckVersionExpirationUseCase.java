@@ -28,6 +28,6 @@ public class CheckVersionExpirationUseCase extends UseCase<VersionEntity> {
     @Override
     protected Observable<VersionEntity> buildUseCaseObservable() {
         return this.versionRepository
-                                .checkVersionExpiration(this.sessionRepository.getCurrentUser());
+            .checkVersionExpiration(this.sessionRepository.getCurrentUser());
     }
 }

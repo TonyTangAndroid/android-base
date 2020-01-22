@@ -4,9 +4,10 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
+import android.widget.Toast;
+
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AlertDialog;
-import android.widget.Toast;
 
 import com.jordifierro.androidbase.data.net.error.RestApiErrorException;
 import com.jordifierro.androidbase.presentation.BaseApplication;
@@ -31,7 +32,7 @@ public abstract class CleanActivity extends BaseActivity implements BaseView {
 
     private void initializeActivityComponent() {
         if (this.fragmentInjector == null) {
-            this.fragmentInjector = ((BaseApplication)getApplication()).getFragmentInjector();
+            this.fragmentInjector = ((BaseApplication) getApplication()).getFragmentInjector();
         }
     }
 
@@ -48,9 +49,8 @@ public abstract class CleanActivity extends BaseActivity implements BaseView {
                 default:
                     showMessage(error.getMessage());
             }
-        }
-        else Toast.makeText(context(), getResources().getString(R.string.message_error),
-                Toast.LENGTH_LONG).show();
+        } else Toast.makeText(context(), getResources().getString(R.string.message_error),
+            Toast.LENGTH_LONG).show();
     }
 
     @Override
@@ -63,13 +63,13 @@ public abstract class CleanActivity extends BaseActivity implements BaseView {
     private void createUpgradeDialog() {
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
         builder.setMessage(getResources().getString(R.string.message_expired) + ".\n" +
-                getResources().getString(R.string.message_update) + ".")
-                .setPositiveButton(R.string.message_ok, new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
-                        navigateToUpgrater();
-                    }
-                }).create().show();
+            getResources().getString(R.string.message_update) + ".")
+            .setPositiveButton(R.string.message_ok, new DialogInterface.OnClickListener() {
+                @Override
+                public void onClick(DialogInterface dialog, int which) {
+                    navigateToUpgrater();
+                }
+            }).create().show();
     }
 
     private void navigateToUpgrater() {

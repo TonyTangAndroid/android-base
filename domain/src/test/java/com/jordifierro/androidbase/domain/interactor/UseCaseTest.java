@@ -9,7 +9,6 @@ import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 
 import io.reactivex.Observable;
-import io.reactivex.observers.DisposableObserver;
 import io.reactivex.observers.TestObserver;
 import io.reactivex.schedulers.TestScheduler;
 
@@ -22,7 +21,8 @@ public class UseCaseTest {
     private TestObserver<Integer> testObserver;
     private FakeUseCase fakeUseCase;
 
-    @Mock private PostExecutionThread mockPostExecutionThread;
+    @Mock
+    private PostExecutionThread mockPostExecutionThread;
 
     @Before
     public void setUp() {
@@ -62,7 +62,8 @@ public class UseCaseTest {
             super(threadExecutor, postExecutionThread);
         }
 
-        @Override protected Observable<Integer> buildUseCaseObservable() {
+        @Override
+        protected Observable<Integer> buildUseCaseObservable() {
             return Observable.just(1, 2, 3);
         }
 

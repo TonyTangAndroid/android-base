@@ -2,9 +2,10 @@ package com.jordifierro.androidbase.presentation.view.activity;
 
 import android.content.Intent;
 import android.os.Bundle;
-import androidx.appcompat.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
+
+import androidx.appcompat.widget.Toolbar;
 
 import com.jordifierro.androidbase.presentation.R;
 import com.jordifierro.androidbase.presentation.view.activity.base.CleanActivity;

@@ -18,9 +18,12 @@ import static org.mockito.Mockito.verify;
 
 public class LoginPresenterTest {
 
-    @Mock DoLoginUseCase mockDoLoginUseCase;
-    @Mock LoginView mockLoginView;
-    @Mock Observable mockObservable;
+    @Mock
+    DoLoginUseCase mockDoLoginUseCase;
+    @Mock
+    LoginView mockLoginView;
+    @Mock
+    Observable mockObservable;
 
     private LoginPresenter loginPresenter;
     private LoginPresenter.LoginSubscriber loginSubscriber;

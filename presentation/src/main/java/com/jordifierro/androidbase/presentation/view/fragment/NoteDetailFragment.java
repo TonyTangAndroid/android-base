@@ -17,8 +17,10 @@ public class NoteDetailFragment extends BaseFragment implements NoteDetailView {
     @Inject
     NoteDetailPresenter noteDetailPresenter;
 
-    @BindView(R.id.tv_title) TextView titleTV;
-    @BindView(R.id.tv_content) TextView contentTV;
+    @BindView(R.id.tv_title)
+    TextView titleTV;
+    @BindView(R.id.tv_content)
+    TextView contentTV;
 
     @Override
     protected void callInjection() {
@@ -47,7 +49,7 @@ public class NoteDetailFragment extends BaseFragment implements NoteDetailView {
 
     @Override
     public int getNoteId() {
-        return ((Listener)getActivity()).getNoteId();
+        return ((Listener) getActivity()).getNoteId();
     }
 
     public interface Listener {

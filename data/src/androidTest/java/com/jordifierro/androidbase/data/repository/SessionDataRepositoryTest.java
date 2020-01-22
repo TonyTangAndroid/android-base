@@ -1,16 +1,19 @@
 package com.jordifierro.androidbase.data.repository;
 
-import static junit.framework.TestCase.assertEquals;
-import static org.junit.Assert.assertNull;
-
 import android.content.Context;
 import android.content.SharedPreferences;
-import androidx.test.platform.app.InstrumentationRegistry;
+
 import androidx.test.ext.junit.runners.AndroidJUnit4;
+import androidx.test.platform.app.InstrumentationRegistry;
+
 import com.jordifierro.androidbase.domain.entity.UserEntity;
+
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
+
+import static junit.framework.TestCase.assertEquals;
+import static org.junit.Assert.assertNull;
 
 @RunWith(AndroidJUnit4.class)
 public class SessionDataRepositoryTest {
@@ -26,7 +29,7 @@ public class SessionDataRepositoryTest {
     @Before
     public void setUp() throws Exception {
         this.sharedPreferences = InstrumentationRegistry.getInstrumentation().getTargetContext()
-                .getSharedPreferences(SHARED_PACKAGE, Context.MODE_PRIVATE);
+            .getSharedPreferences(SHARED_PACKAGE, Context.MODE_PRIVATE);
         SharedPreferences.Editor editor = sharedPreferences.edit();
         editor.clear();
         editor.apply();
@@ -37,7 +40,7 @@ public class SessionDataRepositoryTest {
     }
 
     @Test
-    public void testGetWithoutSetReturnsNull(){
+    public void testGetWithoutSetReturnsNull() {
         assertNull(this.sessionDataRepository.getCurrentUser().getEmail());
         assertNull(this.sessionDataRepository.getCurrentUser().getAuthToken());
     }

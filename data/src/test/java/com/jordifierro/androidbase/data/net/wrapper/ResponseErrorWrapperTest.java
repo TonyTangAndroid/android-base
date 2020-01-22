@@ -18,7 +18,7 @@ public class ResponseErrorWrapperTest {
     @Before
     public void setup() {
         this.responseErrorWrapper =
-                new ResponseErrorWrapper(new ResponseErrorEntity(FAKE_MESSAGE, FAKE_STATUS));
+            new ResponseErrorWrapper(new ResponseErrorEntity(FAKE_MESSAGE, FAKE_STATUS));
     }
 
     @Test

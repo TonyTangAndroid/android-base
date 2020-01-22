@@ -15,7 +15,7 @@ public class ResponseErrorEntityTest {
 
     @Before
     public void setup() {
-        this.error =  new ResponseErrorEntity(FAKE_MESSAGE, FAKE_STATUS);
+        this.error = new ResponseErrorEntity(FAKE_MESSAGE, FAKE_STATUS);
     }
 
     @Test

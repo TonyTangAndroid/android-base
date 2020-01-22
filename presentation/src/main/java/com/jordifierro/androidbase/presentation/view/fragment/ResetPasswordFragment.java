@@ -4,9 +4,7 @@ import android.widget.EditText;
 
 import com.jordifierro.androidbase.presentation.R;
 import com.jordifierro.androidbase.presentation.presenter.BasePresenter;
-import com.jordifierro.androidbase.presentation.presenter.RegisterPresenter;
 import com.jordifierro.androidbase.presentation.presenter.ResetPasswordPresenter;
-import com.jordifierro.androidbase.presentation.view.RegisterView;
 import com.jordifierro.androidbase.presentation.view.ResetPasswordView;
 
 import javax.inject.Inject;
@@ -19,9 +17,12 @@ public class ResetPasswordFragment extends BaseFragment implements ResetPassword
     @Inject
     ResetPasswordPresenter resetPasswordPresenter;
 
-    @BindView(R.id.et_email) EditText emailEditText;
-    @BindView(R.id.et_password) EditText passwordEditText;
-    @BindView(R.id.et_password_confirmation) EditText passwordConfirmationEditText;
+    @BindView(R.id.et_email)
+    EditText emailEditText;
+    @BindView(R.id.et_password)
+    EditText passwordEditText;
+    @BindView(R.id.et_password_confirmation)
+    EditText passwordConfirmationEditText;
 
     @Override
     protected void callInjection() {
@@ -45,8 +46,8 @@ public class ResetPasswordFragment extends BaseFragment implements ResetPassword
     @OnClick(R.id.btn_resetpassword)
     public void resetPasswordButtonPressed() {
         this.resetPasswordPresenter.resetPassword(emailEditText.getText().toString(),
-                                            passwordEditText.getText().toString(),
-                                            passwordConfirmationEditText.getText().toString());
+            passwordEditText.getText().toString(),
+            passwordConfirmationEditText.getText().toString());
     }
 
 }

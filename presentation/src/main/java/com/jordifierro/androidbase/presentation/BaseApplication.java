@@ -20,8 +20,8 @@ public class BaseApplication extends Application {
 
     protected void initializeInjector() {
         this.applicationComponent = DaggerApplicationComponent.builder()
-                                        .applicationModule(new ApplicationModule(this))
-                                        .build();
+            .applicationModule(new ApplicationModule(this))
+            .build();
     }
 
     public ApplicationComponent getApplicationComponent() {
@@ -30,7 +30,7 @@ public class BaseApplication extends Application {
 
     public FragmentInjector getFragmentInjector() {
         return DaggerActivityComponent.builder()
-                .applicationComponent(this.applicationComponent).build();
+            .applicationComponent(this.applicationComponent).build();
     }
 
 }

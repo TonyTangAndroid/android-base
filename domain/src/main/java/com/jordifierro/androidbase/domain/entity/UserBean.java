@@ -9,6 +9,10 @@ import javax.annotation.Nullable;
 @AutoValue
 public abstract class UserBean {
 
+    public static Builder builder() {
+        return new AutoValue_UserBean.Builder();
+    }
+
     @Nullable
     @SerializedName("email")
     public abstract String email();
@@ -32,10 +36,6 @@ public abstract class UserBean {
     @Nullable
     @SerializedName("newPasswordConfirmation")
     public abstract String newPasswordConfirmation();
-
-    public static Builder builder() {
-        return new AutoValue_UserBean.Builder();
-    }
 
     @AutoValue.Builder
     public abstract static class Builder {

@@ -11,9 +11,9 @@ import javax.inject.Inject;
 @ActivityScope
 public class SettingsPresenter extends BasePresenter implements Presenter {
 
+    SettingsView settingsView;
     private DoLogoutUseCase doLogoutUseCase;
     private DeleteUserUseCase deleteUserUseCase;
-    SettingsView settingsView;
 
     @Inject
     public SettingsPresenter(DoLogoutUseCase doLogoutUseCase, DeleteUserUseCase deleteUserUseCase) {

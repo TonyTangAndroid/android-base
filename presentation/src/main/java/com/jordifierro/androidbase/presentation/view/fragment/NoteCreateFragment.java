@@ -6,8 +6,6 @@ import com.jordifierro.androidbase.presentation.R;
 import com.jordifierro.androidbase.presentation.presenter.BasePresenter;
 import com.jordifierro.androidbase.presentation.presenter.NoteCreatePresenter;
 import com.jordifierro.androidbase.presentation.view.NoteCreateView;
-import com.jordifierro.androidbase.presentation.view.activity.base.BaseActivity;
-import com.jordifierro.androidbase.presentation.view.activity.base.CleanActivity;
 
 import javax.inject.Inject;
 
@@ -19,8 +17,10 @@ public class NoteCreateFragment extends BaseFragment implements NoteCreateView {
     @Inject
     NoteCreatePresenter noteCreatePresenter;
 
-    @BindView(R.id.et_title) TextView titleET;
-    @BindView(R.id.et_content) TextView contentET;
+    @BindView(R.id.et_title)
+    TextView titleET;
+    @BindView(R.id.et_content)
+    TextView contentET;
 
     @Override
     protected void callInjection() {
@@ -43,8 +43,8 @@ public class NoteCreateFragment extends BaseFragment implements NoteCreateView {
 
     @OnClick(R.id.btn_submit)
     public void createButtonPressed() {
-        this.noteCreatePresenter.createButtonPressed(   titleET.getText().toString(),
-                                                        contentET.getText().toString());
+        this.noteCreatePresenter.createButtonPressed(titleET.getText().toString(),
+            contentET.getText().toString());
     }
 
 }

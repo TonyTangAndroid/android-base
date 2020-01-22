@@ -34,11 +34,11 @@ public class CreateUserUseCase extends UseCase<UserEntity> {
     @Override
     protected Observable<UserEntity> buildUseCaseObservable() {
         return this.userRepository.createUser(this.user)
-                .doOnNext(new Consumer<UserEntity>() {
-                    @Override
-                    public void accept(UserEntity userEntity) throws Exception {
-                        sessionRepository.setCurrentUser(userEntity);
-                    }
-                });
+            .doOnNext(new Consumer<UserEntity>() {
+                @Override
+                public void accept(UserEntity userEntity) throws Exception {
+                    sessionRepository.setCurrentUser(userEntity);
+                }
+            });
     }
 }

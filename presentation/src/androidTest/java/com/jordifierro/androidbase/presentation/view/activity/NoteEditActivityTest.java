@@ -2,10 +2,11 @@ package com.jordifierro.androidbase.presentation.view.activity;
 
 import android.content.Intent;
 import android.content.pm.PackageManager;
-import androidx.test.rule.ActivityTestRule;
-import androidx.test.ext.junit.runners.AndroidJUnit4;
-import androidx.appcompat.widget.Toolbar;
 import android.widget.TextView;
+
+import androidx.appcompat.widget.Toolbar;
+import androidx.test.ext.junit.runners.AndroidJUnit4;
+import androidx.test.rule.ActivityTestRule;
 
 import com.jordifierro.androidbase.domain.entity.NoteEntity;
 import com.jordifierro.androidbase.presentation.R;
@@ -35,20 +36,20 @@ public class NoteEditActivityTest {
 
     @Rule
     public final ActivityTestRule<NoteEditActivity> activityTestRule = new ActivityTestRule<>(
-            NoteEditActivity.class, true, false);
+        NoteEditActivity.class, true, false);
     private NoteEditFragment noteEditFragment;
 
     @Before
     public void setUp() throws Exception {
         activityTestRule.launchActivity(new Intent().putExtra(NoteEditActivity.PARAM_NOTE_ID, 2));
         this.noteEditFragment = ((NoteEditFragment) this.activityTestRule.getActivity()
-                                .getFragmentManager().findFragmentById(R.id.fragment_container));
+            .getFragmentManager().findFragmentById(R.id.fragment_container));
     }
 
     @Test
     public void testViewElements() throws PackageManager.NameNotFoundException {
-        onView(allOf(isAssignableFrom(TextView.class),withParent(isAssignableFrom(Toolbar.class))))
-                .check(matches(withText(R.string.title_activity_note_edit)));
+        onView(allOf(isAssignableFrom(TextView.class), withParent(isAssignableFrom(Toolbar.class))))
+            .check(matches(withText(R.string.title_activity_note_edit)));
         onView(withId(R.id.btn_submit)).check(matches(withText(R.string.button_save)));
     }
 
@@ -69,7 +70,7 @@ public class NoteEditActivityTest {
             @Override
             public void run() {
                 NoteEditActivityTest.this.noteEditFragment.showNote(
-                        new NoteEntity("Note title", "Note content..."));
+                    new NoteEntity("Note title", "Note content..."));
             }
         });
 
@@ -84,7 +85,7 @@ public class NoteEditActivityTest {
             @Override
             public void run() {
                 NoteEditActivityTest.this.noteEditFragment.showNote(
-                        new NoteEntity("Title", "Content"));
+                    new NoteEntity("Title", "Content"));
             }
         });
 
@@ -93,7 +94,7 @@ public class NoteEditActivityTest {
         onView(withId(R.id.btn_submit)).perform(click());
 
         verify(this.noteEditFragment.getNoteEditPresenter()).updateNote(
-                "Title updated!", "Content changed!");
+            "Title updated!", "Content changed!");
     }
 
     @Test

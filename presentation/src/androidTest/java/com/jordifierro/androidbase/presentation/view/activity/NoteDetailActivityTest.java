@@ -1,11 +1,12 @@
 package com.jordifierro.androidbase.presentation.view.activity;
 
 import android.content.Intent;
-import androidx.test.espresso.intent.Intents;
-import androidx.test.rule.ActivityTestRule;
-import androidx.test.ext.junit.runners.AndroidJUnit4;
-import androidx.appcompat.widget.Toolbar;
 import android.widget.TextView;
+
+import androidx.appcompat.widget.Toolbar;
+import androidx.test.espresso.intent.Intents;
+import androidx.test.ext.junit.runners.AndroidJUnit4;
+import androidx.test.rule.ActivityTestRule;
 
 import com.jordifierro.androidbase.domain.entity.NoteEntity;
 import com.jordifierro.androidbase.presentation.R;
@@ -36,20 +37,20 @@ public class NoteDetailActivityTest {
 
     @Rule
     public final ActivityTestRule<NoteDetailActivity> activityTestRule = new ActivityTestRule<>(
-            NoteDetailActivity.class, true, false);
+        NoteDetailActivity.class, true, false);
     private NoteDetailFragment noteDetailFragment;
 
     @Before
     public void setUp() throws Exception {
         activityTestRule.launchActivity(new Intent().putExtra(NoteDetailActivity.PARAM_NOTE_ID, 2));
         this.noteDetailFragment = ((NoteDetailFragment) this.activityTestRule.getActivity()
-                                .getFragmentManager().findFragmentById(R.id.fragment_container));
+            .getFragmentManager().findFragmentById(R.id.fragment_container));
     }
 
     @Test
     public void testViewElements() {
-        onView(Matchers.allOf(isAssignableFrom(TextView.class),withParent(isAssignableFrom(Toolbar.class))))
-                .check(matches(withText(R.string.title_activity_note_detail)));
+        onView(Matchers.allOf(isAssignableFrom(TextView.class), withParent(isAssignableFrom(Toolbar.class))))
+            .check(matches(withText(R.string.title_activity_note_detail)));
     }
 
     @Test
@@ -64,7 +65,7 @@ public class NoteDetailActivityTest {
             @Override
             public void run() {
                 NoteDetailActivityTest.this.noteDetailFragment.showNote(
-                        new NoteEntity("Note title", "Note content..."));
+                    new NoteEntity("Note title", "Note content..."));
             }
         });
 
@@ -79,8 +80,8 @@ public class NoteDetailActivityTest {
         onView(withId(R.id.item_edit)).perform(click());
 
         intended(allOf(
-                hasComponent(NoteEditActivity.class.getName()),
-                hasExtra(NoteEditActivity.PARAM_NOTE_ID, 2)));
+            hasComponent(NoteEditActivity.class.getName()),
+            hasExtra(NoteEditActivity.PARAM_NOTE_ID, 2)));
         Intents.release();
     }
 
