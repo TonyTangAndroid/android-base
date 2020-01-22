@@ -66,6 +66,8 @@ dependencies {
     androidTestCompile presentationTestDependencies.dexmakerParent
     androidTestCompile presentationTestDependencies.dexmakerMockito
     androidTestCompile presentationTestDependencies.espresso
+    androidTestCompile presentationTestDependencies.testRunner
+    androidTestCompile presentationTestDependencies.testRules
     androidTestCompile presentationTestDependencies.espressoIntents
     androidTestCompile presentationTestDependencies.espressoWeb
 }
