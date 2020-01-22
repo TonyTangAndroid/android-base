@@ -12,7 +12,7 @@ ext {
     androidMinSdkVersion = 15
     androidTargetSdkVersion = 27
     androidCompileSdkVersion = 27
-    androidSupportVersion = '27.0.2'
+    androidSupportVersion = '27.1.1'
 
     //Libraries
     daggerVersion = '2.14.1'
@@ -85,7 +85,7 @@ ext {
             espressoIntents:    "com.android.support.test.espresso:espresso-intents:${espressoVersion}",
             espressoWeb:        "com.android.support.test.espresso:espresso-web:${espressoVersion}",
             daggerCompiler:     "com.google.dagger:dagger-compiler:${daggerVersion}"
-    ]
+     ]
 
 
 }
