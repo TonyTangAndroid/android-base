@@ -26,17 +26,6 @@ android {
     }
 }
 
-task copyResToDebugClasses(type: Copy){
-    from "${projectDir}/src/test/res"
-    into "${buildDir}/intermediates/classes/test/debug/res"
-}
-task copyResToReleaseClasses(type: Copy){
-    from "${projectDir}/src/test/res"
-    into "${buildDir}/intermediates/classes/test/release/res"
-}
-preBuild.dependsOn(copyResToDebugClasses)
-preBuild.dependsOn(copyResToReleaseClasses)
-
 dependencies {
     def dataDependencies = rootProject.ext.dataDependencies
     def dataTestDependencies = rootProject.ext.dataTestDependencies

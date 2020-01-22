@@ -90,7 +90,7 @@ public class UserDataRepositoryTest {
     public void testCreateUserSuccess() throws Exception {
         this.mockWebServer.enqueue(new MockResponse().setResponseCode(201).setBody(
                 FileUtils.readFileToString(
-                        TestUtils.getFileFromPath(this, "res/user_create_ok.json"))));
+                        TestUtils.getFileFromPath(this, "user_create_ok.json"))));
 
         this.userDataRepository.createUser(this.fakeUser).subscribe(this.testObserver);
         this.testObserver.awaitTerminalEvent();
@@ -105,7 +105,7 @@ public class UserDataRepositoryTest {
     public void testCreateUserError() throws Exception {
         this.mockWebServer.enqueue(new MockResponse().setResponseCode(422).setBody(
                 FileUtils.readFileToString(
-                        TestUtils.getFileFromPath(this, "res/user_create_error.json"))));
+                        TestUtils.getFileFromPath(this, "user_create_error.json"))));
 
         this.userDataRepository.createUser(this.fakeUser).subscribe(this.testObserver);
         this.testObserver.awaitTerminalEvent();
@@ -171,7 +171,7 @@ public class UserDataRepositoryTest {
     public void testResetPasswordSuccess() throws Exception {
         this.mockWebServer.enqueue(new MockResponse().setResponseCode(201).setBody(
                 FileUtils.readFileToString(
-                        TestUtils.getFileFromPath(this, "res/reset_password_ok.json"))));
+                        TestUtils.getFileFromPath(this, "reset_password_ok.json"))));
 
         this.userDataRepository.resetPassword(this.fakeUser).subscribe(this.testObserver);
         this.testObserver.awaitTerminalEvent();
@@ -185,7 +185,7 @@ public class UserDataRepositoryTest {
     public void testResetPasswordError() throws Exception {
         this.mockWebServer.enqueue(new MockResponse().setResponseCode(422).setBody(
                 FileUtils.readFileToString(
-                        TestUtils.getFileFromPath(this, "res/reset_password_error.json"))));
+                        TestUtils.getFileFromPath(this, "reset_password_error.json"))));
 
         this.userDataRepository.resetPassword(this.fakeUser).subscribe(this.testObserver);
         this.testObserver.awaitTerminalEvent();
@@ -213,7 +213,7 @@ public class UserDataRepositoryTest {
     public void testLoginUserSuccess() throws Exception {
         this.mockWebServer.enqueue(new MockResponse().setResponseCode(200).setBody(
                 FileUtils.readFileToString(
-                        TestUtils.getFileFromPath(this, "res/session_login_ok.json"))));
+                        TestUtils.getFileFromPath(this, "session_login_ok.json"))));
 
 
         this.userDataRepository.loginUser(this.fakeUser).subscribe(this.testObserver);
@@ -229,7 +229,7 @@ public class UserDataRepositoryTest {
     public void testLoginUserError() throws Exception {
         this.mockWebServer.enqueue(new MockResponse().setResponseCode(422).setBody(
                 FileUtils.readFileToString(
-                        TestUtils.getFileFromPath(this, "res/session_login_error.json"))));
+                        TestUtils.getFileFromPath(this, "session_login_error.json"))));
 
 
         this.userDataRepository.loginUser(this.fakeUser).subscribe(this.testObserver);

@@ -89,7 +89,7 @@ public class NoteDataRepositoryTest {
     public void testCreateNoteSuccessResponse() throws Exception {
         this.mockWebServer.enqueue(new MockResponse().setResponseCode(201).setBody(
                 FileUtils.readFileToString(
-                        TestUtils.getFileFromPath(this, "res/note_create_ok.json"))));
+                        TestUtils.getFileFromPath(this, "note_create_ok.json"))));
 
         this.noteDataRepository.createNote(this.fakeUser, this.fakeNote)
                 .subscribeWith(this.testObserver);
@@ -106,7 +106,7 @@ public class NoteDataRepositoryTest {
     public void testCreateNoteErrorResponse() throws Exception {
         this.mockWebServer.enqueue(new MockResponse().setResponseCode(422).setBody(
                 FileUtils.readFileToString(
-                        TestUtils.getFileFromPath(this, "res/note_create_error.json"))));
+                        TestUtils.getFileFromPath(this, "note_create_error.json"))));
 
         this.noteDataRepository.createNote(this.fakeUser, this.fakeNote)
                 .subscribe(this.testObserver);
@@ -136,7 +136,7 @@ public class NoteDataRepositoryTest {
     public void testGetNoteSuccessResponse() throws Exception {
         this.mockWebServer.enqueue(new MockResponse().setResponseCode(200).setBody(
                 FileUtils.readFileToString(
-                        TestUtils.getFileFromPath(this, "res/note_get_ok.json"))));
+                        TestUtils.getFileFromPath(this, "note_get_ok.json"))));
 
 
         this.noteDataRepository.getNote(this.fakeUser, 1).subscribe(this.testObserver);
@@ -153,7 +153,7 @@ public class NoteDataRepositoryTest {
     public void testGetNoteErrorResponse() throws Exception {
         this.mockWebServer.enqueue(new MockResponse().setResponseCode(404).setBody(
                 FileUtils.readFileToString(
-                        TestUtils.getFileFromPath(this, "res/note_get_error.json"))));
+                        TestUtils.getFileFromPath(this, "note_get_error.json"))));
 
 
         this.noteDataRepository.getNote(this.fakeUser, 1).subscribe(this.testObserver);
@@ -183,7 +183,7 @@ public class NoteDataRepositoryTest {
     public void testGetNotesSuccessResponse() throws Exception {
         this.mockWebServer.enqueue(new MockResponse().setResponseCode(200).setBody(
                 FileUtils.readFileToString(
-                        TestUtils.getFileFromPath(this, "res/note_getall_ok.json"))));
+                        TestUtils.getFileFromPath(this, "note_getall_ok.json"))));
 
         this.noteDataRepository.getNotes(this.fakeUser).subscribe(this.testObserver);
         this.testObserver.awaitTerminalEvent();
@@ -226,7 +226,7 @@ public class NoteDataRepositoryTest {
     public void testUpdateNoteSuccessResponse() throws Exception {
         this.mockWebServer.enqueue(new MockResponse().setResponseCode(200).setBody(
                 FileUtils.readFileToString(
-                        TestUtils.getFileFromPath(this, "res/note_update_ok.json"))));
+                        TestUtils.getFileFromPath(this, "note_update_ok.json"))));
 
         this.noteDataRepository.updateNote(this.fakeUser, this.fakeNote)
                 .subscribe(this.testObserver);
@@ -243,7 +243,7 @@ public class NoteDataRepositoryTest {
     public void testUpdateNoteErrorResponse() throws Exception {
         this.mockWebServer.enqueue(new MockResponse().setResponseCode(404).setBody(
                 FileUtils.readFileToString(
-                        TestUtils.getFileFromPath(this, "res/note_update_error.json"))));
+                        TestUtils.getFileFromPath(this, "note_update_error.json"))));
 
         this.noteDataRepository.updateNote(this.fakeUser, this.fakeNote)
                 .subscribe(this.testObserver);

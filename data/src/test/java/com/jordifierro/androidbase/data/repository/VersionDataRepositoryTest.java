@@ -77,7 +77,7 @@ public class VersionDataRepositoryTest {
     public void testCheckVersionExpirationOk() throws Exception {
         this.mockWebServer.enqueue(new MockResponse().setResponseCode(200).setBody(
                 FileUtils.readFileToString(
-                        TestUtils.getFileFromPath(this, "res/version_expiration_ok.json"))));
+                        TestUtils.getFileFromPath(this, "version_expiration_ok.json"))));
 
         this.versionDataRepository.checkVersionExpiration(this.fakeUser)
                                     .subscribe(this.testObserver);
@@ -92,7 +92,7 @@ public class VersionDataRepositoryTest {
     public void testCheckVersionExpirationWarned() throws Exception {
         this.mockWebServer.enqueue(new MockResponse().setResponseCode(200).setBody(
                 FileUtils.readFileToString(
-                        TestUtils.getFileFromPath(this, "res/version_expiration_warned.json"))));
+                        TestUtils.getFileFromPath(this, "version_expiration_warned.json"))));
 
         this.versionDataRepository.checkVersionExpiration(this.fakeUser)
                 .subscribe(this.testObserver);
@@ -107,7 +107,7 @@ public class VersionDataRepositoryTest {
     public void testCheckVersionExpirationExpired() throws Exception {
         this.mockWebServer.enqueue(new MockResponse().setResponseCode(200).setBody(
                 FileUtils.readFileToString(
-                        TestUtils.getFileFromPath(this, "res/version_expiration_expired.json"))));
+                        TestUtils.getFileFromPath(this, "version_expiration_expired.json"))));
 
         this.versionDataRepository.checkVersionExpiration(this.fakeUser)
                 .subscribe(this.testObserver);
