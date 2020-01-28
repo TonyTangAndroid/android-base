@@ -7,7 +7,7 @@ import androidx.test.ext.junit.runners.AndroidJUnit4;
 import androidx.test.rule.ActivityTestRule;
 
 import com.jordifierro.androidbase.presentation.R;
-import com.jordifierro.androidbase.presentation.view.fragment.LoginFragment;
+import com.jordifierro.androidbase.presentation.view.fragment.RegisterFragment;
 
 import org.junit.Before;
 import org.junit.Rule;
@@ -27,16 +27,16 @@ import static androidx.test.espresso.matcher.ViewMatchers.withText;
 import static org.mockito.Mockito.verify;
 
 @RunWith(AndroidJUnit4.class)
-public class LoginActivityTest {
+public class RegisterActivityTest {
 
     @Rule
-    public final ActivityTestRule<LoginActivity> activityTestRule = new ActivityTestRule<>(
-        LoginActivity.class);
-    private LoginFragment loginFragment;
+    public final ActivityTestRule<RegisterActivity> activityTestRule = new ActivityTestRule<>(
+        RegisterActivity.class);
+    private RegisterFragment registerFragment;
 
     @Before
     public void setUp() throws Exception {
-        this.loginFragment = ((LoginFragment) this.activityTestRule.getActivity()
+        this.registerFragment = ((RegisterFragment) this.activityTestRule.getActivity()
             .getFragmentManager().findFragmentById(R.id.fragment_container));
     }
 
@@ -44,51 +44,42 @@ public class LoginActivityTest {
     public void testViewElements() throws PackageManager.NameNotFoundException {
         onView(withId(R.id.et_email)).check(matches(withHint(R.string.edittext_email)));
         onView(withId(R.id.et_password)).check(matches(withHint(R.string.edittext_password)));
-        onView(withId(R.id.btn_login)).check(matches(withText(R.string.button_login)));
+        onView(withId(R.id.et_password_confirmation))
+            .check(matches(withHint(R.string.edittext_password_confirmation)));
         onView(withId(R.id.btn_register)).check(matches(withText(R.string.button_register)));
-        onView(withId(R.id.tv_forgot_password))
-            .check(matches(withText(R.string.textview_forgot_password)));
+        onView(withId(R.id.tv_terms)).check(matches(withText(R.string.textview_register_terms)));
     }
 
     @Test
     public void testLoginButton() {
 
-        onView(withId(R.id.et_email)).perform(typeText("email@test.com"));
-        onView(withId(R.id.et_password)).perform(typeText("87654321"));
-        onView(withId(R.id.btn_login)).perform(click());
+        onView(withId(R.id.et_email)).perform(typeText("email@test.com"), closeSoftKeyboard());
+        onView(withId(R.id.et_password)).perform(typeText("87654321"), closeSoftKeyboard());
+        onView(withId(R.id.et_password_confirmation))
+            .perform(typeText("1234"), closeSoftKeyboard());
+        onView(withId(R.id.btn_register)).perform(click());
 
-        verify(this.loginFragment.getLoginPresenter()).loginUser("email@test.com", "87654321");
+        verify(this.registerFragment.getRegisterPresenter())
+            .registerUser("email@test.com", "87654321", "1234");
     }
 
     @Test
-    public void testViewNotes() {
+    public void testNavigateToNotes() {
         Intents.init();
 
-        this.loginFragment.viewNotes();
+        this.registerFragment.viewNotes();
 
         intended(hasComponent(MainActivity.class.getName()));
         Intents.release();
     }
 
     @Test
-    public void testRegisterButton() {
+    public void testTermsClicked() {
         Intents.init();
 
-        onView(withId(R.id.btn_register)).perform(click());
+        onView(withId(R.id.tv_terms)).perform(click());
 
-        intended(hasComponent(RegisterActivity.class.getName()));
+        intended(hasComponent(TermsActivity.class.getName()));
         Intents.release();
     }
-
-    @Test
-    public void testForgotPasswordClick() {
-        Intents.init();
-
-        closeSoftKeyboard();
-        onView(withId(R.id.tv_forgot_password)).perform(click());
-
-        intended(hasComponent(ResetPasswordActivity.class.getName()));
-        Intents.release();
-    }
-
 }

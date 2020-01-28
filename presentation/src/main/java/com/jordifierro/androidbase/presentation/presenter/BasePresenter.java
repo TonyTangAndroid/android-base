@@ -1,10 +1,11 @@
-package com.jordifierro.androidbase.presentation.view;
+package com.jordifierro.androidbase.presentation.presenter;
 
 import com.jordifierro.androidbase.domain.interactor.UseCase;
+import com.jordifierro.androidbase.presentation.view.BaseView;
 
 import io.reactivex.observers.DisposableObserver;
 
-public class BasePresenter {
+public class BasePresenter implements Presenter {
 
     BaseView view;
     private UseCase useCase0, useCase1, useCase2;
@@ -24,16 +25,20 @@ public class BasePresenter {
         this.useCase2 = useCase2;
     }
 
+    @Override
     public void initWithView(BaseView view) {
         this.view = view;
     }
 
+    @Override
     public void resume() {
     }
 
+    @Override
     public void pause() {
     }
 
+    @Override
     public void destroy() {
         if (this.useCase0 != null) this.useCase0.unsubscribe();
         if (this.useCase1 != null) this.useCase1.unsubscribe();

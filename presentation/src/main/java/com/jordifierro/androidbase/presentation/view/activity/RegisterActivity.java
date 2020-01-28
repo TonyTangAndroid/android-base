@@ -5,14 +5,14 @@ import android.os.Bundle;
 
 import com.jordifierro.androidbase.presentation.R;
 import com.jordifierro.androidbase.presentation.view.activity.base.CleanActivity;
-import com.jordifierro.androidbase.presentation.view.fragment.LoginFragment;
+import com.jordifierro.androidbase.presentation.view.fragment.RegisterFragment;
 
-public class LoginActivity extends CleanActivity implements LoginFragment.Listener {
+public class RegisterActivity extends CleanActivity implements RegisterFragment.Listener {
 
     @Override
     protected void initializeActivity(Bundle savedInstanceState) {
         if (savedInstanceState == null) {
-            addFragment(R.id.fragment_container, new LoginFragment());
+            addFragment(R.id.fragment_container, new RegisterFragment());
         }
     }
 
@@ -29,13 +29,7 @@ public class LoginActivity extends CleanActivity implements LoginFragment.Listen
     }
 
     @Override
-    public void displayRegister() {
-        startActivity(new Intent(this, RegisterActivity.class));
+    public void showTerms() {
+        startActivity(new Intent(this, TermsActivity.class));
     }
-
-    @Override
-    public void forgotPassword() {
-        startActivity(new Intent(this, ResetPasswordActivity.class));
-    }
-
 }
