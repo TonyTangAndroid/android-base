@@ -1,8 +1,11 @@
-package com.jordifierro.androidbase.presentation.view;
+package com.jordifierro.androidbase.presentation.view.fragment;
 
 import android.widget.EditText;
 
 import com.jordifierro.androidbase.presentation.R;
+import com.jordifierro.androidbase.presentation.presenter.BasePresenter;
+import com.jordifierro.androidbase.presentation.presenter.LoginPresenter;
+import com.jordifierro.androidbase.presentation.view.LoginView;
 
 import javax.inject.Inject;
 
