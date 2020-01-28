@@ -16,7 +16,8 @@ ext {
     legacySupportV4Version = '1.0.0'
     materialDesignVersion = '1.0.0'
     annotationVersion = '1.1.0'
-    androidTestVersion = '1.1.1'
+    androidTestUnitVersion = '1.1.1'
+    androidTestRulesVersion = '1.2.0'
 
     //Libraries
     daggerVersion = '2.25.4'
@@ -100,8 +101,8 @@ ext {
             espresso:           "androidx.test.espresso:espresso-core:${espressoVersion}",
             espressoIntents:    "androidx.test.espresso:espresso-intents:${espressoVersion}",
             espressoWeb:        "androidx.test.espresso:espresso-web:${espressoVersion}",
-            testRunner:         "androidx.test.ext:junit:${androidTestVersion}",
-            testRules:          "androidx.test:rules:${androidTestVersion}",
+            testRunner:         "androidx.test.ext:junit:${androidTestUnitVersion}",
+            testRules:          "androidx.test:rules:${androidTestRulesVersion}",
             daggerCompiler:     "com.google.dagger:dagger-compiler:${daggerVersion}",
 
     ]
