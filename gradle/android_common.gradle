@@ -1,5 +1,3 @@
-apply plugin: 'com.android.library'
-
 android {
     compileSdkVersion rootProject.ext.androidCompileSdkVersion
     buildToolsVersion rootProject.ext.androidBuildToolsVersion
