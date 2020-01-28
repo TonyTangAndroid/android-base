@@ -37,9 +37,7 @@ ext {
     mockitoVersion = '3.2.4'
     commonsIOVersion = '2.4'
     jetAnnotationVersion = '15.0'
-    espressoVersion = '3.1.0'
-    testRunnerVersion = '1.0.2'
-    testRulesVersion = '1.0.2'
+    espressoVersion = '3.2.0'
 
     domainDependencies = [
             retrofit:           "com.squareup.retrofit2:retrofit:${retrofitVersion}",
@@ -76,9 +74,6 @@ ext {
             mockito:            "org.mockito:mockito-core:${mockitoVersion}",
             mockWebServer:      "com.squareup.okhttp3:mockwebserver:${okhttpVersion}",
             commonsIO:          "commons-io:commons-io:${commonsIOVersion}",
-            espresso:           "com.android.support.test.espresso:espresso-core:${espressoVersion}",
-            testRunner:         "com.android.support.test:runner:${testRunnerVersion}",
-            testRules:         "com.android.support.test:rules:${testRulesVersion}",
     ]
 
     presentationDependencies = [
