@@ -8,8 +8,16 @@ buildscript {
     }
     dependencies {
         classpath 'com.android.tools.build:gradle:3.5.3'
+        classpath 'org.jacoco:org.jacoco.core:0.8.5'
+        classpath 'org.neotech.plugin:android-root-coverage-plugin:1.2.0'
     }
 }
+
+
+apply plugin: 'jacoco'
+jacoco { toolVersion = '0.8.5' }
+
+apply plugin: 'org.neotech.plugin.rootcoverage'
 
 allprojects {
     repositories {
@@ -20,4 +28,50 @@ allprojects {
 
 task clean(type: Delete) {
     delete rootProject.buildDir
+}
+
+rootCoverage {
+    buildVariant "debug"
+//  buildVariantOverrides ":driver" : "mockDebug"
+
+    // Class exclude patterns
+    excludes = [
+            '**/R.class',
+            '**/R$*.class',
+            '**/BuildConfig.*',
+            '**/Manifest*.*',
+            '**/*Test*.*',
+            'android/**/*.*',
+
+            //Butterknife hack for multi-modules poroject
+            '**/R2.class',
+            '**/R2$*.class',
+            '**/*_ViewBinding*.*',
+
+            //Dagger 2
+            '**/*Dagger*Component*.*',
+            '**/*Module.*',
+            '**/*Module$*.*',
+            '**/*Module_Proxy.*',
+            '**/*MembersInjector*.*',
+            '**/*_Factory*.*',
+            '**/*Provide*Factory*.*',
+
+            //Autofactory
+            '**/*Factory.*',
+
+            //Classes I intentionally don't want to test
+            '**/*Activity.*',
+            '**/App.class',
+            '**/*Adapter.*',
+            '**/*ViewHolder*.*',
+            '**/api/response/*.*',
+            '**/data/model/*.*',
+    ]
+    executeTests true
+    executeAndroidTests false
+    executeUnitTests true
+    generateXml true
+    includeAndroidTestResults false
+    includeUnitTestResults true
 }
