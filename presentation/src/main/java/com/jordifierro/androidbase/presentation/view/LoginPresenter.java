@@ -1,15 +1,13 @@
-package com.jordifierro.androidbase.presentation.presenter;
+package com.jordifierro.androidbase.presentation.view;
 
 import com.jordifierro.androidbase.domain.entity.UserEntity;
 import com.jordifierro.androidbase.domain.interactor.user.DoLoginUseCase;
 import com.jordifierro.androidbase.presentation.dependency.ActivityScope;
-import com.jordifierro.androidbase.presentation.view.BaseView;
-import com.jordifierro.androidbase.presentation.view.LoginView;
 
 import javax.inject.Inject;
 
 @ActivityScope
-public class LoginPresenter extends BasePresenter implements Presenter {
+public class LoginPresenter extends BasePresenter {
 
     LoginView loginView;
     private DoLoginUseCase doLoginUseCase;
@@ -20,13 +18,11 @@ public class LoginPresenter extends BasePresenter implements Presenter {
         this.doLoginUseCase = doLoginUseCase;
     }
 
-    @Override
     public void initWithView(BaseView view) {
         super.initWithView(view);
         this.loginView = (LoginView) view;
     }
 
-    @Override
     public void destroy() {
         super.destroy();
         this.loginView = null;

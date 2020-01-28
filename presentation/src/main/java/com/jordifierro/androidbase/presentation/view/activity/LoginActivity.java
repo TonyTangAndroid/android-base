@@ -1,11 +1,10 @@
 package com.jordifierro.androidbase.presentation.view.activity;
 
-import android.content.Intent;
 import android.os.Bundle;
 
 import com.jordifierro.androidbase.presentation.R;
 import com.jordifierro.androidbase.presentation.view.activity.base.CleanActivity;
-import com.jordifierro.androidbase.presentation.view.fragment.LoginFragment;
+import com.jordifierro.androidbase.presentation.view.LoginFragment;
 
 public class LoginActivity extends CleanActivity implements LoginFragment.Listener {
 
@@ -23,19 +22,15 @@ public class LoginActivity extends CleanActivity implements LoginFragment.Listen
 
     @Override
     public void viewNotes() {
-        Intent notesIntent = new Intent(this, MainActivity.class);
-        notesIntent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
-        startActivity(notesIntent);
+
     }
 
     @Override
     public void displayRegister() {
-        startActivity(new Intent(this, RegisterActivity.class));
-    }
+     }
 
     @Override
     public void forgotPassword() {
-        startActivity(new Intent(this, ResetPasswordActivity.class));
-    }
+     }
 
 }

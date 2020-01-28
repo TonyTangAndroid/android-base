@@ -1,4 +1,4 @@
-package com.jordifierro.androidbase.presentation.view.fragment;
+package com.jordifierro.androidbase.presentation.view;
 
 import android.app.Fragment;
 import android.app.ProgressDialog;
@@ -10,8 +10,6 @@ import android.view.ViewGroup;
 import android.widget.Toast;
 
 import com.jordifierro.androidbase.presentation.dependency.component.FragmentInjector;
-import com.jordifierro.androidbase.presentation.presenter.BasePresenter;
-import com.jordifierro.androidbase.presentation.view.BaseView;
 import com.jordifierro.androidbase.presentation.view.activity.base.CleanActivity;
 
 import butterknife.ButterKnife;
