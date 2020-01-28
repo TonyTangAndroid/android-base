@@ -69,9 +69,9 @@ rootCoverage {
             '**/data/model/*.*',
     ]
     executeTests true
-    executeAndroidTests true
+    executeAndroidTests false
     executeUnitTests true
     generateXml true
-    includeAndroidTestResults true
+    includeAndroidTestResults false
     includeUnitTestResults true
 }
