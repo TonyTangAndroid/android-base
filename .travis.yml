@@ -111,3 +111,5 @@ notifications:
       - https://webhooks.gitter.im/e/1b633ac4f7ea6fa35dd1
     on_success: change
     on_failure: always
+after_success:
+  - bash <(curl -s https://codecov.io/bash)
