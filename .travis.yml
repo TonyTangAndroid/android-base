@@ -6,7 +6,6 @@ env:
     - ADB_INSTALL_TIMEOUT=5
     - ANDROID_API=29
   matrix:
-    - EMULATOR_API=21
     - EMULATOR_API=22
 android:
   components:
@@ -44,3 +43,5 @@ before_script:
   - adb shell input keyevent 82 &
 script:
   - ./gradlew build cAT
+after_success:
+  - bash <(curl -s https://codecov.io/bash)

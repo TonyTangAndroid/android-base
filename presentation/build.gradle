@@ -1,15 +1,8 @@
 apply plugin: 'com.android.application'
-
+apply from: "$rootDir/gradle/android_common.gradle"
 android {
-    compileSdkVersion rootProject.ext.androidCompileSdkVersion
-    buildToolsVersion rootProject.ext.androidBuildToolsVersion
-
     defaultConfig {
         applicationId 'com.jordifierro.androidbase.presentation'
-        minSdkVersion rootProject.ext.androidMinSdkVersion
-        targetSdkVersion rootProject.ext.androidTargetSdkVersion
-        versionCode rootProject.ext.appVersionCode
-        versionName rootProject.ext.appVersionName
         testInstrumentationRunner 'com.jordifierro.androidbase.presentation.TestMockerRunner'
     }
     compileOptions {
