@@ -9,7 +9,8 @@
         android:layout_height="wrap_content"
         android:layout_alignParentTop="true"
         android:inputType="textEmailAddress"
-        android:hint="@string/edittext_email" />
+        android:hint="@string/edittext_email"
+        android:importantForAutofill="no" />
 
     <EditText android:id="@+id/et_password"
         android:layout_width="match_parent"
