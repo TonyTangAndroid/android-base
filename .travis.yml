@@ -6,8 +6,7 @@ env:
     - ADB_INSTALL_TIMEOUT=5
     - ANDROID_API=29
   matrix:
-    - EMULATOR_API=21
-    - EMULATOR_API=22
+    - EMULATOR_API=25
 android:
   components:
     - tools
@@ -17,7 +16,7 @@ android:
     - android-$EMULATOR_API
     - extra-google-m2repository
     - extra-android-m2repository
-    - addon-google_apis-google-24
+    - addon-google_apis-google-25
     - sys-img-armeabi-v7a-addon-google_apis-google-$ANDROID_API
     - sys-img-armeabi-v7a-addon-google_apis-google-$EMULATOR_API
     - sys-img-armeabi-v7a-android-$EMULATOR_API
