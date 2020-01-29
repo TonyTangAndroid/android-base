@@ -42,6 +42,6 @@ before_script:
   - adb wait-for-device
   - adb shell input keyevent 82 &
 script:
-  - ./gradlew build rootCodeCoverageReport
+  - ./gradlew build cAT
 after_success:
   - bash <(curl -s https://codecov.io/bash)
