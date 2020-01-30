@@ -14,6 +14,7 @@ import io.reactivex.Observable;
 import static junit.framework.Assert.assertNull;
 import static org.mockito.Matchers.any;
 import static org.mockito.Mockito.verify;
+import static org.mockito.Mockito.verifyNoMoreInteractions;
 
 public class LoginPresenterTest {
 
@@ -80,6 +81,7 @@ public class LoginPresenterTest {
 
         verify(this.mockLoginView).hideLoader();
         verify(this.mockLoginView).viewNotes();
+        verifyNoMoreInteractions(this.mockLoginView);
     }
 
 }
