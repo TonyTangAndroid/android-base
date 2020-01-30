@@ -32,11 +32,11 @@ env:
     # - API=21 ABI=x86_64 # FIXME - AdapterTest.testSetOccupancyVisibilityAndColor() - java.lang.NoSuchMethodError: No virtual method getColor()Landroid/content/res/ColorStateList; in class Landroid/graphics/drawable/GradientDrawable
     # - API=22 ABI=x86_64 # FIXME - AdapterTest.testSetOccupancyVisibilityAndColor() - java.lang.NoSuchMethodError: No virtual method getColor()Landroid/content/res/ColorStateList; in class Landroid/graphics/drawable/GradientDrawable
     # - API=23 ABI=x86_64 # FIXME - AdapterTest.testSetOccupancyVisibilityAndColor() - java.lang.NoSuchMethodError: No virtual method getColor()Landroid/content/res/ColorStateList; in class Landroid/graphics/drawable/GradientDrawable
-    # - API=24 ABI=x86_64 # Works
-    # - API=25 ABI=x86_64 # Works
-    # - API=26 ABI=x86_64 # Works
-    # - API=27 ABI=x86_64 # Works
-    # - API=28 ABI=x86_64 # Works
+    - API=24 ABI=x86_64 # Works
+    - API=25 ABI=x86_64 # Works
+    - API=26 ABI=x86_64 # Works
+    - API=27 ABI=x86_64 # Works
+    - API=28 ABI=x86_64 # Works
     - API=29 ABI=x86_64 # Works
 
 before_install:
