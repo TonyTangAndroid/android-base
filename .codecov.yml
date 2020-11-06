@@ -1,0 +1,38 @@
+coverage:
+  precision: 2
+  round: down
+  range: "30...45"
+  status:
+    patch: yes
+    changes: no
+
+comment:
+  layout: "header, diff, changes, tree"
+  behavior: default
+
+ignore:
+  - "tst/*"     # ignore test harness code
+  - "tst/**/*"  # ignore test harness code
+  - '**/R.class'
+  - '**/R$*.class'
+  - '**/BuildConfig.*'
+  - '**/Manifest*.*'
+  - '**/*Test*.*'
+  - 'android/**/*.*'
+  - '**/R2.class'
+  - '**/R2$*.class'
+  - '**/*_ViewBinding*.*'
+  - '**/*Dagger*Component*.*'
+  - '**/*Module.*'
+  - '**/*Module$*.*'
+  - '**/*Module_Proxy.*'
+  - '**/*MembersInjector*.*'
+  - '**/*_Factory*.*'
+  - '**/*Provide*Factory*.*'
+  - '**/*Factory.*'
+  - '**/*Activity.*'
+  - '**/App.class'
+  - '**/*Adapter.*'
+  - '**/*ViewHolder*.*'
+  - '**/api/response/*.*'
+  - '**/data/model/*.*'
